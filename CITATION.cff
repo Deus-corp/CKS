@@ -1,0 +1,57 @@
+cff-version: 1.2.0
+
+title: "Canonical Knowledge Structure (CKS)"
+
+message: >
+If you use the Canonical Knowledge Structure (CKS) project,
+please cite it using the metadata provided in this file.
+
+type: software
+
+authors:
+
+* family-names: "Hruznov"
+  given-names: "Vladyslav"
+
+repository-code: "https://github.com/catharsis/CKS"
+
+url: "https://github.com/catharsis/CKS"
+
+license: "MIT"
+
+version: "0.1.0"
+
+date-released: "2026-07-13"
+
+doi: "10.5281/zenodo.21332624"
+
+abstract: >
+Canonical Knowledge Structure (CKS) is an open specification and
+reference implementation that defines a representation-independent
+semantic foundation for constructing, validating, serializing,
+comparing, and evolving knowledge.
+
+keywords:
+
+* knowledge representation
+* semantic model
+* canonical structure
+* ontology
+* knowledge graph
+* validation
+* serialization
+* artificial intelligence
+* interoperability
+* reference implementation
+
+language: "en"
+
+preferred-citation:
+type: software
+authors:
+- family-names: "Hruznov"
+given-names: "Vladyslav"
+title: "Canonical Knowledge Structure (CKS)"
+version: "0.1.0"
+doi: "10.5281/zenodo.21332624"
+url: "https://github.com/catharsis/CKS"
