@@ -12,7 +12,7 @@ The public API is defined by the Canonical Knowledge Interface (CKS-007).
 
 The recommended import style is:
 
-```python id="3cbw8w"
+```python
 from cks import (
     construct,
     parse,
@@ -43,7 +43,7 @@ Construct a canonical Knowledge Structure from an iterable of Knowledge Objects.
 
 ### Signature
 
-```python id="ozhj7w"
+```python
 construct(
     objects: Iterable[KnowledgeObject],
 ) -> KnowledgeStructure
@@ -51,7 +51,7 @@ construct(
 
 ### Example
 
-```python id="s5ffbq"
+```python
 structure = construct(
     [
         object1,
@@ -71,7 +71,7 @@ Parse canonical JSON into a Knowledge Structure.
 
 ### Signature
 
-```python id="sl99a4"
+```python
 parse(
     source: str | dict,
 ) -> KnowledgeStructure
@@ -85,7 +85,7 @@ parse(
 
 ### Example
 
-```python id="w1n0qo"
+```python
 structure = parse(json_text)
 ```
 
@@ -97,7 +97,7 @@ Serialize a Knowledge Structure into canonical JSON.
 
 ### Signature
 
-```python id="ulcq4i"
+```python
 serialize(
     structure: KnowledgeStructure,
 ) -> str
@@ -105,7 +105,7 @@ serialize(
 
 ### Example
 
-```python id="x4jufq"
+```python
 json_text = serialize(structure)
 ```
 
@@ -121,7 +121,7 @@ Execute the complete canonical validation pipeline.
 
 ### Signature
 
-```python id="mohr0d"
+```python
 validate(
     structure: KnowledgeStructure,
 ) -> ValidationResult
@@ -135,7 +135,7 @@ validate(
 
 ### Example
 
-```python id="rwslgm"
+```python
 result = validate(structure)
 
 print(result.is_valid)
@@ -149,7 +149,7 @@ Return diagnostics without exposing the complete ValidationResult.
 
 ### Signature
 
-```python id="z96rnr"
+```python
 diagnose(
     structure: KnowledgeStructure,
 ) -> DiagnosticCollection
@@ -157,7 +157,7 @@ diagnose(
 
 ### Example
 
-```python id="mgdzvu"
+```python
 diagnostics = diagnose(structure)
 ```
 
@@ -171,7 +171,7 @@ Return an implementation-independent summary of a Knowledge Structure.
 
 ### Signature
 
-```python id="ugz30k"
+```python
 inspect(
     structure: KnowledgeStructure,
 ) -> Mapping[str, object]
@@ -179,7 +179,7 @@ inspect(
 
 ### Example
 
-```python id="cpdfyz"
+```python
 summary = inspect(structure)
 ```
 
@@ -199,7 +199,7 @@ Compare two Knowledge Structures.
 
 ### Signature
 
-```python id="jlwm7m"
+```python
 compare(
     left: KnowledgeStructure,
     right: KnowledgeStructure,
@@ -208,7 +208,7 @@ compare(
 
 ### Example
 
-```python id="tsv6vk"
+```python
 comparison = compare(
     structure1,
     structure2,
@@ -227,7 +227,7 @@ Extract a single Knowledge Object.
 
 ### Signature
 
-```python id="lcaj0f"
+```python
 extract(
     structure: KnowledgeStructure,
     identity: str,
@@ -236,7 +236,7 @@ extract(
 
 ### Example
 
-```python id="mghx5c"
+```python
 obj = extract(
     structure,
     "definition-001",
@@ -255,7 +255,7 @@ Create a new Knowledge Structure containing only selected objects.
 
 ### Signature
 
-```python id="d42kmu"
+```python
 project(
     structure: KnowledgeStructure,
     identities: Iterable[str],
@@ -264,7 +264,7 @@ project(
 
 ### Example
 
-```python id="4l4w2x"
+```python
 subset = project(
     structure,
     [
@@ -286,7 +286,7 @@ Apply admissible structural transformations.
 
 ### Signature
 
-```python id="0zjlwm"
+```python
 evolve(
     structure: KnowledgeStructure,
     transformations,
@@ -309,7 +309,7 @@ Applications normally do not need to instantiate the engine directly.
 
 However, it remains available:
 
-```python id="w4z0o5"
+```python
 from cks import ReferenceEngine
 
 engine = ReferenceEngine()
@@ -327,7 +327,7 @@ Raised when canonical serialization cannot be parsed.
 
 Example:
 
-```python id="lpnfbw"
+```python
 from cks import SerializationError
 
 try:
