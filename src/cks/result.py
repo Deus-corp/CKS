@@ -51,7 +51,7 @@ class ValidationResult:
     )
 
     metadata: Mapping[str, Any] = field(
-        default_factory=MappingProxyType
+        default_factory=dict
     )
 
     # ------------------------------------------------------------------
@@ -70,10 +70,14 @@ class ValidationResult:
             tuple(self.evaluated_constraints),
         )
 
+        metadata = MappingProxyType(
+            dict(self.metadata)
+        )
+
         object.__setattr__(
             self,
             "metadata",
-            MappingProxyType(dict(self.metadata)),
+            metadata,
         )
 
         if self.is_valid and self.diagnostics.has_errors():

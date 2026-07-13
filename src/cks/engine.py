@@ -31,6 +31,9 @@ class ReferenceEngine:
     This class realises the Reference Engine defined by CKS-006.
 
     The engine is intentionally stateless.
+
+    Every operation returns a new immutable value and never mutates
+    existing Knowledge Structures.
     Multiple validation requests may safely reuse the same engine instance.
 
     Every operation is:
@@ -126,6 +129,7 @@ class ReferenceEngine:
         )
 
         return {
+            "version": self.VERSION,
             "object_count": len(structure.objects),
             "relation_count": len(structure.relations()),
             "object_types": sorted(
@@ -139,6 +143,7 @@ class ReferenceEngine:
                 obj.identity.id
                 for obj in structure
             ),
+            "immutable": True,
         }
 
     def compare(
@@ -149,14 +154,42 @@ class ReferenceEngine:
         """
         Compare two KnowledgeStructures.
 
-        Comparison is based on canonical structural equivalence.
+        The comparison distinguishes between identity equivalence and
+        semantic equivalence.
+
+        Returns
+        -------
+        Mapping[str, object]
         """
 
-        left_ids = sorted(obj.identity.id for obj in left.objects)
-        right_ids = sorted(obj.identity.id for obj in right.objects)
+        left_ids = frozenset(
+            obj.identity.id
+            for obj in left.objects
+        )
+
+        right_ids = frozenset(
+            obj.identity.id
+            for obj in right.objects
+        )
+
+        identity_equivalent = left.identity_equivalent(right)
+
+        semantic_equivalent = left.structurally_equivalent(right)
+
+        only_left = tuple(
+            sorted(left_ids - right_ids)
+        )
+
+        only_right = tuple(
+            sorted(right_ids - left_ids)
+        )
 
         return {
-            "equivalent": left_ids == right_ids,
+            "identity_equivalent": identity_equivalent,
+            "semantic_equivalent": semantic_equivalent,
+            "equivalent": semantic_equivalent,
+            "only_left": only_left,
+            "only_right": only_right,
             "left_objects": len(left.objects),
             "right_objects": len(right.objects),
             "left_relations": len(left.relations()),
@@ -190,6 +223,57 @@ class ReferenceEngine:
             for identity in identities
             if (obj := structure.get(identity)) is not None
         )
+    
+    def evolve(
+        self,
+        structure: KnowledgeStructure,
+        *,
+        add: Iterable[KnowledgeObject] = (),
+        remove: Iterable[str] = (),
+    ) -> KnowledgeStructure:
+        """
+        Produce a new KnowledgeStructure by applying canonical changes.
+
+        Parameters
+        ----------
+        structure
+            Original immutable structure.
+
+        add
+            KnowledgeObjects to insert.
+
+        remove
+            Canonical identities to remove.
+
+        Returns
+        -------
+        KnowledgeStructure
+            New immutable structure.
+        """
+
+        remove_ids = frozenset(remove)
+
+        objects = [
+            obj
+            for obj in structure.objects
+            if obj.identity.id not in remove_ids
+        ]
+
+        existing = {
+            obj.identity.id
+            for obj in objects
+        }
+
+        for obj in add:
+            if obj.identity.id in existing:
+                raise ValueError(
+                    f"Duplicate canonical identity '{obj.identity.id}'."
+                )
+
+            objects.append(obj)
+            existing.add(obj.identity.id)
+
+        return KnowledgeStructure(objects)
 
     # ------------------------------------------------------------------
     # Representation

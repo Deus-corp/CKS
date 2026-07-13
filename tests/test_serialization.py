@@ -177,10 +177,15 @@ def test_serialize_preserves_relation():
 
     assert relation.relation_type == "depends_on"
 
-    assert relation.participants == [
+    assert relation.participants == (
         "obj-1",
         "obj-2",
-    ]
+    )
+
+    assert isinstance(
+        relation.participants,
+        tuple,
+    )
 
 
 # =============================================================================

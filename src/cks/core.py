@@ -15,8 +15,72 @@ Implemented concepts:
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from types import MappingProxyType
 from typing import Any, Iterable, Iterator, Mapping
 
+
+def _freeze(value: Any) -> Any:
+    """
+    Recursively freeze a canonical value.
+
+    Rules
+    -----
+    Mapping -> MappingProxyType
+    list -> tuple
+    tuple -> tuple
+    set -> frozenset
+
+    Primitive immutable values are returned unchanged.
+    """
+
+    if isinstance(value, Mapping):
+        return MappingProxyType(
+            {
+                key: _freeze(item)
+                for key, item in value.items()
+            }
+        )
+
+    if isinstance(value, list):
+        return tuple(
+            _freeze(item)
+            for item in value
+        )
+
+    if isinstance(value, tuple):
+        return tuple(
+            _freeze(item)
+            for item in value
+        )
+
+    if isinstance(value, set):
+        return frozenset(
+            _freeze(item)
+            for item in value
+        )
+
+    return value
+
+# ============================================================================
+# Internal Helpers
+# ============================================================================
+
+
+def _freeze_mapping(
+    mapping: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    """
+    Recursively freeze a semantic mapping.
+
+    Every nested mapping and collection becomes immutable.
+    """
+
+    return MappingProxyType(
+        {
+            key: _freeze(value)
+            for key, value in mapping.items()
+        }
+    )
 
 # ============================================================================
 # Canonical Identity
@@ -55,6 +119,20 @@ class KnowledgeObject:
     identity: ObjectIdentity
     structure: Mapping[str, Any] = field(default_factory=dict)
 
+    def __post_init__(self) -> None:
+        """
+        Freeze the semantic structure.
+
+        KnowledgeObjects are deeply immutable with respect to their
+        top-level semantic mapping.
+        """
+
+        object.__setattr__(
+            self,
+            "structure",
+            _freeze_mapping(self.structure),
+        )
+
 
 # ============================================================================
 # Canonical Relation
@@ -81,18 +159,27 @@ class CanonicalRelation(KnowledgeObject):
         struct.setdefault("participants", tuple(participants))
         struct.setdefault("relation_type", relation_type)
 
-        object.__setattr__(self, "identity", identity)
-        object.__setattr__(self, "structure", struct)
+        object.__setattr__(
+            self,
+            "identity",
+            identity,
+        )
+
+        object.__setattr__(
+            self,
+            "structure",
+            _freeze_mapping(struct),
+        )
 
     @property
-    def participants(self) -> list[str]:
+    def participants(self) -> tuple[str, ...]:
         """
         Return the participating canonical identities.
 
         A defensive copy is returned to preserve the immutability of the
         underlying CanonicalRelation.
         """
-        return list(self.structure["participants"])
+        return tuple(self.structure["participants"])
 
     @property
     def relation_type(self) -> str:
@@ -183,23 +270,88 @@ class KnowledgeStructure:
         """
         return self._index.get(identity)
     
+    def _canonical_signature(
+        self,
+    ) -> tuple[
+        tuple[
+            str,
+            str,
+            str,
+            tuple[tuple[str, object], ...],
+        ],
+        ...,
+    ]:
+        """
+        Return the canonical semantic signature of the structure.
+
+        Object order is ignored.
+
+        The signature completely describes the semantic content of the
+        KnowledgeStructure.
+        """
+
+        signature = []
+
+        for obj in self._objects:
+
+            structure = tuple(
+                sorted(obj.structure.items())
+            )
+
+            signature.append(
+                (
+                    obj.identity.id,
+                    obj.identity.type,
+                    obj.identity.name,
+                    structure,
+                )
+            )
+
+        return tuple(sorted(signature))
+    
     def structurally_equivalent(
         self,
         other: object,
     ) -> bool:
         """
-        Determine whether two KnowledgeStructures are structurally equivalent.
+        Determine whether two KnowledgeStructures are semantically
+        equivalent.
 
-        Two structures are considered structurally equivalent when they
-        contain the same canonical identities, regardless of object order.
+        Two structures are structurally equivalent when every canonical
+        object, identity and semantic structure is identical,
+        independently of ordering.
         """
 
-        if not isinstance(other, KnowledgeStructure):
+        if not isinstance(
+            other,
+            KnowledgeStructure,
+        ):
             return False
 
         return (
-            frozenset(self._index.keys())
-            == frozenset(other._index.keys())
+            self._canonical_signature()
+            == other._canonical_signature()
+        )
+    
+    def identity_equivalent(
+        self,
+        other: object,
+    ) -> bool:
+        """
+        Compare only canonical identities.
+
+        This is weaker than structural equivalence.
+        """
+
+        if not isinstance(
+            other,
+            KnowledgeStructure,
+        ):
+            return False
+
+        return (
+            frozenset(self._index)
+            == frozenset(other._index)
         )
     
     def __eq__(self, other: object) -> bool:

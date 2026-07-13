@@ -113,7 +113,8 @@ def test_relation_properties():
         "depends_on",
     )
 
-    assert relation.participants == ["a", "b"]
+    assert relation.participants == ("a", "b")
+    assert isinstance(relation.participants, tuple)
     assert relation.relation_type == "depends_on"
 
 
@@ -221,3 +222,81 @@ def test_repr():
     assert "KnowledgeStructure" in text
     assert "objects=3" in text
     assert "relations=1" in text
+
+
+def test_knowledge_object_structure_is_immutable():
+    obj = KnowledgeObject(
+        identity=ObjectIdentity(
+            "obj",
+            "Concept",
+            "Object",
+        ),
+        structure={"a": 1},
+    )
+
+    with pytest.raises(TypeError):
+        obj.structure["b"] = 2
+
+def test_relation_structure_is_immutable():
+    relation = CanonicalRelation(
+        identity=ObjectIdentity(
+            "r",
+            "CanonicalRelation",
+            "R",
+        ),
+        participants=["a", "b"],
+        relation_type="depends_on",
+    )
+
+    with pytest.raises(TypeError):
+        relation.structure["x"] = 1
+
+def test_nested_structure_is_deeply_immutable():
+    obj = KnowledgeObject(
+        identity=ObjectIdentity(
+            "obj",
+            "Thing",
+            "Thing",
+        ),
+        structure={
+            "nested": {
+                "value": 1,
+            },
+        },
+    )
+
+    with pytest.raises(TypeError):
+        obj.structure["nested"]["x"] = 2
+
+def test_nested_lists_are_converted_to_tuples():
+    obj = KnowledgeObject(
+        identity=ObjectIdentity(
+            "obj",
+            "Thing",
+            "Thing",
+        ),
+        structure={
+            "nested": {
+                "items": [1, 2, 3],
+            },
+        },
+    )
+
+    assert obj.structure["nested"]["items"] == (1, 2, 3)
+
+def test_sets_are_converted_to_frozensets():
+    obj = KnowledgeObject(
+        identity=ObjectIdentity(
+            "obj",
+            "Thing",
+            "Thing",
+        ),
+        structure={
+            "tags": {"a", "b"},
+        },
+    )
+
+    assert isinstance(
+        obj.structure["tags"],
+        frozenset,
+    )

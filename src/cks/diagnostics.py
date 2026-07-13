@@ -17,6 +17,33 @@ from typing import Any, Mapping, Optional
 
 
 # ============================================================================
+# Internal Helpers
+# ============================================================================
+
+
+def _freeze_mapping(
+    mapping: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    """
+    Return an immutable shallow copy of a mapping.
+
+    Lists are converted to tuples.
+
+    The returned mapping cannot be modified.
+    """
+
+    frozen: dict[str, Any] = {}
+
+    for key, value in mapping.items():
+
+        if isinstance(value, list):
+            value = tuple(value)
+
+        frozen[key] = value
+
+    return MappingProxyType(frozen)
+
+# ============================================================================
 # Diagnostic Severity
 # ============================================================================
 
@@ -103,7 +130,7 @@ class Diagnostic:
         object.__setattr__(
             self,
             "metadata",
-            MappingProxyType(dict(self.metadata)),
+            _freeze_mapping(self.metadata),
         )
 
     # ------------------------------------------------------------------
@@ -137,6 +164,7 @@ class Diagnostic:
             self.severity.priority,
             self.identity,
             self.location or "",
+            self.message,
         )
 
 # ============================================================================
@@ -187,7 +215,10 @@ class DiagnosticCollection:
     def __bool__(self) -> bool:
         return bool(self.diagnostics)
 
-    def __contains__(self, identity: str) -> bool:
+    def __contains__(self, identity: object) -> bool:
+        if not isinstance(identity, str):
+            return False
+
         return any(
             d.identity == identity
             for d in self.diagnostics
