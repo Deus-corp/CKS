@@ -1,0 +1,1578 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Universal representation-independent semantic foundation for knowledge.">
+      
+      
+        <meta name="author" content="Vladyslav">
+      
+      
+      
+        <link rel="prev" href="../CKS-007_Canonical_Knowledge_Interface/">
+      
+      
+        <link rel="next" href="../CKS-B001-PY_Python_Reference/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>CKS-008 - Canonical Knowledge Structure (CKS)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Canonical Knowledge Structure (CKS)" class="md-header__button md-logo" aria-label="Canonical Knowledge Structure (CKS)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Canonical Knowledge Structure (CKS)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CKS-008
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/<YOUR_GITHUB>/CKS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../concepts/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Concepts
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../examples/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Specifications
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Canonical Knowledge Structure (CKS)" class="md-nav__button md-logo" aria-label="Canonical Knowledge Structure (CKS)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Canonical Knowledge Structure (CKS)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/<YOUR_GITHUB>/CKS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-000_Canonical_Foundations_and_Terminology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-000
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-001_Core_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-002_Canonical_Construction_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-002
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-003_Canonical_Serialization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-003
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-004_Canonical_Structure_Evolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-004
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-005_Validator_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-005
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-006_Reference_Engine_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-006
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-007_Canonical_Knowledge_Interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-007
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-008
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-008
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#position-within-cks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Position within CKS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conformance-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conformance Principle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-B001-PY_Python_Reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-B001-PY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#position-within-cks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Position within CKS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conformance-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conformance Principle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="introduction">Introduction</h1>
+<h2 id="purpose">Purpose</h2>
+<p>The purpose of this specification is to define the unified conformance
+criteria for all components of the Canonical Knowledge Structure
+ecosystem.</p>
+<p>Where previous Core Specifications define:</p>
+<ul>
+<li>the canonical semantic model (CKS‑001),</li>
+<li>canonical construction (CKS‑002),</li>
+<li>canonical serialization (CKS‑003),</li>
+<li>canonical structure evolution (CKS‑004),</li>
+<li>canonical validation (CKS‑005),</li>
+<li>canonical computation (CKS‑006), and</li>
+<li>canonical interaction (CKS‑007),</li>
+</ul>
+<p>this specification defines the normative conditions under which an
+implementation may be considered conformant to those specifications.</p>
+<p>Conformance is determined by observable canonical behaviour, not by
+implementation technology.</p>
+<hr />
+<h2 id="scope">Scope</h2>
+<p>This specification defines:</p>
+<ul>
+<li>general conformance principles,</li>
+<li>validator conformance criteria,</li>
+<li>reference engine conformance criteria,</li>
+<li>CKI conformance criteria,</li>
+<li>conformance levels,</li>
+<li>the conformance verification procedure.</li>
+</ul>
+<p>Implementation algorithms, performance benchmarks, and
+implementation-specific testing frameworks are outside the scope of
+this specification.</p>
+<hr />
+<h2 id="position-within-cks">Position within CKS</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Title</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CKS-000</td>
+<td>Canonical Foundations and Terminology</td>
+<td>Philosophical principles and unified terminology</td>
+</tr>
+<tr>
+<td>CKS-001</td>
+<td>Core Specification</td>
+<td>Formal semantic model</td>
+</tr>
+<tr>
+<td>CKS-002</td>
+<td>Canonical Construction Specification</td>
+<td>Construction methodology</td>
+</tr>
+<tr>
+<td>CKS-003</td>
+<td>Canonical Serialization</td>
+<td>Machine‑processable representation</td>
+</tr>
+<tr>
+<td>CKS-004</td>
+<td>Canonical Structure Evolution</td>
+<td>Admissible structural evolution</td>
+</tr>
+<tr>
+<td>CKS-005</td>
+<td>Validator Specification</td>
+<td>Formal model of canonical validation</td>
+</tr>
+<tr>
+<td>CKS-006</td>
+<td>Reference Engine Specification</td>
+<td>Computational engine architecture</td>
+</tr>
+<tr>
+<td>CKS-007</td>
+<td>Canonical Knowledge Interface (CKI)</td>
+<td>Canonical operations and interaction</td>
+</tr>
+<tr>
+<td><strong>CKS-008</strong></td>
+<td><strong>Reference Conformance Specification</strong></td>
+<td><strong>Unified conformance criteria</strong></td>
+</tr>
+</tbody>
+</table>
+<p>CKS‑008 is the final normative specification in the Core CKS series.
+It establishes the conditions that every conformant implementation
+shall satisfy.</p>
+<hr />
+<h2 id="conformance-principle">Conformance Principle</h2>
+<blockquote>
+<p><strong>Conformance is determined by observable canonical behaviour, not
+by implementation technology.</strong></p>
+</blockquote>
+<p>Two implementations that produce identical canonical outputs for all
+admissible canonical inputs are equally conformant, regardless of
+differences in programming language, internal algorithms, data
+structures, or execution platform.</p>
+<hr />
+<h1 id="general-conformance-principles">General Conformance Principles</h1>
+<h2 id="semantic-equivalence">Semantic Equivalence</h2>
+<p>Conformance shall be evaluated by semantic equivalence of observable
+behaviour.  Implementation A and Implementation B are equally
+conformant if, for every admissible canonical input, they produce
+canonically equivalent outputs.</p>
+<h2 id="determinism">Determinism</h2>
+<p>Every conformant implementation shall be deterministic.  Identical
+canonical inputs shall always produce identical canonical outputs.
+Behaviour shall not depend on execution order, hardware platform, or
+implementation-specific state.</p>
+<h2 id="representation-independence">Representation Independence</h2>
+<p>Conformance shall be independent of serialization format, programming
+language, operating system, or communication protocol.  Only canonical
+semantics determine conformance.</p>
+<h2 id="observational-purity">Observational Purity</h2>
+<p>Conformant implementations shall not modify the canonical semantics of
+their inputs, unless the operation being implemented is explicitly
+defined as a structural transformation.  Validation, inspection, and
+serialization are observational operations.</p>
+<h2 id="completeness-of-constraint-evaluation">Completeness of Constraint Evaluation</h2>
+<p>Every conformant implementation shall evaluate every canonical
+constraint applicable to its domain.  Omission of a mandatory
+constraint constitutes non‑conformance.</p>
+<h2 id="contract-preservation">Contract Preservation</h2>
+<p>Every conformant implementation shall satisfy the canonical operation
+contracts defined by the relevant Core Specifications.  Preconditions,
+postconditions, and invariants shall be preserved.</p>
+<h2 id="traceability">Traceability</h2>
+<p>Every validation decision, diagnostic, and transformation shall be
+traceable to the specific canonical constraint or operation contract
+from which it derives.</p>
+<h2 id="conformance-closure">Conformance Closure</h2>
+<p>Conformance shall be preserved under admissible canonical operation composition.</p>
+<p>If every constituent Canonical Knowledge Operation satisfies the applicable conformance requirements,</p>
+<p>then every admissible composition of those operations shall likewise satisfy those requirements.</p>
+<p>Consequently,</p>
+<p>conformance is compositional.</p>
+<p>The correctness of a canonical workflow therefore follows from the correctness of its constituent operations together with admissible canonical composition.</p>
+<h2 id="semantic-and-behavioural-conformance">Semantic and Behavioural Conformance</h2>
+<p>Conformance consists of two complementary dimensions.</p>
+<h3 id="semantic-conformance">Semantic Conformance</h3>
+<p>Semantic Conformance requires preservation of canonical meaning.</p>
+<p>Equivalent canonical inputs shall produce canonically equivalent semantic outputs.</p>
+<p>Semantic equivalence is independent of implementation technology.</p>
+<hr />
+<h3 id="behavioural-conformance">Behavioural Conformance</h3>
+<p>Behavioural Conformance requires preservation of observable canonical behaviour.</p>
+<p>Observable behaviour includes:</p>
+<ul>
+<li>operation contracts;</li>
+<li>validation results;</li>
+<li>diagnostics;</li>
+<li>canonical interface objects;</li>
+<li>deterministic execution.</li>
+</ul>
+<p>Different implementations may internally differ while remaining behaviourally conformant.</p>
+<hr />
+<h1 id="validator-conformance">Validator Conformance</h1>
+<h2 id="reference-specification">Reference Specification</h2>
+<p>Validator implementations shall conform to CKS‑005 (Validator
+Specification).  All mandatory provisions of CKS‑005 apply.</p>
+<h2 id="mandatory-criteria">Mandatory Criteria</h2>
+<p>A conformant Validator shall:</p>
+<ul>
+<li><strong>(V‑1)</strong> Evaluate every Canonical Validation Constraint applicable
+  to the validated Canonical Knowledge Structure (CKS‑005, Section 5).</li>
+<li><strong>(V‑2)</strong> Produce exactly one Validation Result per validation
+  execution (CKS‑005, Section 7).</li>
+<li><strong>(V‑3)</strong> Produce a Validation Result that is deterministic and
+  semantically faithful to the canonical semantics of the input
+  structure (CKS‑005, Section 17).</li>
+<li><strong>(V‑4)</strong> Classify a Canonical Knowledge Structure as valid if and
+  only if it satisfies every applicable constraint (CKS‑005,
+  Section 16, Completeness Theorem).</li>
+<li><strong>(V‑5)</strong> Never classify an invalid structure as valid (CKS‑005,
+  Section 15, Soundness Theorem).</li>
+<li><strong>(V‑6)</strong> Operate observationally: validation shall not modify the
+  canonical identity, structure, relations, derivations, or semantics
+  of the validated structure (CKS‑005, Section 2.5).</li>
+<li><strong>(V‑7)</strong> Produce diagnostics that are deterministic, traceable to
+  specific constraints, and implementation‑independent in their
+  canonical meaning (CKS‑006, Section 8).</li>
+</ul>
+<h2 id="validation-pipeline">Validation Pipeline</h2>
+<p>If a conformant implementation realises the validation process through
+a pipeline (CKS‑006, Section 6), it shall preserve the canonical
+ordering of stages: Loading, Deserialization, Structural Validation,
+Semantic Validation, Constraint Evaluation, Diagnostic Generation, and
+Validation Result Construction.</p>
+<hr />
+<h1 id="reference-engine-conformance">Reference Engine Conformance</h1>
+<h2 id="reference-specification_1">Reference Specification</h2>
+<p>Reference Engine implementations shall conform to CKS‑006 (Reference
+Engine Specification).  All mandatory provisions of CKS‑006 apply.</p>
+<h2 id="mandatory-criteria_1">Mandatory Criteria</h2>
+<p>A conformant Reference Engine shall:</p>
+<ul>
+<li><strong>(RE‑1)</strong> Realise the canonical execution mapping
+  \(RE : CKS \to VR\) as a total, deterministic function over its
+  canonical domain (CKS‑006, Section 11).</li>
+<li><strong>(RE‑2)</strong> Preserve the canonical invariants established in CKS‑006,
+  Section 14: identity preservation, semantic preservation, structural
+  preservation, observational purity, determinism, and execution
+  closure.</li>
+<li><strong>(RE‑3)</strong> Execute the complete Canonical Validation Pipeline without
+  omitting any mandatory stage (CKS‑006, Section 6).</li>
+<li><strong>(RE‑4)</strong> Produce Validation Results that are structurally
+  equivalent to those produced by any other conformant Reference Engine
+  for identical inputs (CKS‑006, Section 16, Canonical Equivalence
+  Theorem).</li>
+<li><strong>(RE‑5)</strong> Compose correctly: if every execution function is correct,
+  the composed Reference Engine shall be correct (CKS‑006,
+  Section 15, Correctness Theorem).</li>
+</ul>
+<h2 id="internal-architecture">Internal Architecture</h2>
+<p>The Reference Engine may be implemented using any internal software
+architecture.  The canonical decomposition into Loader, Deserializer,
+Structural Validator, Semantic Validator, Constraint Evaluator,
+Diagnostic Engine, and Validation Result Generator (CKS‑006,
+Section 4) is normative with respect to responsibilities, not with
+respect to module boundaries.</p>
+<hr />
+<h1 id="cki-conformance">CKI Conformance</h1>
+<h2 id="reference-specification_2">Reference Specification</h2>
+<p>Canonical Knowledge Interface implementations shall conform to CKS‑007
+(Canonical Knowledge Interface).  All mandatory provisions of CKS‑007
+apply.</p>
+<h2 id="mandatory-criteria_2">Mandatory Criteria</h2>
+<p>A conformant CKI implementation shall:</p>
+<ul>
+<li><strong>(CKI‑1)</strong> Expose every mandatory canonical operation defined in
+  CKS‑007, Section 2.</li>
+<li><strong>(CKI‑2)</strong> Satisfy the canonical operation contract of every exposed
+  operation (CKS‑007, Section 3).</li>
+<li><strong>(CKI‑3)</strong> Preserve canonical semantics across every operation:
+  operations shall not modify canonical identity, structure, relations,
+  or derivations unless the operation is explicitly defined as a
+  structural transformation.</li>
+<li><strong>(CKI‑4)</strong> Produce deterministic outputs: identical canonical inputs
+  shall produce identical canonical outputs.</li>
+<li><strong>(CKI‑5)</strong> Accept and produce only Canonical Knowledge Objects and
+  Canonical Interface Objects as defined in CKS‑007, Sections 5–6.</li>
+<li><strong>(CKI‑6)</strong> Preserve canonical object identity across serialization
+  and deserialization cycles (CKS‑007, Section 5.4).</li>
+</ul>
+<h2 id="binding-conformance">Binding Conformance</h2>
+<p>Language‑specific bindings (Python, Rust, Java, etc.) shall preserve
+the canonical semantics of every operation they expose.  Syntactic
+conveniences shall not alter canonical behaviour.</p>
+<hr />
+<h1 id="conformance-levels">Conformance Levels</h1>
+<h2 id="purpose_1">Purpose</h2>
+<p>Conformance levels enable incremental adoption of the CKS
+specifications and provide a clear vocabulary for describing the
+capabilities of an implementation.</p>
+<h2 id="level-i-basic-compliance">Level I — Basic Compliance</h2>
+<p>The implementation:</p>
+<ul>
+<li>supports the canonical request/response model (CKS‑007),</li>
+<li>satisfies operation contracts for all mandatory operations,</li>
+<li>preserves invariant contracts,</li>
+<li>produces deterministic outputs.</li>
+</ul>
+<p>This level establishes basic interoperability.</p>
+<h2 id="level-ii-verified-compliance">Level II — Verified Compliance</h2>
+<p>In addition to Level I, the implementation:</p>
+<ul>
+<li>implements the complete Safety Architecture (where applicable),</li>
+<li>supports execution traceability,</li>
+<li>provides checkpoint awareness (where applicable),</li>
+<li>passes the conformance verification procedure defined in Section 7
+  for all mandatory test cases.</li>
+</ul>
+<p>This level guarantees verified canonical execution.</p>
+<h2 id="level-iii-canonical-compliance">Level III — Canonical Compliance</h2>
+<p>In addition to Level II, the implementation:</p>
+<ul>
+<li>implements the complete Canonical Architecture as specified,</li>
+<li>guarantees semantic equivalence with the Reference Engine,</li>
+<li>supports all canonical operations defined in CKS‑007,</li>
+<li>passes the full conformance verification procedure, including
+  optional and edge‑case tests.</li>
+</ul>
+<p>This level represents complete conformance with the Core CKS
+specifications.</p>
+<hr />
+<h1 id="conformance-verification-procedure">Conformance Verification Procedure</h1>
+<h2 id="purpose_2">Purpose</h2>
+<p>The conformance verification procedure defines the process by which an
+implementation is evaluated against the criteria established in this
+specification.</p>
+<h2 id="reference-knowledge-structures">Reference Knowledge Structures</h2>
+<p>Verification shall use a fixed set of Reference Knowledge Structures.
+These structures shall include:</p>
+<ul>
+<li>valid Canonical Knowledge Structures,</li>
+<li>invalid Canonical Knowledge Structures (each violating exactly one
+  canonical constraint),</li>
+<li>edge‑case structures (empty, maximal, cyclic),</li>
+<li>structures exercising every mandatory canonical operation.</li>
+</ul>
+<p>The Reference Knowledge Structures are defined in CKS‑009 (Reference
+Knowledge Corpus).</p>
+<hr />
+<h2 id="canonical-equivalence-oracle">Canonical Equivalence Oracle</h2>
+<p>Every Conformance Verification Procedure shall compare implementation outputs against the canonical semantic model rather than against implementation-specific representations.</p>
+<p>The Canonical Equivalence Oracle determines whether produced outputs are canonically equivalent to the expected Reference Knowledge Structures.</p>
+<p>Observable equivalence,</p>
+<p>rather than implementation identity,</p>
+<p>constitutes the normative criterion for successful verification.</p>
+<hr />
+<h2 id="verification-steps">Verification Steps</h2>
+<ol>
+<li><strong>Architecture Review.</strong> Confirm that the implementation exposes the
+   required components and operations.</li>
+<li><strong>DSV/Structure Verification.</strong> Confirm that the implementation
+   correctly represents canonical state.</li>
+<li><strong>Operation Verification.</strong> For each mandatory operation, execute it
+   against the Reference Knowledge Structures and compare the output
+   against the expected canonical output.</li>
+<li><strong>Constraint Evaluation Verification.</strong> Confirm that every mandatory
+   constraint is evaluated and that the set of evaluated constraints
+   matches the canonical constraint set.</li>
+<li><strong>Determinism Verification.</strong> Execute each operation multiple times
+   on identical inputs and confirm identical outputs.</li>
+<li><strong>Round‑Trip Verification.</strong> For serialization operations, confirm
+   that \(Deserialize(Serialize(S)) \equiv S\).</li>
+<li><strong>Conformance Decision.</strong> If all steps pass, the implementation is
+   conformant at the level corresponding to the satisfied criteria.</li>
+<li>Canonical Equivalence Verification. Confirm that the complete observable behaviour of the implementation is canonically equivalent to the Reference Model. Equivalent observable behaviour constitutes the final criterion of conformance.</li>
+</ol>
+<h2 id="conformance-report">Conformance Report</h2>
+<p>Every conformance verification shall produce a Conformance Report
+containing:</p>
+<ul>
+<li>implementation identifier,</li>
+<li>achieved conformance level,</li>
+<li>verified operations,</li>
+<li>evaluated constraints,</li>
+<li>detected deviations (if any),</li>
+<li>verification date.</li>
+</ul>
+<p>The Conformance Report constitutes a Canonical Interface Object.</p>
+<p>Accordingly,</p>
+<p>it may be serialized,</p>
+<p>transmitted,</p>
+<p>archived,</p>
+<p>digitally signed,</p>
+<p>and independently verified while preserving its canonical semantics.</p>
+<hr />
+<h1 id="nonconformance">Non‑Conformance</h1>
+<h2 id="definition">Definition</h2>
+<p>An implementation is non‑conformant if it fails to satisfy any
+mandatory criterion established in Sections 3–5 of this specification.</p>
+<h2 id="deviation-classes">Deviation Classes</h2>
+<p><strong>Minor Deviation.</strong> The implementation differs internally while
+preserving canonical semantics.  Conformance is retained.</p>
+<p><strong>Major Deviation.</strong> Mandatory behaviour differs from the
+specification.  Conformance is suspended until corrected.</p>
+<p><strong>Critical Deviation.</strong> Canonical guarantees are violated.
+Conformance is denied.</p>
+<hr />
+<h1 id="relationship-to-future-specifications">Relationship to Future Specifications</h1>
+<p>Future specifications may extend the conformance criteria defined
+herein to cover additional components (e.g., distributed Reference
+Engines, probabilistic validators, domain‑specific Knowledge Spaces).
+Such extensions shall preserve the criteria established in this
+specification for all existing components.</p>
+<p>Future specifications shall extend conformance exclusively through the introduction of additional criteria.</p>
+<p>Previously established conformance criteria shall never be weakened,</p>
+<p>reinterpreted,</p>
+<p>or redefined.</p>
+<p>Conformance therefore evolves through extension rather than revision.</p>
+<hr />
+<h1 id="normative-references">Normative References</h1>
+<p>[CKS-000] Canonical Knowledge Structure — Canonical Foundations and Terminology.</p>
+<p>[CKS-001] Canonical Knowledge Structure — Core Specification.</p>
+<p>[CKS-002] Canonical Knowledge Structure — Canonical Construction Specification.</p>
+<p>[CKS-003] Canonical Knowledge Structure — Canonical Serialization.</p>
+<p>[CKS-004] Canonical Knowledge Structure — Canonical Structure Evolution.</p>
+<p>[CKS-005] Canonical Knowledge Structure — Validator Specification.</p>
+<p>[CKS-006] Canonical Knowledge Structure — Reference Engine Specification.</p>
+<p>[CKS-007] Canonical Knowledge Structure — Canonical Knowledge Interface (CKI).</p>
+<p>[CKS-008] Canonical Knowledge Structure — Reference Conformance Specification.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

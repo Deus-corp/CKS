@@ -1,0 +1,3263 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Universal representation-independent semantic foundation for knowledge.">
+      
+      
+        <meta name="author" content="Vladyslav">
+      
+      
+      
+        <link rel="prev" href="../CKS-005_Validator_Specification/">
+      
+      
+        <link rel="next" href="../CKS-007_Canonical_Knowledge_Interface/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>CKS-006 - Canonical Knowledge Structure (CKS)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#part-i-normative-reference-engine-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Canonical Knowledge Structure (CKS)" class="md-header__button md-logo" aria-label="Canonical Knowledge Structure (CKS)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Canonical Knowledge Structure (CKS)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CKS-006
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/<YOUR_GITHUB>/CKS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../concepts/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Concepts
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../examples/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Specifications
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Canonical Knowledge Structure (CKS)" class="md-nav__button md-logo" aria-label="Canonical Knowledge Structure (CKS)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Canonical Knowledge Structure (CKS)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/<YOUR_GITHUB>/CKS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-000_Canonical_Foundations_and_Terminology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-000
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-001_Core_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-002_Canonical_Construction_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-002
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-003_Canonical_Serialization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-003
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-004_Canonical_Structure_Evolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-004
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-005_Validator_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-005
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-006
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-007_Canonical_Knowledge_Interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-007
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-008_Reference_Conformance_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-008
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-B001-PY_Python_Reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-B001-PY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="part-i-normative-reference-engine-model">Part I — Normative Reference Engine Model</h1>
+<h1 id="introduction">Introduction</h1>
+<h2 id="purpose">Purpose</h2>
+<p>The purpose of this specification is to define the canonical Reference Engine for the Canonical Knowledge Structure ecosystem.</p>
+<p>Where the Core CKS specifications establish:</p>
+<ul>
+<li>canonical semantic entities;</li>
+<li>canonical construction;</li>
+<li>canonical serialization;</li>
+<li>canonical structure evolution;</li>
+<li>canonical validation,</li>
+</ul>
+<p>this specification defines the implementation-independent architecture of the Reference Engine that realizes those specifications.</p>
+<p>The Reference Engine provides the normative computational model through which Canonical Knowledge Structures are processed, validated, and diagnosed.</p>
+<p>Accordingly, this specification establishes the reference implementation model independently of optimization techniques, execution environments, programming languages, or software architectures.</p>
+<hr />
+<h2 id="scope">Scope</h2>
+<p>This specification defines:</p>
+<ul>
+<li>the Reference Engine Model;</li>
+<li>the canonical validation pipeline;</li>
+<li>Reference Engine components;</li>
+<li>validation execution principles;</li>
+<li>diagnostic generation;</li>
+<li>validation result representation;</li>
+<li>reference conformance requirements;</li>
+<li>extension principles.</li>
+</ul>
+<p>Algorithms, optimization strategies, parallel execution, storage mechanisms, user interfaces, networking, and implementation-specific technologies are intentionally outside the scope of this specification.</p>
+<hr />
+<h2 id="position-within-cks">Position within CKS</h2>
+<p>The Canonical Knowledge Structure specifications are organized as follows:</p>
+<ul>
+<li><strong>CKS-000</strong> establishes the foundational principles of the CKS ecosystem.</li>
+<li><strong>CKS-001</strong> defines the canonical semantic model.</li>
+<li><strong>CKS-002</strong> defines canonical construction.</li>
+<li><strong>CKS-003</strong> defines canonical serialization.</li>
+<li><strong>CKS-004</strong> defines canonical structure evolution.</li>
+<li><strong>CKS-005</strong> defines canonical validation.</li>
+<li><strong>CKS-006</strong> defines the Reference Engine realizing the canonical validation model.</li>
+</ul>
+<p>The Reference Engine is therefore the first implementation-oriented specification of the CKS ecosystem.</p>
+<p>It realizes the canonical behavior defined by the preceding specifications while preserving their implementation independence.</p>
+<hr />
+<h2 id="reference-implementation-principle">Reference Implementation Principle</h2>
+<p>The Reference Engine is normative.</p>
+<p>Its purpose is not to prescribe a particular software implementation but to define the canonical computational behavior required of every conformant implementation.</p>
+<p>Any implementation that preserves the canonical semantics established by the Core CKS specifications may serve as a conformant realization of the Reference Engine.</p>
+<hr />
+<h2 id="implementation-independence">Implementation Independence</h2>
+<p>The Reference Engine is independent of:</p>
+<ul>
+<li>programming language;</li>
+<li>execution platform;</li>
+<li>operating system;</li>
+<li>software architecture;</li>
+<li>storage technology;</li>
+<li>deployment model.</li>
+</ul>
+<p>The reference implementation described by this specification is expressed using Python in subsequent implementation specifications solely because Python provides a clear and accessible reference language.</p>
+<p>Python is not part of the normative Reference Engine model.</p>
+<hr />
+<h2 id="relationship-to-subsequent-specifications">Relationship to Subsequent Specifications</h2>
+<p>This specification defines the architecture and normative behavior of the Reference Engine.</p>
+<p>Subsequent implementation specifications define:</p>
+<ul>
+<li>the Python Reference API;</li>
+<li>the Reference Test Suite;</li>
+<li>Reference Knowledge Sets;</li>
+<li>implementation examples.</li>
+</ul>
+<p>Those specifications shall conform to the normative model established by the present document.</p>
+<hr />
+<h1 id="canonical-reference-engine-model">Canonical Reference Engine Model</h1>
+<h2 id="purpose_1">Purpose</h2>
+<p>The Canonical Reference Engine Model defines the implementation-independent computational model responsible for realizing the normative behavior established by the Core CKS specifications.</p>
+<p>The Reference Engine executes canonical validation while preserving the semantic invariants defined by the Canonical Knowledge Structure framework.</p>
+<p>The model describes computational behavior rather than implementation details.</p>
+<hr />
+<h2 id="canonical-reference-engine">Canonical Reference Engine</h2>
+<p>A <strong>Canonical Reference Engine (CRE)</strong> is an implementation-independent computational system that processes Canonical Knowledge Structures according to the normative requirements established by the Core CKS specifications.</p>
+<p>The Reference Engine realizes canonical validation without modifying canonical semantics.</p>
+<p>Its purpose is to determine whether a Canonical Knowledge Structure satisfies the canonical validity criteria defined by CKS-005 and to produce deterministic validation results.</p>
+<hr />
+<h2 id="position-within-the-cks-architecture">Position within the CKS Architecture</h2>
+<p>Formally,</p>
+<p>Canonical Knowledge Structure</p>
+<p>↓</p>
+<p>Reference Engine</p>
+<p>↓</p>
+<p>Validation Result</p>
+<p>↓</p>
+<p>Diagnostics</p>
+<p>The Reference Engine therefore constitutes the canonical computational bridge between Canonical Knowledge Structures and their validation outcomes.</p>
+<hr />
+<h2 id="computational-principle">Computational Principle</h2>
+<p>The Reference Engine shall execute the canonical validation model defined by CKS-005.</p>
+<p>Execution shall preserve:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical semantics;</li>
+<li>canonical structure;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical constraints.</li>
+</ul>
+<p>The Reference Engine shall never modify the Canonical Knowledge Structure being validated.</p>
+<p>Validation is observational rather than transformational.</p>
+<hr />
+<h2 id="execution-independence">Execution Independence</h2>
+<p>The Canonical Reference Engine is independent of:</p>
+<ul>
+<li>programming language;</li>
+<li>execution platform;</li>
+<li>operating system;</li>
+<li>software architecture;</li>
+<li>storage technology;</li>
+<li>deployment model.</li>
+</ul>
+<p>Equivalent implementations shall produce identical validation results for identical Canonical Knowledge Structures.</p>
+<hr />
+<h2 id="canonical-input">Canonical Input</h2>
+<p>The input to the Reference Engine shall be an admissible serialized representation of a Canonical Knowledge Structure or an equivalent in-memory canonical representation.</p>
+<p>Regardless of representation, the Reference Engine shall operate upon the canonical semantics represented by the structure rather than upon implementation-specific artifacts.</p>
+<hr />
+<h2 id="canonical-output">Canonical Output</h2>
+<p>The output of the Reference Engine shall be a Validation Result.</p>
+<p>Every Validation Result shall contain sufficient canonical information to determine:</p>
+<ul>
+<li>whether validation succeeded;</li>
+<li>whether canonical validity was preserved;</li>
+<li>which canonical constraints were evaluated;</li>
+<li>any diagnostics produced during validation.</li>
+</ul>
+<p>The precise structure of Validation Results is defined in subsequent chapters.</p>
+<hr />
+<h2 id="deterministic-execution">Deterministic Execution</h2>
+<p>Given equivalent Canonical Knowledge Structures, every conformant Reference Engine shall produce structurally equivalent Validation Results.</p>
+<p>Formally,</p>
+<p>CRE(S₁) ≡ CRE(S₂)</p>
+<p>whenever</p>
+<p>S₁ ≡ S₂,</p>
+<p>where ≡ denotes structural equivalence as defined by CKS-001.</p>
+<p>Deterministic execution is a mandatory property of every conformant Reference Engine.</p>
+<hr />
+<h1 id="reference-engine-principles">Reference Engine Principles</h1>
+<h2 id="purpose_2">Purpose</h2>
+<p>The Reference Engine Principles establish the fundamental properties that every conformant Reference Engine shall satisfy.</p>
+<p>These principles govern the behavior of the Reference Engine independently of implementation strategy, programming language, execution environment, or software architecture.</p>
+<p>Together, they define the canonical computational behavior required by the CKS ecosystem.</p>
+<hr />
+<h2 id="specification-conformance">Specification Conformance</h2>
+<p>Every Reference Engine shall conform to the normative requirements established by the Core CKS specifications.</p>
+<p>The behavior of the Reference Engine shall be derived exclusively from the canonical semantics defined by:</p>
+<ul>
+<li>CKS-001;</li>
+<li>CKS-002;</li>
+<li>CKS-003;</li>
+<li>CKS-004;</li>
+<li>CKS-005.</li>
+</ul>
+<p>No implementation shall introduce additional canonical semantics.</p>
+<hr />
+<h2 id="semantic-fidelity">Semantic Fidelity</h2>
+<p>The Reference Engine shall faithfully preserve the canonical semantics of every Canonical Knowledge Structure during validation.</p>
+<p>Execution shall never:</p>
+<ul>
+<li>modify canonical identity;</li>
+<li>alter canonical semantics;</li>
+<li>reinterpret canonical relations;</li>
+<li>introduce additional canonical knowledge.</li>
+</ul>
+<p>Validation is therefore a semantic observation rather than a semantic transformation.</p>
+<hr />
+<h2 id="determinism">Determinism</h2>
+<p>The Reference Engine shall be deterministic.</p>
+<p>Equivalent Canonical Knowledge Structures shall always produce structurally equivalent Validation Results.</p>
+<p>Execution shall not depend upon:</p>
+<ul>
+<li>execution order;</li>
+<li>hardware platform;</li>
+<li>operating system;</li>
+<li>programming language;</li>
+<li>implementation details.</li>
+</ul>
+<p>Determinism is mandatory for every conformant implementation.</p>
+<hr />
+<h2 id="representation-independence">Representation Independence</h2>
+<p>The behavior of the Reference Engine shall be independent of the representation of the Canonical Knowledge Structure.</p>
+<p>Equivalent canonical structures shall produce identical validation behavior regardless of whether they originate from:</p>
+<ul>
+<li>JSON;</li>
+<li>YAML;</li>
+<li>XML;</li>
+<li>binary serialization;</li>
+<li>databases;</li>
+<li>in-memory representations.</li>
+</ul>
+<p>Only canonical semantics determine validation.</p>
+<hr />
+<h2 id="observational-purity">Observational Purity</h2>
+<p>The Reference Engine shall operate as a read-only observer of Canonical Knowledge Structures.</p>
+<p>Validation shall never modify:</p>
+<ul>
+<li>canonical entities;</li>
+<li>canonical identity;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical metadata.</li>
+</ul>
+<p>The validated structure shall remain unchanged after successful execution.</p>
+<hr />
+<h2 id="reproducibility">Reproducibility</h2>
+<p>Repeated execution of the Reference Engine upon an unchanged Canonical Knowledge Structure shall always produce equivalent Validation Results.</p>
+<p>Formally,</p>
+<p>CRE(S)</p>
+<p>=
+CRE(S)</p>
+<p>for every admissible Canonical Knowledge Structure S.</p>
+<p>Reproducibility enables reliable validation, testing, certification, and interoperability.</p>
+<hr />
+<h2 id="extensibility">Extensibility</h2>
+<p>The Reference Engine shall support future extensions without modifying the canonical behavior defined by the Core CKS specifications.</p>
+<p>Extensions may introduce:</p>
+<ul>
+<li>additional diagnostics;</li>
+<li>additional reporting capabilities;</li>
+<li>additional implementation modules.</li>
+</ul>
+<p>Extensions shall never redefine previously established canonical semantics.</p>
+<hr />
+<h2 id="canonical-compatibility">Canonical Compatibility</h2>
+<p>Independent implementations of the Reference Engine are canonically compatible if they produce structurally equivalent Validation Results for structurally equivalent Canonical Knowledge Structures.</p>
+<p>Canonical compatibility depends exclusively upon adherence to the Core CKS specifications and is independent of implementation technology.</p>
+<hr />
+<h2 id="consequences">Consequences</h2>
+<p>The Reference Engine Principles guarantee:</p>
+<ul>
+<li>deterministic execution;</li>
+<li>semantic fidelity;</li>
+<li>implementation independence;</li>
+<li>reproducible validation;</li>
+<li>interoperability between independent implementations;</li>
+<li>long-term maintainability of the CKS ecosystem.</li>
+</ul>
+<p>Every conformant Reference Engine shall satisfy all principles established in this chapter.</p>
+<hr />
+<h1 id="reference-engine-components">Reference Engine Components</h1>
+<h2 id="purpose_3">Purpose</h2>
+<p>The purpose of this chapter is to define the canonical components comprising the Reference Engine.</p>
+<p>Each component performs a distinct computational responsibility while collectively realizing the canonical validation model defined by CKS-005.</p>
+<p>The decomposition established by this specification is normative with respect to responsibilities rather than implementation.</p>
+<p>Equivalent implementations may organize software differently provided that the canonical behavior of each component is preserved.</p>
+<hr />
+<h2 id="component-model">Component Model</h2>
+<p>The Reference Engine consists of a finite collection of logically independent components.</p>
+<p>Each component is responsible for one well-defined stage of canonical validation.</p>
+<p>Collectively, the components form the complete validation pipeline.</p>
+<hr />
+<h2 id="loader">Loader</h2>
+<p>The Loader receives a serialized Canonical Knowledge Structure from an external source.</p>
+<p>Its responsibilities include:</p>
+<ul>
+<li>obtaining the serialized representation;</li>
+<li>verifying representation availability;</li>
+<li>forwarding the representation for deserialization.</li>
+</ul>
+<p>The Loader shall not interpret canonical semantics.</p>
+<hr />
+<h2 id="deserializer">Deserializer</h2>
+<p>The Deserializer transforms the serialized representation into an internal Canonical Knowledge Structure representation.</p>
+<p>Deserialization shall preserve:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical structure;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical metadata.</li>
+</ul>
+<p>Deserialization shall conform to the Canonical Serialization Model defined by CKS-003.</p>
+<hr />
+<h2 id="validation-coordinator">Validation Coordinator</h2>
+<p>The Validation Coordinator manages the execution of canonical validation.</p>
+<p>Its responsibilities include:</p>
+<ul>
+<li>initiating validation;</li>
+<li>coordinating validation stages;</li>
+<li>preserving deterministic execution order;</li>
+<li>collecting validation outcomes.</li>
+</ul>
+<p>The Validation Coordinator shall not modify canonical semantics.</p>
+<hr />
+<h2 id="structural-validator">Structural Validator</h2>
+<p>The Structural Validator evaluates structural properties defined by the Core CKS specifications.</p>
+<p>Structural validation includes verification of:</p>
+<ul>
+<li>canonical identity;</li>
+<li>structural organization;</li>
+<li>canonical references;</li>
+<li>serialization consistency;</li>
+<li>structural integrity.</li>
+</ul>
+<p>Structural validation shall precede semantic validation.</p>
+<hr />
+<h2 id="semantic-validator">Semantic Validator</h2>
+<p>The Semantic Validator evaluates semantic correctness.</p>
+<p>Semantic validation includes verification of:</p>
+<ul>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>semantic consistency;</li>
+<li>canonical validity;</li>
+<li>semantic constraints.</li>
+</ul>
+<p>Semantic validation shall operate exclusively upon canonical semantics.</p>
+<hr />
+<h2 id="constraint-evaluator">Constraint Evaluator</h2>
+<p>The Constraint Evaluator executes the canonical validation constraints defined by CKS-005.</p>
+<p>Each canonical constraint shall be evaluated deterministically.</p>
+<p>Constraint evaluation shall preserve:</p>
+<ul>
+<li>semantic fidelity;</li>
+<li>deterministic execution;</li>
+<li>reproducibility.</li>
+</ul>
+<hr />
+<h2 id="diagnostic-engine">Diagnostic Engine</h2>
+<p>The Diagnostic Engine produces canonical diagnostics describing validation outcomes.</p>
+<p>Diagnostics shall identify:</p>
+<ul>
+<li>violated constraints;</li>
+<li>affected canonical entities;</li>
+<li>severity;</li>
+<li>diagnostic identifiers;</li>
+<li>explanatory information.</li>
+</ul>
+<p>Diagnostics shall never modify the Canonical Knowledge Structure.</p>
+<hr />
+<h2 id="validation-result-generator">Validation Result Generator</h2>
+<p>The Validation Result Generator constructs the final Validation Result.</p>
+<p>The Validation Result shall contain sufficient information to determine:</p>
+<ul>
+<li>validation status;</li>
+<li>diagnostic collection;</li>
+<li>evaluated constraints;</li>
+<li>execution summary;</li>
+<li>implementation-independent metadata.</li>
+</ul>
+<p>The Validation Result constitutes the canonical output of the Reference Engine.</p>
+<hr />
+<h2 id="logical-independence">Logical Independence</h2>
+<p>Reference Engine components are logically independent.</p>
+<p>Each component performs a single canonical responsibility.</p>
+<p>Communication between components shall occur exclusively through explicitly defined canonical interfaces.</p>
+<p>Logical independence improves:</p>
+<ul>
+<li>maintainability;</li>
+<li>extensibility;</li>
+<li>testability;</li>
+<li>implementation interoperability.</li>
+</ul>
+<hr />
+<h2 id="component-composition">Component Composition</h2>
+<p>Collectively, the Reference Engine components realize the complete canonical validation process.</p>
+<p>Every conformant implementation shall preserve the canonical responsibilities established by this chapter regardless of internal software architecture.</p>
+<p>Alternative implementations may reorganize software modules provided that the canonical computational behavior remains equivalent.</p>
+<hr />
+<h1 id="reference-engine-execution-model">Reference Engine Execution Model</h1>
+<h2 id="purpose_4">Purpose</h2>
+<p>The purpose of this chapter is to define the canonical execution model of the Reference Engine.</p>
+<p>The execution model specifies the normative sequence through which a Canonical Knowledge Structure is processed, validated, and transformed into a Validation Result.</p>
+<p>Execution describes computational behavior rather than implementation strategy.</p>
+<hr />
+<h2 id="execution-principle">Execution Principle</h2>
+<p>Reference Engine execution consists of a finite sequence of canonical processing stages.</p>
+<p>Each stage receives the output of the preceding stage and produces a deterministic result for the subsequent stage.</p>
+<p>Execution shall preserve all canonical invariants established by the Core CKS specifications.</p>
+<hr />
+<h2 id="canonical-execution-flow">Canonical Execution Flow</h2>
+<p>The canonical execution flow of the Reference Engine is:</p>
+<p>Canonical Input</p>
+<p>↓</p>
+<p>Loading</p>
+<p>↓</p>
+<p>Deserialization</p>
+<p>↓</p>
+<p>Structural Validation</p>
+<p>↓</p>
+<p>Semantic Validation</p>
+<p>↓</p>
+<p>Constraint Evaluation</p>
+<p>↓</p>
+<p>Diagnostic Generation</p>
+<p>↓</p>
+<p>Validation Result</p>
+<p>Every conformant implementation shall realize an execution behavior canonically equivalent to this model.</p>
+<hr />
+<h2 id="stage-independence">Stage Independence</h2>
+<p>Each execution stage performs a single canonical responsibility.</p>
+<p>Execution stages shall remain logically independent.</p>
+<p>A stage shall neither duplicate nor reinterpret the responsibilities assigned to another stage.</p>
+<p>Logical separation improves determinism, maintainability, and verification.</p>
+<hr />
+<h2 id="sequential-semantics">Sequential Semantics</h2>
+<p>Execution proceeds in canonical order.</p>
+<p>Each stage shall begin only after the preceding stage has successfully completed or produced a deterministic failure result.</p>
+<p>No execution stage may depend upon information unavailable at its point of execution.</p>
+<hr />
+<h2 id="failure-propagation">Failure Propagation</h2>
+<p>If an execution stage detects a condition preventing further canonical validation, the Reference Engine shall terminate validation in a deterministic manner.</p>
+<p>Termination shall produce a Validation Result containing the diagnostics collected up to the point of termination.</p>
+<p>Failure propagation shall preserve reproducibility.</p>
+<hr />
+<h2 id="successful-completion">Successful Completion</h2>
+<p>Execution completes successfully when every required validation stage has finished and a Validation Result has been produced.</p>
+<p>Successful completion does not necessarily imply that the Canonical Knowledge Structure is valid.</p>
+<p>Rather, it indicates that the validation process itself completed correctly.</p>
+<p>Canonical validity is determined solely by the Validation Result.</p>
+<hr />
+<h2 id="execution-determinism">Execution Determinism</h2>
+<p>Given equivalent Canonical Knowledge Structures, every conformant Reference Engine shall execute equivalent computational stages and produce structurally equivalent Validation Results.</p>
+<p>Execution shall therefore be independent of:</p>
+<ul>
+<li>implementation details;</li>
+<li>execution environment;</li>
+<li>operating system;</li>
+<li>programming language;</li>
+<li>optimization strategy.</li>
+</ul>
+<hr />
+<h2 id="execution-traceability">Execution Traceability</h2>
+<p>Every execution stage shall be canonically identifiable.</p>
+<p>A conformant implementation shall be capable of determining:</p>
+<ul>
+<li>which validation stages were executed;</li>
+<li>which constraints were evaluated;</li>
+<li>which diagnostics were produced;</li>
+<li>how the final Validation Result was obtained.</li>
+</ul>
+<p>Traceability supports verification, debugging, certification, and reproducibility.</p>
+<hr />
+<h2 id="execution-closure">Execution Closure</h2>
+<p>The execution of the Reference Engine always terminates with exactly one Validation Result.</p>
+<p>Every admissible execution therefore maps one Canonical Knowledge Structure to one Validation Result.</p>
+<p>Formally,</p>
+<p>RE :</p>
+<p>CKS</p>
+<p>→</p>
+<p>ValidationResult</p>
+<p>The execution model is therefore functionally deterministic and complete.</p>
+<hr />
+<h1 id="canonical-validation-pipeline">Canonical Validation Pipeline</h1>
+<h2 id="purpose_5">Purpose</h2>
+<p>The Canonical Validation Pipeline defines the normative sequence of validation stages executed by the Reference Engine.</p>
+<p>Its purpose is to ensure that every conformant implementation performs canonical validation in a deterministic, reproducible, and implementation-independent manner.</p>
+<p>The pipeline defines logical execution stages rather than software modules.</p>
+<hr />
+<h2 id="pipeline-principle">Pipeline Principle</h2>
+<p>Canonical validation shall proceed through a finite sequence of well-defined validation stages.</p>
+<p>Each stage receives the canonical output of the preceding stage and produces the canonical input for the subsequent stage.</p>
+<p>Each stage shall preserve all canonical semantics established by the Core CKS specifications.</p>
+<hr />
+<h2 id="pipeline-stages">Pipeline Stages</h2>
+<p>The Canonical Validation Pipeline consists of the following stages:</p>
+<ol>
+<li>Loading</li>
+<li>Deserialization</li>
+<li>Structural Validation</li>
+<li>Semantic Validation</li>
+<li>Constraint Evaluation</li>
+<li>Diagnostic Generation</li>
+<li>Validation Result Construction</li>
+</ol>
+<p>Every conformant Reference Engine shall realize a pipeline canonically equivalent to this sequence.</p>
+<hr />
+<h2 id="loading-stage">Loading Stage</h2>
+<p>The Loading Stage obtains the serialized Canonical Knowledge Structure from an external source.</p>
+<p>Loading verifies only representation availability.</p>
+<p>No canonical semantics shall be interpreted during this stage.</p>
+<hr />
+<h2 id="deserialization-stage">Deserialization Stage</h2>
+<p>The Deserialization Stage reconstructs the Canonical Knowledge Structure according to the Canonical Serialization Model defined by CKS-003.</p>
+<p>Deserialization shall preserve:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical structure;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical metadata.</li>
+</ul>
+<p>Failure during deserialization terminates the pipeline.</p>
+<hr />
+<h2 id="structural-validation-stage">Structural Validation Stage</h2>
+<p>The Structural Validation Stage verifies structural correctness.</p>
+<p>Structural validation includes evaluation of:</p>
+<ul>
+<li>canonical identity;</li>
+<li>structural organization;</li>
+<li>canonical references;</li>
+<li>serialization consistency;</li>
+<li>structural integrity.</li>
+</ul>
+<p>Only structurally admissible Canonical Knowledge Structures shall proceed to semantic validation.</p>
+<hr />
+<h2 id="semantic-validation-stage">Semantic Validation Stage</h2>
+<p>The Semantic Validation Stage evaluates semantic correctness according to the canonical semantic model defined by CKS-001.</p>
+<p>Semantic validation includes:</p>
+<ul>
+<li>semantic consistency;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>semantic invariants.</li>
+</ul>
+<p>Semantic validation operates exclusively upon canonical semantics.</p>
+<hr />
+<h2 id="constraint-evaluation-stage">Constraint Evaluation Stage</h2>
+<p>The Constraint Evaluation Stage executes the canonical validation constraints defined by CKS-005.</p>
+<p>Each constraint shall be evaluated independently.</p>
+<p>Constraint evaluation shall be deterministic and reproducible.</p>
+<p>The complete constraint evaluation forms the canonical validity assessment.</p>
+<hr />
+<h2 id="diagnostic-generation-stage">Diagnostic Generation Stage</h2>
+<p>The Diagnostic Generation Stage constructs the canonical diagnostic collection.</p>
+<p>Diagnostics shall include sufficient information to identify:</p>
+<ul>
+<li>violated constraints;</li>
+<li>affected canonical entities;</li>
+<li>diagnostic severity;</li>
+<li>canonical diagnostic identifiers;</li>
+<li>explanatory information.</li>
+</ul>
+<p>Diagnostic generation shall not modify validation outcomes.</p>
+<hr />
+<h2 id="validation-result-construction">Validation Result Construction</h2>
+<p>The final stage constructs the Validation Result.</p>
+<p>The Validation Result shall summarize the complete execution of the validation pipeline.</p>
+<p>At minimum, it shall contain:</p>
+<ul>
+<li>validation status;</li>
+<li>diagnostic collection;</li>
+<li>evaluated constraints;</li>
+<li>execution metadata.</li>
+</ul>
+<p>The Validation Result constitutes the canonical output of the Reference Engine.</p>
+<hr />
+<h2 id="pipeline-determinism">Pipeline Determinism</h2>
+<p>Equivalent Canonical Knowledge Structures shall always traverse equivalent validation pipelines.</p>
+<p>Pipeline execution shall therefore be independent of:</p>
+<ul>
+<li>implementation language;</li>
+<li>execution platform;</li>
+<li>optimization strategy;</li>
+<li>storage architecture;</li>
+<li>software framework.</li>
+</ul>
+<hr />
+<h2 id="pipeline-completeness">Pipeline Completeness</h2>
+<p>A Canonical Validation Pipeline is complete if every canonical validity criterion defined by CKS-005 has been evaluated.</p>
+<p>No conformant implementation shall omit any mandatory validation stage.</p>
+<p>Pipeline completeness guarantees that the resulting Validation Result fully represents the canonical validity of the processed Canonical Knowledge Structure.</p>
+<hr />
+<h1 id="validation-result-model">Validation Result Model</h1>
+<h2 id="purpose_6">Purpose</h2>
+<p>The purpose of this chapter is to define the canonical representation of validation outcomes produced by the Reference Engine.</p>
+<p>A Validation Result constitutes the canonical output of the validation process.</p>
+<p>It summarizes the outcome of canonical validation independently of implementation details, execution environment, or software architecture.</p>
+<hr />
+<h2 id="validation-result">Validation Result</h2>
+<p>A <strong>Validation Result</strong> is a canonical representation describing the outcome of validating a Canonical Knowledge Structure.</p>
+<p>A Validation Result shall contain sufficient information to determine:</p>
+<ul>
+<li>whether validation completed successfully;</li>
+<li>whether the Canonical Knowledge Structure is canonically valid;</li>
+<li>which canonical constraints were evaluated;</li>
+<li>which diagnostics were produced.</li>
+</ul>
+<p>The Validation Result represents the complete observable outcome of Reference Engine execution.</p>
+<hr />
+<h2 id="canonical-output-principle">Canonical Output Principle</h2>
+<p>Every execution of the Reference Engine shall produce exactly one Validation Result.</p>
+<p>Formally,</p>
+<p>RE :</p>
+<p>CKS</p>
+<p>→</p>
+<p>ValidationResult</p>
+<p>Regardless of whether validation succeeds or fails, the Reference Engine shall always produce a Validation Result.</p>
+<hr />
+<h2 id="validation-status">Validation Status</h2>
+<p>Every Validation Result shall contain a canonical validation status.</p>
+<p>The validation status represents the overall outcome of validation.</p>
+<p>At minimum, the status shall distinguish between:</p>
+<ul>
+<li>successful validation;</li>
+<li>unsuccessful validation;</li>
+<li>incomplete validation.</li>
+</ul>
+<p>The precise representation of validation status is implementation-independent.</p>
+<hr />
+<h2 id="diagnostic-collection">Diagnostic Collection</h2>
+<p>Every Validation Result shall contain the complete collection of diagnostics generated during validation.</p>
+<p>If no diagnostics are produced, the diagnostic collection shall be empty.</p>
+<p>Diagnostic ordering shall not affect canonical semantics.</p>
+<hr />
+<h2 id="constraint-evaluation-summary">Constraint Evaluation Summary</h2>
+<p>A Validation Result shall identify the canonical validation constraints evaluated during execution.</p>
+<p>Constraint summaries provide traceability between the Validation Result and the canonical validation model defined by CKS-005.</p>
+<hr />
+<h2 id="execution-metadata">Execution Metadata</h2>
+<p>A Validation Result may contain implementation-independent execution metadata.</p>
+<p>Examples include:</p>
+<ul>
+<li>executed validation stages;</li>
+<li>execution completion status;</li>
+<li>implementation identifier;</li>
+<li>specification version.</li>
+</ul>
+<p>Execution metadata shall not influence canonical validity.</p>
+<hr />
+<h2 id="semantic-independence">Semantic Independence</h2>
+<p>The Validation Result shall describe the outcome of validation without modifying the Canonical Knowledge Structure.</p>
+<p>Validation Results therefore constitute semantic observations rather than semantic transformations.</p>
+<p>The validated Canonical Knowledge Structure remains unchanged.</p>
+<hr />
+<h2 id="determinism_1">Determinism</h2>
+<p>Equivalent Canonical Knowledge Structures shall produce structurally equivalent Validation Results.</p>
+<p>Equivalent Validation Results shall contain equivalent:</p>
+<ul>
+<li>validation status;</li>
+<li>diagnostic collections;</li>
+<li>constraint summaries;</li>
+<li>execution metadata.</li>
+</ul>
+<p>Determinism shall hold independently of implementation technology.</p>
+<hr />
+<h2 id="completeness">Completeness</h2>
+<p>A Validation Result is complete if it fully represents the outcome of every validation stage executed by the Reference Engine.</p>
+<p>No conformant implementation shall omit canonical information required to interpret validation outcomes.</p>
+<p>Validation completeness guarantees that every canonical validation decision is recoverable from the Validation Result.</p>
+<hr />
+<h2 id="canonical-observation-principle">Canonical Observation Principle</h2>
+<p>The Validation Result constitutes the canonical observation produced by the Reference Engine.</p>
+<p>It provides a complete, deterministic, and implementation-independent description of validation while preserving all canonical semantics established by the Core CKS specifications.</p>
+<p>The Validation Result therefore represents the unique canonical interface between the Reference Engine and every external consumer of validation information.</p>
+<hr />
+<h1 id="canonical-diagnostics">Canonical Diagnostics</h1>
+<h2 id="purpose_7">Purpose</h2>
+<p>The purpose of this chapter is to define the canonical diagnostic model used by the Reference Engine.</p>
+<p>Diagnostics provide implementation-independent explanations of validation outcomes while preserving the canonical semantics established by the Core CKS specifications.</p>
+<p>Diagnostics describe validation observations rather than modifying Canonical Knowledge Structures.</p>
+<hr />
+<h2 id="canonical-diagnostic">Canonical Diagnostic</h2>
+<p>A <strong>Canonical Diagnostic</strong> is an implementation-independent description of a validation observation produced during execution of the Reference Engine.</p>
+<p>Diagnostics communicate canonical validation information to external consumers without altering canonical semantics.</p>
+<p>Each diagnostic corresponds to one or more canonical validation constraints evaluated during execution.</p>
+<hr />
+<h2 id="diagnostic-principle">Diagnostic Principle</h2>
+<p>Diagnostics shall be:</p>
+<ul>
+<li>deterministic;</li>
+<li>reproducible;</li>
+<li>implementation-independent;</li>
+<li>semantically faithful.</li>
+</ul>
+<p>Equivalent validation executions shall produce structurally equivalent diagnostics.</p>
+<hr />
+<h2 id="diagnostic-identity">Diagnostic Identity</h2>
+<p>Every diagnostic shall possess a canonical diagnostic identifier.</p>
+<p>Diagnostic identifiers uniquely identify the class of validation observation represented by the diagnostic.</p>
+<p>Identifiers shall remain stable across conformant implementations.</p>
+<hr />
+<h2 id="diagnostic-severity">Diagnostic Severity</h2>
+<p>Every diagnostic shall possess a canonical severity.</p>
+<p>Severity classifies the significance of the corresponding validation observation.</p>
+<p>Canonical severities may include:</p>
+<ul>
+<li>Information;</li>
+<li>Warning;</li>
+<li>Error.</li>
+</ul>
+<p>Additional implementation-specific classifications may be introduced provided they preserve canonical interpretation.</p>
+<hr />
+<h2 id="diagnostic-scope">Diagnostic Scope</h2>
+<p>Every diagnostic shall identify the canonical entity to which it applies.</p>
+<p>Diagnostic scope may include:</p>
+<ul>
+<li>Knowledge Objects;</li>
+<li>Canonical Relations;</li>
+<li>Knowledge Structures;</li>
+<li>Knowledge Spaces;</li>
+<li>Canonical Derivations;</li>
+<li>Validation Constraints.</li>
+</ul>
+<p>Diagnostic scope shall never alter the semantic identity of the referenced canonical entity.</p>
+<hr />
+<h2 id="diagnostic-explanation">Diagnostic Explanation</h2>
+<p>Every diagnostic shall contain sufficient explanatory information to describe the observed validation condition.</p>
+<p>Explanations are intended to support interpretation by:</p>
+<ul>
+<li>users;</li>
+<li>software tools;</li>
+<li>automated systems;</li>
+<li>future implementations.</li>
+</ul>
+<p>Explanatory text shall not modify canonical semantics.</p>
+<hr />
+<h2 id="diagnostic-collection_1">Diagnostic Collection</h2>
+<p>Diagnostics produced during validation shall form a Diagnostic Collection.</p>
+<p>The Diagnostic Collection constitutes one component of the Validation Result.</p>
+<p>Diagnostic ordering shall not affect canonical semantics.</p>
+<p>Equivalent Diagnostic Collections are structurally equivalent regardless of ordering unless explicitly required by a subsequent specification.</p>
+<hr />
+<h2 id="diagnostic-determinism">Diagnostic Determinism</h2>
+<p>Equivalent Canonical Knowledge Structures shall produce structurally equivalent Diagnostic Collections.</p>
+<p>Diagnostics shall therefore be independent of:</p>
+<ul>
+<li>execution platform;</li>
+<li>programming language;</li>
+<li>implementation strategy;</li>
+<li>software architecture.</li>
+</ul>
+<hr />
+<h2 id="diagnostic-traceability">Diagnostic Traceability</h2>
+<p>Every diagnostic shall be canonically traceable to the validation constraint or validation stage that produced it.</p>
+<p>Traceability supports:</p>
+<ul>
+<li>verification;</li>
+<li>debugging;</li>
+<li>certification;</li>
+<li>reproducibility;</li>
+<li>interoperability.</li>
+</ul>
+<hr />
+<h2 id="diagnostic-independence">Diagnostic Independence</h2>
+<p>Diagnostics constitute observations of canonical validation.</p>
+<p>They shall never:</p>
+<ul>
+<li>modify Canonical Knowledge Structures;</li>
+<li>alter canonical identity;</li>
+<li>redefine canonical semantics;</li>
+<li>influence subsequent validation stages.</li>
+</ul>
+<p>Diagnostics are therefore purely observational.</p>
+<hr />
+<h2 id="canonical-diagnostic-model">Canonical Diagnostic Model</h2>
+<p>Collectively, the Canonical Diagnostic Model establishes a deterministic, implementation-independent, and semantically faithful representation of validation observations.</p>
+<p>Every conformant Reference Engine shall produce diagnostics satisfying the principles established by this chapter.</p>
+<hr />
+<h1 id="reference-engine-interface">Reference Engine Interface</h1>
+<h2 id="purpose_8">Purpose</h2>
+<p>The purpose of this chapter is to define the canonical interaction model between external systems and the Reference Engine.</p>
+<p>The Reference Engine Interface specifies the observable behavior of the Reference Engine independently of programming language, communication protocol, execution environment, or software architecture.</p>
+<p>The interface defines canonical interaction semantics rather than implementation mechanisms.</p>
+<hr />
+<h2 id="interface-principle">Interface Principle</h2>
+<p>The Reference Engine shall expose a deterministic validation interface.</p>
+<p>The interface accepts a Canonical Knowledge Structure as input and produces exactly one Validation Result as output.</p>
+<p>The interface shall preserve all canonical semantics established by the Core CKS specifications.</p>
+<hr />
+<h2 id="canonical-interaction">Canonical Interaction</h2>
+<p>Every interaction with the Reference Engine consists of three canonical phases:</p>
+<ol>
+<li>Request</li>
+<li>Validation Execution</li>
+<li>Validation Result</li>
+</ol>
+<p>The interaction shall be deterministic and reproducible.</p>
+<hr />
+<h2 id="canonical-input_1">Canonical Input</h2>
+<p>The interface shall accept an admissible Canonical Knowledge Structure.</p>
+<p>Input may originate from:</p>
+<ul>
+<li>serialized representations;</li>
+<li>in-memory canonical structures;</li>
+<li>future canonical representations.</li>
+</ul>
+<p>Regardless of representation, validation shall operate exclusively upon canonical semantics.</p>
+<hr />
+<h2 id="canonical-output_1">Canonical Output</h2>
+<p>The interface shall return exactly one Validation Result.</p>
+<p>The Validation Result shall represent the complete outcome of validation.</p>
+<p>The interface shall never return partial canonical results unless explicitly defined by a subsequent specification.</p>
+<hr />
+<h2 id="stateless-execution">Stateless Execution</h2>
+<p>Each validation request shall be independent.</p>
+<p>The Reference Engine shall not require persistent execution state from previous validation requests.</p>
+<p>Equivalent validation requests shall therefore produce equivalent Validation Results regardless of execution history.</p>
+<hr />
+<h2 id="deterministic-behavior">Deterministic Behavior</h2>
+<p>The interface shall be deterministic.</p>
+<p>Equivalent Canonical Knowledge Structures shall always produce structurally equivalent Validation Results.</p>
+<p>Interface behavior shall not depend upon:</p>
+<ul>
+<li>execution order;</li>
+<li>implementation technology;</li>
+<li>communication protocol;</li>
+<li>execution environment.</li>
+</ul>
+<hr />
+<h2 id="error-reporting">Error Reporting</h2>
+<p>If validation cannot be completed, the interface shall still produce a Validation Result describing the observed validation condition.</p>
+<p>Failures shall be represented through canonical diagnostics rather than implementation-specific exceptions.</p>
+<p>Implementation-specific exception mechanisms may exist internally but shall not alter canonical validation semantics.</p>
+<hr />
+<h2 id="implementation-independence_1">Implementation Independence</h2>
+<p>The canonical interface is independent of:</p>
+<ul>
+<li>Python;</li>
+<li>REST;</li>
+<li>RPC;</li>
+<li>command-line interfaces;</li>
+<li>graphical interfaces;</li>
+<li>embedded implementations.</li>
+</ul>
+<p>All conformant interfaces shall exhibit equivalent canonical behavior.</p>
+<hr />
+<h2 id="interface-compatibility">Interface Compatibility</h2>
+<p>Independent implementations are interface-compatible if equivalent validation requests produce structurally equivalent Validation Results.</p>
+<p>Interface compatibility depends solely upon conformance to the present specification.</p>
+<hr />
+<h2 id="canonical-contract">Canonical Contract</h2>
+<p>The Reference Engine Interface establishes the canonical contract between the Reference Engine and every external consumer.</p>
+<p>Future specifications, including the Python Reference API, shall realize this contract without modifying its canonical semantics.</p>
+<hr />
+<h1 id="reference-engine-conformance">Reference Engine Conformance</h1>
+<h2 id="purpose_9">Purpose</h2>
+<p>The purpose of this chapter is to define the normative conformance requirements for Reference Engine implementations.</p>
+<p>Conformance establishes the conditions under which an implementation may be considered a Canonical Reference Engine.</p>
+<p>Conformance concerns observable canonical behavior rather than internal implementation.</p>
+<hr />
+<h2 id="conformance-principle">Conformance Principle</h2>
+<p>An implementation conforms to this specification if and only if its observable behavior is canonically equivalent to the behavior defined by the present specification.</p>
+<p>Internal software architecture, implementation language, optimization strategy, and execution platform are not part of conformance.</p>
+<p>Only canonical behavior determines conformance.</p>
+<hr />
+<h2 id="semantic-conformance">Semantic Conformance</h2>
+<p>A conformant Reference Engine shall preserve all canonical semantics established by the Core CKS specifications.</p>
+<p>In particular, it shall preserve:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical structure;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical validation semantics.</li>
+</ul>
+<p>No implementation may redefine canonical semantics.</p>
+<hr />
+<h2 id="validation-conformance">Validation Conformance</h2>
+<p>A conformant Reference Engine shall execute the complete canonical validation model defined by CKS-005.</p>
+<p>Every mandatory validation constraint shall be evaluated.</p>
+<p>No mandatory validation stage may be omitted.</p>
+<hr />
+<h2 id="pipeline-conformance">Pipeline Conformance</h2>
+<p>A conformant implementation shall realize a validation pipeline canonically equivalent to the Canonical Validation Pipeline defined by this specification.</p>
+<p>Alternative software architectures are permitted provided that the observable validation behavior remains equivalent.</p>
+<hr />
+<h2 id="result-conformance">Result Conformance</h2>
+<p>Equivalent Canonical Knowledge Structures shall produce structurally equivalent Validation Results.</p>
+<p>Validation Results shall satisfy the canonical Validation Result Model defined by this specification.</p>
+<p>Equivalent implementations shall therefore produce canonically equivalent validation outputs.</p>
+<hr />
+<h2 id="diagnostic-conformance">Diagnostic Conformance</h2>
+<p>Diagnostics generated by a conformant implementation shall satisfy the Canonical Diagnostic Model.</p>
+<p>Diagnostic identifiers, canonical severity, semantic interpretation, and traceability shall remain consistent with the present specification.</p>
+<p>Implementation-specific presentation is permitted provided canonical meaning is preserved.</p>
+<hr />
+<h2 id="deterministic-conformance">Deterministic Conformance</h2>
+<p>A conformant Reference Engine shall be deterministic.</p>
+<p>Repeated execution upon equivalent Canonical Knowledge Structures shall produce structurally equivalent Validation Results.</p>
+<p>Determinism is a mandatory conformance requirement.</p>
+<hr />
+<h2 id="implementation-freedom">Implementation Freedom</h2>
+<p>Conformance does not prescribe:</p>
+<ul>
+<li>programming language;</li>
+<li>execution platform;</li>
+<li>operating system;</li>
+<li>storage technology;</li>
+<li>optimization strategy;</li>
+<li>software architecture.</li>
+</ul>
+<p>Implementations remain free to optimize execution provided canonical behavior is preserved.</p>
+<hr />
+<h2 id="future-compatibility">Future Compatibility</h2>
+<p>Future versions of the CKS ecosystem may extend the Reference Engine through additional capabilities.</p>
+<p>Such extensions shall preserve backward compatibility with the canonical behavior established by the present specification.</p>
+<p>Previously conformant implementations shall remain conformant unless explicitly superseded by a future normative specification.</p>
+<hr />
+<h2 id="canonical-conformance">Canonical Conformance</h2>
+<p>A Reference Engine is canonically conformant if it satisfies every normative requirement established by:</p>
+<ul>
+<li>CKS-001;</li>
+<li>CKS-002;</li>
+<li>CKS-003;</li>
+<li>CKS-004;</li>
+<li>CKS-005;</li>
+<li>the present specification.</li>
+</ul>
+<p>Canonical conformance establishes interoperability between independent implementations of the Canonical Knowledge Structure ecosystem.</p>
+<hr />
+<h2 id="concluding-principle">Concluding Principle</h2>
+<p>The present specification defines the normative computational model of the Canonical Reference Engine.</p>
+<p>Subsequent implementation specifications—including the Python Reference API, Test Suite, and Reference Knowledge Sets—shall realize this model without modifying its canonical semantics.</p>
+<p>Together, these specifications establish the complete Reference Implementation of the Canonical Knowledge Structure ecosystem.</p>
+<hr />
+<h1 id="part-ii-mathematical-theory-of-reference-execution">Part II — Mathematical Theory of Reference Execution</h1>
+<h1 id="mathematical-execution-model">Mathematical Execution Model</h1>
+<h2 id="purpose_10">Purpose</h2>
+<p>The purpose of this chapter is to establish the formal mathematical model of the Canonical Reference Engine.</p>
+<p>The model provides an implementation-independent description of reference execution using mathematical mappings and canonical structures.</p>
+<p>This chapter serves as the formal foundation for the computational theory developed throughout the remainder of this specification.</p>
+<hr />
+<h2 id="canonical-execution-space">Canonical Execution Space</h2>
+<p>Let</p>
+<p>$$
+CKS
+$$</p>
+<p>denote the set of all admissible Canonical Knowledge Structures.</p>
+<p>Let</p>
+<p>$$
+VR
+$$</p>
+<p>denote the set of all admissible Validation Results.</p>
+<p>Reference execution is therefore defined over the mapping between these two canonical spaces.</p>
+<hr />
+<h2 id="canonical-execution-mapping">Canonical Execution Mapping</h2>
+<p>The Canonical Reference Engine is formally defined as the mapping</p>
+<p>$$
+RE :
+CKS
+\rightarrow
+VR.
+$$</p>
+<p>For every admissible Canonical Knowledge Structure</p>
+<p>$$
+S
+\in
+CKS,
+$$</p>
+<p>the Reference Engine produces exactly one Validation Result</p>
+<p>$$
+RE(S)
+\in
+VR.
+$$</p>
+<hr />
+<h2 id="domain">Domain</h2>
+<p>The domain of the Canonical Reference Engine is</p>
+<p>$$
+\operatorname{Dom}(RE)
+=
+CKS.
+$$</p>
+<p>Only admissible Canonical Knowledge Structures belong to the execution domain.</p>
+<p>Structures outside the canonical domain are not defined by the present specification.</p>
+<hr />
+<h2 id="codomain">Codomain</h2>
+<p>The codomain of the Canonical Reference Engine is</p>
+<p>$$
+\operatorname{Cod}(RE)
+=
+VR.
+$$</p>
+<p>Every execution therefore terminates with a Validation Result belonging to the canonical validation space.</p>
+<hr />
+<h2 id="totality">Totality</h2>
+<p>The Canonical Reference Engine is a total mapping over its canonical domain.</p>
+<p>Formally,</p>
+<p>$$
+\forall
+S
+\in
+CKS,
+$$</p>
+<p>$$
+\exists!
+\;
+RE(S)
+\in
+VR.
+$$</p>
+<p>Thus every admissible Canonical Knowledge Structure produces exactly one Validation Result.</p>
+<hr />
+<h2 id="determinism_2">Determinism</h2>
+<p>Reference execution is deterministic.</p>
+<p>Formally,</p>
+<p>$$
+\forall
+S
+\in
+CKS,
+$$</p>
+<p>repeated evaluation satisfies</p>
+<p>$$
+RE(S)
+=
+RE(S).
+$$</p>
+<p>Equivalent executions therefore produce structurally equivalent Validation Results.</p>
+<hr />
+<h2 id="referential-transparency">Referential Transparency</h2>
+<p>The Canonical Reference Engine is referentially transparent.</p>
+<p>For every admissible Canonical Knowledge Structure,</p>
+<p>$$
+RE(S)
+$$</p>
+<p>depends exclusively upon</p>
+<p>$$
+S.
+$$</p>
+<p>Execution shall not depend upon:</p>
+<ul>
+<li>execution history;</li>
+<li>external mutable state;</li>
+<li>implementation artifacts;</li>
+<li>execution platform.</li>
+</ul>
+<hr />
+<h2 id="semantic-preservation">Semantic Preservation</h2>
+<p>Reference execution is observational.</p>
+<p>For every admissible Canonical Knowledge Structure,</p>
+<p>$$
+RE
+$$</p>
+<p>shall not modify</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical semantics;</li>
+<li>canonical relations;</li>
+<li>canonical derivations.</li>
+</ul>
+<p>Execution therefore preserves the canonical semantics established by the Core CKS specifications.</p>
+<hr />
+<h2 id="mathematical-interpretation">Mathematical Interpretation</h2>
+<p>The Canonical Reference Engine is a deterministic mathematical mapping from the space of Canonical Knowledge Structures to the space of Validation Results.</p>
+<p>Execution therefore constitutes a mathematical observation of canonical validity rather than a transformation of canonical knowledge.</p>
+<p>This interpretation serves as the formal foundation for the execution algebra developed in the following chapters.</p>
+<hr />
+<h1 id="execution-functions">Execution Functions</h1>
+<h2 id="purpose_11">Purpose</h2>
+<p>The purpose of this chapter is to define the canonical execution functions comprising the Reference Engine.</p>
+<p>Rather than treating the Reference Engine as a monolithic computation, this specification models it as the composition of elementary canonical functions.</p>
+<p>Each function represents one logically independent stage of canonical execution.</p>
+<hr />
+<h2 id="functional-decomposition">Functional Decomposition</h2>
+<p>The Canonical Reference Engine consists of a finite sequence of canonical execution functions.</p>
+<p>Each function transforms one canonical representation into another while preserving the semantic invariants established by the Core CKS specifications.</p>
+<p>Collectively, these functions realize the complete validation process.</p>
+<hr />
+<h2 id="loading-function">Loading Function</h2>
+<p>Let</p>
+<p>$$
+L
+$$</p>
+<p>denote the Loading Function.</p>
+<p>Formally,</p>
+<p>$$
+L :
+Input
+\rightarrow
+SerializedCKS.
+$$</p>
+<p>The Loading Function obtains a serialized representation of a Canonical Knowledge Structure.</p>
+<p>The Loading Function performs no semantic interpretation.</p>
+<hr />
+<h2 id="deserialization-function">Deserialization Function</h2>
+<p>Let</p>
+<p>$$
+D
+$$</p>
+<p>denote the Deserialization Function.</p>
+<p>Formally,</p>
+<p>$$
+D :
+SerializedCKS
+\rightarrow
+CKS.
+$$</p>
+<p>The Deserialization Function reconstructs the canonical semantic representation defined by CKS-003.</p>
+<p>Deserialization preserves canonical identity.</p>
+<hr />
+<h2 id="structural-validation-function">Structural Validation Function</h2>
+<p>Let</p>
+<p>$$
+SV
+$$</p>
+<p>denote the Structural Validation Function.</p>
+<p>Formally,</p>
+<p>$$
+SV :
+CKS
+\rightarrow
+CKS.
+$$</p>
+<p>The Structural Validation Function verifies structural correctness.</p>
+<p>Successful structural validation preserves the Canonical Knowledge Structure.</p>
+<p>Failure is represented through diagnostics rather than structural modification.</p>
+<hr />
+<h2 id="semantic-validation-function">Semantic Validation Function</h2>
+<p>Let</p>
+<p>$$
+SemV
+$$</p>
+<p>denote the Semantic Validation Function.</p>
+<p>Formally,</p>
+<p>$$
+SemV :
+CKS
+\rightarrow
+CKS.
+$$</p>
+<p>The Semantic Validation Function evaluates semantic correctness according to the canonical model established by CKS-001.</p>
+<p>Semantic validation preserves canonical semantics.</p>
+<hr />
+<h2 id="constraint-evaluation-function">Constraint Evaluation Function</h2>
+<p>Let</p>
+<p>$$
+CE
+$$</p>
+<p>denote the Constraint Evaluation Function.</p>
+<p>Formally,</p>
+<p>$$
+CE :
+CKS
+\rightarrow
+DS,
+$$</p>
+<p>where</p>
+<p>$$
+DS
+$$</p>
+<p>denotes the space of Diagnostic Collections.</p>
+<p>Constraint evaluation computes the canonical validation observations defined by CKS-005.</p>
+<hr />
+<h2 id="validation-result-function">Validation Result Function</h2>
+<p>Let</p>
+<p>$$
+VRF
+$$</p>
+<p>denote the Validation Result Function.</p>
+<p>Formally,</p>
+<p>$$
+VRF :
+(CKS,DS)
+\rightarrow
+VR.
+$$</p>
+<p>The Validation Result Function constructs the canonical Validation Result from the validated Canonical Knowledge Structure and its associated diagnostics.</p>
+<hr />
+<h2 id="functional-independence">Functional Independence</h2>
+<p>Each execution function performs exactly one canonical responsibility.</p>
+<p>No execution function shall redefine or duplicate the responsibility of another execution function.</p>
+<p>Functional independence guarantees:</p>
+<ul>
+<li>deterministic execution;</li>
+<li>modular reasoning;</li>
+<li>implementation independence;</li>
+<li>compositional correctness.</li>
+</ul>
+<hr />
+<h2 id="functional-preservation">Functional Preservation</h2>
+<p>Every execution function preserves the canonical semantic model established by the Core CKS specifications.</p>
+<p>No execution function modifies:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical semantics;</li>
+<li>canonical derivations;</li>
+<li>canonical relations.</li>
+</ul>
+<p>Execution functions are therefore observational unless explicitly defined otherwise by a future specification.</p>
+<hr />
+<h2 id="mathematical-interpretation_1">Mathematical Interpretation</h2>
+<p>The Reference Engine is therefore represented not as a single primitive operation but as a finite family of canonical execution functions.</p>
+<p>This decomposition establishes the formal basis for the execution composition defined in the following chapter.</p>
+<hr />
+<h1 id="composition-of-the-reference-engine">Composition of the Reference Engine</h1>
+<h2 id="purpose_12">Purpose</h2>
+<p>The purpose of this chapter is to define the Canonical Reference Engine as the composition of the canonical execution functions introduced in the preceding chapter.</p>
+<p>Rather than constituting a primitive operation, the Reference Engine is mathematically represented as the ordered composition of deterministic execution functions.</p>
+<p>This composition establishes the formal computational structure of canonical validation.</p>
+<hr />
+<h2 id="functional-composition">Functional Composition</h2>
+<p>Let</p>
+<p>$$
+L,
+D,
+SV,
+SemV,
+CE,
+VRF
+$$</p>
+<p>denote the canonical execution functions defined in Chapter 12.</p>
+<p>The Canonical Reference Engine is their ordered composition.</p>
+<hr />
+<h2 id="canonical-composition">Canonical Composition</h2>
+<p>Formally,</p>
+<p>$$
+RE
+=
+VRF
+\circ
+CE
+\circ
+SemV
+\circ
+SV
+\circ
+D
+\circ
+L.
+$$</p>
+<p>Execution therefore proceeds by successive application of the canonical execution functions.</p>
+<p>Each function receives the canonical output of its predecessor.</p>
+<hr />
+<h2 id="execution-sequence">Execution Sequence</h2>
+<p>For an admissible input</p>
+<p>$$
+x,
+$$</p>
+<p>execution proceeds as</p>
+<p>$$
+x
+\stackrel{L}{\longrightarrow}
+SerializedCKS
+\stackrel{D}{\longrightarrow}
+CKS
+\stackrel{SV}{\longrightarrow}
+CKS
+\stackrel{SemV}{\longrightarrow}
+CKS
+\stackrel{CE}{\longrightarrow}
+DS
+\stackrel{VRF}{\longrightarrow}
+VR.
+$$</p>
+<p>This sequence represents the canonical execution order.</p>
+<hr />
+<h2 id="associativity">Associativity</h2>
+<p>Function composition is associative.</p>
+<p>Therefore,</p>
+<p>$$
+(RE_3
+\circ
+RE_2)
+\circ
+RE_1
+=
+RE_3
+\circ
+(RE_2
+\circ
+RE_1).
+$$</p>
+<p>Accordingly, the computational behavior of the Reference Engine depends solely upon the canonical ordering of execution functions.</p>
+<hr />
+<h2 id="sequential-correctness">Sequential Correctness</h2>
+<p>Each execution function shall receive only admissible canonical inputs.</p>
+<p>The output of every execution stage shall satisfy the domain requirements of the subsequent stage.</p>
+<p>Consequently, the canonical execution composition is well-defined.</p>
+<hr />
+<h2 id="closure">Closure</h2>
+<p>The composition of canonical execution functions is closed.</p>
+<p>Formally,</p>
+<p>$$
+RE :
+CKS
+\rightarrow
+VR.
+$$</p>
+<p>Thus, regardless of internal execution stages, the Reference Engine remains a mapping from Canonical Knowledge Structures to Validation Results.</p>
+<hr />
+<h2 id="semantic-preservation_1">Semantic Preservation</h2>
+<p>Every execution function preserves canonical semantics.</p>
+<p>Consequently,</p>
+<p>their composition likewise preserves canonical semantics.</p>
+<p>Semantic preservation is therefore a compositional property of the Reference Engine.</p>
+<hr />
+<h2 id="deterministic-composition">Deterministic Composition</h2>
+<p>Every execution function is deterministic.</p>
+<p>The composition of deterministic functions is itself deterministic.</p>
+<p>Therefore,</p>
+<p>$$
+RE
+$$</p>
+<p>is deterministic.</p>
+<p>This property holds independently of implementation strategy.</p>
+<hr />
+<h2 id="canonical-computational-model">Canonical Computational Model</h2>
+<p>The Canonical Reference Engine is mathematically characterized as a deterministic composition of canonical execution functions.</p>
+<p>This composition completely defines the computational behavior of reference execution independently of implementation technology.</p>
+<p>Subsequent chapters derive the formal properties of the Reference Engine from this compositional model.</p>
+<hr />
+<h1 id="reference-engine-invariants">Reference Engine Invariants</h1>
+<h2 id="purpose_13">Purpose</h2>
+<p>The purpose of this chapter is to establish the canonical invariants preserved by every execution of the Reference Engine.</p>
+<p>An invariant is a property that remains unchanged throughout the complete execution of the Canonical Validation Pipeline.</p>
+<p>These invariants define the fundamental correctness conditions of reference execution independently of implementation technology.</p>
+<hr />
+<h2 id="canonical-invariant">Canonical Invariant</h2>
+<p>A <strong>Reference Engine Invariant</strong> is a mathematical property preserved by every execution of the Canonical Reference Engine.</p>
+<p>If</p>
+<p>$$
+RE
+:
+CKS
+\rightarrow
+VR,
+$$</p>
+<p>then every admissible execution preserves the invariants established in this chapter.</p>
+<p>Violation of any invariant constitutes non-conformance to the present specification.</p>
+<hr />
+<h2 id="identity-preservation">Identity Preservation</h2>
+<p>Reference execution preserves canonical identity.</p>
+<p>Formally,</p>
+<p>if</p>
+<p>$$
+S
+\in
+CKS,
+$$</p>
+<p>then execution of</p>
+<p>$$
+RE(S)
+$$</p>
+<p>shall never modify the canonical identity of any entity contained within</p>
+<p>$$
+S.
+$$</p>
+<p>Canonical identity is therefore invariant under reference execution.</p>
+<hr />
+<h2 id="semantic-preservation_2">Semantic Preservation</h2>
+<p>Reference execution preserves canonical semantics.</p>
+<p>For every admissible Canonical Knowledge Structure,</p>
+<p>the execution pipeline shall never alter:</p>
+<ul>
+<li>canonical meaning;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical constraints.</li>
+</ul>
+<p>Validation observes canonical semantics without transforming them.</p>
+<hr />
+<h2 id="structural-preservation">Structural Preservation</h2>
+<p>Reference execution preserves structural organization.</p>
+<p>Execution shall not:</p>
+<ul>
+<li>create Knowledge Objects;</li>
+<li>remove Knowledge Objects;</li>
+<li>create Canonical Relations;</li>
+<li>remove Canonical Relations;</li>
+<li>modify canonical decomposition.</li>
+</ul>
+<p>Structural preservation follows directly from the observational nature of validation.</p>
+<hr />
+<h2 id="observational-purity_1">Observational Purity</h2>
+<p>The Reference Engine is observational.</p>
+<p>Execution produces observations of canonical validity without modifying the observed Canonical Knowledge Structure.</p>
+<p>Formally,</p>
+<p>$$
+RE
+$$</p>
+<p>is a read-only mapping with respect to</p>
+<p>$$
+CKS.
+$$</p>
+<hr />
+<h2 id="deterministic-execution_1">Deterministic Execution</h2>
+<p>Reference execution preserves determinism.</p>
+<p>For every admissible</p>
+<p>$$
+S
+\in
+CKS,
+$$</p>
+<p>repeated execution satisfies</p>
+<p>$$
+RE(S)
+=
+RE(S).
+$$</p>
+<p>Execution therefore contains no nondeterministic behavior.</p>
+<hr />
+<h2 id="pipeline-invariance">Pipeline Invariance</h2>
+<p>Every execution stage preserves the invariants established by all preceding stages.</p>
+<p>Consequently,</p>
+<p>the complete Canonical Validation Pipeline preserves:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical semantics;</li>
+<li>structural organization;</li>
+<li>deterministic behavior.</li>
+</ul>
+<p>Pipeline invariance follows by functional composition.</p>
+<hr />
+<h2 id="referential-transparency_1">Referential Transparency</h2>
+<p>Reference execution depends exclusively upon its canonical input.</p>
+<p>Formally,</p>
+<p>if</p>
+<p>$$
+S_1
+=
+S_2,
+$$</p>
+<p>then</p>
+<p>$$
+RE(S_1)
+=
+RE(S_2).
+$$</p>
+<p>Reference execution therefore has no observable side effects.</p>
+<hr />
+<h2 id="execution-closure_1">Execution Closure</h2>
+<p>Reference execution is closed over the canonical execution model.</p>
+<p>Every admissible execution terminates with exactly one Validation Result.</p>
+<p>No execution may terminate outside the codomain</p>
+<p>$$
+VR.
+$$</p>
+<p>Execution closure guarantees the mathematical completeness of the Reference Engine.</p>
+<hr />
+<h2 id="invariant-preservation-theorem">Invariant Preservation Theorem</h2>
+<p>Every execution function comprising the Canonical Reference Engine preserves the invariants established in this chapter.</p>
+<p>Since the Canonical Reference Engine is the composition of invariant-preserving execution functions,</p>
+<p>the complete Reference Engine likewise preserves these invariants.</p>
+<p>Thus every conformant Reference Engine satisfies:</p>
+<ul>
+<li>identity preservation;</li>
+<li>semantic preservation;</li>
+<li>structural preservation;</li>
+<li>observational purity;</li>
+<li>deterministic execution;</li>
+<li>execution closure.</li>
+</ul>
+<p>These invariants constitute the mathematical foundation for the correctness theory developed in the following chapters.</p>
+<hr />
+<h1 id="reference-engine-correctness">Reference Engine Correctness</h1>
+<h2 id="purpose_14">Purpose</h2>
+<p>The purpose of this chapter is to establish the mathematical correctness of the Canonical Reference Engine.</p>
+<p>Correctness guarantees that every Validation Result produced by the Reference Engine faithfully represents the canonical validity of the processed Canonical Knowledge Structure.</p>
+<p>The correctness established by this chapter is independent of implementation technology.</p>
+<hr />
+<h2 id="correctness-principle">Correctness Principle</h2>
+<p>A Reference Engine is correct if its observable behavior is completely determined by the canonical semantics established by the Core CKS specifications.</p>
+<p>Correctness therefore excludes:</p>
+<ul>
+<li>implementation-specific interpretation;</li>
+<li>semantic approximation;</li>
+<li>heuristic validation;</li>
+<li>implementation-dependent behavior.</li>
+</ul>
+<p>Only canonical semantics determine validation outcomes.</p>
+<hr />
+<h2 id="soundness">Soundness</h2>
+<p>The Canonical Reference Engine is sound.</p>
+<p>Formally,</p>
+<p>if</p>
+<p>$$
+RE(S)
+$$</p>
+<p>produces a Validation Result declaring</p>
+<p>$$
+S
+$$</p>
+<p>canonically valid,</p>
+<p>then</p>
+<p>$$
+S
+$$</p>
+<p>satisfies every mandatory validation constraint defined by CKS-005.</p>
+<p>Soundness guarantees that invalid structures are never classified as canonically valid.</p>
+<hr />
+<h2 id="completeness_1">Completeness</h2>
+<p>The Canonical Reference Engine is complete.</p>
+<p>If</p>
+<p>$$
+S
+$$</p>
+<p>satisfies every canonical validation constraint,</p>
+<p>then</p>
+<p>$$
+RE(S)
+$$</p>
+<p>shall produce a Validation Result declaring</p>
+<p>$$
+S
+$$</p>
+<p>canonically valid.</p>
+<p>Completeness guarantees that every canonically valid structure is recognized by the Reference Engine.</p>
+<hr />
+<h2 id="correct-constraint-evaluation">Correct Constraint Evaluation</h2>
+<p>Every canonical validation constraint defined by CKS-005 shall be evaluated exactly according to its normative semantics.</p>
+<p>Constraint evaluation shall neither strengthen nor weaken canonical validity.</p>
+<p>The correctness of the Reference Engine therefore follows directly from the correctness of canonical constraint evaluation.</p>
+<hr />
+<h2 id="preservation-of-canonical-semantics">Preservation of Canonical Semantics</h2>
+<p>Reference execution preserves canonical semantics throughout the complete validation process.</p>
+<p>Consequently,</p>
+<p>validation decisions depend exclusively upon canonical semantics rather than implementation artifacts.</p>
+<p>Semantic preservation guarantees correctness of interpretation.</p>
+<hr />
+<h2 id="correctness-of-composition">Correctness of Composition</h2>
+<p>The Canonical Reference Engine is the composition</p>
+<p>$$
+RE
+=
+VRF
+\circ
+CE
+\circ
+SemV
+\circ
+SV
+\circ
+D
+\circ
+L.
+$$</p>
+<p>If every execution function is correct,</p>
+<p>then the composed Reference Engine is likewise correct.</p>
+<p>Correctness therefore follows compositionally.</p>
+<hr />
+<h2 id="correctness-theorem">Correctness Theorem</h2>
+<p><strong>Theorem.</strong></p>
+<p>Assume that:</p>
+<ul>
+<li>the Loading Function is correct;</li>
+<li>the Deserialization Function is correct;</li>
+<li>the Structural Validation Function is correct;</li>
+<li>the Semantic Validation Function is correct;</li>
+<li>the Constraint Evaluation Function is correct;</li>
+<li>the Validation Result Function is correct.</li>
+</ul>
+<p>Then</p>
+<p>$$
+RE
+$$</p>
+<p>is correct.</p>
+<hr />
+<h2 id="proof-sketch">Proof Sketch</h2>
+<p>The proof follows directly from functional composition.</p>
+<p>Each execution function preserves the canonical invariants established in Chapter 14.</p>
+<p>Each function produces a correct canonical output satisfying the domain requirements of the subsequent function.</p>
+<p>Since functional composition preserves correctness,</p>
+<p>the complete Reference Engine is correct.</p>
+<p>Therefore,</p>
+<p>$$
+RE
+$$</p>
+<p>correctly computes the canonical Validation Result for every admissible Canonical Knowledge Structure.</p>
+<p>∎</p>
+<hr />
+<h2 id="consequences_1">Consequences</h2>
+<p>Correctness guarantees:</p>
+<ul>
+<li>deterministic validation;</li>
+<li>faithful semantic interpretation;</li>
+<li>implementation-independent behavior;</li>
+<li>reproducible Validation Results;</li>
+<li>interoperability between independent implementations.</li>
+</ul>
+<p>Correctness therefore establishes the Canonical Reference Engine as the normative computational realization of the CKS validation model.</p>
+<hr />
+<h2 id="mathematical-interpretation_2">Mathematical Interpretation</h2>
+<p>The correctness established by this chapter demonstrates that the Canonical Reference Engine is not merely an implementation of the validation process.</p>
+<p>Rather,</p>
+<p>it is the unique computational realization of the canonical validation semantics defined by the Core CKS specifications.</p>
+<p>Subsequent chapters derive equivalence, compatibility, and algebraic properties from this correctness theorem.</p>
+<hr />
+<h1 id="canonical-equivalence-of-reference-engines">Canonical Equivalence of Reference Engines</h1>
+<h2 id="purpose_15">Purpose</h2>
+<p>The purpose of this chapter is to define canonical equivalence between independent Reference Engine implementations.</p>
+<p>Canonical equivalence establishes when two Reference Engines realize the same canonical computational behavior despite differences in implementation technology, programming language, software architecture, or execution environment.</p>
+<hr />
+<h2 id="equivalence-principle">Equivalence Principle</h2>
+<p>Canonical equivalence is determined exclusively by observable canonical behavior.</p>
+<p>Internal implementation details are irrelevant.</p>
+<p>Two Reference Engines are canonically equivalent if they produce equivalent Validation Results for every admissible Canonical Knowledge Structure.</p>
+<hr />
+<h2 id="behavioral-equivalence">Behavioral Equivalence</h2>
+<p>Let</p>
+<p>$$
+RE_1,
+RE_2
+:
+CKS
+\rightarrow
+VR
+$$</p>
+<p>be two Reference Engines.</p>
+<p>They are behaviorally equivalent if</p>
+<p>$$
+\forall
+S
+\in
+CKS,
+$$</p>
+<p>$$
+RE_1(S)
+=
+RE_2(S).
+$$</p>
+<p>Behavioral equivalence is independent of implementation.</p>
+<hr />
+<h2 id="canonical-equivalence">Canonical Equivalence</h2>
+<p>Two Reference Engines are canonically equivalent if they satisfy:</p>
+<ul>
+<li>equivalent validation semantics;</li>
+<li>equivalent canonical diagnostics;</li>
+<li>equivalent Validation Results;</li>
+<li>equivalent deterministic behavior.</li>
+</ul>
+<p>Formally,</p>
+<p>$$
+RE_1
+\equiv
+RE_2
+$$</p>
+<p>iff</p>
+<p>$$
+\forall
+S
+\in
+CKS,
+$$</p>
+<p>$$
+RE_1(S)
+=
+RE_2(S).
+$$</p>
+<hr />
+<h2 id="structural-independence">Structural Independence</h2>
+<p>Canonical equivalence does not require identical software architecture.</p>
+<p>Equivalent implementations may differ in:</p>
+<ul>
+<li>internal data structures;</li>
+<li>algorithms;</li>
+<li>optimization strategies;</li>
+<li>execution model;</li>
+<li>memory representation.</li>
+</ul>
+<p>Only canonical observable behavior determines equivalence.</p>
+<hr />
+<h2 id="semantic-equivalence">Semantic Equivalence</h2>
+<p>Canonical equivalence preserves semantic interpretation.</p>
+<p>Equivalent Reference Engines shall:</p>
+<ul>
+<li>evaluate identical canonical constraints;</li>
+<li>preserve identical canonical semantics;</li>
+<li>produce identical validation decisions.</li>
+</ul>
+<p>Semantic equivalence therefore implies validation equivalence.</p>
+<hr />
+<h2 id="diagnostic-equivalence">Diagnostic Equivalence</h2>
+<p>Equivalent Reference Engines shall produce canonically equivalent diagnostics.</p>
+<p>Diagnostic presentation may differ.</p>
+<p>However,</p>
+<p>the following shall remain equivalent:</p>
+<ul>
+<li>diagnostic identifiers;</li>
+<li>diagnostic meaning;</li>
+<li>diagnostic severity;</li>
+<li>canonical traceability.</li>
+</ul>
+<hr />
+<h2 id="functional-equivalence">Functional Equivalence</h2>
+<p>Equivalent Reference Engines realize equivalent execution mappings.</p>
+<p>Formally,</p>
+<p>$$
+RE_1
+\equiv
+RE_2
+$$</p>
+<p>implies</p>
+<p>$$
+RE_1
+:
+CKS
+\rightarrow
+VR
+$$</p>
+<p>and</p>
+<p>$$
+RE_2
+:
+CKS
+\rightarrow
+VR
+$$</p>
+<p>represent the same canonical function.</p>
+<hr />
+<h2 id="equivalence-relation">Equivalence Relation</h2>
+<p>Canonical equivalence is an equivalence relation.</p>
+<p>Specifically,</p>
+<h3 id="reflexivity">Reflexivity</h3>
+<p>$$
+RE
+\equiv
+RE.
+$$</p>
+<h3 id="symmetry">Symmetry</h3>
+<p>If</p>
+<p>$$
+RE_1
+\equiv
+RE_2,
+$$</p>
+<p>then</p>
+<p>$$
+RE_2
+\equiv
+RE_1.
+$$</p>
+<h3 id="transitivity">Transitivity</h3>
+<p>If</p>
+<p>$$
+RE_1
+\equiv
+RE_2
+$$</p>
+<p>and</p>
+<p>$$
+RE_2
+\equiv
+RE_3,
+$$</p>
+<p>then</p>
+<p>$$
+RE_1
+\equiv
+RE_3.
+$$</p>
+<hr />
+<h2 id="canonical-implementation-classes">Canonical Implementation Classes</h2>
+<p>Canonical equivalence partitions all conformant Reference Engines into equivalence classes.</p>
+<p>Each equivalence class represents one canonical computational behavior.</p>
+<p>Differences inside an equivalence class are implementation-specific and possess no canonical significance.</p>
+<hr />
+<h2 id="mathematical-interpretation_3">Mathematical Interpretation</h2>
+<p>The Canonical Reference Engine is therefore defined not by a unique software implementation but by an equivalence class of mathematically equivalent implementations.</p>
+<p>Consequently,</p>
+<p>the present specification defines canonical computation rather than canonical software.</p>
+<p>Independent implementations remain fully interoperable provided they belong to the same canonical equivalence class.</p>
+<hr />
+<h1 id="formal-properties-of-the-reference-engine">Formal Properties of the Reference Engine</h1>
+<h2 id="purpose_16">Purpose</h2>
+<p>The purpose of this chapter is to establish the fundamental mathematical properties of the Canonical Reference Engine.</p>
+<p>These properties are derived from the execution model, functional composition, invariants, correctness, and canonical equivalence established in the preceding chapters.</p>
+<p>Together they characterize the Canonical Reference Engine as a deterministic mathematical computational system.</p>
+<hr />
+<h3 id="determinism_3">Determinism</h3>
+<p><strong>Property 17.2 (Determinism).</strong> The Canonical Reference Engine is
+deterministic.</p>
+<p>$$
+\forall S \in CKS,\; RE(S) = RE(S).
+$$</p>
+<p>Repeated execution on the same Canonical Knowledge Structure always
+produces structurally equivalent Validation Results.  This follows
+directly from the deterministic definition of each execution function
+(Chapter 12) and the composition model (Chapter 13).</p>
+<h3 id="semantic-preservation_3">Semantic Preservation</h3>
+<p><strong>Property 17.3 (Semantic Preservation).</strong> Reference execution preserves
+canonical semantics.  For every admissible (S \in CKS), execution of
+(RE(S)) does not modify canonical identity, canonical semantics,
+canonical relations, or canonical derivations.  Validation therefore
+constitutes semantic observation rather than semantic transformation
+(see Section 11.9).</p>
+<h3 id="referential-transparency_2">Referential Transparency</h3>
+<p><strong>Property 17.4 (Referential Transparency).</strong> The Canonical Reference
+Engine is referentially transparent.  If (S_1 = S_2) then
+(RE(S_1) = RE(S_2)).  Reference execution depends exclusively on
+canonical input (Section 11.8).</p>
+<h3 id="pipeline-completeness_1">Pipeline Completeness</h3>
+<p><strong>Property 17.5 (Pipeline Completeness).</strong> Every conformant execution
+evaluates the complete Canonical Validation Pipeline.  No mandatory
+execution stage may be omitted.  Consequently, every Validation Result
+completely represents the canonical validation process (Section 6.12).</p>
+<h3 id="totality_1">Totality</h3>
+<p><strong>Property 17.6 (Totality).</strong> The Canonical Reference Engine is total
+over its canonical domain.  (\forall S \in CKS,\; \exists!\; RE(S) \in VR.)
+Every admissible Canonical Knowledge Structure produces exactly one
+Validation Result (Section 11.6).</p>
+<h3 id="closure_1">Closure</h3>
+<p><strong>Property 17.7 (Closure).</strong> Reference execution is closed.
+(RE : CKS \to VR.)  Every execution terminates inside the canonical
+Validation Result space (Section 11.5).</p>
+<h3 id="canonical-equivalence_1">Canonical Equivalence</h3>
+<p><strong>Property 17.8 (Canonical Equivalence).</strong> Canonically equivalent
+Reference Engines compute the same canonical function.  If
+(RE_1 \equiv RE_2) then (\forall S \in CKS,\; RE_1(S) = RE_2(S).)
+Canonical equivalence guarantees complete interoperability
+(Chapter 16).</p>
+<h3 id="functional-composition_1">Functional Composition</h3>
+<p><strong>Property 17.9 (Functional Composition).</strong> The composition of correct
+canonical execution functions is correct.  Therefore
+(RE = VRF \circ CE \circ SemV \circ SV \circ D \circ L) is correct
+whenever every component function is correct.  Correctness is
+compositional (Chapter 13).</p>
+<h3 id="confluence">Confluence</h3>
+<p><strong>Property 17.10 (Confluence).</strong> Independent conformant implementations
+always converge to canonically equivalent Validation Results.
+Implementation-specific execution paths may differ internally, but
+their observable canonical outputs remain equivalent (Chapter 16).</p>
+<h3 id="compatibility">Compatibility</h3>
+<p><strong>Property 17.11 (Compatibility).</strong> Every conformant Reference Engine is
+interoperable with every other conformant Reference Engine.
+Interoperability follows from canonical semantics, canonical
+diagnostics, deterministic execution, and canonical equivalence
+(Chapter 16).</p>
+<hr />
+<h2 id="summary">Summary</h2>
+<p>The Canonical Reference Engine satisfies the following formal properties:</p>
+<ul>
+<li>determinism;</li>
+<li>semantic preservation;</li>
+<li>referential transparency;</li>
+<li>pipeline completeness;</li>
+<li>totality;</li>
+<li>closure;</li>
+<li>canonical equivalence;</li>
+<li>compositional correctness;</li>
+<li>confluence;</li>
+<li>interoperability.</li>
+</ul>
+<p>These properties collectively characterize the Canonical Reference Engine as the unique implementation-independent computational realization of canonical validation within the CKS ecosystem.</p>
+<hr />
+<h1 id="reference-engine-algebra">Reference Engine Algebra</h1>
+<h2 id="purpose_17">Purpose</h2>
+<p>The purpose of this chapter is to establish the algebraic structure of the Canonical Reference Engine.</p>
+<p>The Reference Engine Algebra describes the mathematical operations, relations, and closure properties governing canonical reference execution.</p>
+<p>This algebra provides an implementation-independent framework for reasoning about Reference Engine composition, specialization, extension, and equivalence.</p>
+<hr />
+<h2 id="algebraic-objects">Algebraic Objects</h2>
+<p>The primary objects of the Reference Engine Algebra are Reference Engines.</p>
+<p>Let</p>
+<p>$$
+\mathcal{R}
+$$</p>
+<p>denote the set of all canonically conformant Reference Engines.</p>
+<p>Each element</p>
+<p>$$
+RE
+\in
+\mathcal{R}
+$$</p>
+<p>is a deterministic mapping</p>
+<p>$$
+RE :
+CKS
+\rightarrow
+VR.
+$$</p>
+<hr />
+<h2 id="algebraic-equality">Algebraic Equality</h2>
+<p>Two Reference Engines are algebraically equal if they compute identical canonical mappings.</p>
+<p>Formally,</p>
+<p>$$
+RE_1
+=
+RE_2
+$$</p>
+<p>iff</p>
+<p>$$
+\forall
+S
+\in
+CKS,
+$$</p>
+<p>$$
+RE_1(S)
+=
+RE_2(S).
+$$</p>
+<p>Algebraic equality is stronger than implementation identity.</p>
+<hr />
+<h2 id="composition">Composition</h2>
+<p>Reference Engines may be composed whenever their observable behavior remains canonically well-defined.</p>
+<p>Composition preserves canonical correctness.</p>
+<p>If</p>
+<p>$$
+RE_1,
+RE_2
+\in
+\mathcal{R},
+$$</p>
+<p>then every admissible composition shall preserve the canonical execution model established by this specification.</p>
+<hr />
+<h2 id="identity-element">Identity Element</h2>
+<p>There exists an identity execution operator</p>
+<p>$$
+I,
+$$</p>
+<p>satisfying</p>
+<p>$$
+RE
+\circ
+I
+=
+I
+\circ
+RE
+=
+RE.
+$$</p>
+<p>The identity operator preserves canonical execution without modification.</p>
+<hr />
+<h2 id="closure_2">Closure</h2>
+<p>The Reference Engine Algebra is closed under admissible composition.</p>
+<p>If</p>
+<p>$$
+RE_1,
+RE_2
+\in
+\mathcal{R},
+$$</p>
+<p>and their composition satisfies the canonical execution model,</p>
+<p>then</p>
+<p>$$
+RE_2
+\circ
+RE_1
+\in
+\mathcal{R}.
+$$</p>
+<p>Closure guarantees the stability of the canonical execution space.</p>
+<hr />
+<h2 id="associativity_1">Associativity</h2>
+<p>Composition of Reference Engines is associative.</p>
+<p>Formally,</p>
+<p>$$
+(RE_3
+\circ
+RE_2)
+\circ
+RE_1
+=
+RE_3
+\circ
+(RE_2
+\circ
+RE_1).
+$$</p>
+<p>Associativity follows directly from function composition.</p>
+<hr />
+<h2 id="extension">Extension</h2>
+<p>A Reference Engine Extension introduces additional implementation capabilities without modifying canonical behavior.</p>
+<p>Extensions may provide:</p>
+<ul>
+<li>performance improvements;</li>
+<li>additional diagnostics;</li>
+<li>developer tooling;</li>
+<li>visualization;</li>
+<li>implementation metadata.</li>
+</ul>
+<p>Extensions shall preserve:</p>
+<ul>
+<li>canonical semantics;</li>
+<li>canonical correctness;</li>
+<li>canonical equivalence.</li>
+</ul>
+<hr />
+<h2 id="specialization">Specialization</h2>
+<p>A Reference Engine Specialization restricts execution to a well-defined subset of admissible Canonical Knowledge Structures.</p>
+<p>Specialization shall not redefine canonical semantics.</p>
+<p>Every specialization remains a conformant Reference Engine within its declared execution domain.</p>
+<hr />
+<h2 id="equivalence-classes">Equivalence Classes</h2>
+<p>Canonical equivalence partitions</p>
+<p>$$
+\mathcal{R}
+$$</p>
+<p>into equivalence classes.</p>
+<p>Each equivalence class represents one unique canonical computational behavior.</p>
+<p>Implementation diversity therefore exists entirely within equivalence classes.</p>
+<hr />
+<h2 id="algebraic-interpretation">Algebraic Interpretation</h2>
+<p>The Reference Engine Algebra characterizes canonical validation as an algebraic computational system.</p>
+<p>Independent implementations correspond to elements of</p>
+<p>$$
+\mathcal{R},
+$$</p>
+<p>while canonical equivalence identifies those elements representing the same mathematical computation.</p>
+<p>The algebra therefore separates canonical computation from implementation technology.</p>
+<hr />
+<h2 id="summary_1">Summary</h2>
+<p>The Reference Engine Algebra establishes:</p>
+<ul>
+<li>algebraic equality;</li>
+<li>composition;</li>
+<li>identity;</li>
+<li>closure;</li>
+<li>associativity;</li>
+<li>extension;</li>
+<li>specialization;</li>
+<li>equivalence classes.</li>
+</ul>
+<p>Together these properties define the mathematical structure governing all conformant Reference Engine implementations.</p>
+<hr />
+<h1 id="reference-engine-correctness-criteria">Reference Engine Correctness Criteria</h1>
+<h2 id="purpose_18">Purpose</h2>
+<p>The purpose of this chapter is to establish the necessary and sufficient correctness criteria for Canonical Reference Engine implementations.</p>
+<p>These criteria define the mathematical conditions under which an implementation may be considered a conformant realization of the Canonical Reference Engine.</p>
+<p>Correctness criteria are independent of implementation language, software architecture, execution environment, and optimization strategy.</p>
+<hr />
+<h2 id="correctness-principle_1">Correctness Principle</h2>
+<p>A Reference Engine is correct if and only if it satisfies every normative property established by the present specification.</p>
+<p>Correctness is therefore determined solely by canonical behavior.</p>
+<p>Implementation details possess no canonical significance.</p>
+<hr />
+<h2 id="necessary-conditions">Necessary Conditions</h2>
+<p>Every conformant Reference Engine shall satisfy the following necessary conditions:</p>
+<ul>
+<li>deterministic execution;</li>
+<li>semantic preservation;</li>
+<li>structural preservation;</li>
+<li>canonical diagnostics;</li>
+<li>canonical Validation Result construction;</li>
+<li>complete evaluation of mandatory validation constraints.</li>
+</ul>
+<p>Violation of any necessary condition constitutes non-conformance.</p>
+<hr />
+<h2 id="sufficient-conditions">Sufficient Conditions</h2>
+<p>A Reference Engine is canonically correct if it satisfies:</p>
+<ul>
+<li>the Canonical Execution Model;</li>
+<li>the Canonical Validation Pipeline;</li>
+<li>the Canonical Diagnostic Model;</li>
+<li>the Validation Result Model;</li>
+<li>the Reference Engine Invariants;</li>
+<li>the Correctness Theorem;</li>
+<li>the Canonical Equivalence Model.</li>
+</ul>
+<p>Collectively these conditions are sufficient for canonical conformance.</p>
+<hr />
+<h2 id="deterministic-criterion">Deterministic Criterion</h2>
+<p>Correct execution requires deterministic behavior.</p>
+<p>Formally,</p>
+<p>$$
+\forall
+S
+\in
+CKS,
+$$</p>
+<p>$$
+RE(S)
+=
+RE(S).
+$$</p>
+<p>Determinism is therefore a mandatory correctness criterion.</p>
+<hr />
+<h2 id="semantic-criterion">Semantic Criterion</h2>
+<p>Correct execution shall preserve canonical semantics.</p>
+<p>Execution shall never modify:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical interpretation.</li>
+</ul>
+<p>Semantic preservation follows directly from the observational nature of reference execution.</p>
+<hr />
+<h2 id="validation-criterion">Validation Criterion</h2>
+<p>Every mandatory validation constraint defined by CKS-005 shall be evaluated according to its canonical semantics.</p>
+<p>Constraint omission, approximation, or reinterpretation is prohibited.</p>
+<p>Validation correctness therefore depends upon complete canonical constraint evaluation.</p>
+<hr />
+<h2 id="result-criterion">Result Criterion</h2>
+<p>Every execution shall terminate with exactly one Validation Result.</p>
+<p>Validation Results shall satisfy the canonical Validation Result Model established by this specification.</p>
+<p>Partial canonical outputs are not permitted.</p>
+<hr />
+<h2 id="equivalence-criterion">Equivalence Criterion</h2>
+<p>Independent implementations shall produce canonically equivalent Validation Results.</p>
+<p>Formally,</p>
+<p>if</p>
+<p>$$
+RE_1,
+RE_2
+\in
+\mathcal R,
+$$</p>
+<p>then</p>
+<p>$$
+RE_1
+\equiv
+RE_2
+$$</p>
+<p>requires</p>
+<p>$$
+\forall
+S
+\in
+CKS,
+$$</p>
+<p>$$
+RE_1(S)
+=
+RE_2(S).
+$$</p>
+<p>Canonical equivalence therefore constitutes a correctness criterion.</p>
+<hr />
+<h2 id="interoperability-criterion">Interoperability Criterion</h2>
+<p>Correct implementations shall interoperate without semantic disagreement.</p>
+<p>Equivalent Canonical Knowledge Structures shall produce equivalent Validation Results independently of implementation technology.</p>
+<p>Interoperability follows directly from canonical correctness.</p>
+<hr />
+<h2 id="conformance-criterion">Conformance Criterion</h2>
+<p>A Reference Engine is canonically conformant if and only if it satisfies every correctness criterion established by:</p>
+<ul>
+<li>CKS-001;</li>
+<li>CKS-002;</li>
+<li>CKS-003;</li>
+<li>CKS-004;</li>
+<li>CKS-005;</li>
+<li>the present specification.</li>
+</ul>
+<p>Canonical conformance therefore represents the strongest form of correctness defined by the CKS ecosystem.</p>
+<hr />
+<h2 id="mathematical-interpretation_4">Mathematical Interpretation</h2>
+<p>The correctness criteria established by this chapter completely characterize the Canonical Reference Engine.</p>
+<p>No additional implementation-dependent requirements are necessary for canonical correctness.</p>
+<p>Consequently,</p>
+<p>correctness is a mathematical property of observable computation rather than an implementation property of software.</p>
+<hr />
+<h1 id="concluding-mathematical-principles">Concluding Mathematical Principles</h1>
+<h2 id="purpose_19">Purpose</h2>
+<p>The purpose of this chapter is to summarize the mathematical principles established by the present specification.</p>
+<p>The Canonical Reference Engine defined herein constitutes the normative computational realization of the Canonical Knowledge Structure ecosystem.</p>
+<p>This chapter concludes the formal theory developed throughout the specification.</p>
+<hr />
+<h2 id="computational-interpretation">Computational Interpretation</h2>
+<p>The Canonical Reference Engine is a deterministic mathematical computational system.</p>
+<p>It realizes canonical validation through the composition of formally defined execution functions operating upon Canonical Knowledge Structures.</p>
+<p>Reference execution therefore constitutes mathematical computation rather than implementation-specific software behavior.</p>
+<hr />
+<h2 id="relationship-to-the-core-specifications">Relationship to the Core Specifications</h2>
+<p>The present specification depends upon the canonical foundations established by:</p>
+<ul>
+<li>CKS-001 — Core Specification;</li>
+<li>CKS-002 — Canonical Construction Specification;</li>
+<li>CKS-003 — Canonical Serialization;</li>
+<li>CKS-004 — Canonical Structure Evolution;</li>
+<li>CKS-005 — Validator Specification.</li>
+</ul>
+<p>These specifications collectively define the semantics upon which the Canonical Reference Engine operates.</p>
+<p>The Reference Engine introduces no new canonical semantics.</p>
+<p>Instead, it provides their normative computational realization.</p>
+<hr />
+<h2 id="mathematical-completeness">Mathematical Completeness</h2>
+<p>The present specification establishes:</p>
+<ul>
+<li>the mathematical execution model;</li>
+<li>canonical execution functions;</li>
+<li>execution composition;</li>
+<li>execution invariants;</li>
+<li>correctness;</li>
+<li>canonical equivalence;</li>
+<li>formal properties;</li>
+<li>execution algebra;</li>
+<li>correctness criteria.</li>
+</ul>
+<p>Together these components constitute a mathematically complete theory of canonical reference execution.</p>
+<hr />
+<h2 id="implementation-independence_2">Implementation Independence</h2>
+<p>The Canonical Reference Engine is independent of:</p>
+<ul>
+<li>programming language;</li>
+<li>execution platform;</li>
+<li>operating system;</li>
+<li>communication protocol;</li>
+<li>software architecture.</li>
+</ul>
+<p>Every conformant implementation computes the same canonical mathematical mapping regardless of implementation technology.</p>
+<p>Implementation diversity therefore preserves canonical computation.</p>
+<hr />
+<h2 id="canonical-computation">Canonical Computation</h2>
+<p>The Canonical Reference Engine computes canonical validity.</p>
+<p>Execution does not create knowledge.</p>
+<p>Execution does not modify knowledge.</p>
+<p>Execution does not reinterpret knowledge.</p>
+<p>Execution observes canonical knowledge according to the mathematical semantics established by the Core CKS specifications.</p>
+<p>The Reference Engine therefore serves as the canonical computational observer of the Canonical Knowledge Structure ecosystem.</p>
+<hr />
+<h2 id="future-specifications">Future Specifications</h2>
+<p>Subsequent specifications shall realize the computational model established herein.</p>
+<p>In particular:</p>
+<ul>
+<li>CKS-007 specifies the Python Reference API;</li>
+<li>CKS-008 specifies the Reference Test Suite;</li>
+<li>CKS-009 specifies the Reference Knowledge Sets.</li>
+</ul>
+<p>These specifications shall preserve the canonical computational model established by the present document.</p>
+<hr />
+<h2 id="final-principle">Final Principle</h2>
+<p>The Canonical Reference Engine constitutes the unique implementation-independent computational realization of the Canonical Knowledge Structure model.</p>
+<p>Every conformant implementation computes the same canonical mathematical object while remaining free to choose its own implementation technology.</p>
+<p>Accordingly,</p>
+<p>the present specification defines canonical computation rather than canonical software.</p>
+<p>This principle establishes the computational foundation of the Canonical Knowledge Structure ecosystem.</p>
+<hr />
+<h1 id="normative-references">Normative References</h1>
+<p>[CKS-000] Canonical Knowledge Structure — Canonical Foundations and Terminology.</p>
+<p>[CKS-001] Canonical Knowledge Structure — Core Specification.</p>
+<p>[CKS-002] Canonical Knowledge Structure — Canonical Construction Specification.</p>
+<p>[CKS-003] Canonical Knowledge Structure — Canonical Serialization.</p>
+<p>[CKS-004] Canonical Knowledge Structure — Canonical Structure Evolution.</p>
+<p>[CKS-005] Canonical Knowledge Structure — Validator Specification.</p>
+<p>[CKS-006] Canonical Knowledge Structure — Reference Engine Specification.</p>
+<p>[CKS-007] Canonical Knowledge Structure — Canonical Knowledge Interface (CKI).</p>
+<p>[CKS-008] Canonical Knowledge Structure — Reference Conformance Specification.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

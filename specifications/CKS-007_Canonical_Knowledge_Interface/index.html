@@ -1,0 +1,2454 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Universal representation-independent semantic foundation for knowledge.">
+      
+      
+        <meta name="author" content="Vladyslav">
+      
+      
+      
+        <link rel="prev" href="../CKS-006_Reference_Engine_Specification/">
+      
+      
+        <link rel="next" href="../CKS-008_Reference_Conformance_Specification/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>CKS-007 - Canonical Knowledge Structure (CKS)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Canonical Knowledge Structure (CKS)" class="md-header__button md-logo" aria-label="Canonical Knowledge Structure (CKS)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Canonical Knowledge Structure (CKS)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CKS-007
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/<YOUR_GITHUB>/CKS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../concepts/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Concepts
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../examples/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Specifications
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Canonical Knowledge Structure (CKS)" class="md-nav__button md-logo" aria-label="Canonical Knowledge Structure (CKS)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Canonical Knowledge Structure (CKS)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/<YOUR_GITHUB>/CKS" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-000_Canonical_Foundations_and_Terminology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-000
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-001_Core_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-002_Canonical_Construction_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-002
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-003_Canonical_Serialization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-003
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-004_Canonical_Structure_Evolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-004
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-005_Validator_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-005
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-006_Reference_Engine_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-006
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-007
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-007
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relationship-to-previous-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationship to Previous Specifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#canonical-position-within-the-cks-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Canonical Position within the CKS Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Philosophy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-independence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Independence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intended-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intended Users
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normative-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Normative Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guiding-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guiding Principle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-008_Reference_Conformance_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-008
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-B001-PY_Python_Reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-B001-PY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Purpose
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relationship-to-previous-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relationship to Previous Specifications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#canonical-position-within-the-cks-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Canonical Position within the CKS Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#design-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design Philosophy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-independence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementation Independence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intended-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intended Users
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normative-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Normative Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guiding-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guiding Principle
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="introduction">Introduction</h1>
+<h2 id="purpose">Purpose</h2>
+<p>The purpose of this specification is to define the Canonical Knowledge Interface (CKI).</p>
+<p>The Canonical Knowledge Interface establishes the normative operational model through which humans, artificial intelligence systems, software applications, and computational platforms interact with Canonical Knowledge Structures.</p>
+<p>Unlike implementation-specific programming interfaces, the CKI defines canonical knowledge operations independently of programming language, software architecture, communication protocol, or execution environment.</p>
+<p>The present specification therefore standardizes interaction with knowledge rather than interaction with software.</p>
+<hr />
+<h2 id="scope">Scope</h2>
+<p>This specification defines:</p>
+<ul>
+<li>the canonical operational model of knowledge interaction;</li>
+<li>canonical knowledge operations;</li>
+<li>operation contracts;</li>
+<li>canonical interface objects;</li>
+<li>reference language bindings;</li>
+<li>interface correctness;</li>
+<li>implementation conformance.</li>
+</ul>
+<p>The specification does not define implementation algorithms.</p>
+<p>Implementation behavior is defined by CKS-006 — Reference Engine Specification.</p>
+<hr />
+<h2 id="relationship-to-previous-specifications">Relationship to Previous Specifications</h2>
+<p>The Canonical Knowledge Interface operates upon the computational model established by the preceding CKS specifications.</p>
+<p>Specifically,</p>
+<ul>
+<li>CKS-001 defines Canonical Knowledge Structures;</li>
+<li>CKS-002 defines canonical construction;</li>
+<li>CKS-003 defines canonical serialization;</li>
+<li>CKS-004 defines canonical structure evolution;</li>
+<li>CKS-005 defines canonical validation;</li>
+<li>CKS-006 defines canonical computation.</li>
+</ul>
+<p>The present specification defines how external systems interact with these canonical computational capabilities.</p>
+<hr />
+<h2 id="canonical-position-within-the-cks-architecture">Canonical Position within the CKS Architecture</h2>
+<p>The Canonical Knowledge Interface forms the highest normative layer of the Canonical Knowledge Structure architecture.</p>
+<p>Conceptually,</p>
+<div class="highlight"><pre><span></span><code>Human
+Artificial Intelligence
+Software Systems
+Distributed Platforms
+        │
+        ▼
+Canonical Knowledge Interface
+        │
+        ▼
+Reference Engine
+        │
+        ▼
+Validator
+        │
+        ▼
+Canonical Knowledge Structures
+</code></pre></div>
+<p>The CKI therefore separates external interaction from internal computation.</p>
+<hr />
+<h2 id="design-philosophy">Design Philosophy</h2>
+<p>The Canonical Knowledge Interface is founded upon one fundamental principle:</p>
+<blockquote>
+<p>Canonical operations belong to knowledge rather than to software.</p>
+</blockquote>
+<p>Programming languages expose these operations.</p>
+<p>Software libraries implement these operations.</p>
+<p>Communication protocols transport these operations.</p>
+<p>Artificial intelligence systems invoke these operations.</p>
+<p>However, the operations themselves remain canonical and implementation-independent.</p>
+<hr />
+<h2 id="implementation-independence">Implementation Independence</h2>
+<p>The Canonical Knowledge Interface is independent of:</p>
+<ul>
+<li>programming language;</li>
+<li>operating system;</li>
+<li>execution platform;</li>
+<li>communication protocol;</li>
+<li>deployment architecture;</li>
+<li>implementation technology.</li>
+</ul>
+<p>Python serves as the first normative reference binding.</p>
+<p>Future bindings may be defined for additional languages and execution environments without modifying the canonical interface itself.</p>
+<hr />
+<h2 id="intended-users">Intended Users</h2>
+<p>The Canonical Knowledge Interface is intended for:</p>
+<ul>
+<li>software developers;</li>
+<li>reference implementation authors;</li>
+<li>artificial intelligence systems;</li>
+<li>distributed knowledge platforms;</li>
+<li>interoperability frameworks;</li>
+<li>future computational environments implementing Canonical Knowledge Structures.</li>
+</ul>
+<hr />
+<h2 id="normative-status">Normative Status</h2>
+<p>The present specification is normative.</p>
+<p>Every conformant implementation claiming compatibility with the Canonical Knowledge Interface shall satisfy the requirements established herein.</p>
+<p>Implementation-specific extensions are permitted provided they preserve canonical interface behavior.</p>
+<hr />
+<h2 id="guiding-principle">Guiding Principle</h2>
+<p>The Canonical Knowledge Interface defines the canonical language through which knowledge is constructed, validated, inspected, evolved, serialized, and exchanged.</p>
+<p>Accordingly,</p>
+<p>the CKI standardizes knowledge interaction rather than software implementation.</p>
+<p>This principle establishes the highest operational layer of the Canonical Knowledge Structure ecosystem.</p>
+<hr />
+<h1 id="canonical-knowledge-operations">Canonical Knowledge Operations</h1>
+<h2 id="purpose_1">Purpose</h2>
+<p>The Canonical Knowledge Interface is defined in terms of canonical knowledge operations.</p>
+<p>A canonical knowledge operation represents an abstract, implementation-independent transformation, observation, or validation performed upon Canonical Knowledge Structures.</p>
+<p>Knowledge operations constitute the fundamental vocabulary of interaction within the CKS ecosystem.</p>
+<p>Every conformant interface exposes these operations independently of implementation technology.</p>
+<hr />
+<h2 id="operation-principle">Operation Principle</h2>
+<p>A canonical knowledge operation is a normative computational action defined by the CKS specifications.</p>
+<p>Operations are independent of:</p>
+<ul>
+<li>programming language;</li>
+<li>software architecture;</li>
+<li>communication protocol;</li>
+<li>execution platform;</li>
+<li>user interface.</li>
+</ul>
+<p>Programming interfaces merely expose canonical operations.</p>
+<p>They do not define them.</p>
+<hr />
+<h2 id="categories-of-operations">Categories of Operations</h2>
+<p>Canonical knowledge operations are organized into the following categories:</p>
+<h3 id="construction-operations">Construction Operations</h3>
+<p>Operations that create Canonical Knowledge Structures.</p>
+<p>Examples include:</p>
+<ul>
+<li>Construct</li>
+<li>Create</li>
+</ul>
+<hr />
+<h3 id="validation-operations">Validation Operations</h3>
+<p>Operations that evaluate canonical correctness.</p>
+<p>Examples include:</p>
+<ul>
+<li>Validate</li>
+<li>Diagnose</li>
+<li>Inspect</li>
+</ul>
+<hr />
+<h3 id="transformation-operations">Transformation Operations</h3>
+<p>Operations that transform canonical representations without changing canonical semantics.</p>
+<p>Examples include:</p>
+<ul>
+<li>Parse</li>
+<li>Serialize</li>
+</ul>
+<hr />
+<h3 id="evolution-operations">Evolution Operations</h3>
+<p>Operations that produce admissible structural evolution.</p>
+<p>Examples include:</p>
+<ul>
+<li>Evolve</li>
+<li>Extend</li>
+</ul>
+<hr />
+<h3 id="analysis-operations">Analysis Operations</h3>
+<p>Operations that extract canonical information without modifying knowledge.</p>
+<p>Examples include:</p>
+<ul>
+<li>Inspect</li>
+<li>Extract</li>
+<li>Compare</li>
+<li>Project</li>
+</ul>
+<hr />
+<h2 id="canonical-operation-set">Canonical Operation Set</h2>
+<p>The Canonical Knowledge Interface defines the following fundamental operations.</p>
+<h3 id="construct">Construct</h3>
+<p>Creates a Canonical Knowledge Structure.</p>
+<hr />
+<h3 id="load">Load</h3>
+<p>Obtains a serialized Canonical Knowledge Structure from an external source.</p>
+<hr />
+<h3 id="parse">Parse</h3>
+<p>Transforms serialized knowledge into its canonical structural representation.</p>
+<hr />
+<h3 id="validate">Validate</h3>
+<p>Determines canonical validity.</p>
+<hr />
+<h3 id="diagnose">Diagnose</h3>
+<p>Produces canonical diagnostic information.</p>
+<hr />
+<h3 id="inspect">Inspect</h3>
+<p>Observes canonical structural properties.</p>
+<hr />
+<h3 id="serialize">Serialize</h3>
+<p>Produces the canonical serialized representation.</p>
+<hr />
+<h3 id="evolve">Evolve</h3>
+<p>Constructs an admissible structural evolution.</p>
+<hr />
+<h3 id="compare">Compare</h3>
+<p>Determines canonical equivalence or difference between structures.</p>
+<hr />
+<h3 id="extract">Extract</h3>
+<p>Retrieves selected canonical knowledge components.</p>
+<hr />
+<h3 id="project">Project</h3>
+<p>Constructs a canonical projection preserving specified structural properties.</p>
+<hr />
+<h2 id="canonical-nature-of-operations">Canonical Nature of Operations</h2>
+<p>Canonical operations are mathematical objects.</p>
+<p>Programming language functions, methods, network requests, command-line tools, and graphical interfaces are merely different representations of the same canonical operation.</p>
+<p>For example,</p>
+<p>the canonical operation</p>
+<p>Validate</p>
+<p>may be represented as:</p>
+<ul>
+<li>a Python function;</li>
+<li>a Rust function;</li>
+<li>a Java method;</li>
+<li>an HTTP endpoint;</li>
+<li>an MCP tool;</li>
+<li>a command-line command;</li>
+<li>a graphical user interface action.</li>
+</ul>
+<p>Each representation realizes the same canonical operation.</p>
+<hr />
+<h2 id="closure-of-operations">Closure of Operations</h2>
+<p>Every canonical knowledge operation produces results belonging to the Canonical Knowledge Structure ecosystem.</p>
+<p>Operations therefore preserve the closure of canonical computation.</p>
+<p>No canonical operation produces objects outside the canonical model defined by the CKS specifications.</p>
+<hr />
+<h2 id="operation-independence">Operation Independence</h2>
+<p>Canonical operations are independent of one another as abstract computational concepts.</p>
+<p>Implementations may internally compose operations.</p>
+<p>However,</p>
+<p>their canonical semantics remain independently defined.</p>
+<hr />
+<h2 id="future-operations">Future Operations</h2>
+<p>Future CKS specifications may introduce additional canonical knowledge operations.</p>
+<p>New operations shall preserve:</p>
+<ul>
+<li>canonical semantics;</li>
+<li>compatibility with existing operations;</li>
+<li>deterministic behavior;</li>
+<li>implementation independence.</li>
+</ul>
+<p>Previously defined operations shall never be redefined.</p>
+<hr />
+<h2 id="mathematical-interpretation">Mathematical Interpretation</h2>
+<p>The Canonical Knowledge Interface is fundamentally defined by its operations rather than by its implementations.</p>
+<p>Canonical operations therefore constitute the operational language of the Canonical Knowledge Structure ecosystem.</p>
+<p>Every conformant interface, regardless of implementation technology, realizes this common operational language.</p>
+<hr />
+<h1 id="canonical-operation-contracts">Canonical Operation Contracts</h1>
+<h2 id="purpose_2">Purpose</h2>
+<p>Every Canonical Knowledge Operation is governed by a canonical operation contract.</p>
+<p>The contract defines the observable behavior of an operation independently of implementation technology.</p>
+<p>Operation contracts guarantee that all conformant implementations expose identical canonical behavior.</p>
+<hr />
+<h2 id="contract-principle">Contract Principle</h2>
+<p>A Canonical Operation Contract specifies:</p>
+<ul>
+<li>the purpose of the operation;</li>
+<li>its canonical input;</li>
+<li>its canonical output;</li>
+<li>required preconditions;</li>
+<li>guaranteed postconditions;</li>
+<li>failure conditions;</li>
+<li>deterministic behavior.</li>
+</ul>
+<p>The contract completely characterizes the observable semantics of the operation.</p>
+<hr />
+<h2 id="canonical-contract-structure">Canonical Contract Structure</h2>
+<p>Every canonical operation contract consists of the following components.</p>
+<h3 id="purpose_3">Purpose</h3>
+<p>Defines the canonical intent of the operation.</p>
+<hr />
+<h3 id="input">Input</h3>
+<p>Defines the admissible canonical input domain.</p>
+<hr />
+<h3 id="output">Output</h3>
+<p>Defines the canonical output domain.</p>
+<hr />
+<h3 id="preconditions">Preconditions</h3>
+<p>Specify conditions that shall hold before execution begins.</p>
+<p>Violation of a precondition prevents successful execution.</p>
+<hr />
+<h3 id="postconditions">Postconditions</h3>
+<p>Specify conditions guaranteed after successful execution.</p>
+<p>Every conformant implementation shall satisfy every postcondition.</p>
+<hr />
+<h3 id="failure-conditions">Failure Conditions</h3>
+<p>Define situations in which the operation cannot successfully complete.</p>
+<p>Failure behavior shall be deterministic.</p>
+<hr />
+<h3 id="invariants">Invariants</h3>
+<p>Define canonical properties preserved throughout execution.</p>
+<p>Operation execution shall never violate canonical invariants established by previous CKS specifications.</p>
+<hr />
+<h2 id="deterministic-contracts">Deterministic Contracts</h2>
+<p>Operation contracts are deterministic.</p>
+<p>Formally,</p>
+<p>if identical canonical inputs satisfy identical preconditions,</p>
+<p>then identical canonical outputs shall be produced.</p>
+<p>Observable behavior shall not depend upon:</p>
+<ul>
+<li>execution order;</li>
+<li>execution environment;</li>
+<li>implementation language;</li>
+<li>optimization strategy.</li>
+</ul>
+<hr />
+<h2 id="total-and-partial-operations">Total and Partial Operations</h2>
+<p>Canonical operations may be either:</p>
+<h3 id="total">Total</h3>
+<p>Defined for every admissible canonical input.</p>
+<p>Example:</p>
+<p>Inspect.</p>
+<hr />
+<h3 id="partial">Partial</h3>
+<p>Defined only when specified preconditions hold.</p>
+<p>Example:</p>
+<p>Validate requires an admissible Canonical Knowledge Structure.</p>
+<p>Partial operations shall explicitly specify all required preconditions.</p>
+<hr />
+<h2 id="contract-preservation">Contract Preservation</h2>
+<p>Reference bindings shall preserve canonical operation contracts.</p>
+<p>Programming languages may introduce additional syntax.</p>
+<p>However,</p>
+<p>they shall not modify:</p>
+<ul>
+<li>canonical purpose;</li>
+<li>canonical semantics;</li>
+<li>canonical preconditions;</li>
+<li>canonical postconditions;</li>
+<li>canonical invariants.</li>
+</ul>
+<hr />
+<h2 id="composition-of-contracts">Composition of Contracts</h2>
+<p>Canonical operation contracts compose.</p>
+<p>If</p>
+<p>Operation A</p>
+<p>produces an output satisfying the preconditions of</p>
+<p>Operation B,</p>
+<p>then</p>
+<p>their composition is canonically admissible.</p>
+<p>Contract composition therefore determines admissible execution pipelines.</p>
+<hr />
+<h2 id="contract-compatibility">Contract Compatibility</h2>
+<p>Future extensions shall preserve existing contracts.</p>
+<p>Previously defined canonical contracts shall never be weakened or reinterpreted.</p>
+<p>Additional guarantees may be introduced provided existing guarantees remain valid.</p>
+<hr />
+<h2 id="mathematical-interpretation_1">Mathematical Interpretation</h2>
+<p>A Canonical Operation Contract is a mathematical specification of observable computation.</p>
+<p>Implementations are free to choose internal algorithms.</p>
+<p>However,</p>
+<p>every implementation shall satisfy the same canonical contract.</p>
+<p>The contract therefore represents the normative semantics of the operation rather than the implementation.</p>
+<hr />
+<h1 id="canonical-operation-composition">Canonical Operation Composition</h1>
+<h2 id="purpose_4">Purpose</h2>
+<p>Canonical Knowledge Operations are not isolated computational actions.</p>
+<p>Instead, they form composable computational sequences through which Canonical Knowledge Structures are created, validated, transformed, analyzed, and exchanged.</p>
+<p>This chapter defines the normative rules governing the composition of canonical operations.</p>
+<hr />
+<h2 id="composition-principle">Composition Principle</h2>
+<p>Two canonical operations may be composed whenever the canonical output of the first operation satisfies the canonical input requirements of the second operation.</p>
+<p>Formally,</p>
+<p>if</p>
+<p>$$
+A : X \rightarrow Y
+$$</p>
+<p>and</p>
+<p>$$
+B : Y \rightarrow Z,
+$$</p>
+<p>then</p>
+<p>$$
+B \circ A : X \rightarrow Z
+$$</p>
+<p>is an admissible canonical composition.</p>
+<hr />
+<h2 id="canonical-pipelines">Canonical Pipelines</h2>
+<p>Knowledge processing is expressed as canonical operation pipelines.</p>
+<p>A canonical pipeline consists of an ordered sequence of admissible operations.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>Load
+    ↓
+Parse
+    ↓
+Validate
+    ↓
+Diagnose
+    ↓
+Serialize
+</code></pre></div>
+<p>Each operation consumes the canonical output of the preceding operation.</p>
+<hr />
+<h2 id="admissible-composition">Admissible Composition</h2>
+<p>Composition is admissible if:</p>
+<ul>
+<li>operation contracts are satisfied;</li>
+<li>preconditions hold;</li>
+<li>postconditions remain valid;</li>
+<li>canonical invariants are preserved.</li>
+</ul>
+<p>Every conformant implementation shall reject inadmissible compositions.</p>
+<hr />
+<h2 id="associativity">Associativity</h2>
+<p>Canonical operation composition is associative.</p>
+<p>Formally,</p>
+<p>$$
+(C \circ B)\circ A
+=
+C\circ(B\circ A)
+$$</p>
+<p>provided that every intermediate composition is admissible.</p>
+<p>Associativity guarantees stable execution pipelines.</p>
+<hr />
+<h2 id="identity-operation">Identity Operation</h2>
+<p>There exists an identity operation</p>
+<p>$$
+I
+$$</p>
+<p>such that</p>
+<p>$$
+I \circ A = A
+$$</p>
+<p>and</p>
+<p>$$
+A \circ I = A.
+$$</p>
+<p>The identity operation preserves canonical knowledge without modification.</p>
+<hr />
+<h2 id="closure">Closure</h2>
+<p>Canonical operation composition is closed.</p>
+<p>Every admissible composition produces canonical objects belonging to the Canonical Knowledge Structure ecosystem.</p>
+<p>No admissible composition produces non-canonical computational states.</p>
+<hr />
+<h2 id="deterministic-composition">Deterministic Composition</h2>
+<p>Composition preserves determinism.</p>
+<p>If every constituent operation is deterministic,</p>
+<p>then the composed pipeline is deterministic.</p>
+<p>Consequently,</p>
+<p>identical canonical inputs always produce identical canonical outputs.</p>
+<hr />
+<h2 id="preservation-of-semantics">Preservation of Semantics</h2>
+<p>Operation composition shall never modify canonical semantics unless explicitly defined by the composed operation.</p>
+<p>Structural transformations,</p>
+<p>serialization,</p>
+<p>diagnostics,</p>
+<p>and validation preserve canonical meaning.</p>
+<p>Semantic preservation is therefore compositional.</p>
+<hr />
+<h2 id="pipeline-correctness">Pipeline Correctness</h2>
+<p>A canonical pipeline is correct if:</p>
+<ul>
+<li>every operation satisfies its contract;</li>
+<li>every composition is admissible;</li>
+<li>every invariant is preserved;</li>
+<li>every intermediate result belongs to the canonical model.</li>
+</ul>
+<p>Pipeline correctness follows directly from operation correctness.</p>
+<hr />
+<h2 id="reference-bindings">Reference Bindings</h2>
+<p>Programming languages may represent canonical composition using:</p>
+<ul>
+<li>function composition;</li>
+<li>method chaining;</li>
+<li>pipeline operators;</li>
+<li>fluent interfaces;</li>
+<li>asynchronous execution;</li>
+<li>distributed execution.</li>
+</ul>
+<p>These representations shall preserve canonical operation composition.</p>
+<hr />
+<h2 id="mathematical-interpretation_2">Mathematical Interpretation</h2>
+<p>Canonical Knowledge Operations form a compositional computational system.</p>
+<p>Complex knowledge workflows are constructed from finite compositions of elementary canonical operations.</p>
+<p>Accordingly,</p>
+<p>the Canonical Knowledge Interface defines not merely individual operations,</p>
+<p>but a complete algebra of knowledge interaction.</p>
+<hr />
+<h1 id="canonical-knowledge-objects">Canonical Knowledge Objects</h1>
+<h2 id="purpose_5">Purpose</h2>
+<p>Canonical Knowledge Operations operate upon Canonical Knowledge Objects.</p>
+<p>Canonical Knowledge Objects represent implementation-independent semantic entities defined by the CKS specifications.</p>
+<p>Programming language objects, serialized representations, database records, and network messages are merely representations of Canonical Knowledge Objects.</p>
+<p>The Canonical Knowledge Interface therefore operates exclusively upon canonical objects rather than implementation artifacts.</p>
+<hr />
+<h2 id="canonical-object-principle">Canonical Object Principle</h2>
+<p>A Canonical Knowledge Object possesses:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical semantics;</li>
+<li>canonical validity;</li>
+<li>implementation independence.</li>
+</ul>
+<p>Every operation defined by the Canonical Knowledge Interface accepts or produces one or more Canonical Knowledge Objects.</p>
+<hr />
+<h2 id="fundamental-canonical-objects">Fundamental Canonical Objects</h2>
+<p>The Canonical Knowledge Interface recognizes the following fundamental object categories.</p>
+<h3 id="canonical-knowledge-structure">Canonical Knowledge Structure</h3>
+<p>Represents a complete admissible knowledge structure.</p>
+<hr />
+<h3 id="knowledge-object">Knowledge Object</h3>
+<p>Represents an individual canonical knowledge entity.</p>
+<hr />
+<h3 id="canonical-relation">Canonical Relation</h3>
+<p>Represents a canonical semantic relation between knowledge objects.</p>
+<hr />
+<h3 id="validation-result">Validation Result</h3>
+<p>Represents the canonical outcome of validation.</p>
+<hr />
+<h3 id="diagnostic">Diagnostic</h3>
+<p>Represents canonical information describing validation observations.</p>
+<hr />
+<h3 id="serialized-representation">Serialized Representation</h3>
+<p>Represents the canonical external encoding of a Canonical Knowledge Structure.</p>
+<hr />
+<h2 id="canonical-identity">Canonical Identity</h2>
+<p>Every Canonical Knowledge Object possesses canonical identity.</p>
+<p>Canonical identity is preserved across:</p>
+<ul>
+<li>serialization;</li>
+<li>deserialization;</li>
+<li>validation;</li>
+<li>inspection;</li>
+<li>projection;</li>
+<li>transmission.</li>
+</ul>
+<p>Implementations shall not modify canonical identity.</p>
+<hr />
+<h2 id="immutability">Immutability</h2>
+<p>Canonical Knowledge Objects are observationally immutable.</p>
+<p>Operations may construct new canonical objects.</p>
+<p>Operations shall not modify the observable canonical semantics of existing objects.</p>
+<p>Immutability guarantees:</p>
+<ul>
+<li>deterministic computation;</li>
+<li>referential transparency;</li>
+<li>reproducibility;</li>
+<li>interoperability.</li>
+</ul>
+<hr />
+<h2 id="object-lifetime">Object Lifetime</h2>
+<p>Canonical Knowledge Objects exist independently of their representations.</p>
+<p>A serialized document,</p>
+<p>an in-memory object,</p>
+<p>a network message,</p>
+<p>or a database record</p>
+<p>are merely different representations of the same canonical object.</p>
+<p>Representations may appear and disappear.</p>
+<p>Canonical identity remains unchanged.</p>
+<hr />
+<h2 id="object-composition">Object Composition</h2>
+<p>Canonical Knowledge Objects may be composed.</p>
+<p>Composite objects preserve the canonical identities of their constituent objects.</p>
+<p>Composition shall never introduce semantic ambiguity.</p>
+<hr />
+<h2 id="object-preservation">Object Preservation</h2>
+<p>Canonical Knowledge Operations preserve canonical object identity unless explicitly defined otherwise.</p>
+<p>Transformation operations may alter representation.</p>
+<p>Validation operations may produce additional canonical objects.</p>
+<p>Evolution operations may construct new admissible canonical objects.</p>
+<p>Canonical semantics remain preserved.</p>
+<hr />
+<h2 id="mathematical-interpretation_3">Mathematical Interpretation</h2>
+<p>Canonical Knowledge Objects constitute the semantic domain over which Canonical Knowledge Operations are defined.</p>
+<p>The Canonical Knowledge Interface therefore defines interaction with canonical semantic objects rather than implementation-specific software objects.</p>
+<hr />
+<h1 id="canonical-interface-objects">Canonical Interface Objects</h1>
+<h2 id="purpose_6">Purpose</h2>
+<p>Canonical Interface Objects define the observable entities exchanged between external systems and the Canonical Knowledge Interface.</p>
+<p>Unlike Canonical Knowledge Objects, Interface Objects do not represent knowledge itself.</p>
+<p>Instead, they represent the results, context, metadata, and operational information produced during canonical interaction.</p>
+<p>The separation between knowledge objects and interface objects preserves semantic independence while enabling interoperable computation.</p>
+<hr />
+<h2 id="interface-object-principle">Interface Object Principle</h2>
+<p>Interface Objects shall satisfy the following principles:</p>
+<ul>
+<li>implementation independence;</li>
+<li>deterministic representation;</li>
+<li>canonical identity where applicable;</li>
+<li>compatibility across language bindings;</li>
+<li>separation from knowledge semantics.</li>
+</ul>
+<p>Interface Objects communicate information about knowledge.</p>
+<p>They are not themselves canonical knowledge.</p>
+<hr />
+<h2 id="fundamental-interface-objects">Fundamental Interface Objects</h2>
+<p>The Canonical Knowledge Interface defines the following normative interface objects.</p>
+<h3 id="validationresult">ValidationResult</h3>
+<p>Represents the canonical outcome of a validation operation.</p>
+<p>Contains:</p>
+<ul>
+<li>validation status;</li>
+<li>diagnostics;</li>
+<li>validation metadata;</li>
+<li>implementation-independent summary.</li>
+</ul>
+<hr />
+<h3 id="diagnostic_1">Diagnostic</h3>
+<p>Represents an individual canonical observation produced during validation or inspection.</p>
+<p>Contains:</p>
+<ul>
+<li>diagnostic identifier;</li>
+<li>severity;</li>
+<li>canonical message;</li>
+<li>canonical location;</li>
+<li>optional supplemental metadata.</li>
+</ul>
+<hr />
+<h3 id="operationcontext">OperationContext</h3>
+<p>Represents contextual information associated with operation execution.</p>
+<p>Examples include:</p>
+<ul>
+<li>execution configuration;</li>
+<li>canonical options;</li>
+<li>implementation-neutral execution parameters.</li>
+</ul>
+<p>OperationContext shall never modify canonical semantics.</p>
+<hr />
+<h3 id="knowledgereference">KnowledgeReference</h3>
+<p>Represents a canonical reference to an existing Canonical Knowledge Object.</p>
+<p>KnowledgeReference enables stable interaction without duplicating knowledge.</p>
+<hr />
+<h3 id="operationdescriptor">OperationDescriptor</h3>
+<p>Represents metadata describing a canonical operation.</p>
+<p>Examples include:</p>
+<ul>
+<li>operation name;</li>
+<li>canonical identifier;</li>
+<li>supported contract;</li>
+<li>version information.</li>
+</ul>
+<hr />
+<h3 id="interfaceerror">InterfaceError</h3>
+<p>Represents canonical operational failures occurring before successful completion of an operation.</p>
+<p>InterfaceError shall be deterministic and implementation-independent.</p>
+<hr />
+<h2 id="determinism">Determinism</h2>
+<p>Equivalent canonical executions shall produce equivalent Interface Objects.</p>
+<p>Observable interface behavior shall not depend upon:</p>
+<ul>
+<li>implementation language;</li>
+<li>execution platform;</li>
+<li>operating system;</li>
+<li>optimization strategy.</li>
+</ul>
+<hr />
+<h2 id="immutability_1">Immutability</h2>
+<p>Interface Objects are observationally immutable.</p>
+<p>Implementations may internally optimize storage.</p>
+<p>However,</p>
+<p>observable interface state shall remain unchanged after creation.</p>
+<hr />
+<h2 id="serialization">Serialization</h2>
+<p>Interface Objects may possess canonical serialized representations.</p>
+<p>Serialization shall preserve all observable canonical information.</p>
+<hr />
+<h2 id="language-bindings">Language Bindings</h2>
+<p>Programming languages shall map Interface Objects into native constructs.</p>
+<p>Such mappings shall preserve:</p>
+<ul>
+<li>canonical meaning;</li>
+<li>observable behavior;</li>
+<li>deterministic semantics.</li>
+</ul>
+<p>Language-specific convenience features shall not modify canonical behavior.</p>
+<hr />
+<h2 id="separation-from-knowledge-objects">Separation from Knowledge Objects</h2>
+<p>Knowledge Objects represent canonical semantic entities.</p>
+<p>Interface Objects represent interaction with those entities.</p>
+<p>This separation ensures that interface evolution does not alter canonical knowledge semantics.</p>
+<hr />
+<h2 id="mathematical-interpretation_4">Mathematical Interpretation</h2>
+<p>Interface Objects constitute the observable codomain of Canonical Knowledge Operations.</p>
+<p>They provide a deterministic, implementation-independent representation of operational outcomes while preserving complete separation from canonical knowledge itself.</p>
+<hr />
+<h1 id="canonical-knowledge-sessions">Canonical Knowledge Sessions</h1>
+<h2 id="purpose_7">Purpose</h2>
+<p>A Canonical Knowledge Session represents a coherent sequence of Canonical Knowledge Operations performed within a single interaction context.</p>
+<p>Knowledge Sessions organize canonical interaction without modifying canonical knowledge semantics.</p>
+<p>They provide a conceptual model for describing knowledge workflows independently of implementation technology.</p>
+<hr />
+<h2 id="session-principle">Session Principle</h2>
+<p>A Knowledge Session is an ordered collection of Canonical Knowledge Operations executed within a common interaction context.</p>
+<p>A session does not introduce additional semantics.</p>
+<p>It merely groups related canonical operations into a coherent interaction.</p>
+<hr />
+<h2 id="session-characteristics">Session Characteristics</h2>
+<p>Every Knowledge Session is:</p>
+<ul>
+<li>deterministic;</li>
+<li>implementation-independent;</li>
+<li>finite;</li>
+<li>compositional;</li>
+<li>reproducible.</li>
+</ul>
+<p>Equivalent sessions operating upon equivalent canonical knowledge produce equivalent observable results.</p>
+<hr />
+<h2 id="canonical-session-structure">Canonical Session Structure</h2>
+<p>A typical Knowledge Session consists of:</p>
+<ol>
+<li>acquisition of canonical knowledge;</li>
+<li>optional construction or parsing;</li>
+<li>validation;</li>
+<li>inspection or diagnosis;</li>
+<li>optional transformation;</li>
+<li>presentation or serialization.</li>
+</ol>
+<p>Implementations may expose additional operations provided canonical contracts remain satisfied.</p>
+<hr />
+<h2 id="session-independence">Session Independence</h2>
+<p>Knowledge Sessions are independent.</p>
+<p>Execution of one session shall not modify the canonical semantics of another session.</p>
+<p>Sessions communicate only through explicitly exchanged Canonical Knowledge Objects.</p>
+<hr />
+<h2 id="session-context">Session Context</h2>
+<p>A session may possess contextual information such as:</p>
+<ul>
+<li>operation ordering;</li>
+<li>execution preferences;</li>
+<li>implementation-neutral options.</li>
+</ul>
+<p>Session context shall never modify canonical semantics.</p>
+<hr />
+<h2 id="deterministic-sessions">Deterministic Sessions</h2>
+<p>Knowledge Sessions preserve determinism.</p>
+<p>Equivalent sequences of equivalent operations applied to equivalent Canonical Knowledge Objects shall produce equivalent observable results.</p>
+<hr />
+<h2 id="mathematical-interpretation_5">Mathematical Interpretation</h2>
+<p>A Knowledge Session represents a finite composition of Canonical Knowledge Operations over Canonical Knowledge Objects.</p>
+<p>Sessions therefore provide the operational view of interaction within the Canonical Knowledge Interface while remaining fully independent of implementation technology.</p>
+<hr />
+<h1 id="canonical-interface-bindings">Canonical Interface Bindings</h1>
+<h2 id="purpose_8">Purpose</h2>
+<p>Canonical Knowledge Operations are implementation-independent.</p>
+<p>To become accessible within a particular computational environment, canonical operations are exposed through language-specific or protocol-specific bindings.</p>
+<p>Bindings provide representations of canonical interaction.</p>
+<p>They do not redefine canonical semantics.</p>
+<hr />
+<h2 id="binding-principle">Binding Principle</h2>
+<p>A Canonical Interface Binding maps Canonical Knowledge Operations into the constructs of a particular execution environment.</p>
+<p>Examples include:</p>
+<ul>
+<li>programming languages;</li>
+<li>network protocols;</li>
+<li>command-line interfaces;</li>
+<li>graphical interfaces;</li>
+<li>artificial intelligence tool interfaces.</li>
+</ul>
+<p>Every binding represents the same canonical operation.</p>
+<hr />
+<h2 id="canonical-preservation">Canonical Preservation</h2>
+<p>Bindings shall preserve:</p>
+<ul>
+<li>canonical operation semantics;</li>
+<li>canonical operation contracts;</li>
+<li>canonical determinism;</li>
+<li>canonical object identity;</li>
+<li>canonical interface behavior.</li>
+</ul>
+<p>Bindings shall not introduce observable semantic differences.</p>
+<hr />
+<h2 id="language-independence">Language Independence</h2>
+<p>Canonical operations exist independently of every programming language.</p>
+<p>Programming languages merely provide syntactic representations.</p>
+<p>Accordingly,</p>
+<p>Python,</p>
+<p>Rust,</p>
+<p>Java,</p>
+<p>C++,</p>
+<p>Go,</p>
+<p>or future languages</p>
+<p>represent equivalent bindings rather than distinct interfaces.</p>
+<hr />
+<h2 id="protocol-independence">Protocol Independence</h2>
+<p>Canonical operations are likewise independent of communication protocols.</p>
+<p>Equivalent bindings may be expressed through:</p>
+<ul>
+<li>HTTP;</li>
+<li>gRPC;</li>
+<li>MCP;</li>
+<li>message queues;</li>
+<li>distributed execution environments.</li>
+</ul>
+<p>Protocol selection shall not modify canonical behavior.</p>
+<hr />
+<h2 id="artificial-intelligence-bindings">Artificial Intelligence Bindings</h2>
+<p>Artificial intelligence systems interact with Canonical Knowledge Structures through canonical bindings.</p>
+<p>Tool invocation,</p>
+<p>function calling,</p>
+<p>MCP,</p>
+<p>or future interaction mechanisms</p>
+<p>constitute implementation bindings rather than distinct computational models.</p>
+<p>Artificial intelligence therefore operates through the same canonical operations as every other participant.</p>
+<hr />
+<h2 id="reference-binding">Reference Binding</h2>
+<p>The first normative binding defined by the CKS ecosystem is the Python Reference Binding.</p>
+<p>Subsequent bindings shall preserve complete compatibility with the Canonical Knowledge Interface.</p>
+<hr />
+<h2 id="future-bindings">Future Bindings</h2>
+<p>Future specifications may define additional bindings.</p>
+<p>Examples include:</p>
+<ul>
+<li>Rust Reference Binding;</li>
+<li>Java Reference Binding;</li>
+<li>HTTP Reference Binding;</li>
+<li>MCP Reference Binding;</li>
+<li>Distributed Reference Binding.</li>
+</ul>
+<p>Such specifications extend the Canonical Knowledge Interface without modifying it.</p>
+<hr />
+<h2 id="mathematical-interpretation_6">Mathematical Interpretation</h2>
+<p>Bindings constitute representation morphisms between canonical operations and concrete computational environments.</p>
+<p>Canonical computation remains unchanged.</p>
+<p>Only representation varies.</p>
+<p>The Canonical Knowledge Interface therefore remains invariant under binding transformations.</p>
+<hr />
+<h1 id="canonical-operation-semantics">Canonical Operation Semantics</h1>
+<h2 id="purpose_9">Purpose</h2>
+<p>Canonical Knowledge Operations are defined by their observable semantics.</p>
+<p>Implementations may differ internally.</p>
+<p>Observable semantics shall remain identical.</p>
+<hr />
+<h2 id="semantic-principle">Semantic Principle</h2>
+<p>Every canonical operation possesses exactly one canonical meaning.</p>
+<p>Different implementations shall not reinterpret canonical semantics.</p>
+<hr />
+<h2 id="semantic-determinism">Semantic Determinism</h2>
+<p>For equivalent canonical inputs,</p>
+<p>operations shall produce semantically equivalent outputs.</p>
+<p>Semantic equivalence is independent of:</p>
+<ul>
+<li>programming language;</li>
+<li>execution platform;</li>
+<li>implementation algorithm;</li>
+<li>optimization strategy.</li>
+</ul>
+<hr />
+<h2 id="observable-semantics">Observable Semantics</h2>
+<p>Only observable behavior is standardized.</p>
+<p>Internal implementation details remain implementation-specific.</p>
+<p>Observable behavior includes:</p>
+<ul>
+<li>produced canonical objects;</li>
+<li>produced interface objects;</li>
+<li>diagnostics;</li>
+<li>operation contracts;</li>
+<li>canonical determinism.</li>
+</ul>
+<hr />
+<h2 id="semantic-preservation">Semantic Preservation</h2>
+<p>Operations preserving canonical knowledge shall preserve canonical semantics.</p>
+<p>Representation may change.</p>
+<p>Canonical meaning shall not change.</p>
+<hr />
+<h2 id="semantic-transformation">Semantic Transformation</h2>
+<p>Operations explicitly defined as transformations shall construct new canonical semantics according to their operation contracts.</p>
+<p>Transformation semantics shall remain deterministic.</p>
+<hr />
+<h2 id="semantic-independence">Semantic Independence</h2>
+<p>Canonical semantics are independent of:</p>
+<ul>
+<li>memory layout;</li>
+<li>execution order;</li>
+<li>storage format;</li>
+<li>transport protocol;</li>
+<li>implementation language.</li>
+</ul>
+<hr />
+<h2 id="mathematical-interpretation_7">Mathematical Interpretation</h2>
+<p>Canonical semantics define the normative meaning of every Canonical Knowledge Operation.</p>
+<p>Bindings,</p>
+<p>implementations,</p>
+<p>and execution environments merely realize these semantics.</p>
+<p>The semantics themselves remain canonical and invariant.</p>
+<hr />
+<h1 id="conformance">Conformance</h1>
+<h2 id="purpose_10">Purpose</h2>
+<p>This chapter defines the normative requirements for claiming conformance with the Canonical Knowledge Interface.</p>
+<p>Conformance establishes observable compatibility rather than implementation identity.</p>
+<p>Implementations remain free to choose internal algorithms provided canonical behavior is preserved.</p>
+<hr />
+<h2 id="conformance-principle">Conformance Principle</h2>
+<p>An implementation conforms to the Canonical Knowledge Interface if and only if it preserves:</p>
+<ul>
+<li>canonical semantics;</li>
+<li>canonical operation contracts;</li>
+<li>canonical determinism;</li>
+<li>canonical object identity;</li>
+<li>canonical interface behavior.</li>
+</ul>
+<p>Internal implementation details are non-normative.</p>
+<hr />
+<h2 id="mandatory-requirements">Mandatory Requirements</h2>
+<p>Every conformant implementation shall:</p>
+<ul>
+<li>implement every required canonical operation;</li>
+<li>satisfy every operation contract;</li>
+<li>preserve canonical semantics;</li>
+<li>preserve deterministic observable behavior;</li>
+<li>preserve canonical object identity;</li>
+<li>preserve interface compatibility.</li>
+</ul>
+<p>Failure to satisfy any mandatory requirement invalidates conformance.</p>
+<hr />
+<h2 id="optional-extensions">Optional Extensions</h2>
+<p>Implementations may introduce additional capabilities.</p>
+<p>Such extensions shall:</p>
+<ul>
+<li>remain implementation-specific;</li>
+<li>preserve canonical behavior;</li>
+<li>avoid modification of existing contracts;</li>
+<li>avoid observable semantic changes.</li>
+</ul>
+<p>Extensions shall never redefine canonical operations.</p>
+<hr />
+<h2 id="observable-compatibility">Observable Compatibility</h2>
+<p>Conformance is determined solely by observable behavior.</p>
+<p>Equivalent canonical inputs shall produce equivalent observable outputs regardless of:</p>
+<ul>
+<li>implementation language;</li>
+<li>execution environment;</li>
+<li>optimization strategy;</li>
+<li>deployment architecture.</li>
+</ul>
+<hr />
+<h2 id="binding-conformance">Binding Conformance</h2>
+<p>Language bindings shall preserve complete compatibility with the Canonical Knowledge Interface.</p>
+<p>Programming language features shall not alter canonical semantics.</p>
+<p>Equivalent bindings therefore remain mutually compatible.</p>
+<hr />
+<h2 id="future-compatibility">Future Compatibility</h2>
+<p>Future versions of the Canonical Knowledge Interface shall preserve backward compatibility unless explicitly stated otherwise.</p>
+<p>Previously conformant implementations shall remain conformant whenever possible.</p>
+<hr />
+<h2 id="reference-conformance">Reference Conformance</h2>
+<p>The Python Reference Binding constitutes the first normative reference implementation of the Canonical Knowledge Interface.</p>
+<p>Future bindings shall demonstrate equivalent observable behavior.</p>
+<hr />
+<h2 id="mathematical-interpretation_8">Mathematical Interpretation</h2>
+<p>Conformance is defined by semantic equivalence rather than implementation equivalence.</p>
+<p>Implementations therefore conform by preserving canonical computation rather than reproducing identical internal algorithms.</p>
+<hr />
+<h1 id="versioning-and-compatibility">Versioning and Compatibility</h1>
+<h2 id="purpose_11">Purpose</h2>
+<p>The Canonical Knowledge Interface shall evolve without compromising canonical semantics or previously established operation contracts.</p>
+<p>This chapter defines the normative rules governing versioning and compatibility.</p>
+<p>The objective is to ensure long-term stability of the Canonical Knowledge Interface while permitting controlled evolution.</p>
+<hr />
+<h2 id="versioning-principle">Versioning Principle</h2>
+<p>A version of the Canonical Knowledge Interface represents a normative state of the specification.</p>
+<p>Every version shall preserve the canonical principles established by previous CKS specifications unless an explicitly declared major revision is introduced.</p>
+<p>Version numbers identify specification evolution rather than implementation releases.</p>
+<hr />
+<h2 id="backward-compatibility">Backward Compatibility</h2>
+<p>Backward compatibility shall be preserved whenever reasonably possible.</p>
+<p>A newer version of the Canonical Knowledge Interface shall continue to support canonical behavior defined by previous compatible versions.</p>
+<p>Existing conformant implementations should remain operational without modification.</p>
+<hr />
+<h2 id="forward-compatibility">Forward Compatibility</h2>
+<p>Implementations should ignore canonical interface elements that are unknown but explicitly defined as optional extensions.</p>
+<p>Forward compatibility shall never require reinterpretation of canonical semantics.</p>
+<hr />
+<h2 id="compatible-changes">Compatible Changes</h2>
+<p>The following modifications are considered compatible:</p>
+<ul>
+<li>addition of new canonical operations;</li>
+<li>addition of optional interface objects;</li>
+<li>clarification of normative text;</li>
+<li>addition of informative examples;</li>
+<li>additional language bindings;</li>
+<li>additional protocol bindings.</li>
+</ul>
+<p>Compatible changes shall not alter existing observable behavior.</p>
+<hr />
+<h2 id="incompatible-changes">Incompatible Changes</h2>
+<p>The following modifications are incompatible:</p>
+<ul>
+<li>redefinition of canonical semantics;</li>
+<li>modification of existing operation contracts;</li>
+<li>alteration of canonical object identity;</li>
+<li>removal of mandatory operations;</li>
+<li>observable behavioral changes;</li>
+<li>reinterpretation of canonical terminology.</li>
+</ul>
+<p>Incompatible changes require a new major version.</p>
+<hr />
+<h2 id="deprecation">Deprecation</h2>
+<p>Canonical operations may be deprecated.</p>
+<p>Deprecated operations shall remain normatively defined until their scheduled removal in a future major version.</p>
+<p>Deprecation shall never modify canonical semantics.</p>
+<hr />
+<h2 id="extension-principle">Extension Principle</h2>
+<p>The Canonical Knowledge Interface evolves through extension rather than revision.</p>
+<p>Previously established canonical definitions remain valid.</p>
+<p>New functionality shall be introduced by adding new canonical concepts rather than modifying existing ones.</p>
+<hr />
+<h2 id="reference-bindings_1">Reference Bindings</h2>
+<p>Reference bindings shall explicitly declare the version of the Canonical Knowledge Interface they implement.</p>
+<p>Bindings supporting multiple versions shall preserve canonical behavior for every supported version.</p>
+<hr />
+<h2 id="mathematical-interpretation_9">Mathematical Interpretation</h2>
+<p>Version evolution constitutes an extension of the canonical operational language.</p>
+<p>Canonical semantics remain invariant across compatible versions.</p>
+<p>Versioning therefore preserves semantic continuity while permitting controlled architectural growth.</p>
+<hr />
+<h1 id="reference-architecture">Reference Architecture</h1>
+<h2 id="purpose_12">Purpose</h2>
+<p>This chapter presents the normative reference architecture of the Canonical Knowledge Interface.</p>
+<p>The reference architecture illustrates the relationships among canonical knowledge objects, operations, contracts, sessions, bindings, and implementations.</p>
+<p>It serves as the architectural summary of the Canonical Knowledge Interface.</p>
+<hr />
+<h2 id="architectural-principle">Architectural Principle</h2>
+<p>The Canonical Knowledge Interface separates:</p>
+<ul>
+<li>canonical semantics;</li>
+<li>canonical operations;</li>
+<li>observable interaction;</li>
+<li>implementation mechanisms.</li>
+</ul>
+<p>Each architectural layer possesses clearly defined responsibilities.</p>
+<p>Communication between layers occurs exclusively through canonical interfaces.</p>
+<hr />
+<h2 id="architectural-layers">Architectural Layers</h2>
+<p>The Canonical Knowledge Interface consists of the following conceptual layers.</p>
+<h3 id="layer-1-canonical-semantics">Layer 1 — Canonical Semantics</h3>
+<p>Defines the meaning of canonical knowledge independently of representation.</p>
+<p>Established by:</p>
+<ul>
+<li>CKS-001</li>
+<li>CKS-002</li>
+<li>CKS-003</li>
+<li>CKS-004</li>
+<li>CKS-005</li>
+</ul>
+<hr />
+<h3 id="layer-2-canonical-computation">Layer 2 — Canonical Computation</h3>
+<p>Defines deterministic canonical computation.</p>
+<p>Established by:</p>
+<ul>
+<li>CKS-006</li>
+</ul>
+<hr />
+<h3 id="layer-3-canonical-interaction">Layer 3 — Canonical Interaction</h3>
+<p>Defines canonical operations and operation contracts.</p>
+<p>Established by:</p>
+<ul>
+<li>CKS-007</li>
+</ul>
+<hr />
+<h3 id="layer-4-language-and-protocol-bindings">Layer 4 — Language and Protocol Bindings</h3>
+<p>Expose canonical interaction through programming languages and communication protocols.</p>
+<p>Examples include:</p>
+<ul>
+<li>Python</li>
+<li>Rust</li>
+<li>Java</li>
+<li>HTTP</li>
+<li>MCP</li>
+</ul>
+<p>Bindings preserve canonical semantics.</p>
+<hr />
+<h3 id="layer-5-applications">Layer 5 — Applications</h3>
+<p>Applications consume canonical knowledge through the Canonical Knowledge Interface.</p>
+<p>Applications never directly define canonical semantics.</p>
+<hr />
+<h2 id="architectural-relationships">Architectural Relationships</h2>
+<p>The relationship among architectural layers is illustrated conceptually.</p>
+<div class="highlight"><pre><span></span><code>Applications
+        │
+        ▼
+Language / Protocol Bindings
+        │
+        ▼
+Canonical Knowledge Interface
+        │
+        ▼
+Reference Engine
+        │
+        ▼
+Canonical Knowledge Structures
+</code></pre></div>
+<p>Each layer depends only upon the layer immediately beneath it.</p>
+<hr />
+<h2 id="separation-of-responsibilities">Separation of Responsibilities</h2>
+<p>The architecture separates responsibilities as follows.</p>
+<p>Canonical Knowledge Structures define knowledge.</p>
+<p>The Reference Engine performs canonical computation.</p>
+<p>The Canonical Knowledge Interface defines interaction.</p>
+<p>Bindings expose interaction.</p>
+<p>Applications consume interaction.</p>
+<p>Each layer remains independently evolvable.</p>
+<hr />
+<h2 id="semantic-preservation_1">Semantic Preservation</h2>
+<p>Canonical semantics flow unchanged throughout the architecture.</p>
+<p>Representations,</p>
+<p>bindings,</p>
+<p>implementations,</p>
+<p>and execution environments</p>
+<p>shall preserve canonical meaning.</p>
+<p>Only representation changes.</p>
+<p>Canonical semantics remain invariant.</p>
+<hr />
+<h2 id="implementation-independence_1">Implementation Independence</h2>
+<p>The reference architecture is independent of:</p>
+<ul>
+<li>programming language;</li>
+<li>operating system;</li>
+<li>hardware platform;</li>
+<li>communication protocol;</li>
+<li>deployment model.</li>
+</ul>
+<p>Implementations realize the architecture without modifying it.</p>
+<hr />
+<h2 id="architectural-stability">Architectural Stability</h2>
+<p>The Canonical Knowledge Interface evolves through extension.</p>
+<p>Architectural layers remain stable.</p>
+<p>Future specifications may introduce additional bindings,</p>
+<p>operations,</p>
+<p>or interface objects</p>
+<p>without modifying the established architectural foundation.</p>
+<hr />
+<h2 id="relationship-to-future-specifications">Relationship to Future Specifications</h2>
+<p>Future CKS specifications extend the reference architecture.</p>
+<p>Examples include:</p>
+<ul>
+<li>additional bindings;</li>
+<li>conformance specifications;</li>
+<li>reference knowledge corpora;</li>
+<li>validation suites;</li>
+<li>future computational environments.</li>
+</ul>
+<p>The present architecture serves as the stable foundation for such extensions.</p>
+<hr />
+<h2 id="mathematical-interpretation_10">Mathematical Interpretation</h2>
+<p>The Canonical Knowledge Interface constitutes the operational layer of the Canonical Knowledge Structure Reference Model.</p>
+<p>It provides the unique implementation-independent interface through which canonical knowledge is observed, validated, transformed, computed, and exchanged.</p>
+<p>The architecture therefore preserves semantic invariance while enabling unrestricted implementation diversity.</p>
+<hr />
+<h1 id="conclusion">Conclusion</h1>
+<p>The Canonical Knowledge Interface completes the first-generation operational architecture of the Canonical Knowledge Structure ecosystem.</p>
+<p>Together with the preceding CKS specifications,</p>
+<p>the present document establishes a complete implementation-independent reference model for canonical knowledge interaction.</p>
+<p>Future specifications extend this model without modifying its canonical foundations.</p>
+<p>Accordingly,</p>
+<p>the Canonical Knowledge Interface provides the stable operational foundation upon which interoperable knowledge systems may be constructed.</p>
+<hr />
+<h1 id="normative-references">Normative References</h1>
+<p>[CKS-000] Canonical Knowledge Structure — Canonical Foundations and Terminology.</p>
+<p>[CKS-001] Canonical Knowledge Structure — Core Specification.</p>
+<p>[CKS-002] Canonical Knowledge Structure — Canonical Construction Specification.</p>
+<p>[CKS-003] Canonical Knowledge Structure — Canonical Serialization.</p>
+<p>[CKS-004] Canonical Knowledge Structure — Canonical Structure Evolution.</p>
+<p>[CKS-005] Canonical Knowledge Structure — Validator Specification.</p>
+<p>[CKS-006] Canonical Knowledge Structure — Reference Engine Specification.</p>
+<p>[CKS-007] Canonical Knowledge Structure — Canonical Knowledge Interface (CKI).</p>
+<p>[CKS-008] Canonical Knowledge Structure — Reference Conformance Specification.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
