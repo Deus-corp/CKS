@@ -1,17 +1,18 @@
 """
 CKS Serialization — Canonical JSON Serialization.
 
-This module implements the canonical serialization and deserialization
-functions defined in CKS‑003 (Canonical Serialization) and CKS‑007
-(Canonical Knowledge Interface).
+This module implements the canonical serialization model defined in
+CKS-003 (Canonical Serialization) and exposes the serialization
+operations required by CKS-007 (Canonical Knowledge Interface).
 
-All functions are observationally pure and do not modify their inputs.
+The implementation is observationally pure:
+serialization and deserialization never modify their inputs.
 """
 
 from __future__ import annotations
 
 import json
-from typing import Any, Dict, List, Union
+from typing import Any
 
 from .core import (
     CanonicalRelation,
@@ -20,119 +21,460 @@ from .core import (
     ObjectIdentity,
 )
 
-# ---------------------------------------------------------------------------
-# Public API
-# ---------------------------------------------------------------------------
+# ============================================================================
+# Canonical Serialization Constants
+# ============================================================================
+
+CANONICAL_JSON_VERSION = "1.0"
+
+ROOT_OBJECTS_KEY = "objects"
+ROOT_VERSION_KEY = "version"
+
+IDENTITY_KEY = "identity"
+STRUCTURE_KEY = "structure"
+
+IDENTITY_FIELDS = frozenset(
+    {
+        "id",
+        "type",
+        "name",
+    }
+)
+
+OBJECT_FIELDS = frozenset(
+    {
+        IDENTITY_KEY,
+        STRUCTURE_KEY,
+    }
+)
+
+RELATION_PARTICIPANTS_KEY = "participants"
+RELATION_TYPE_KEY = "relation_type"
+
+
+# ============================================================================
+# Exceptions
+# ============================================================================
 
 
 class SerializationError(Exception):
-    """Raised when canonical serialization cannot be parsed or produced."""
+    """Raised when canonical serialization cannot be parsed."""
 
 
-def parse(source: Union[str, dict]) -> KnowledgeStructure:
-    """Parse a serialized representation into a KnowledgeStructure.
+# ============================================================================
+# Canonical Deserializer
+# ============================================================================
 
-    The *source* must be a valid JSON string or a ``dict`` conforming to
-    the canonical serialization model (CKS‑003).
 
-    Returns a KnowledgeStructure semantically equivalent to the
-    serialized representation.
+class CanonicalDeserializer:
+    """
+    Canonical JSON deserializer.
+
+    Converts canonical JSON into a KnowledgeStructure while preserving
+    canonical semantics.
+    """
+
+    # ---------------------------------------------------------------------
+
+    def deserialize(self, source: str | dict[str, Any]) -> KnowledgeStructure:
+        """
+        Deserialize canonical JSON into a KnowledgeStructure.
+        """
+
+        data = self._load_json(source)
+
+        if not isinstance(data, dict):
+            raise SerializationError(
+                "Top-level JSON value must be an object."
+            )
+
+        self._validate_root(data)
+
+        objects: list[KnowledgeObject] = []
+        seen: set[str] = set()
+
+        for raw_object in data[ROOT_OBJECTS_KEY]:
+            obj = self._parse_object(raw_object)
+
+            oid = obj.identity.id
+
+            if oid in seen:
+                raise SerializationError(
+                    f"Duplicate canonical identity: {oid!r}"
+                )
+
+            seen.add(oid)
+            objects.append(obj)
+
+        return KnowledgeStructure(objects)
+
+    # ---------------------------------------------------------------------
+
+    def _load_json(
+        self,
+        source: str | dict[str, Any],
+    ) -> dict[str, Any]:
+        
+        if not isinstance(source, (str, dict)):
+            raise SerializationError(
+               "Source must be a JSON string or decoded JSON object."
+            )
+
+        if isinstance(source, dict):
+            return source
+
+        try:
+            return json.loads(source)
+
+        except json.JSONDecodeError as exc:
+            raise SerializationError(
+                f"Invalid JSON: {exc}"
+            ) from exc
+
+    # ---------------------------------------------------------------------
+
+    def _validate_root(
+        self,
+        data: dict[str, Any],
+    ) -> None:
+
+        if ROOT_OBJECTS_KEY not in data:
+            raise SerializationError(
+                "Missing top-level 'objects' array."
+            )
+
+        objects = data[ROOT_OBJECTS_KEY]
+
+        if not isinstance(objects, list):
+            raise SerializationError(
+                "'objects' must be a JSON array."
+            )
+
+        version = data.get(ROOT_VERSION_KEY)
+
+        if version is not None:
+
+            if version != CANONICAL_JSON_VERSION:
+                raise SerializationError(
+                    f"Unsupported serialization version "
+                    f"{version!r}."
+                )
+
+    # ---------------------------------------------------------------------
+
+    def _parse_identity(
+        self,
+        data: Any,
+    ) -> ObjectIdentity:
+
+        if not isinstance(data, dict):
+            raise SerializationError(
+                "Object identity must be an object."
+            )
+
+        unknown = set(data.keys()) - IDENTITY_FIELDS
+
+        if unknown:
+            raise SerializationError(
+                "Unknown identity field(s): "
+                + ", ".join(sorted(unknown))
+            )
+
+        try:
+            oid = data["id"]
+            typ = data["type"]
+            name = data["name"]
+
+        except KeyError as exc:
+            raise SerializationError(
+                f"Missing identity field {exc.args[0]!r}."
+            ) from exc
+
+        if not all(
+            isinstance(x, str)
+            for x in (oid, typ, name)
+        ):
+            raise SerializationError(
+                "Identity fields must all be strings."
+            )
+
+        return ObjectIdentity(
+            id=oid,
+            type=typ,
+            name=name,
+        )
+
+    # ---------------------------------------------------------------------
+
+    def _parse_object(
+        self,
+        data: Any,
+    ) -> KnowledgeObject:
+
+        if not isinstance(data, dict):
+            raise SerializationError(
+                "Each object must be represented by a JSON object."
+            )
+        
+        unknown = set(data.keys()) - OBJECT_FIELDS
+
+        if unknown:
+            raise SerializationError(
+                "Unknown object field(s): "
+                + ", ".join(sorted(unknown))
+            )
+
+        if IDENTITY_KEY not in data:
+            raise SerializationError(
+                "Missing object identity."
+            )
+
+        identity = self._parse_identity(
+            data[IDENTITY_KEY]
+        )
+
+        structure = data.get(
+            STRUCTURE_KEY,
+            {},
+        )
+
+        if not isinstance(structure, dict):
+            raise SerializationError(
+                "Object structure must be an object."
+            )
+
+        # -------------------------------------------------------------
+        # Canonical Relation
+        # -------------------------------------------------------------
+
+        is_relation = (
+            RELATION_PARTICIPANTS_KEY in structure
+            and RELATION_TYPE_KEY in structure
+        )
+
+        if is_relation:
+
+            participants = structure.get(
+                RELATION_PARTICIPANTS_KEY
+            )
+
+            relation_type = structure.get(
+                RELATION_TYPE_KEY
+            )
+
+            if not isinstance(participants, list):
+                raise SerializationError(
+                    "Relation participants must be a list."
+                )
+            
+            if len(participants) < 2:
+                raise SerializationError(
+                    "CanonicalRelation requires at least two participants."
+                )
+            
+            if not all(
+                isinstance(participant, str)
+                for participant in participants
+            ):
+                raise SerializationError(
+                    "Relation participants must all be strings."
+                )
+
+            if not isinstance(relation_type, str):
+                raise SerializationError(
+                    "Relation type must be a string."
+                )
+            
+            if not relation_type.strip():
+                raise SerializationError(
+                    "Relation type cannot be empty."
+                )
+
+            return CanonicalRelation(
+                identity=identity,
+                participants=participants,
+                relation_type=relation_type,
+                structure=structure,
+            )
+
+        # -------------------------------------------------------------
+        # Ordinary Knowledge Object
+        # -------------------------------------------------------------
+
+        return KnowledgeObject(
+            identity=identity,
+            structure=structure,
+        )
+
+# ============================================================================
+# Canonical Serializer
+# ============================================================================
+
+
+class CanonicalSerializer:
+    """
+    Canonical JSON serializer.
+
+    Converts a KnowledgeStructure into the canonical JSON
+    representation defined by CKS-003.
+    """
+
+    # ---------------------------------------------------------------------
+
+    def serialize(
+        self,
+        structure: KnowledgeStructure,
+    ) -> str:
+
+        data = self.serialize_structure(structure)
+
+        return json.dumps(
+            data,
+            indent=2,
+            sort_keys=True,
+            ensure_ascii=False,
+        )
+    
+    def roundtrip(
+        self,
+        structure: KnowledgeStructure,
+    ) -> KnowledgeStructure:
+        """
+        Serialize and immediately deserialize a KnowledgeStructure.
+
+        Useful for conformance testing.
+        """
+
+        return _deserializer.deserialize(
+            self.serialize(structure)
+        )
+
+    # ---------------------------------------------------------------------
+
+    def serialize_structure(
+        self,
+        structure: KnowledgeStructure,
+    ) -> dict[str, Any]:
+
+        return {
+            ROOT_VERSION_KEY: CANONICAL_JSON_VERSION,
+            ROOT_OBJECTS_KEY: [
+                self._encode_object(obj)
+                for obj in structure.objects
+            ],
+        }
+
+    # ---------------------------------------------------------------------
+
+    def _encode_object(
+        self,
+        obj: KnowledgeObject,
+    ) -> dict[str, Any]:
+
+        identity = {
+            "id": obj.identity.id,
+            "type": obj.identity.type,
+            "name": obj.identity.name,
+        }
+
+        structure = dict(obj.structure)
+
+        #
+        # Canonicalize CanonicalRelation
+        #
+        if isinstance(obj, CanonicalRelation):
+
+            participants = list(
+                structure.get(
+                    RELATION_PARTICIPANTS_KEY,
+                    [],
+                )
+            )
+
+            relation_type = structure.get(
+                RELATION_TYPE_KEY,
+                "",
+            )
+
+            structure[RELATION_PARTICIPANTS_KEY] = participants
+            structure[RELATION_TYPE_KEY] = relation_type
+
+        return {
+            IDENTITY_KEY: identity,
+            STRUCTURE_KEY: structure,
+        }
+
+# ============================================================================
+# Singleton Instances
+# ============================================================================
+
+#
+# Reference implementation instances.
+#
+# These objects are stateless and therefore safe to reuse throughout the
+# lifetime of the process.
+#
+
+_deserializer = CanonicalDeserializer()
+_serializer = CanonicalSerializer()
+
+
+# ============================================================================
+# Public API (CKS-007)
+# ============================================================================
+
+
+def parse(source: str | dict[str, Any]) -> KnowledgeStructure:
+    """
+    Parse a canonical JSON representation into a KnowledgeStructure.
+
+    This function implements the canonical Parse operation defined by
+    CKS-007.
+
+    Parameters
+    ----------
+    source:
+        Canonical JSON string or an already decoded JSON object.
+
+    Returns
+    -------
+    KnowledgeStructure
 
     Raises
     ------
     SerializationError
-        If *source* cannot be parsed or violates uniqueness constraints.
+        If the input cannot be interpreted as canonical serialization.
     """
-    try:
-        if isinstance(source, str):
-            data = json.loads(source)
-        else:
-            data = source
-    except json.JSONDecodeError as exc:
-        raise SerializationError(f"Invalid JSON: {exc}") from exc
-
-    if not isinstance(data, dict):
-        raise SerializationError("Top‑level JSON value must be an object")
-
-    if "objects" not in data:
-        raise SerializationError("Top‑level JSON object must contain an 'objects' key")
-
-    objects_data: List[Dict[str, Any]] = data.get("objects", [])
-    if not isinstance(objects_data, list):
-        raise SerializationError("'objects' must be an array")
-
-    objects: List[KnowledgeObject] = []
-    seen_ids: set[str] = set()
-
-    for obj_data in objects_data:
-        # --- parse identity ---
-        ident_data = obj_data.get("identity")
-        if not isinstance(ident_data, dict):
-            raise SerializationError("Each object must have an 'identity' object")
-
-        oid = ident_data.get("id")
-        otype = ident_data.get("type")
-        oname = ident_data.get("name")
-
-        if not isinstance(oid, str) or not isinstance(otype, str) or not isinstance(oname, str):
-            raise SerializationError(
-                "Object identity must contain string fields: id, type, name"
-            )
-
-        if oid in seen_ids:
-            raise SerializationError(f"Duplicate canonical identity: {oid!r}")
-        seen_ids.add(oid)
-
-        identity = ObjectIdentity(id=oid, type=otype, name=oname)
-
-        # --- parse structure ---
-        structure_data: Dict[str, Any] = obj_data.get("structure", {})
-        if not isinstance(structure_data, dict):
-            raise SerializationError("Each object must have a 'structure' object")
-
-        # Determine whether this object is a CanonicalRelation
-        is_relation = (
-            "participants" in structure_data and "relation_type" in structure_data
-        )
-
-        if is_relation:
-            participants = structure_data.get("participants", [])
-            relation_type = structure_data.get("relation_type", "")
-            if not isinstance(participants, list) or not isinstance(relation_type, str):
-                raise SerializationError(
-                    "CanonicalRelation must have 'participants' (list) and "
-                    "'relation_type' (str)"
-                )
-            obj = CanonicalRelation(
-                identity=identity,
-                participants=participants,
-                relation_type=relation_type,
-                structure=structure_data,
-            )
-        else:
-            obj = KnowledgeObject(identity=identity, structure=structure_data)
-
-        objects.append(obj)
-
-    return KnowledgeStructure(objects)
+    return _deserializer.deserialize(source)
 
 
 def serialize(structure: KnowledgeStructure) -> str:
-    """Serialize a KnowledgeStructure to its canonical JSON representation.
-
-    The resulting string satisfies ``parse(serialize(S)) ≡ S``
-    (structural equivalence, CKS‑001, Section 15).
     """
-    output_objects: List[Dict[str, Any]] = []
-    for obj in structure.objects:
-        obj_data: Dict[str, Any] = {
-            "identity": {
-                "id": obj.identity.id,
-                "type": obj.identity.type,
-                "name": obj.identity.name,
-            },
-            "structure": obj.structure,
-        }
-        output_objects.append(obj_data)
+    Serialize a KnowledgeStructure into canonical JSON.
 
-    return json.dumps({"objects": output_objects}, indent=2)
+    This function implements the canonical Serialize operation defined
+    by CKS-007.
+
+    The resulting serialization satisfies the canonical round-trip
+    property
+
+        parse(serialize(S)) ≡ S
+
+    where ≡ denotes Structural Equivalence (CKS-001, Section 15).
+    """
+    return _serializer.serialize(structure)
+
+
+
+
+# ============================================================================
+# Public Symbols
+# ============================================================================
+
+__all__ = [
+    "SerializationError",
+    "CanonicalDeserializer",
+    "CanonicalSerializer",
+    "parse",
+    "serialize",
+]

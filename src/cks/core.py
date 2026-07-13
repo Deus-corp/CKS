@@ -1,67 +1,71 @@
 """
 CKS Core — Canonical Knowledge Objects.
 
-This module implements the fundamental immutable types defined in
-CKS‑001 (Core Specification), Sections 1–2 and 8–9.
+This module implements the fundamental immutable semantic types defined
+by CKS-001 (Core Specification).
+
+Implemented concepts:
+
+- ObjectIdentity
+- KnowledgeObject
+- CanonicalRelation
+- KnowledgeStructure
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Any, Iterable, Iterator, Mapping
 
 
-# ---------------------------------------------------------------------------
+# ============================================================================
 # Canonical Identity
-# ---------------------------------------------------------------------------
+# ============================================================================
 
-@dataclass(frozen=True)
+
+@dataclass(frozen=True, slots=True)
 class ObjectIdentity:
-    """Canonical identity of a Knowledge Object (CKS‑001, Section 2.2)."""
+    """
+    Immutable canonical identity of a Knowledge Object.
 
-    id: str          # globally unique canonical identifier
-    type: str        # canonical object type (Definition, Theorem, …)
-    name: str        # canonical human‑readable designation
+    Defined in CKS-001, Section 2.2.
+    """
+
+    id: str
+    type: str
+    name: str
 
 
-# ---------------------------------------------------------------------------
+# ============================================================================
 # Knowledge Object
-# ---------------------------------------------------------------------------
+# ============================================================================
 
-@dataclass(frozen=True)
+
+@dataclass(frozen=True, slots=True)
 class KnowledgeObject:
-    """Fundamental semantic unit of CKS (CKS‑001, Sections 1–2).
+    """
+    Fundamental semantic unit of the Canonical Knowledge Structure.
 
-    Attributes
-    ----------
-    identity : ObjectIdentity
-        Immutable canonical identity.
-    structure : dict
-        Canonical semantic structure (content, relations, metadata).
+    A Knowledge Object consists of an immutable canonical identity and
+    an immutable semantic structure.
+
+    Defined in CKS-001, Sections 1–2.
     """
 
     identity: ObjectIdentity
-    structure: Dict = field(default_factory=dict)
+    structure: Mapping[str, Any] = field(default_factory=dict)
 
 
-# ---------------------------------------------------------------------------
+# ============================================================================
 # Canonical Relation
-# ---------------------------------------------------------------------------
+# ============================================================================
+
 
 class CanonicalRelation(KnowledgeObject):
-    """Specialised Knowledge Object that represents a structural relationship
-    between two or more Knowledge Objects (CKS‑001, Section 8).
+    """
+    Canonical semantic relation between Knowledge Objects.
 
-    Parameters
-    ----------
-    identity : ObjectIdentity
-        Canonical identity of the relation.
-    participants : list of str
-        Canonical identifiers of the participating Knowledge Objects.
-    relation_type : str
-        Semantic type of the relationship.
-    structure : dict, optional
-        Additional canonical semantic structure.
+    Defined in CKS-001, Section 8.
     """
 
     def __init__(
@@ -70,84 +74,150 @@ class CanonicalRelation(KnowledgeObject):
         *,
         participants: Iterable[str],
         relation_type: str,
-        structure: Optional[Dict] = None,
+        structure: Mapping[str, Any] | None = None,
     ) -> None:
-        # Because KnowledgeObject is frozen we must bypass the dataclass
-        # machinery to set the attributes.
-        object.__setattr__(self, "identity", identity)
         struct = dict(structure or {})
-        struct.setdefault("participants", list(participants))
+
+        struct.setdefault("participants", tuple(participants))
         struct.setdefault("relation_type", relation_type)
+
+        object.__setattr__(self, "identity", identity)
         object.__setattr__(self, "structure", struct)
 
     @property
-    def participants(self) -> List[str]:
-        """Return the canonical identities of the participating objects."""
-        return self.structure.get("participants", [])
+    def participants(self) -> list[str]:
+        """
+        Return the participating canonical identities.
+
+        A defensive copy is returned to preserve the immutability of the
+        underlying CanonicalRelation.
+        """
+        return list(self.structure["participants"])
 
     @property
     def relation_type(self) -> str:
-        """Return the semantic type of this relation."""
-        return self.structure.get("relation_type", "")
+        """Semantic relation type."""
+        return str(self.structure["relation_type"])
 
 
-# ---------------------------------------------------------------------------
+# ============================================================================
 # Knowledge Structure
-# ---------------------------------------------------------------------------
+# ============================================================================
+
 
 class KnowledgeStructure:
-    """Immutable collection of Knowledge Objects (CKS‑001, Section 9).
+    """
+    Immutable collection of Knowledge Objects.
 
-    Parameters
-    ----------
-    objects : iterable of KnowledgeObject
-        The Knowledge Objects that form this structure.  Every object must
-        have a unique canonical identity.
-
-    Raises
-    ------
-    ValueError
-        If duplicate identities are detected.
+    Defined in CKS-001, Section 9.
     """
 
+    __slots__ = (
+        "_objects",
+        "_index",
+        "_relations",
+    )
+
     def __init__(self, objects: Iterable[KnowledgeObject]) -> None:
-        seen: Dict[str, str] = {}
-        objs: List[KnowledgeObject] = []
+        object_list: list[KnowledgeObject] = []
+        index: dict[str, KnowledgeObject] = {}
+        relations: list[CanonicalRelation] = []
+
         for obj in objects:
             oid = obj.identity.id
-            if oid in seen:
-                raise ValueError(
-                    f"Duplicate canonical identity '{oid}' "
-                    f"(first seen as {seen[oid]!r})"
-                )
-            seen[oid] = obj.identity.name
-            objs.append(obj)
-        # Store the objects in an immutable tuple – observational purity.
-        self._objects: Tuple[KnowledgeObject, ...] = tuple(objs)
 
-    # -- read-only accessors ------------------------------------------------
+            if oid in index:
+                raise ValueError(
+                    f"Duplicate canonical identity '{oid}'."
+                )
+
+            index[oid] = obj
+            object_list.append(obj)
+
+            if isinstance(obj, CanonicalRelation):
+                relations.append(obj)
+
+        self._objects = tuple(object_list)
+        self._index = index
+        self._relations = tuple(relations)
+
+    # ------------------------------------------------------------------
+    # Basic collection protocol
+    # ------------------------------------------------------------------
+
+    def __len__(self) -> int:
+        return len(self._objects)
+
+    def __iter__(self) -> Iterator[KnowledgeObject]:
+        return iter(self._objects)
+
+    def __contains__(self, identity: str) -> bool:
+        return identity in self._index
+
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
 
     @property
-    def objects(self) -> Tuple[KnowledgeObject, ...]:
-        """Return all Knowledge Objects in this structure."""
+    def objects(self) -> tuple[KnowledgeObject, ...]:
+        """
+        Return every Knowledge Object.
+
+        The returned tuple is immutable.
+        """
         return self._objects
 
-    def relations(self) -> List[CanonicalRelation]:
-        """Return every CanonicalRelation contained in this structure."""
-        return [o for o in self._objects if isinstance(o, CanonicalRelation)]
-
-    def get(self, identity: str) -> Optional[KnowledgeObject]:
-        """Return the Knowledge Object with the given canonical identity,
-        or ``None`` if no such object exists.
+    def relations(self) -> tuple[CanonicalRelation, ...]:
         """
-        for obj in self._objects:
-            if obj.identity.id == identity:
-                return obj
-        return None
+        Return every Canonical Relation.
+        """
+        return self._relations
+
+    def get(self, identity: str) -> KnowledgeObject | None:
+        """
+        Return the object with the given canonical identity.
+
+        Returns
+        -------
+        KnowledgeObject | None
+        """
+        return self._index.get(identity)
+    
+    def structurally_equivalent(
+        self,
+        other: object,
+    ) -> bool:
+        """
+        Determine whether two KnowledgeStructures are structurally equivalent.
+
+        Two structures are considered structurally equivalent when they
+        contain the same canonical identities, regardless of object order.
+        """
+
+        if not isinstance(other, KnowledgeStructure):
+            return False
+
+        return (
+            frozenset(self._index.keys())
+            == frozenset(other._index.keys())
+        )
+    
+    def __eq__(self, other: object) -> bool:
+        """
+        Structural equality.
+
+        Equality is defined in terms of structural equivalence.
+        """
+
+        return self.structurally_equivalent(other)
+
+    # ------------------------------------------------------------------
+    # Representation
+    # ------------------------------------------------------------------
 
     def __repr__(self) -> str:
         return (
-            f"<KnowledgeStructure "
-            f"objects={len(self._objects)} "
-            f"relations={len(self.relations())}>"
+            f"KnowledgeStructure("
+            f"objects={len(self._objects)}, "
+            f"relations={len(self._relations)})"
         )
