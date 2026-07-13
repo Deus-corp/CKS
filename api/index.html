@@ -993,64 +993,52 @@
 <hr />
 <h1 id="importing-cks">Importing CKS</h1>
 <p>The recommended import style is:</p>
-<p>```python id="3cbw8w"
-from cks import (
-    construct,
-    parse,
-    serialize,
-    validate,
-    diagnose,
-    inspect,
-    compare,
-    extract,
-    project,
-    evolve,
-)
-<div class="highlight"><pre><span></span><code>All public operations are:
-
-* deterministic;
-* observationally pure;
-* implementation-independent.
-
----
-
-# Construction
-
-## construct()
-
-Construct a canonical Knowledge Structure from an iterable of Knowledge Objects.
-
-### Signature
-
-```python id=&quot;ozhj7w&quot;
-construct(
-    objects: Iterable[KnowledgeObject],
-) -&gt; KnowledgeStructure
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">construct</span><span class="p">,</span>
+    <span class="n">parse</span><span class="p">,</span>
+    <span class="n">serialize</span><span class="p">,</span>
+    <span class="n">validate</span><span class="p">,</span>
+    <span class="n">diagnose</span><span class="p">,</span>
+    <span class="n">inspect</span><span class="p">,</span>
+    <span class="n">compare</span><span class="p">,</span>
+    <span class="n">extract</span><span class="p">,</span>
+    <span class="n">project</span><span class="p">,</span>
+    <span class="n">evolve</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>All public operations are:</p>
+<ul>
+<li>deterministic;</li>
+<li>observationally pure;</li>
+<li>implementation-independent.</li>
+</ul>
+<hr />
+<h1 id="construction">Construction</h1>
+<h2 id="construct">construct()</h2>
+<p>Construct a canonical Knowledge Structure from an iterable of Knowledge Objects.</p>
+<h3 id="signature">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">construct</span><span class="p">(</span>
+    <span class="n">objects</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">KnowledgeObject</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KnowledgeStructure</span>
+</code></pre></div>
 <h3 id="example">Example</h3>
-<p>```python id="s5ffbq"
-structure = construct(
-    [
-        object1,
-        object2,
-        relation,
-    ]
-)
-<div class="highlight"><pre><span></span><code>---
-
-# Serialization
-
-## parse()
-
-Parse canonical JSON into a Knowledge Structure.
-
-### Signature
-
-```python id=&quot;sl99a4&quot;
-parse(
-    source: str | dict,
-) -&gt; KnowledgeStructure
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="n">structure</span> <span class="o">=</span> <span class="n">construct</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">object1</span><span class="p">,</span>
+        <span class="n">object2</span><span class="p">,</span>
+        <span class="n">relation</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
+<hr />
+<h1 id="serialization">Serialization</h1>
+<h2 id="parse">parse()</h2>
+<p>Parse canonical JSON into a Knowledge Structure.</p>
+<h3 id="signature_1">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">parse</span><span class="p">(</span>
+    <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KnowledgeStructure</span>
+</code></pre></div>
 <h3 id="parameters">Parameters</h3>
 <table>
 <thead>
@@ -1067,41 +1055,29 @@ parse(
 </tbody>
 </table>
 <h3 id="example_1">Example</h3>
-<p>```python id="w1n0qo"
-structure = parse(json_text)
-<div class="highlight"><pre><span></span><code>---
-
-## serialize()
-
-Serialize a Knowledge Structure into canonical JSON.
-
-### Signature
-
-```python id=&quot;ulcq4i&quot;
-serialize(
-    structure: KnowledgeStructure,
-) -&gt; str
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="n">structure</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">json_text</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="serialize">serialize()</h2>
+<p>Serialize a Knowledge Structure into canonical JSON.</p>
+<h3 id="signature_2">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">serialize</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
 <h3 id="example_2">Example</h3>
-<p>```python id="x4jufq"
-json_text = serialize(structure)
-<div class="highlight"><pre><span></span><code>The reference implementation guarantees canonical round-trip behaviour.
-
----
-
-# Validation
-
-## validate()
-
-Execute the complete canonical validation pipeline.
-
-### Signature
-
-```python id=&quot;mohr0d&quot;
-validate(
-    structure: KnowledgeStructure,
-) -&gt; ValidationResult
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="n">json_text</span> <span class="o">=</span> <span class="n">serialize</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+</code></pre></div>
+<p>The reference implementation guarantees canonical round-trip behaviour.</p>
+<hr />
+<h1 id="validation">Validation</h1>
+<h2 id="validate">validate()</h2>
+<p>Execute the complete canonical validation pipeline.</p>
+<h3 id="signature_3">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">validate</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValidationResult</span>
+</code></pre></div>
 <h3 id="validation-stages">Validation Stages</h3>
 <ol>
 <li>Structural Validation</li>
@@ -1109,140 +1085,103 @@ validate(
 <li>Constraint Evaluation</li>
 </ol>
 <h3 id="example_3">Example</h3>
-<p>```python id="rwslgm"
-result = validate(structure)</p>
-<p>print(result.is_valid)
-<div class="highlight"><pre><span></span><code>---
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">validate</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
 
-## diagnose()
-
-Return diagnostics without exposing the complete ValidationResult.
-
-### Signature
-
-```python id=&quot;z96rnr&quot;
-diagnose(
-    structure: KnowledgeStructure,
-) -&gt; DiagnosticCollection
-</code></pre></div></p>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="diagnose">diagnose()</h2>
+<p>Return diagnostics without exposing the complete ValidationResult.</p>
+<h3 id="signature_4">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">diagnose</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DiagnosticCollection</span>
+</code></pre></div>
 <h3 id="example_4">Example</h3>
-<p>```python id="mgdzvu"
-diagnostics = diagnose(structure)
-<div class="highlight"><pre><span></span><code>---
-
-# Inspection
-
-## inspect()
-
-Return an implementation-independent summary of a Knowledge Structure.
-
-### Signature
-
-```python id=&quot;ugz30k&quot;
-inspect(
-    structure: KnowledgeStructure,
-) -&gt; Mapping[str, object]
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="n">diagnostics</span> <span class="o">=</span> <span class="n">diagnose</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h1 id="inspection">Inspection</h1>
+<h2 id="inspect">inspect()</h2>
+<p>Return an implementation-independent summary of a Knowledge Structure.</p>
+<h3 id="signature_5">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">inspect</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span>
+</code></pre></div>
 <h3 id="example_5">Example</h3>
-<p>```python id="cpdfyz"
-summary = inspect(structure)
-<div class="highlight"><pre><span></span><code>Typical summary information includes:
-
-* object count;
-* relation count;
-* structural metadata.
-
----
-
-# Comparison
-
-## compare()
-
-Compare two Knowledge Structures.
-
-### Signature
-
-```python id=&quot;jlwm7m&quot;
-compare(
-    left: KnowledgeStructure,
-    right: KnowledgeStructure,
-) -&gt; Mapping[str, object]
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="n">summary</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+</code></pre></div>
+<p>Typical summary information includes:</p>
+<ul>
+<li>object count;</li>
+<li>relation count;</li>
+<li>structural metadata.</li>
+</ul>
+<hr />
+<h1 id="comparison">Comparison</h1>
+<h2 id="compare">compare()</h2>
+<p>Compare two Knowledge Structures.</p>
+<h3 id="signature_6">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">compare</span><span class="p">(</span>
+    <span class="n">left</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+    <span class="n">right</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span>
+</code></pre></div>
 <h3 id="example_6">Example</h3>
-<p>```python id="tsv6vk"
-comparison = compare(
-    structure1,
-    structure2,
-)
-<div class="highlight"><pre><span></span><code>The comparison is based on observable structure rather than implementation details.
-
----
-
-# Extraction
-
-## extract()
-
-Extract a single Knowledge Object.
-
-### Signature
-
-```python id=&quot;lcaj0f&quot;
-extract(
-    structure: KnowledgeStructure,
-    identity: str,
-) -&gt; KnowledgeObject | None
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="n">comparison</span> <span class="o">=</span> <span class="n">compare</span><span class="p">(</span>
+    <span class="n">structure1</span><span class="p">,</span>
+    <span class="n">structure2</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>The comparison is based on observable structure rather than implementation details.</p>
+<hr />
+<h1 id="extraction">Extraction</h1>
+<h2 id="extract">extract()</h2>
+<p>Extract a single Knowledge Object.</p>
+<h3 id="signature_7">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">extract</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+    <span class="n">identity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KnowledgeObject</span> <span class="o">|</span> <span class="kc">None</span>
+</code></pre></div>
 <h3 id="example_7">Example</h3>
-<p>```python id="mghx5c"
-obj = extract(
-    structure,
-    "definition-001",
-)
-<div class="highlight"><pre><span></span><code>Returns `None` when the requested object does not exist.
-
----
-
-# Projection
-
-## project()
-
-Create a new Knowledge Structure containing only selected objects.
-
-### Signature
-
-```python id=&quot;d42kmu&quot;
-project(
-    structure: KnowledgeStructure,
-    identities: Iterable[str],
-) -&gt; KnowledgeStructure
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="n">obj</span> <span class="o">=</span> <span class="n">extract</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">,</span>
+    <span class="s2">&quot;definition-001&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Returns <code>None</code> when the requested object does not exist.</p>
+<hr />
+<h1 id="projection">Projection</h1>
+<h2 id="project">project()</h2>
+<p>Create a new Knowledge Structure containing only selected objects.</p>
+<h3 id="signature_8">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">project</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+    <span class="n">identities</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KnowledgeStructure</span>
+</code></pre></div>
 <h3 id="example_8">Example</h3>
-<p>```python id="4l4w2x"
-subset = project(
-    structure,
-    [
-        "definition-001",
-        "theorem-003",
-    ],
-)
-<div class="highlight"><pre><span></span><code>Projection never modifies the original structure.
-
----
-
-# Evolution
-
-## evolve()
-
-Apply admissible structural transformations.
-
-### Signature
-
-```python id=&quot;0zjlwm&quot;
-evolve(
-    structure: KnowledgeStructure,
-    transformations,
-) -&gt; KnowledgeStructure
-</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="n">subset</span> <span class="o">=</span> <span class="n">project</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;definition-001&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;theorem-003&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Projection never modifies the original structure.</p>
+<hr />
+<h1 id="evolution">Evolution</h1>
+<h2 id="evolve">evolve()</h2>
+<p>Apply admissible structural transformations.</p>
+<h3 id="signature_9">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">evolve</span><span class="p">(</span>
+    <span class="n">structure</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+    <span class="n">transformations</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KnowledgeStructure</span>
+</code></pre></div>
 <h3 id="status">Status</h3>
 <p>The reference implementation currently exposes the canonical interface.</p>
 <p>Complete evolution semantics will be introduced in a future release following CKS-004.</p>
@@ -1251,29 +1190,23 @@ evolve(
 <p>The public interface internally delegates every operation to the Reference Engine.</p>
 <p>Applications normally do not need to instantiate the engine directly.</p>
 <p>However, it remains available:</p>
-<p>```python id="w4z0o5"
-from cks import ReferenceEngine</p>
-<p>engine = ReferenceEngine()
-<div class="highlight"><pre><span></span><code>The engine provides the same canonical operations exposed by the module-level API.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReferenceEngine</span>
 
----
+<span class="n">engine</span> <span class="o">=</span> <span class="n">ReferenceEngine</span><span class="p">()</span>
+</code></pre></div>
+<p>The engine provides the same canonical operations exposed by the module-level API.</p>
+<hr />
+<h1 id="exceptions">Exceptions</h1>
+<h2 id="serializationerror">SerializationError</h2>
+<p>Raised when canonical serialization cannot be parsed.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks</span><span class="w"> </span><span class="kn">import</span> <span class="n">SerializationError</span>
 
-# Exceptions
-
-## SerializationError
-
-Raised when canonical serialization cannot be parsed.
-
-Example:
-
-```python id=&quot;lpnfbw&quot;
-from cks import SerializationError
-
-try:
-    structure = parse(text)
-except SerializationError:
-    ...
-</code></pre></div></p>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">SerializationError</span><span class="p">:</span>
+    <span class="o">...</span>
+</code></pre></div>
 <hr />
 <h1 id="validationresult">ValidationResult</h1>
 <p>The validator returns an immutable <code>ValidationResult</code>.</p>
