@@ -1,3 +1,22 @@
+Metadata-Version: 2.4
+Name: cks
+Version: 0.1.0
+Summary: Canonical Knowledge Structure — Reference Implementation
+Author: Vladyslav Hruznov
+License: MIT
+Project-URL: Homepage, https://github.com/Deus-corp/CKS
+Project-URL: Documentation, https://github.com/Deus-corp/CKS
+Keywords: canonical-knowledge-structure,knowledge-representation,validation,semantics
+Classifier: Development Status :: 3 — Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
 # Canonical Knowledge Structure (CKS)
 
 A representation‑independent semantic foundation for organising,
