@@ -1,0 +1,105 @@
+site_name: Canonical Knowledge Structure (CKS)
+site_description: Universal representation-independent semantic foundation for knowledge.
+site_author: Vladyslav
+repo_url: https://github.com/<YOUR_GITHUB>/CKS
+repo_name: GitHub
+
+theme:
+  name: material
+
+  language: en
+
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+
+    - search.highlight
+    - search.share
+    - search.suggest
+
+    - content.code.copy
+
+  palette:
+
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+markdown_extensions:
+
+  - admonition
+
+  - tables
+
+  - attr_list
+
+  - footnotes
+
+  - pymdownx.highlight
+
+  - pymdownx.superfences
+
+  - pymdownx.tabbed
+
+  - pymdownx.details
+
+plugins:
+
+  - search
+
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+
+nav:
+
+  - Home: index.md
+
+  - Getting Started: getting-started.md
+
+  - Concepts: concepts.md
+
+  - Architecture: architecture.md
+
+  - API Reference: api.md
+
+  - Examples: examples.md
+
+  - Specifications:
+
+      - Overview: specifications/index.md
+
+      - CKS-000: specifications/CKS-000_Canonical_Foundations_and_Terminology.md
+
+      - CKS-001: specifications/CKS-001_Core_Specification.md
+
+      - CKS-002: specifications/CKS-002_Canonical_Construction_Specification.md
+
+      - CKS-003: specifications/CKS-003_Canonical_Serialization.md
+
+      - CKS-004: specifications/CKS-004_Canonical_Structure_Evolution.md
+
+      - CKS-005: specifications/CKS-005_Validator_Specification.md
+
+      - CKS-006: specifications/CKS-006_Reference_Engine_Specification.md
+
+      - CKS-007: specifications/CKS-007_Canonical_Knowledge_Interface.md
+
+      - CKS-008: specifications/CKS-008_Reference_Conformance_Specification.md
+
+      - CKS-B001-PY: specifications/CKS-B001-PY_Python_Reference.md
