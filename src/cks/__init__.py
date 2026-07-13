@@ -4,7 +4,8 @@ Canonical Knowledge Structure (CKS).
 Reference implementation of the Canonical Knowledge Structure (CKS)
 specifications.
 
-The package exposes the canonical public API defined by CKS-007.
+The package exposes the canonical public API defined by CKS-007 together
+with the immutable canonical data model.
 
 Typical usage:
 
@@ -12,6 +13,9 @@ Typical usage:
 
     structure = cks.parse(source)
     result = cks.validate(structure)
+
+Advanced users may instantiate their own ReferenceEngine or build
+custom validation pipelines using the lower-level modules.
 
 Only symbols defined here should normally be imported by user code.
 """
@@ -52,6 +56,11 @@ from .interface import (
 
 __version__ = "0.1.0"
 
+VERSION = tuple(
+    int(part)
+    for part in __version__.split(".")
+)
+
 __all__ = [
     # Public API
     "construct",
@@ -87,4 +96,5 @@ __all__ = [
 
     # Package metadata
     "__version__",
+    "VERSION",
 ]

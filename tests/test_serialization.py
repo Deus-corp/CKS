@@ -268,3 +268,35 @@ def test_parse_then_serialize_then_parse():
     )
 
     assert once.structurally_equivalent(twice)
+
+def test_serializer_handles_immutable_nested_values():
+    obj = KnowledgeObject(
+        identity=ObjectIdentity(
+            id="obj-1",
+            type="Example",
+            name="Example",
+        ),
+        structure={
+            "numbers": (1, 2, 3),
+            "nested": {
+                "letters": ("a", "b"),
+            },
+        },
+    )
+
+    structure = KnowledgeStructure([obj])
+
+    restored = parse(
+        serialize(structure)
+    )
+
+    restored_obj = restored.get("obj-1")
+
+    assert restored_obj is not None
+
+    assert restored_obj.structure["numbers"] == (1, 2, 3)
+
+    assert restored_obj.structure["nested"]["letters"] == (
+        "a",
+        "b",
+    )

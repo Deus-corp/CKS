@@ -225,3 +225,24 @@ def test_public_api_is_deterministic():
     right = cks.inspect(structure)
 
     assert left == right
+
+
+def test_public_evolve():
+    obj = KnowledgeObject(
+        ObjectIdentity("A", "Type", "A"),
+        {},
+    )
+
+    structure = cks.construct([obj])
+
+    obj2 = KnowledgeObject(
+        ObjectIdentity("B", "Type", "B"),
+        {},
+    )
+
+    evolved = cks.evolve(
+        structure,
+        add=[obj2],
+    )
+
+    assert len(evolved.objects) == 2

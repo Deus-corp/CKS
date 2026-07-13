@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 from typing import Any
+from types import MappingProxyType
 
 from .core import (
     CanonicalRelation,
@@ -51,6 +52,47 @@ OBJECT_FIELDS = frozenset(
 RELATION_PARTICIPANTS_KEY = "participants"
 RELATION_TYPE_KEY = "relation_type"
 
+
+# ============================================================================
+# Internal Helpers
+# ============================================================================
+
+
+def _jsonify(value: Any) -> Any:
+    """
+    Convert immutable canonical values into JSON-compatible values.
+
+    The conversion is recursive.
+
+    MappingProxyType -> dict
+    tuple            -> list
+    frozenset        -> sorted list
+
+    Primitive JSON values are returned unchanged.
+    """
+
+    if isinstance(value, MappingProxyType):
+        value = dict(value)
+
+    if isinstance(value, dict):
+        return {
+            key: _jsonify(val)
+            for key, val in value.items()
+        }
+
+    if isinstance(value, tuple):
+        return [
+            _jsonify(item)
+            for item in value
+        ]
+
+    if isinstance(value, frozenset):
+        return sorted(
+            _jsonify(item)
+            for item in value
+        )
+
+    return value
 
 # ============================================================================
 # Exceptions
@@ -377,27 +419,7 @@ class CanonicalSerializer:
             "name": obj.identity.name,
         }
 
-        structure = dict(obj.structure)
-
-        #
-        # Canonicalize CanonicalRelation
-        #
-        if isinstance(obj, CanonicalRelation):
-
-            participants = list(
-                structure.get(
-                    RELATION_PARTICIPANTS_KEY,
-                    [],
-                )
-            )
-
-            relation_type = structure.get(
-                RELATION_TYPE_KEY,
-                "",
-            )
-
-            structure[RELATION_PARTICIPANTS_KEY] = participants
-            structure[RELATION_TYPE_KEY] = relation_type
+        structure = _jsonify(obj.structure)
 
         return {
             IDENTITY_KEY: identity,

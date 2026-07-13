@@ -16,7 +16,6 @@ Every exported function is:
 
 from __future__ import annotations
 
-from typing import Any
 from typing import Iterable
 from typing import Mapping
 
@@ -180,13 +179,33 @@ def project(
 
 def evolve(
     structure: KnowledgeStructure,
-    transformations: Iterable[Any],
+    *,
+    add: Iterable[KnowledgeObject] = (),
+    remove: Iterable[str] = (),
 ) -> KnowledgeStructure:
     """
-    Apply a sequence of admissible structural evolutions.
+    Produce a new immutable KnowledgeStructure by applying canonical
+    additions and removals.
 
-    .. note::
-        Full evolution semantics are defined in CKS‑004 and will be
-        implemented in a future release.
+    Parameters
+    ----------
+    structure
+        Original immutable structure.
+
+    add
+        KnowledgeObjects to insert.
+
+    remove
+        Canonical identities to remove.
+
+    Returns
+    -------
+    KnowledgeStructure
+        New immutable structure.
     """
-    return _ENGINE.evolve(structure, transformations)
+
+    return _ENGINE.evolve(
+        structure,
+        add=add,
+        remove=remove,
+    )
