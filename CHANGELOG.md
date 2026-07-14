@@ -6,6 +6,34 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [0.8.0] - 2026-07-14
+
+### Added
+
+#### Plugin Architecture
+
+- External constraint discovery via `importlib.metadata` entry points.
+- `cks.plugin` module for loading plugins at import time.
+- `cks plugin list` CLI command to inspect registered constraints.
+- `docs/plugins.md` — guide for creating and distributing constraint plugins.
+
+#### API Stabilization
+
+- Evolution operators (`AddObject`, `AddRelation`, `RemoveObject`, `RemoveRelation`, `compose`) promoted to public API.
+- Full `__all__` declarations across all public modules.
+- `cks.interface.evolve` now accepts `operators` instead of `add`/`remove` keyword arguments.
+
+#### Documentation
+
+- Added `docs/plugins.md` (Plugin Development Guide).
+- Updated `docs/api.md` with evolution operators and plugin references.
+
+#### Testing
+
+- All 110 tests passing.
+
+---
+
 ## [0.7.0] - 2026-07-14
 
 ### Added

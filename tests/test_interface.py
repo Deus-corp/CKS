@@ -11,6 +11,7 @@ Only the public package namespace (`import cks`) is used here.
 from __future__ import annotations
 
 import cks
+from cks.evolution import AddObject
 
 from cks.core import (
     CanonicalRelation,
@@ -232,17 +233,15 @@ def test_public_evolve():
         ObjectIdentity("A", "Type", "A"),
         {},
     )
-
     structure = cks.construct([obj])
 
     obj2 = KnowledgeObject(
         ObjectIdentity("B", "Type", "B"),
         {},
     )
+    evolved = cks.evolve(structure, operators=[AddObject(obj2)])
 
-    evolved = cks.evolve(
-        structure,
-        add=[obj2],
-    )
-
+    assert structure is not evolved
+    assert len(structure.objects) == 1
     assert len(evolved.objects) == 2
+    assert evolved.get("B") is not None

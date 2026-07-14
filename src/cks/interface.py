@@ -179,33 +179,17 @@ def project(
 
 def evolve(
     structure: KnowledgeStructure,
-    *,
-    add: Iterable[KnowledgeObject] = (),
-    remove: Iterable[str] = (),
+    operators: Iterable[Any],
 ) -> KnowledgeStructure:
     """
-    Produce a new immutable KnowledgeStructure by applying canonical
-    additions and removals.
+    Apply a sequence of admissible structural operators to a Knowledge Structure.
 
     Parameters
     ----------
     structure
         Original immutable structure.
-
-    add
-        KnowledgeObjects to insert.
-
-    remove
-        Canonical identities to remove.
-
-    Returns
-    -------
-    KnowledgeStructure
-        New immutable structure.
+    operators
+        Structural operators implementing the desired evolution
+        (Genesis/Decay).  Each operator must satisfy its contract.
     """
-
-    return _ENGINE.evolve(
-        structure,
-        add=add,
-        remove=remove,
-    )
+    return _ENGINE.evolve(structure, operators=operators)

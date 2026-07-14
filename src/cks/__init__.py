@@ -5,7 +5,8 @@ Reference implementation of the Canonical Knowledge Structure (CKS)
 specifications.
 
 The package exposes the canonical public API defined by CKS-007 together
-with the immutable canonical data model.
+with the immutable canonical data model, structural evolution operators,
+and a plugin system for external constraints.
 
 Typical usage:
 
@@ -37,6 +38,16 @@ from .diagnostics import (
 
 from .engine import ReferenceEngine
 
+from .evolution import (
+    AddObject,
+    AddRelation,
+    RemoveObject,
+    RemoveRelation,
+    compose,
+)
+
+from .plugin import load_external_constraints
+
 from .result import ValidationResult
 
 from .serialization import SerializationError
@@ -54,7 +65,13 @@ from .interface import (
     validate,
 )
 
-__version__ = "0.1.0"
+# ---------------------------------------------------------------------------
+# Bootstrap external constraint plugins
+# ---------------------------------------------------------------------------
+
+_EXTERNAL_COUNT = load_external_constraints()
+
+__version__ = "0.8.0"
 
 VERSION = tuple(
     int(part)
@@ -79,6 +96,13 @@ __all__ = [
     "KnowledgeObject",
     "CanonicalRelation",
     "KnowledgeStructure",
+
+    # Evolution operators
+    "AddObject",
+    "AddRelation",
+    "RemoveObject",
+    "RemoveRelation",
+    "compose",
 
     # Diagnostics
     "DiagnosticSeverity",

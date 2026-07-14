@@ -19,9 +19,9 @@ url: "https://github.com/catharsis/CKS"
 
 license: "MIT"
 
-version: "0.1.0"
+version: "0.8.0"
 
-date-released: "2026-07-13"
+date-released: "2026-07-14"
 
 doi: "10.5281/zenodo.21332624"
 
@@ -52,6 +52,6 @@ authors:
 - family-names: "Hruznov"
 given-names: "Vladyslav"
 title: "Canonical Knowledge Structure (CKS)"
-version: "0.1.0"
+version: "0.8.0"
 doi: "10.5281/zenodo.21332624"
 url: "https://github.com/catharsis/CKS"

@@ -48,6 +48,12 @@ def _create_parser() -> argparse.ArgumentParser:
     evolve_parser.add_argument("operations", type=Path, help="JSON file describing operations")
     evolve_parser.add_argument("--output", "-o", type=Path, default=None, help="Write result to file")
 
+    # plugin
+    plugin_parser = sub.add_parser("plugin", help="Manage plugins")
+    plugin_sub = plugin_parser.add_subparsers(dest="plugin_command", required=True)
+    plugin_list = plugin_sub.add_parser("list", help="List loaded constraints")
+    plugin_list.set_defaults(func=_run_plugin_list_command)
+
     return parser
 
 
@@ -92,6 +98,16 @@ def _parse_operations(ops_data: list[dict]) -> list[StructuralOperator]:
         else:
             raise ValueError(f"Unknown operation type: {op_type}")
     return operators
+
+def _run_plugin_list_command(_args):
+    """Print every constraint registered in the global registry."""
+    from ..constraints import registry
+    constraints = registry.constraints()
+    if not constraints:
+        print("No constraints registered.")
+        return
+    for c in constraints:
+        print(f"  {c.identity} — {c.description or '(no description)'}")
 
 
 def main(argv: Optional[Sequence[str]] = None) -> None:
