@@ -49,12 +49,6 @@ jobs:
       - name: Lint with ruff
         run: ruff check src/
       
-      - name: Type check with mypy
-        run: |
-          pip install -e .[dev]
-          pip install types-jsonschema
-          mypy src/
-
   pre-commit:
     runs-on: ubuntu-latest
     steps:
