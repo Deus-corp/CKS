@@ -1060,6 +1060,24 @@ JSON Python      Database
     <span class="nb">print</span><span class="p">(</span><span class="n">diagnostic</span><span class="p">)</span>
 </code></pre></div>
 <hr />
+<h1 id="evolution">Evolution</h1>
+<p>Knowledge Structures can be evolved through canonical structural operators.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks.interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">evolve</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cks.evolution</span><span class="w"> </span><span class="kn">import</span> <span class="n">AddObject</span>
+
+<span class="n">new_obj</span> <span class="o">=</span> <span class="n">KnowledgeObject</span><span class="p">(</span>
+    <span class="n">identity</span><span class="o">=</span><span class="n">ObjectIdentity</span><span class="p">(</span>
+        <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;definition-2&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;Definition&quot;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;New Knowledge&quot;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Add a new object</span>
+<span class="n">evolved</span> <span class="o">=</span> <span class="n">evolve</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">operators</span><span class="o">=</span><span class="p">[</span><span class="n">AddObject</span><span class="p">(</span><span class="n">new_obj</span><span class="p">)])</span>
+</code></pre></div>
+<p>The original structure remains unchanged — evolution always returns a new structure.</p>
+<hr />
 <h1 id="serialization">Serialization</h1>
 <p>Serialize the structure into canonical JSON.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks.interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
@@ -1098,8 +1116,9 @@ JSON Python      Database
 <hr />
 <h1 id="running-the-test-suite">Running the Test Suite</h1>
 <p>Execute the complete reference test suite.</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pytest
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>-v
 </code></pre></div>
+<p>Current status: 116 tests, all passing.</p>
 <p>All tests should pass before contributing changes.</p>
 <hr />
 <h1 id="repository-structure">Repository Structure</h1>
@@ -1110,9 +1129,27 @@ JSON Python      Database
         engine.py
         validator.py
         serialization.py
+        diagnostics.py
+        result.py
+        evolution.py
+        cli/
+            __init__.py
+            formatters.py
+        constraints/
+            __init__.py
+            base.py
+            builtin.py
+            registry.py
+            structural.py
+            semantic.py
 
 docs/
 examples/
+    corpus/
+        valid_theory_example.json
+        invalid_duplicate_id.json
+        invalid_dangling_reference.json
+        invalid_derivation_cycle.json
 tests/
 </code></pre></div>
 <hr />
@@ -1145,6 +1182,7 @@ tests/
 <li><strong>Architecture</strong> — the design of the reference implementation.</li>
 <li><strong>API Reference</strong> — the complete public interface.</li>
 <li><strong>Examples</strong> — practical usage patterns.</li>
+<li><strong>CLI Reference</strong> — use <code>cks --help</code> for command-line usage.</li>
 </ul>
 
 

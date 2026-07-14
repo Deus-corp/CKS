@@ -987,165 +987,105 @@
 
 
 <h1 id="examples">Examples</h1>
-<p>The CKS reference implementation includes a collection of executable examples demonstrating the canonical operations defined by the CKS specifications.</p>
-<p>The examples are intended to complement the API documentation by showing complete workflows rather than isolated function calls.</p>
-<p>All examples can be found in the project's <code>examples/</code> directory.</p>
+<p>The CKS reference implementation includes a <strong>Reference Corpus</strong> of
+canonical examples demonstrating valid and invalid Knowledge Structures.</p>
+<p>These examples are used for testing, learning, and as a baseline for
+conformance verification.</p>
+<p>All corpus examples can be found under <code>examples/corpus/</code>.</p>
 <hr />
-<h1 id="running-examples">Running Examples</h1>
-<p>Clone the repository and install the package in editable mode.</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-</code></pre></div>
-<p>Examples can then be executed directly.</p>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>examples/01_basic_validation.py
-</code></pre></div>
-<hr />
-<h1 id="example-overview">Example Overview</h1>
+<h1 id="reference-corpus">Reference Corpus</h1>
+<p>The corpus provides a growing set of canonical structures:</p>
 <table>
 <thead>
 <tr>
-<th>Example</th>
+<th>File</th>
 <th>Description</th>
+<th>Valid?</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>01_basic_validation.py</td>
-<td>Construct and validate a simple Knowledge Structure</td>
+<td><code>valid_theory_example.json</code></td>
+<td>A small theory with definitions, axioms, theorems, and proofs.</td>
+<td>✅</td>
 </tr>
 <tr>
-<td>02_serialization.py</td>
-<td>Serialize and deserialize canonical JSON</td>
+<td><code>invalid_duplicate_id.json</code></td>
+<td>Two objects with the same canonical identity.</td>
+<td>❌</td>
 </tr>
 <tr>
-<td>03_constraints.py</td>
-<td>Execute the validation pipeline with constraints</td>
+<td><code>invalid_dangling_reference.json</code></td>
+<td>A relation referencing a non-existent object.</td>
+<td>❌</td>
 </tr>
 <tr>
-<td>04_reference_engine.py</td>
-<td>Interact directly with the Reference Engine</td>
-</tr>
-<tr>
-<td>05_custom_constraint.py</td>
-<td>Register and execute a custom validation constraint</td>
+<td><code>invalid_derivation_cycle.json</code></td>
+<td>Derivation relations forming a cycle (A → B → C → A).</td>
+<td>❌</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h1 id="example-1-basic-validation">Example 1 — Basic Validation</h1>
-<p>File:</p>
-<div class="highlight"><pre><span></span><code>examples/01_basic_validation.py
+<h1 id="using-the-cli">Using the CLI</h1>
+<p>The command-line interface provides quick access to validation and
+inspection.</p>
+<p><strong>Validate a structure:</strong></p>
+<div class="highlight"><pre><span></span><code>cks<span class="w"> </span>validate<span class="w"> </span>examples/corpus/valid_theory_example.json
 </code></pre></div>
-<p>This example demonstrates the minimal workflow for creating and validating a Knowledge Structure.</p>
-<p>Topics covered:</p>
-<ul>
-<li>creating Knowledge Objects;</li>
-<li>constructing a Knowledge Structure;</li>
-<li>validating the structure;</li>
-<li>inspecting the ValidationResult.</li>
-</ul>
-<p>Typical workflow:</p>
-<div class="highlight"><pre><span></span><code>Knowledge Objects
-        │
-        ▼
-Knowledge Structure
-        │
-        ▼
-validate()
-        │
-        ▼
-ValidationResult
+<p>Expected output:</p>
+<div class="highlight"><pre><span></span><code>✅ Valid
+Errors: 0  Warnings: 0  Info: 0
 </code></pre></div>
-<p>This is the recommended starting point for new users.</p>
-<hr />
-<h1 id="example-2-serialization">Example 2 — Serialization</h1>
-<p>File:</p>
-<div class="highlight"><pre><span></span><code>examples/02_serialization.py
+<p><strong>Validate with JSON output:</strong></p>
+<div class="highlight"><pre><span></span><code>cks<span class="w"> </span>validate<span class="w"> </span>examples/corpus/valid_theory_example.json<span class="w"> </span>--format<span class="w"> </span>json
 </code></pre></div>
-<p>This example demonstrates canonical serialization.</p>
-<p>Topics covered:</p>
-<ul>
-<li>parsing canonical JSON;</li>
-<li>serializing Knowledge Structures;</li>
-<li>canonical round-trip behaviour.</li>
-</ul>
-<p>Workflow:</p>
-<div class="highlight"><pre><span></span><code>Knowledge Structure
-        │
-        ▼
-serialize()
-        │
-        ▼
-Canonical JSON
-        │
-        ▼
-parse()
-        │
-        ▼
-Knowledge Structure
+<p><strong>Inspect a structure:</strong></p>
+<div class="highlight"><pre><span></span><code>cks<span class="w"> </span>inspect<span class="w"> </span>examples/corpus/valid_theory_example.json
 </code></pre></div>
-<p>The resulting structure is structurally equivalent to the original.</p>
-<hr />
-<h1 id="example-3-validation-constraints">Example 3 — Validation Constraints</h1>
-<p>File:</p>
-<div class="highlight"><pre><span></span><code>examples/03_constraints.py
-</code></pre></div>
-<p>This example illustrates the canonical validation pipeline.</p>
-<p>Topics include:</p>
-<ul>
-<li>structural validation;</li>
-<li>semantic validation;</li>
-<li>constraint evaluation;</li>
-<li>diagnostics.</li>
-</ul>
-<p>The example demonstrates how multiple validation stages contribute to a single ValidationResult.</p>
-<hr />
-<h1 id="example-4-reference-engine">Example 4 — Reference Engine</h1>
-<p>File:</p>
-<div class="highlight"><pre><span></span><code>examples/04_reference_engine.py
-</code></pre></div>
-<p>Although most applications use the public interface, the Reference Engine is also available directly.</p>
-<p>This example demonstrates:</p>
-<ul>
-<li>constructing the engine;</li>
-<li>executing canonical operations;</li>
-<li>inspecting results.</li>
-</ul>
-<p>Typical workflow:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReferenceEngine</span>
-
-<span class="n">engine</span> <span class="o">=</span> <span class="n">ReferenceEngine</span><span class="p">()</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+<p><strong>Parse a structure:</strong></p>
+<div class="highlight"><pre><span></span><code>cks<span class="w"> </span>parse<span class="w"> </span>examples/corpus/valid_theory_example.json
 </code></pre></div>
 <hr />
-<h1 id="example-5-custom-constraints">Example 5 — Custom Constraints</h1>
-<p>File:</p>
-<div class="highlight"><pre><span></span><code>examples/05_custom_constraint.py
+<h1 id="evolution-examples">Evolution Examples</h1>
+<p>Knowledge Structures can be evolved using structural operators.</p>
+<p><strong>Create an operations file</strong> (<code>add_lemma.json</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add_object&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lemma-1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lemma&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New Lemma&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;structure&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
-<p>The reference validator supports deterministic custom constraints.</p>
-<p>This example demonstrates:</p>
-<ul>
-<li>defining a constraint;</li>
-<li>registering it;</li>
-<li>executing validation;</li>
-<li>inspecting custom diagnostics.</li>
-</ul>
-<p>Example outline:</p>
-<div class="highlight"><pre><span></span><code><span class="n">register_constraint</span><span class="p">(</span><span class="n">my_constraint</span><span class="p">)</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">validate</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+<p><strong>Apply the evolution:</strong></p>
+<div class="highlight"><pre><span></span><code>cks<span class="w"> </span>evolve<span class="w"> </span>examples/corpus/valid_theory_example.json<span class="w"> </span>add_lemma.json
 </code></pre></div>
-<p>Custom constraints execute during the Constraint Evaluation stage of the validation pipeline.</p>
+<p>The command outputs the evolved structure as canonical JSON.</p>
+<p>Multiple operators can be chained in a single operations file:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add_object&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;obj-1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Definition&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;X&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;structure&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add_object&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;obj-2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Definition&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;structure&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;add_relation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rel-1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Relation&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;depends&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;participants&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;obj-1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;obj-2&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;relation_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;depends_on&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
 <hr />
 <h1 id="canonical-workflow">Canonical Workflow</h1>
 <p>Most applications follow the same sequence of operations.</p>
-<div class="highlight"><pre><span></span><code>Construct
+<div class="highlight"><pre><span></span><code>Construct / Parse
       │
       ▼
 Validate
       │
       ▼
-Inspect
+Inspect / Diagnose
+      │
+      ▼
+Evolve (optional)
       │
       ▼
 Serialize
@@ -1155,28 +1095,19 @@ Exchange
 </code></pre></div>
 <p>Each operation is deterministic and observationally pure.</p>
 <hr />
-<h1 id="extending-the-examples">Extending the Examples</h1>
-<p>The examples are intentionally minimal.</p>
-<p>They are designed to be copied and modified for experimentation.</p>
-<p>Future releases will include additional examples covering:</p>
-<ul>
-<li>larger Knowledge Structures;</li>
-<li>projection and extraction;</li>
-<li>structural comparison;</li>
-<li>evolution workflows;</li>
-<li>domain-specific constraint libraries;</li>
-<li>interoperability with external systems.</li>
-</ul>
+<h1 id="running-the-test-suite">Running the Test Suite</h1>
+<p>All corpus examples are verified by the automated test suite:</p>
+<div class="highlight"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>-v
+</code></pre></div>
+<p>Current status: 116 tests passing.</p>
 <hr />
 <h1 id="related-documentation">Related Documentation</h1>
-<p>For detailed explanations of the concepts demonstrated here, see:</p>
 <ul>
-<li><strong>Getting Started</strong></li>
-<li><strong>Concepts</strong></li>
-<li><strong>Architecture</strong></li>
-<li><strong>API Reference</strong></li>
+<li><strong>Getting Started</strong> — installation and first steps.</li>
+<li><strong>API Reference</strong> — complete public interface.</li>
+<li><strong>Architecture</strong> — implementation design.</li>
+<li><strong>Concepts</strong> — semantic foundations.</li>
 </ul>
-<p>For the formal definitions of the canonical behaviour, consult the CKS Core Specifications.</p>
 
 
 

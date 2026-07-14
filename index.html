@@ -1071,12 +1071,14 @@ CKS-002      CKS-003
 <ul>
 <li>immutable semantic model;</li>
 <li>canonical serializer;</li>
-<li>validator;</li>
+<li>validator with constraint registry;</li>
 <li>reference engine;</li>
+<li>structural evolution (Genesis/Decay operators);</li>
+<li>command-line interface (CLI);</li>
 <li>public interface;</li>
-<li>conformance tests;</li>
-<li>documentation;</li>
-<li>executable examples.</li>
+<li>conformance tests (116 tests);</li>
+<li>reference corpus (valid and invalid examples);</li>
+<li>documentation.</li>
 </ul>
 <hr />
 <h1 id="documentation">Documentation</h1>
@@ -1130,7 +1132,7 @@ Architecture
 API Reference
        │
        ▼
-Examples
+Examples (including CLI and Corpus)
        │
        ▼
 Specifications
@@ -1140,13 +1142,24 @@ Specifications
 <h1 id="current-status">Current Status</h1>
 <p>The CKS specifications are stable and continue to evolve through versioned releases.</p>
 <p>The Python implementation serves as the first canonical implementation of the CKS ecosystem.</p>
+<p>Completed milestones include:</p>
+<ul>
+<li>✅ Core semantic model (CKS‑001)</li>
+<li>✅ Canonical serialization (CKS‑003)</li>
+<li>✅ Validation pipeline (CKS‑005)</li>
+<li>✅ Reference Engine (CKS‑006)</li>
+<li>✅ Canonical Knowledge Interface (CKS‑007)</li>
+<li>✅ Structural Evolution (CKS‑004)</li>
+<li>✅ Command-Line Interface</li>
+<li>✅ Reference Corpus</li>
+</ul>
 <p>Future work includes:</p>
 <ul>
-<li>additional reference implementations;</li>
+<li>additional reference implementations (Rust, TypeScript);</li>
 <li>extended constraint libraries;</li>
-<li>evolution semantics;</li>
 <li>interoperability tooling;</li>
-<li>domain-specific knowledge models.</li>
+<li>domain-specific knowledge models;</li>
+<li>SDK and plugin architecture.</li>
 </ul>
 <hr />
 <h1 id="open-source">Open Source</h1>

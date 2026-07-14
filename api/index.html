@@ -1005,6 +1005,14 @@
     <span class="n">project</span><span class="p">,</span>
     <span class="n">evolve</span><span class="p">,</span>
 <span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cks.evolution</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AddObject</span><span class="p">,</span>
+    <span class="n">AddRelation</span><span class="p">,</span>
+    <span class="n">RemoveObject</span><span class="p">,</span>
+    <span class="n">RemoveRelation</span><span class="p">,</span>
+    <span class="n">compose</span><span class="p">,</span>
+<span class="p">)</span>
 </code></pre></div>
 <p>All public operations are:</p>
 <ul>
@@ -1175,16 +1183,51 @@
 <hr />
 <h1 id="evolution">Evolution</h1>
 <h2 id="evolve">evolve()</h2>
-<p>Apply admissible structural transformations.</p>
+<p>Apply a sequence of admissible structural operators (Genesis/Decay) to a Knowledge Structure.</p>
 <h3 id="signature_9">Signature</h3>
 <div class="highlight"><pre><span></span><code><span class="n">evolve</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
-    <span class="n">transformations</span><span class="p">,</span>
+    <span class="n">operators</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">StructuralOperator</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KnowledgeStructure</span>
 </code></pre></div>
-<h3 id="status">Status</h3>
-<p>The reference implementation currently exposes the canonical interface.</p>
-<p>Complete evolution semantics will be introduced in a future release following CKS-004.</p>
+<h3 id="operators">Operators</h3>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AddObject</code></td>
+<td>Introduce a new KnowledgeObject</td>
+</tr>
+<tr>
+<td><code>AddRelation</code></td>
+<td>Introduce a new CanonicalRelation</td>
+</tr>
+<tr>
+<td><code>RemoveObject</code></td>
+<td>Remove a KnowledgeObject (and related relations)</td>
+</tr>
+<tr>
+<td><code>RemoveRelation</code></td>
+<td>Remove a CanonicalRelation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_9">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks.evolution</span><span class="w"> </span><span class="kn">import</span> <span class="n">AddObject</span><span class="p">,</span> <span class="n">AddRelation</span><span class="p">,</span> <span class="n">compose</span>
+
+<span class="n">ops</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">AddObject</span><span class="p">(</span><span class="n">new_object</span><span class="p">),</span>
+    <span class="n">AddRelation</span><span class="p">(</span><span class="n">new_relation</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">evolved</span> <span class="o">=</span> <span class="n">evolve</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">ops</span><span class="p">)</span>
+</code></pre></div>
+<p>All operators are observationally pure — the original structure is never modified.</p>
 <hr />
 <h1 id="reference-engine">Reference Engine</h1>
 <p>The public interface internally delegates every operation to the Reference Engine.</p>
@@ -1299,6 +1342,26 @@
 <td>SerializationError</td>
 <td>Serialization exception</td>
 </tr>
+<tr>
+<td>StructuralOperator</td>
+<td>Abstract base for evolution operators</td>
+</tr>
+<tr>
+<td>AddObject</td>
+<td>Genesis – add a KnowledgeObject</td>
+</tr>
+<tr>
+<td>AddRelation</td>
+<td>Genesis – add a CanonicalRelation</td>
+</tr>
+<tr>
+<td>RemoveObject</td>
+<td>Decay – remove a KnowledgeObject</td>
+</tr>
+<tr>
+<td>RemoveRelation</td>
+<td>Decay – remove a CanonicalRelation</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -1321,6 +1384,7 @@
 <li><strong>Examples</strong> — practical usage patterns.</li>
 <li><strong>Core Specifications</strong> — formal normative definitions.</li>
 </ul>
+<hr />
 
 
 

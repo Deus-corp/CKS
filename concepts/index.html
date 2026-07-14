@@ -1154,6 +1154,18 @@ name  : Representation Independence
 <p>must never change <code>structure</code>.</p>
 <p>This property makes canonical operations predictable and safe to compose.</p>
 <hr />
+<h1 id="structural-evolution">Structural Evolution</h1>
+<p>Knowledge Structures are not static; they can evolve through <strong>admissible structural transformations</strong>.</p>
+<p>Structural evolution is governed by <strong>Primitive Structural Extensions (PSE)</strong> — minimal, irreducible transformations that preserve all canonical invariants.</p>
+<p>Two fundamental classes of operators exist:</p>
+<ul>
+<li><strong>Genesis</strong> — introduces new Knowledge Objects or Canonical Relations, expanding the structure.</li>
+<li><strong>Decay</strong> — removes existing objects or relations, simplifying the structure.</li>
+</ul>
+<p>All evolution operators are governed by <strong>formal contracts</strong> specifying preconditions, postconditions, and invariant obligations. Composition of operators yields complex developmental trajectories.</p>
+<p>Structural evolution ensures that knowledge can grow, adapt, and be refined while remaining canonically valid.</p>
+<p>The formal theory of structural evolution is defined in CKS‑004.</p>
+<hr />
 <h1 id="validation">Validation</h1>
 <p>Validation evaluates whether a Knowledge Structure satisfies the constraints defined by the CKS specifications.</p>
 <p>The validation process produces a <code>ValidationResult</code> containing:</p>
@@ -1205,6 +1217,10 @@ name  : Representation Independence
 <li><code>evolve()</code></li>
 </ul>
 <p>Every implementation should expose behaviour consistent with the CKS specifications.</p>
+<hr />
+<h1 id="cli-and-reference-corpus">CLI and Reference Corpus</h1>
+<p>The CKS ecosystem provides a <strong>command-line interface (CLI)</strong> for interacting with Knowledge Structures from the terminal. Commands include <code>validate</code>, <code>parse</code>, <code>inspect</code>, and <code>evolve</code>.</p>
+<p>A <strong>Reference Corpus</strong> of canonical examples (valid and invalid structures) is maintained under <code>examples/corpus/</code> to serve as a test suite and a learning resource.</p>
 <hr />
 <h1 id="summary">Summary</h1>
 <p>The concepts introduced in this document form the semantic vocabulary of the CKS ecosystem.</p>
