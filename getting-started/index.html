@@ -329,6 +329,25 @@
   
   
     <li class="md-tabs__item">
+      <a href="../plugins/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Plugin Development
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../examples/" class="md-tabs__link">
         
   
@@ -559,6 +578,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../examples/" class="md-nav__link">
         
   
@@ -601,10 +647,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -622,8 +668,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1006,12 +1052,13 @@ JSON Python      Database
 <p>The same knowledge can therefore be represented in multiple ways while preserving identical meaning.</p>
 <hr />
 <h1 id="installation">Installation</h1>
-<p>Clone the repository:</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;your-account&gt;/CKS.git
-<span class="nb">cd</span><span class="w"> </span>CKS
+<p>From PyPI (recommended):</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>canonical-ks
 </code></pre></div>
-<p>Install the reference implementation in editable mode:</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+<p>Or from source:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Deus-corp/CKS.git
+<span class="nb">cd</span><span class="w"> </span>CKS
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 </code></pre></div>
 <p>Verify the installation:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">cks</span>
@@ -1058,6 +1105,9 @@ JSON Python      Database
 <p>Diagnostics are available even for valid structures.</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">diagnostic</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">diagnostics</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">diagnostic</span><span class="p">)</span>
+</code></pre></div>
+<p>Or use the command line:</p>
+<div class="highlight"><pre><span></span><code>cks<span class="w"> </span>validate<span class="w"> </span>examples/corpus/valid_theory_example.json
 </code></pre></div>
 <hr />
 <h1 id="evolution">Evolution</h1>
@@ -1118,7 +1168,7 @@ JSON Python      Database
 <p>Execute the complete reference test suite.</p>
 <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>-v
 </code></pre></div>
-<p>Current status: 116 tests, all passing.</p>
+<p>Current status: 110 tests, all passing.</p>
 <p>All tests should pass before contributing changes.</p>
 <hr />
 <h1 id="repository-structure">Repository Structure</h1>
@@ -1132,6 +1182,8 @@ JSON Python      Database
         diagnostics.py
         result.py
         evolution.py
+        schema.py
+        plugin.py
         cli/
             __init__.py
             formatters.py
@@ -1150,6 +1202,8 @@ examples/
         invalid_duplicate_id.json
         invalid_dangling_reference.json
         invalid_derivation_cycle.json
+    json/
+        cks-schema.json
 tests/
 </code></pre></div>
 <hr />
