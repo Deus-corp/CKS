@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "objects": [
+    {
+      "identity": {
+        "id": "obj-1",
+        "type": "Definition",
+        "name": "Knowledge Object"
+      },
+      "structure": {}
+    },
+    {
+      "identity": {
+        "id": "obj-2",
+        "type": "Theorem",
+        "name": "Representation Independence"
+      },
+      "structure": {}
+    },
+    {
+      "identity": {
+        "id": "rel-1",
+        "type": "Relation",
+        "name": "depends_on"
+      },
+      "structure": {
+        "participants": ["obj-1", "obj-2"],
+        "relation_type": "depends_on"
+      }
+    }
+  ]
+}

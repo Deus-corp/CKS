@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "objects": [
+    {
+      "identity": { "id": "a", "type": "Lemma", "name": "Lemma A" },
+      "structure": {}
+    },
+    {
+      "identity": { "id": "b", "type": "Lemma", "name": "Lemma B" },
+      "structure": {}
+    },
+    {
+      "identity": { "id": "c", "type": "Lemma", "name": "Lemma C" },
+      "structure": {}
+    },
+    {
+      "identity": { "id": "d1", "type": "Relation", "name": "a-derives-b" },
+      "structure": {
+        "participants": ["a", "b"],
+        "relation_type": "derives"
+      }
+    },
+    {
+      "identity": { "id": "d2", "type": "Relation", "name": "b-derives-c" },
+      "structure": {
+        "participants": ["b", "c"],
+        "relation_type": "derives"
+      }
+    },
+    {
+      "identity": { "id": "d3", "type": "Relation", "name": "c-derives-a" },
+      "structure": {
+        "participants": ["c", "a"],
+        "relation_type": "derives"
+      }
+    }
+  ]
+}

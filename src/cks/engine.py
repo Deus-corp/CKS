@@ -16,6 +16,7 @@ from .result import ValidationResult
 from .serialization import parse as _parse
 from .serialization import serialize as _serialize
 from .validator import validate as _validate
+from .evolution import StructuralOperator, compose
 
 
 # =============================================================================
@@ -227,53 +228,14 @@ class ReferenceEngine:
     def evolve(
         self,
         structure: KnowledgeStructure,
-        *,
-        add: Iterable[KnowledgeObject] = (),
-        remove: Iterable[str] = (),
+        operators: Iterable[StructuralOperator],
     ) -> KnowledgeStructure:
+        """Apply a sequence of admissible structural evolutions.
+
+        Each operator must satisfy its contract. The resulting structure is
+        guaranteed to be structurally valid.
         """
-        Produce a new KnowledgeStructure by applying canonical changes.
-
-        Parameters
-        ----------
-        structure
-            Original immutable structure.
-
-        add
-            KnowledgeObjects to insert.
-
-        remove
-            Canonical identities to remove.
-
-        Returns
-        -------
-        KnowledgeStructure
-            New immutable structure.
-        """
-
-        remove_ids = frozenset(remove)
-
-        objects = [
-            obj
-            for obj in structure.objects
-            if obj.identity.id not in remove_ids
-        ]
-
-        existing = {
-            obj.identity.id
-            for obj in objects
-        }
-
-        for obj in add:
-            if obj.identity.id in existing:
-                raise ValueError(
-                    f"Duplicate canonical identity '{obj.identity.id}'."
-                )
-
-            objects.append(obj)
-            existing.add(obj.identity.id)
-
-        return KnowledgeStructure(objects)
+        return compose(structure, operators)
 
     # ------------------------------------------------------------------
     # Representation

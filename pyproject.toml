@@ -30,3 +30,6 @@ Documentation = "https://github.com/Deus-corp/CKS"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[project.scripts]
+cks = "cks.cli:main"

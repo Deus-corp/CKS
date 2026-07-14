@@ -19,48 +19,319 @@ Dynamic: license-file
 
 # Canonical Knowledge Structure (CKS)
 
-A representation‑independent semantic foundation for organising,
-preserving, validating, and evolving knowledge.
+> A universal, representation-independent foundation for knowledge.
 
-## Overview
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Tests](https://img.shields.io/badge/tests-63%20passing-brightgreen)
+![Status](https://img.shields.io/badge/status-reference%20implementation-blue)
 
-CKS defines a canonical model in which knowledge is represented as
-**Knowledge Objects** connected by **Canonical Relations**, forming
-**Knowledge Structures** within a **Knowledge Space**.  The ecosystem
-is specified by a family of implementation‑independent documents
-(CKS‑000 through CKS‑008) and realised by this reference
-implementation.
+CKS is an open specification that defines how knowledge can be represented,
+validated, exchanged, and evolved independently of programming languages,
+document formats, databases, or AI systems.
 
-## Installation
+Rather than introducing yet another serialization format or programming
+language, CKS defines a **canonical semantic layer** shared by humans,
+software, and artificial intelligence.
+
+---
+
+# Why CKS?
+
+Today the same knowledge exists simultaneously in many incompatible forms:
+
+- documents
+- databases
+- JSON
+- XML
+- source code
+- knowledge graphs
+- ontologies
+- AI prompts
+- APIs
+
+Each representation describes the same underlying knowledge differently.
+
+CKS separates **knowledge itself** from every concrete representation.
+
+```
+Knowledge
+      │
+      ▼
+Canonical Knowledge Structure (CKS)
+      │
+ ┌────┼───────────────┐
+ ▼    ▼               ▼
+JSON Python Database Natural Language
+```
+
+Representations may change.
+
+Canonical knowledge remains the same.
+
+---
+
+# Core Principles
+
+CKS is founded on four simple principles.
+
+### Knowledge exists independently of its representation.
+
+Knowledge is not JSON.
+
+Knowledge is not a PDF.
+
+Knowledge is not source code.
+
+Representations are temporary.
+
+Knowledge is not.
+
+---
+
+### Structure preserves meaning.
+
+Meaning is preserved by canonical structure rather than by syntax.
+
+---
+
+### Representation preserves structure.
+
+Different representations may express the same canonical structure.
+
+---
+
+### Canonical operations belong to knowledge itself.
+
+Validation.
+
+Serialization.
+
+Comparison.
+
+Evolution.
+
+Inspection.
+
+These are operations on knowledge—not on files, databases, or programming
+languages.
+
+---
+
+# Architecture
+
+The CKS ecosystem consists of implementation-independent specifications.
+
+| Specification | Purpose |
+|--------------|---------|
+| CKS-000 | Foundations and terminology |
+| CKS-001 | Canonical semantic model |
+| CKS-002 | Knowledge construction |
+| CKS-003 | Canonical serialization |
+| CKS-004 | Structure evolution |
+| CKS-005 | Validation |
+| CKS-006 | Reference Engine |
+| CKS-007 | Canonical Knowledge Interface |
+| CKS-008 | Conformance |
+| CKS-009 | Reference Knowledge Corpus |
+| CKS-B001 | Python Reference Implementation |
+
+---
+
+# Features
+
+The current Python reference implementation provides:
+
+- Immutable Canonical Knowledge Objects
+- Canonical Relations
+- Immutable Knowledge Structures
+- Canonical JSON Serialization
+- Deterministic Validation Pipeline
+- Diagnostic System
+- Reference Engine
+- Canonical Public API
+- Structural Comparison
+- Projection
+- Extraction
+- Inspection
+- Conformance Test Suite
+
+---
+
+# Design Goals
+
+CKS is designed to be:
+
+- deterministic
+- immutable
+- observationally pure
+- representation-independent
+- implementation-independent
+- language-independent
+- suitable for formal verification
+
+---
+
+# Current Repository
+
+This repository contains the official Python Reference Implementation of
+the Canonical Knowledge Structure specifications.
+
+Currently implemented:
+
+- ✅ Canonical Knowledge Objects
+- ✅ Canonical Relations
+- ✅ Canonical Knowledge Structures
+- ✅ Canonical Serialization
+- ✅ Validation Pipeline
+- ✅ Diagnostic System
+- ✅ Reference Engine
+- ✅ Canonical Public Interface
+- ✅ Conformance Test Suite
+
+Planned:
+
+- Structure Evolution (CKS-004)
+- Constraint Libraries
+- Reference Knowledge Corpus
+- Additional language implementations
+
+---
+
+# Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/<your-username>/CKS.git
+cd CKS
+```
+
+Install in editable mode:
 
 ```bash
 pip install -e .
 ```
 
-## Quick Start
+---
+
+# Quick Example
 
 ```python
-from cks import parse, validate, serialize
+from cks import (
+    construct,
+    validate,
+    serialize,
+)
 
-# Load a canonical knowledge structure
-structure = parse("knowledge.json")
+from cks.core import (
+    KnowledgeObject,
+    ObjectIdentity,
+)
 
-# Validate it
+obj = KnowledgeObject(
+    identity=ObjectIdentity(
+        id="obj-1",
+        type="Definition",
+        name="Knowledge",
+    )
+)
+
+structure = construct([obj])
+
 result = validate(structure)
-print(result.is_valid)
-for d in result.diagnostics:
-    print(d.severity, d.message)
 
-# Serialize back
-json_str = serialize(structure)
+print(result.is_valid)
+
+print(serialize(structure))
 ```
 
-## Documentation
+---
 
-Full specifications are available on Zenodo:
+# Testing
+
+Run the complete conformance suite:
+
+```bash
+python -m pytest -v
+```
+
+Current status:
+
+- 63 tests
+- all passing
+
+The test suite verifies:
+
+- deterministic behaviour
+- immutability
+- observational purity
+- canonical serialization
+- validation correctness
+- public API conformance
+- structural equivalence
+
+---
+
+# Documentation
+
+The complete specification is published separately.
+
+Core specifications:
+
+- CKS-000 — Foundations
+- CKS-001 — Core Specification
+- CKS-002 — Construction
+- CKS-003 — Serialization
+- CKS-004 — Evolution
+- CKS-005 — Validator
+- CKS-006 — Reference Engine
+- CKS-007 — Canonical Knowledge Interface
+- CKS-008 — Conformance
+
+DOI:
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21332624.svg)](https://doi.org/10.5281/zenodo.21332624)
 
-## License
+---
+
+# Project Status
+
+Current implementation status:
+
+| Component | Status |
+|----------|--------|
+| Core Model | ✅ Complete |
+| Serialization | ✅ Complete |
+| Validation | ✅ Complete |
+| Reference Engine | ✅ Complete |
+| Public API | ✅ Complete |
+| Test Suite | ✅ Passing |
+
+The current implementation serves as the reference implementation of the
+existing CKS specifications.
+
+Future work focuses primarily on expanding the specification rather than
+redesigning the implemented components.
+
+---
+
+# Vision
+
+CKS aims to establish a universal semantic foundation for knowledge
+exchange between:
+
+- humans
+- software
+- databases
+- distributed systems
+- artificial intelligence
+
+through a single canonical representation of knowledge that is independent
+of every concrete implementation.
+
+---
+
+# License
 
 MIT

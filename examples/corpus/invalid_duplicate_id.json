@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "objects": [
+    {
+      "identity": { "id": "dup", "type": "Definition", "name": "First" },
+      "structure": {}
+    },
+    {
+      "identity": { "id": "dup", "type": "Definition", "name": "Second" },
+      "structure": {}
+    }
+  ]
+}

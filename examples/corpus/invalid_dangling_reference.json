@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "objects": [
+    {
+      "identity": { "id": "obj-1", "type": "Definition", "name": "Existing" },
+      "structure": {}
+    },
+    {
+      "identity": { "id": "rel-1", "type": "Relation", "name": "bad-ref" },
+      "structure": {
+        "participants": ["obj-1", "missing"],
+        "relation_type": "depends_on"
+      }
+    }
+  ]
+}

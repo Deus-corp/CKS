@@ -1,0 +1,49 @@
+{
+  "version": "1.0",
+  "objects": [
+    {
+      "identity": { "id": "def-1", "type": "Definition", "name": "Knowledge Object" },
+      "structure": {
+        "content": "A Knowledge Object is the smallest canonical semantic unit recognized by a Canonical Knowledge Structure."
+      }
+    },
+    {
+      "identity": { "id": "def-2", "type": "Definition", "name": "Canonical Identity" },
+      "structure": {
+        "content": "Canonical identity is an immutable, globally unique identifier that distinguishes one Knowledge Object from another."
+      }
+    },
+    {
+      "identity": { "id": "ax-1", "type": "Axiom", "name": "KOA-1" },
+      "structure": {
+        "content": "Every Canonical Knowledge Structure shall consist exclusively of Knowledge Objects."
+      }
+    },
+    {
+      "identity": { "id": "thm-1", "type": "Theorem", "name": "Representation Invariance" },
+      "structure": {
+        "content": "Two admissible structural projections of the same Knowledge Structure preserve identical canonical semantics."
+      }
+    },
+    {
+      "identity": { "id": "proof-1", "type": "Proof", "name": "Proof of Representation Invariance" },
+      "structure": {
+        "content": "By definition, both projections originate from the same Knowledge Structure. By Canonical Law 2, admissible projections preserve canonical semantics."
+      }
+    },
+    {
+      "identity": { "id": "rel-1", "type": "Relation", "name": "thm-depends-on-def" },
+      "structure": {
+        "participants": ["thm-1", "def-1", "def-2"],
+        "relation_type": "depends_on"
+      }
+    },
+    {
+      "identity": { "id": "rel-2", "type": "Relation", "name": "proof-derives-thm" },
+      "structure": {
+        "participants": ["proof-1", "thm-1"],
+        "relation_type": "derives"
+      }
+    }
+  ]
+}

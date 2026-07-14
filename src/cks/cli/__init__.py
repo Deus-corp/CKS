@@ -1,0 +1,153 @@
+"""
+CKS Command-Line Interface.
+
+Canonical entry point for interacting with CKS from the terminal.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+from typing import Optional, Sequence
+
+from ..serialization import parse as cks_parse, serialize as cks_serialize, SerializationError
+from ..validator import validate as cks_validate
+from ..diagnostics import DiagnosticSeverity
+from ..evolution import compose, StructuralOperator, AddObject, AddRelation, RemoveObject, RemoveRelation
+from ..core import KnowledgeObject, CanonicalRelation, ObjectIdentity
+from .formatters import format_json, format_text
+
+
+def _create_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="cks",
+        description="Canonical Knowledge Structure — CLI",
+    )
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    # validate
+    validate_parser = sub.add_parser("validate", help="Validate a Knowledge Structure")
+    validate_parser.add_argument("input", type=Path, help="Path to canonical JSON file")
+    validate_parser.add_argument("--format", "-f", choices=("text", "json"), default="text")
+    validate_parser.add_argument("--output", "-o", type=Path, default=None)
+
+    # parse
+    parse_parser = sub.add_parser("parse", help="Parse a canonical JSON file")
+    parse_parser.add_argument("input", type=Path)
+
+    # inspect
+    inspect_parser = sub.add_parser("inspect", help="Inspect a Knowledge Structure")
+    inspect_parser.add_argument("input", type=Path)
+    inspect_parser.add_argument("--format", "-f", choices=("text", "json"), default="text")
+    inspect_parser.add_argument("--output", "-o", type=Path, default=None)
+
+    # evolve
+    evolve_parser = sub.add_parser("evolve", help="Apply structural evolution")
+    evolve_parser.add_argument("input", type=Path, help="Path to canonical JSON file")
+    evolve_parser.add_argument("operations", type=Path, help="JSON file describing operations")
+    evolve_parser.add_argument("--output", "-o", type=Path, default=None, help="Write result to file")
+
+    return parser
+
+
+def _read_structure(path: Path):
+    try:
+        raw = path.read_text(encoding="utf-8")
+        return cks_parse(raw)
+    except FileNotFoundError:
+        raise SystemExit(f"File not found: {path}")
+    except SerializationError as exc:
+        raise SystemExit(f"Serialization error: {exc}")
+
+
+def _write_output(content: str, path: Optional[Path]) -> None:
+    if path is None:
+        print(content)
+    else:
+        path.write_text(content, encoding="utf-8")
+
+
+def _parse_operations(ops_data: list[dict]) -> list[StructuralOperator]:
+    operators = []
+    for op in ops_data:
+        op_type = op["type"]
+        if op_type == "add_object":
+            identity = ObjectIdentity(**op["identity"])
+            obj = KnowledgeObject(identity=identity, structure=op.get("structure", {}))
+            operators.append(AddObject(obj))
+        elif op_type == "add_relation":
+            identity = ObjectIdentity(**op["identity"])
+            relation = CanonicalRelation(
+                identity=identity,
+                participants=op["participants"],
+                relation_type=op["relation_type"],
+                structure=op.get("structure", {}),
+            )
+            operators.append(AddRelation(relation))
+        elif op_type == "remove_object":
+            operators.append(RemoveObject(op["object_id"]))
+        elif op_type == "remove_relation":
+            operators.append(RemoveRelation(op["relation_id"]))
+        else:
+            raise ValueError(f"Unknown operation type: {op_type}")
+    return operators
+
+
+def main(argv: Optional[Sequence[str]] = None) -> None:
+    parser = _create_parser()
+    args = parser.parse_args(argv)
+
+    if args.command == "validate":
+        structure = _read_structure(args.input)
+        result = cks_validate(structure)
+        formatted = format_json(result) if args.format == "json" else format_text(result)
+        _write_output(formatted, args.output)
+        sys.exit(0 if result.is_valid else 1)
+
+    elif args.command == "parse":
+        structure = _read_structure(args.input)
+        print(f"Objects: {len(structure.objects)}")
+        print(f"Relations: {len(structure.relations())}")
+
+    elif args.command == "inspect":
+        structure = _read_structure(args.input)
+        lines = [
+            f"Objects: {len(structure.objects)}",
+            f"Relations: {len(structure.relations())}",
+            "",
+        ]
+        for obj in structure.objects:
+            lines.append(f"  {obj.identity.type}: {obj.identity.id} ({obj.identity.name})")
+
+        if args.format == "json":
+            data = {
+                "objects": [
+                    {"id": obj.identity.id, "type": obj.identity.type, "name": obj.identity.name}
+                    for obj in structure.objects
+                ],
+                "relations": [
+                    {"id": r.identity.id, "type": r.relation_type, "participants": list(r.participants)}
+                    for r in structure.relations()
+                ],
+            }
+            formatted = json.dumps(data, indent=2)
+        else:
+            formatted = "\n".join(lines)
+        _write_output(formatted, args.output)
+
+    elif args.command == "evolve":
+        structure = _read_structure(args.input)
+        ops_data = json.loads(args.operations.read_text(encoding="utf-8"))
+        operators = _parse_operations(ops_data)
+        new_structure = compose(structure, operators)
+        result = cks_serialize(new_structure)
+        _write_output(result, args.output)
+
+    else:
+        parser.print_help()
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,7 @@
+[
+  {
+    "type": "add_object",
+    "identity": { "id": "obj-3", "type": "Lemma", "name": "New Lemma" },
+    "structure": {}
+  }
+]
