@@ -44,7 +44,7 @@ class ReferenceEngine:
         • implementation-independent
     """
 
-    VERSION: str = "0.8.0"
+    VERSION: str = "0.8.3"
 
     # ------------------------------------------------------------------
     # Construction & Serialization

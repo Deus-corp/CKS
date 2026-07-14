@@ -6,6 +6,19 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [0.8.3] - 2026-07-14
+
+### Changed
+
+- Renamed PyPI distribution package to `canonical-ks` (Python import remains `import cks`).
+- Updated `pyproject.toml` with correct package name and dependencies.
+
+### Fixed
+
+- Resolved PyPI publication name conflict by renaming distribution to `canonical-ks`.
+
+---
+
 ## [0.8.0] - 2026-07-14
 
 ### Added
