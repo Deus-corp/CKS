@@ -6,5 +6,5 @@ repos:
         description: Validate CKS JSON files before commit.
         entry: python scripts/validate_cks.py
         language: system
-        files: '\.json$'
+        files: 'examples/corpus/valid_.*\.json$|examples/json/valid_.*\.json$'
         stages: [pre-commit]

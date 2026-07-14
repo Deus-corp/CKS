@@ -152,14 +152,6 @@ def evaluate_constraints(structure: KnowledgeStructure) -> list[Diagnostic]:
     return _validator.constraint_validate(structure)
 
 
-def validate(structure: KnowledgeStructure) -> ValidationResult:
-    """Execute the complete canonical validation pipeline."""
-    return _validator.validate(structure)
-
-def validate_all(structures: Iterable[KnowledgeStructure]) -> list[ValidationResult]:
-    """Validate multiple KnowledgeStructures and return individual results."""
-    return [_validator.validate(s) for s in structures]
-
 def validate(
     structure: KnowledgeStructure,
     *,

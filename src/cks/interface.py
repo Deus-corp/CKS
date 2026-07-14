@@ -16,8 +16,7 @@ Every exported function is:
 
 from __future__ import annotations
 
-from typing import Iterable
-from typing import Mapping
+from typing import Iterable, Mapping, Any
 
 from .core import KnowledgeObject
 from .core import KnowledgeStructure
@@ -106,17 +105,6 @@ def serialize(
 # Validation
 # ---------------------------------------------------------------------------
 
-def validate(
-    structure: KnowledgeStructure,
-) -> ValidationResult:
-    """
-    Execute the complete canonical validation pipeline.
-
-    This function corresponds to the Validator defined in CKS-005.
-    """
-    return _ENGINE.validate(structure)
-
-
 def diagnose(
     structure: KnowledgeStructure,
 ) -> DiagnosticCollection:
@@ -195,11 +183,6 @@ def evolve(
         (Genesis/Decay).  Each operator must satisfy its contract.
     """
     return _ENGINE.evolve(structure, operators=operators)
-
-
-def validate_all(structures: Iterable[KnowledgeStructure]) -> list[ValidationResult]:
-    """Validate multiple KnowledgeStructures."""
-    return _validate_all(structures)
 
 def validate(
     structure: KnowledgeStructure,

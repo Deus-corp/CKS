@@ -8,7 +8,7 @@ Interface (CKS-007).
 """
 
 from dataclasses import dataclass
-from typing import Any, Iterable, Mapping
+from typing import Iterable, Mapping
 
 from .core import KnowledgeObject, KnowledgeStructure
 from .diagnostics import DiagnosticCollection
@@ -44,7 +44,7 @@ class ReferenceEngine:
         • implementation-independent
     """
 
-    VERSION: str = "1.0.0"
+    VERSION: str = "1.0.1"
 
     # ------------------------------------------------------------------
     # Construction & Serialization

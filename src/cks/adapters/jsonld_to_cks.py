@@ -6,7 +6,7 @@ Converts a JSON‑LD document into a Canonical Knowledge Structure.
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from ..core import (
     CanonicalRelation,

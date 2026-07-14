@@ -6,8 +6,6 @@ Converts an RDF graph (RDF/XML, Turtle, etc.) into a Canonical Knowledge Structu
 
 from __future__ import annotations
 
-from pathlib import Path
-from typing import Union
 
 import rdflib
 

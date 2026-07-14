@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import html
 import json
-from typing import Optional
 
 from ..result import ValidationResult
 from ..diagnostics import DiagnosticSeverity
@@ -91,10 +90,10 @@ def format_html(result: ValidationResult) -> str:
 def format_markdown(result: ValidationResult) -> str:
     """Return a Markdown report."""
     lines = [
-        f"## {'✅ Valid' if result.is_valid else '❌ Invalid'}",
+        "## {'✅ Valid' if result.is_valid else '❌ Invalid'}",
         "",
-        f"| Severity | Identity | Message | Location |",
-        f"|----------|----------|---------|----------|",
+        "| Severity | Identity | Message | Location |",
+        "|----------|----------|---------|----------|",
     ]
     for d in result.diagnostics:
         lines.append(

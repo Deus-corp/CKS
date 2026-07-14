@@ -7,9 +7,7 @@ Converts a Canonical Knowledge Structure into an RDF graph
 
 from __future__ import annotations
 
-from typing import Optional
 
-import rdflib
 from rdflib import RDF, RDFS, Graph, Literal, URIRef
 
 from ..core import CanonicalRelation, KnowledgeStructure

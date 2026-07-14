@@ -14,13 +14,12 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Dict, FrozenSet, Iterable, List, Optional, Tuple
+from typing import Iterable, Tuple
 
 from .core import (
     CanonicalRelation,
     KnowledgeObject,
     KnowledgeStructure,
-    ObjectIdentity,
 )
 
 # ---------------------------------------------------------------------------
