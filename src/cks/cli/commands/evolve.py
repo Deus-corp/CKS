@@ -11,6 +11,7 @@ from typing import Optional
 from ...serialization import parse as cks_parse, serialize as cks_serialize, SerializationError
 from ...evolution import compose, AddObject, AddRelation, RemoveObject, RemoveRelation
 from ...core import KnowledgeObject, CanonicalRelation, ObjectIdentity
+from ...evolution import StructuralOperator
 
 
 def add_parser(subparsers):
@@ -52,7 +53,7 @@ def handle(args):
 
 
 def _parse_operations(ops_data: list[dict]) -> list:
-    operators = []
+    operators: list[StructuralOperator] = []
     for i, op in enumerate(ops_data):
         op_type = op.get("type")
         if op_type is None:

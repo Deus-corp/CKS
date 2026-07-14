@@ -6,6 +6,38 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.1.0] - 2026-07-14
+
+### Added
+
+- `--strict` flag for CLI to fail on plugin loading errors.
+- `mypy` static type checking in CI/CD (strict for core modules).
+- `docs/contracts.md` — formal contract chain documentation.
+- `_normalize_structure()` in `core.py` for explicit structural comparison.
+- Contract tests for plugin system (`tests/test_plugin.py`).
+- Type annotations for core modules.
+
+### Changed
+
+- `CanonicalRelation` now validates `participants` and `relation_type` explicitly.
+- CLI refactored into modular commands (`cli/commands/`).
+- Plugin system replaced `stderr print` with structured `logging`.
+- Removed Python <3.9 fallback from `plugin.py`.
+- `mypy` configuration: strict only for core modules.
+- Development status updated to `Production/Stable` in `pyproject.toml`.
+
+### Fixed
+
+- CanonicalRelation no longer silently ignores conflicting structure keys.
+- CLI error handling improved for missing files and invalid operations.
+- mypy type errors resolved across core modules.
+
+### Testing
+
+- All 119 tests passing.
+
+---
+
 ## [1.0.1] - 2026-07-14
 
 ### Added

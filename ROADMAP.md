@@ -117,21 +117,17 @@ The reference implementation evolves together with the formal CKS specifications
 
 ---
 
-# Version 1.1 — Production Readiness (current)
-
-Planned work:
+# Version 1.1 — Production Readiness ✅ (completed)
 
 * Fix `CanonicalRelation` to explicitly validate `participants` and `relation_type`.
 * Change development status to `Production/Stable` in `pyproject.toml`.
-* Formalize that canonical identity is determined by `id` only (`type` and `name` are required attributes but do not affect uniqueness).
+* Formalize that canonical identity is determined by `id` only.
 * Remove Python <3.9 fallback from `plugin.py`.
 * Replace stderr print with structured logging in `plugin.py`.
 
 ---
 
-# Version 1.2 — CLI Modularization
-
-Planned work:
+# Version 1.2 — CLI Modularization ✅ (completed)
 
 * Split `cli/__init__.py` into separate handlers (`cli/commands/`).
 * Add schema validation layer for operation files.
@@ -140,9 +136,7 @@ Planned work:
 
 ---
 
-# Version 1.3 — Contract Strengthening
-
-Planned work:
+# Version 1.3 — Contract Strengthening (current)
 
 * Extract `_normalize_structure()` for explicit structural comparison.
 * Document the contract “specification → validator → tests → CLI → plugins”.

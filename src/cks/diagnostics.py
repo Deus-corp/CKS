@@ -149,7 +149,7 @@ class Diagnostic:
 
     # ------------------------------------------------------------------
 
-    def sort_key(self) -> tuple[int, str, str]:
+    def sort_key(self) -> tuple[int, str, str, str]:
         """
         Deterministic ordering key.
 

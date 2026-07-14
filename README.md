@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Tests](https://img.shields.io/badge/tests-114%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-119%20passing-brightgreen)
 [![PyPI](https://img.shields.io/pypi/v/canonical-ks)](https://pypi.org/project/canonical-ks/)
 
 CKS is an open specification that defines how knowledge can be represented,
@@ -143,6 +143,8 @@ The current Python reference implementation provides:
 - Batch Validation (multiple files)
 - JSON‑LD, Turtle, RDF/XML Import (via `cks convert`)
 - JSON‑LD, Turtle, RDF/XML Export (via `cks export`)
+- Strict Plugin Validation (`--strict`)
+- Static Type Checking (mypy)
 
 ---
 
@@ -181,6 +183,9 @@ Currently implemented:
 - ✅ Conformance Test Suite (114 tests)
 - ✅ PyPI Publication
 - ✅ Import/Export Adapters (JSON‑LD, Turtle, RDF/XML)
+- ✅ Modular CLI (commands refactored into separate handlers)
+- ✅ Contract Documentation (`docs/contracts.md`)
+- ✅ Static Type Checking (mypy)
 
 Planned:
 
@@ -323,6 +328,9 @@ Current implementation status:
 | Structural Evolution | ✅ Complete |
 | Advanced Validation | ✅ Complete |
 | Import/Export Adapters | ✅ Complete |
+| Modular CLI | ✅ Complete |
+| Contract Documentation | ✅ Complete |
+| Static Type Checking | ✅ Complete |
 
 The current implementation serves as the reference implementation of the
 existing CKS specifications.

@@ -24,6 +24,7 @@ from .result import ValidationResult
 from .validation import ValidationStage
 from .constraints.base import Constraint
 from .constraints.registry import ConstraintRegistry, registry as _registry
+from .constraints.base import Constraint
 
 
 ConstraintEvaluator = Callable[[KnowledgeStructure], list[Diagnostic]] | Constraint
@@ -101,8 +102,8 @@ class ReferenceValidator:
         *,
         min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
     ) -> ValidationResult:
-        diagnostics = self._pipeline.execute(structure)
-        diagnostics = tuple(sorted(diagnostics, key=Diagnostic.sort_key))
+        diagnostics_raw: list[Diagnostic] = self._pipeline.execute(structure)
+        diagnostics = tuple(sorted(diagnostics_raw, key=Diagnostic.sort_key))
         collection = DiagnosticCollection(diagnostics=diagnostics)
         valid = all(
             d.severity.value < min_severity.value
@@ -132,7 +133,7 @@ _validator = ReferenceValidator()
 # Public API
 # =============================================================================
 
-def register_constraint(fn: ConstraintEvaluator) -> None:
+def register_constraint(fn: Constraint) -> None:
     """Register a canonical validation constraint."""
     _registry.register(fn)
 

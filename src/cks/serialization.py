@@ -166,12 +166,17 @@ class CanonicalDeserializer:
             return source
 
         try:
-            return json.loads(source)
-
+            data = json.loads(source)
         except json.JSONDecodeError as exc:
             raise SerializationError(
                 f"Invalid JSON: {exc}"
             ) from exc
+
+        if not isinstance(data, dict):
+            raise SerializationError(
+                "Top-level JSON value must be an object."
+            )
+        return data
 
     # ---------------------------------------------------------------------
 
