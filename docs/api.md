@@ -25,6 +25,14 @@ from cks import (
     project,
     evolve,
 )
+
+from cks.evolution import (
+    AddObject,
+    AddRelation,
+    RemoveObject,
+    RemoveRelation,
+    compose,
+)
 ```
 
 All public operations are:
@@ -282,22 +290,40 @@ Projection never modifies the original structure.
 
 ## evolve()
 
-Apply admissible structural transformations.
+Apply a sequence of admissible structural operators (Genesis/Decay) to a Knowledge Structure.
 
 ### Signature
 
 ```python
 evolve(
     structure: KnowledgeStructure,
-    transformations,
+    operators: Iterable[StructuralOperator],
 ) -> KnowledgeStructure
 ```
 
-### Status
+### Operators
 
-The reference implementation currently exposes the canonical interface.
+| Operator         | Description                                |
+| ---------------- | ------------------------------------------ |
+| `AddObject`      | Introduce a new KnowledgeObject            |
+| `AddRelation`    | Introduce a new CanonicalRelation          |
+| `RemoveObject`   | Remove a KnowledgeObject (and related relations) |
+| `RemoveRelation` | Remove a CanonicalRelation                 |
 
-Complete evolution semantics will be introduced in a future release following CKS-004.
+### Example
+
+```python
+from cks.evolution import AddObject, AddRelation, compose
+
+ops = [
+    AddObject(new_object),
+    AddRelation(new_relation),
+]
+
+evolved = evolve(structure, ops)
+```
+
+All operators are observationally pure — the original structure is never modified.
 
 ---
 
@@ -377,6 +403,11 @@ The following classes are part of the supported public API.
 | DiagnosticCollection | Immutable diagnostic collection |
 | ReferenceEngine      | Reference implementation engine |
 | SerializationError   | Serialization exception         |
+| StructuralOperator   | Abstract base for evolution operators      |
+| AddObject            | Genesis – add a KnowledgeObject            |
+| AddRelation          | Genesis – add a CanonicalRelation          |
+| RemoveObject         | Decay – remove a KnowledgeObject           |
+| RemoveRelation       | Decay – remove a CanonicalRelation         |
 
 ---
 
@@ -403,3 +434,5 @@ For additional information, see:
 * **Architecture** — implementation design.
 * **Examples** — practical usage patterns.
 * **Core Specifications** — formal normative definitions.
+
+---

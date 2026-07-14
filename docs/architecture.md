@@ -26,10 +26,18 @@ The CKS architecture is organised as a layered system.
         ▼            ▼            ▼
  Serialization   Validation    Inspection
 serialization.py validator.py   engine.py
+        │            │
+        │            ▼
+        │     Constraint Registry
+        │       (constraints/)
         │
         ▼
  Core Semantic Model
       (core.py)
+
+  CLI (Command-Line Interface)
+        │
+        └── validate, parse, inspect, evolve
 ```
 
 Each layer has a clearly defined responsibility.
@@ -160,16 +168,33 @@ The validation layer includes a constraint registry.
 
 The registry allows implementations to register additional deterministic validation constraints.
 
-```text
-Constraint Registry
-        │
-        ▼
-Constraint 1
-Constraint 2
-Constraint 3
-```
+Constraints are organized into **Validation Domains** (CKS‑005):
+
+- `structural.py` — unique identity, referential integrity.
+- `semantic.py` — derivation arity, cycle detection.
+- `builtin.py` — manifest that instantiates and exports all built‑in constraints.
 
 Constraints execute after structural and semantic validation.
+
+---
+
+# Evolution Engine
+
+```
+evolution.py
+```
+
+The Evolution Engine implements CKS‑004 (Canonical Structure Evolution).
+
+It provides:
+
+- `StructuralOperator` — abstract base class for admissible transformations.
+- `OperatorContract` — formal contract specifying preconditions, postconditions, and invariants.
+- Genesis operators: `AddObject`, `AddRelation`.
+- Decay operators: `RemoveObject`, `RemoveRelation`.
+- `compose()` — apply a sequence of operators in order.
+
+All operators are observationally pure and preserve structural invariants.
 
 ---
 
@@ -276,7 +301,12 @@ serialization validator
            │
            ▼
        interface
+           │
+           ▼
+          cli
 ```
+
+Evolution (`evolution.py`) depends on core and is used by engine.
 
 Dependencies always point toward higher abstraction layers.
 
@@ -327,15 +357,26 @@ src/
     ├── validator.py
     ├── diagnostics.py
     ├── result.py
+    ├── evolution.py
+    ├── cli/
+    │   ├── __init__.py
+    │   └── formatters.py
     ├── constraints/
+    │   ├── __init__.py
+    │   ├── base.py
+    │   ├── builtin.py
+    │   ├── registry.py
+    │   ├── structural.py
+    │   └── semantic.py
     └── ...
-```
 
-Tests, documentation, and examples are maintained separately.
-
-```text
 docs/
 examples/
+    corpus/
+        valid_theory_example.json
+        invalid_duplicate_id.json
+        invalid_dangling_reference.json
+        invalid_derivation_cycle.json
 tests/
 ```
 
@@ -347,10 +388,12 @@ The architecture is intentionally modular.
 
 Future versions may introduce additional components such as:
 
-* constraint libraries;
-* alternative serialization formats;
-* optimisation engines;
-* additional language bindings.
+- constraint libraries;
+- alternative serialization formats;
+- optimisation engines;
+- additional language bindings;
+- CLI extensions;
+- Reference Corpus (CKS‑009).
 
 These extensions should integrate through the existing canonical interfaces without modifying the semantic model.
 

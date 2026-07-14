@@ -1,190 +1,102 @@
 # Examples
 
-The CKS reference implementation includes a collection of executable examples demonstrating the canonical operations defined by the CKS specifications.
+The CKS reference implementation includes a **Reference Corpus** of
+canonical examples demonstrating valid and invalid Knowledge Structures.
 
-The examples are intended to complement the API documentation by showing complete workflows rather than isolated function calls.
+These examples are used for testing, learning, and as a baseline for
+conformance verification.
 
-All examples can be found in the project's `examples/` directory.
+All corpus examples can be found under `examples/corpus/`.
 
 ---
 
-# Running Examples
+# Reference Corpus
 
-Clone the repository and install the package in editable mode.
+The corpus provides a growing set of canonical structures:
+
+| File | Description | Valid? |
+|------|-------------|--------|
+| `valid_theory_example.json` | A small theory with definitions, axioms, theorems, and proofs. | ✅ |
+| `invalid_duplicate_id.json` | Two objects with the same canonical identity. | ❌ |
+| `invalid_dangling_reference.json` | A relation referencing a non-existent object. | ❌ |
+| `invalid_derivation_cycle.json` | Derivation relations forming a cycle (A → B → C → A). | ❌ |
+
+# Using the CLI
+
+The command-line interface provides quick access to validation and
+inspection.
+
+**Validate a structure:**
 
 ```bash
-pip install -e .
+cks validate examples/corpus/valid_theory_example.json
 ```
 
-Examples can then be executed directly.
+Expected output:
+
+```
+✅ Valid
+Errors: 0  Warnings: 0  Info: 0
+```
+
+**Validate with JSON output:**
 
 ```bash
-python examples/01_basic_validation.py
+cks validate examples/corpus/valid_theory_example.json --format json
+```
+
+**Inspect a structure:**
+
+```bash
+cks inspect examples/corpus/valid_theory_example.json
+```
+
+**Parse a structure:**
+
+```bash
+cks parse examples/corpus/valid_theory_example.json
 ```
 
 ---
 
-# Example Overview
+# Evolution Examples
 
-| Example                 | Description                                         |
-| ----------------------- | --------------------------------------------------- |
-| 01_basic_validation.py  | Construct and validate a simple Knowledge Structure |
-| 02_serialization.py     | Serialize and deserialize canonical JSON            |
-| 03_constraints.py       | Execute the validation pipeline with constraints    |
-| 04_reference_engine.py  | Interact directly with the Reference Engine         |
-| 05_custom_constraint.py | Register and execute a custom validation constraint |
+Knowledge Structures can be evolved using structural operators.
 
----
+**Create an operations file** (`add_lemma.json`):
 
-# Example 1 — Basic Validation
-
-File:
-
-```text
-examples/01_basic_validation.py
+```json
+[
+  {
+    "type": "add_object",
+    "identity": { "id": "lemma-1", "type": "Lemma", "name": "New Lemma" },
+    "structure": {}
+  }
+]
 ```
 
-This example demonstrates the minimal workflow for creating and validating a Knowledge Structure.
+**Apply the evolution:**
 
-Topics covered:
-
-* creating Knowledge Objects;
-* constructing a Knowledge Structure;
-* validating the structure;
-* inspecting the ValidationResult.
-
-Typical workflow:
-
-```text
-Knowledge Objects
-        │
-        ▼
-Knowledge Structure
-        │
-        ▼
-validate()
-        │
-        ▼
-ValidationResult
+```bash
+cks evolve examples/corpus/valid_theory_example.json add_lemma.json
 ```
 
-This is the recommended starting point for new users.
+The command outputs the evolved structure as canonical JSON.
 
----
+Multiple operators can be chained in a single operations file:
 
-# Example 2 — Serialization
-
-File:
-
-```text
-examples/02_serialization.py
+```json
+[
+  { "type": "add_object", "identity": { "id": "obj-1", "type": "Definition", "name": "X" }, "structure": {} },
+  { "type": "add_object", "identity": { "id": "obj-2", "type": "Definition", "name": "Y" }, "structure": {} },
+  {
+    "type": "add_relation",
+    "identity": { "id": "rel-1", "type": "Relation", "name": "depends" },
+    "participants": ["obj-1", "obj-2"],
+    "relation_type": "depends_on"
+  }
+]
 ```
-
-This example demonstrates canonical serialization.
-
-Topics covered:
-
-* parsing canonical JSON;
-* serializing Knowledge Structures;
-* canonical round-trip behaviour.
-
-Workflow:
-
-```text
-Knowledge Structure
-        │
-        ▼
-serialize()
-        │
-        ▼
-Canonical JSON
-        │
-        ▼
-parse()
-        │
-        ▼
-Knowledge Structure
-```
-
-The resulting structure is structurally equivalent to the original.
-
----
-
-# Example 3 — Validation Constraints
-
-File:
-
-```text
-examples/03_constraints.py
-```
-
-This example illustrates the canonical validation pipeline.
-
-Topics include:
-
-* structural validation;
-* semantic validation;
-* constraint evaluation;
-* diagnostics.
-
-The example demonstrates how multiple validation stages contribute to a single ValidationResult.
-
----
-
-# Example 4 — Reference Engine
-
-File:
-
-```text
-examples/04_reference_engine.py
-```
-
-Although most applications use the public interface, the Reference Engine is also available directly.
-
-This example demonstrates:
-
-* constructing the engine;
-* executing canonical operations;
-* inspecting results.
-
-Typical workflow:
-
-```python
-from cks import ReferenceEngine
-
-engine = ReferenceEngine()
-
-result = engine.validate(structure)
-```
-
----
-
-# Example 5 — Custom Constraints
-
-File:
-
-```text
-examples/05_custom_constraint.py
-```
-
-The reference validator supports deterministic custom constraints.
-
-This example demonstrates:
-
-* defining a constraint;
-* registering it;
-* executing validation;
-* inspecting custom diagnostics.
-
-Example outline:
-
-```python
-register_constraint(my_constraint)
-
-result = validate(structure)
-```
-
-Custom constraints execute during the Constraint Evaluation stage of the validation pipeline.
 
 ---
 
@@ -193,13 +105,16 @@ Custom constraints execute during the Constraint Evaluation stage of the validat
 Most applications follow the same sequence of operations.
 
 ```text
-Construct
+Construct / Parse
       │
       ▼
 Validate
       │
       ▼
-Inspect
+Inspect / Diagnose
+      │
+      ▼
+Evolve (optional)
       │
       ▼
 Serialize
@@ -212,30 +127,21 @@ Each operation is deterministic and observationally pure.
 
 ---
 
-# Extending the Examples
+# Running the Test Suite
 
-The examples are intentionally minimal.
+All corpus examples are verified by the automated test suite:
 
-They are designed to be copied and modified for experimentation.
+```bash
+python3 -m pytest -v
+```
 
-Future releases will include additional examples covering:
-
-* larger Knowledge Structures;
-* projection and extraction;
-* structural comparison;
-* evolution workflows;
-* domain-specific constraint libraries;
-* interoperability with external systems.
+Current status: 116 tests passing.
 
 ---
 
 # Related Documentation
 
-For detailed explanations of the concepts demonstrated here, see:
-
-* **Getting Started**
-* **Concepts**
-* **Architecture**
-* **API Reference**
-
-For the formal definitions of the canonical behaviour, consult the CKS Core Specifications.
+- **Getting Started** — installation and first steps.
+- **API Reference** — complete public interface.
+- **Architecture** — implementation design.
+- **Concepts** — semantic foundations.

@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Tests](https://img.shields.io/badge/tests-63%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-116%20passing-brightgreen)
 ![Status](https://img.shields.io/badge/status-reference%20implementation-blue)
 
 CKS is an open specification that defines how knowledge can be represented,
@@ -136,6 +136,8 @@ The current Python reference implementation provides:
 - Extraction
 - Inspection
 - Conformance Test Suite
+- Command-Line Interface (validate, parse, inspect, evolve)
+- Structural Evolution (Genesis/Decay operators)
 
 ---
 
@@ -168,7 +170,10 @@ Currently implemented:
 - ✅ Diagnostic System
 - ✅ Reference Engine
 - ✅ Canonical Public Interface
-- ✅ Conformance Test Suite
+- ✅ Command-Line Interface
+- ✅ Structural Evolution (CKS‑004)
+- ✅ Reference Knowledge Corpus
+- ✅ Conformance Test Suite (116 tests)
 
 Planned:
 
@@ -227,6 +232,16 @@ print(result.is_valid)
 print(serialize(structure))
 ```
 
+Or use the command line:
+
+```bash
+# Validate a knowledge structure
+cks validate examples/corpus/valid_theory_example.json
+
+# Evolve a structure by adding an object
+cks evolve examples/corpus/valid_theory_example.json examples/corpus/evolve_add.json
+```
+
 ---
 
 # Testing
@@ -239,7 +254,7 @@ python -m pytest -v
 
 Current status:
 
-- 63 tests
+- 116 tests
 - all passing
 
 The test suite verifies:
@@ -288,6 +303,8 @@ Current implementation status:
 | Reference Engine | ✅ Complete |
 | Public API | ✅ Complete |
 | Test Suite | ✅ Passing |
+| CLI | ✅ Complete |
+| Structural Evolution | ✅ Complete |
 
 The current implementation serves as the reference implementation of the
 existing CKS specifications.

@@ -120,12 +120,14 @@ Current components include:
 
 * immutable semantic model;
 * canonical serializer;
-* validator;
+* validator with constraint registry;
 * reference engine;
+* structural evolution (Genesis/Decay operators);
+* command-line interface (CLI);
 * public interface;
-* conformance tests;
-* documentation;
-* executable examples.
+* conformance tests (116 tests);
+* reference corpus (valid and invalid examples);
+* documentation.
 
 ---
 
@@ -161,7 +163,7 @@ Architecture
 API Reference
        │
        ▼
-Examples
+Examples (including CLI and Corpus)
        │
        ▼
 Specifications
@@ -177,13 +179,24 @@ The CKS specifications are stable and continue to evolve through versioned relea
 
 The Python implementation serves as the first canonical implementation of the CKS ecosystem.
 
+Completed milestones include:
+
+* ✅ Core semantic model (CKS‑001)
+* ✅ Canonical serialization (CKS‑003)
+* ✅ Validation pipeline (CKS‑005)
+* ✅ Reference Engine (CKS‑006)
+* ✅ Canonical Knowledge Interface (CKS‑007)
+* ✅ Structural Evolution (CKS‑004)
+* ✅ Command-Line Interface
+* ✅ Reference Corpus
+
 Future work includes:
 
-* additional reference implementations;
+* additional reference implementations (Rust, TypeScript);
 * extended constraint libraries;
-* evolution semantics;
 * interoperability tooling;
-* domain-specific knowledge models.
+* domain-specific knowledge models;
+* SDK and plugin architecture.
 
 ---
 

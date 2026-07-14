@@ -113,6 +113,30 @@ for diagnostic in result.diagnostics:
 
 ---
 
+# Evolution
+
+Knowledge Structures can be evolved through canonical structural operators.
+
+```python
+from cks.interface import evolve
+from cks.evolution import AddObject
+
+new_obj = KnowledgeObject(
+    identity=ObjectIdentity(
+        id="definition-2",
+        type="Definition",
+        name="New Knowledge"
+    )
+)
+
+# Add a new object
+evolved = evolve(structure, operators=[AddObject(new_obj)])
+```
+
+The original structure remains unchanged — evolution always returns a new structure.
+
+---
+
 # Serialization
 
 Serialize the structure into canonical JSON.
@@ -173,8 +197,11 @@ Additional operations include:
 Execute the complete reference test suite.
 
 ```bash
-python -m pytest
+python -m pytest -v
 ```
+
+Current status: 116 tests, all passing.
+
 
 All tests should pass before contributing changes.
 
@@ -190,9 +217,27 @@ src/
         engine.py
         validator.py
         serialization.py
+        diagnostics.py
+        result.py
+        evolution.py
+        cli/
+            __init__.py
+            formatters.py
+        constraints/
+            __init__.py
+            base.py
+            builtin.py
+            registry.py
+            structural.py
+            semantic.py
 
 docs/
 examples/
+    corpus/
+        valid_theory_example.json
+        invalid_duplicate_id.json
+        invalid_dangling_reference.json
+        invalid_derivation_cycle.json
 tests/
 ```
 
@@ -235,3 +280,4 @@ Continue with:
 * **Architecture** — the design of the reference implementation.
 * **API Reference** — the complete public interface.
 * **Examples** — practical usage patterns.
+* **CLI Reference** — use `cks --help` for command-line usage.

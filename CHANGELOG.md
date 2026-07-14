@@ -6,6 +6,54 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [0.7.0] - 2026-07-14
+
+### Added
+
+#### CLI (Command-Line Interface)
+
+- `cks validate` command with `--format` (text/json) and `--output` options.
+- `cks parse` command for quick structural inspection.
+- `cks inspect` command with text and JSON output modes.
+- `cks evolve` command applying structural evolution from JSON operation files.
+- Structured `cks.cli` package with extensible formatters (`formatters.py`).
+
+#### Structural Evolution (CKS-004)
+
+- `StructuralOperator` abstract base class with `OperatorContract`.
+- `AddObject` and `AddRelation` (Genesis operators).
+- `RemoveObject` and `RemoveRelation` (Decay operators).
+- `compose()` for chaining multiple operators.
+- Integration into `ReferenceEngine.evolve()`.
+
+#### Constraints Refactoring
+
+- Moved constraint implementations to domain-specific modules (`structural.py`, `semantic.py`) matching Validation Domains (CKS‑005).
+- Converted `builtin.py` into a manifest that imports and instantiates canonical constraints.
+- Removed duplicate registration logic; constraints are now registered exclusively through `builtin.py`.
+
+#### Reference Corpus
+
+- Initial canonical examples under `examples/corpus/`:
+  - `valid_theory_example.json`
+  - `invalid_duplicate_id.json`
+  - `invalid_dangling_reference.json`
+  - `invalid_derivation_cycle.json`
+
+#### Documentation
+
+- Updated `README`, `ROADMAP`, `CHANGELOG`, `CONTRIBUTING`.
+- Updated `docs/`: Getting Started, API Reference, Architecture, Concepts, Examples, Index.
+- Added CLI usage and evolution to all documentation.
+
+#### Testing
+
+- 11 unit tests for `evolution.py`.
+- 13 CLI integration tests (`tests/test_cli.py`) covering all commands and formats.
+- Total test suite: 116 tests passing.
+
+---
+
 ## [0.1.0] - 2026-07-13
 
 ### Added

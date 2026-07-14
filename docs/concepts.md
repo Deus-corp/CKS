@@ -237,6 +237,25 @@ This property makes canonical operations predictable and safe to compose.
 
 ---
 
+# Structural Evolution
+
+Knowledge Structures are not static; they can evolve through **admissible structural transformations**.
+
+Structural evolution is governed by **Primitive Structural Extensions (PSE)** — minimal, irreducible transformations that preserve all canonical invariants.
+
+Two fundamental classes of operators exist:
+
+- **Genesis** — introduces new Knowledge Objects or Canonical Relations, expanding the structure.
+- **Decay** — removes existing objects or relations, simplifying the structure.
+
+All evolution operators are governed by **formal contracts** specifying preconditions, postconditions, and invariant obligations. Composition of operators yields complex developmental trajectories.
+
+Structural evolution ensures that knowledge can grow, adapt, and be refined while remaining canonically valid.
+
+The formal theory of structural evolution is defined in CKS‑004.
+
+---
+
 # Validation
 
 Validation evaluates whether a Knowledge Structure satisfies the constraints defined by the CKS specifications.
@@ -308,6 +327,14 @@ Examples include:
 * `evolve()`
 
 Every implementation should expose behaviour consistent with the CKS specifications.
+
+---
+
+# CLI and Reference Corpus
+
+The CKS ecosystem provides a **command-line interface (CLI)** for interacting with Knowledge Structures from the terminal. Commands include `validate`, `parse`, `inspect`, and `evolve`.
+
+A **Reference Corpus** of canonical examples (valid and invalid structures) is maintained under `examples/corpus/` to serve as a test suite and a learning resource.
 
 ---
 
