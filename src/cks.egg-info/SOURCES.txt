@@ -9,6 +9,7 @@ src/cks/evolution.py
 src/cks/interface.py
 src/cks/plugin.py
 src/cks/result.py
+src/cks/schema.py
 src/cks/serialization.py
 src/cks/validation.py
 src/cks/validator.py

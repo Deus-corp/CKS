@@ -36,6 +36,13 @@ def _create_parser() -> argparse.ArgumentParser:
     parse_parser = sub.add_parser("parse", help="Parse a canonical JSON file")
     parse_parser.add_argument("input", type=Path)
 
+    # schema
+    schema_parser = sub.add_parser("schema", help="Schema-related utilities")
+    schema_sub = schema_parser.add_subparsers(dest="schema_command", required=True)
+    schema_validate_parser = schema_sub.add_parser("validate", help="Validate a JSON document against the canonical schema")
+    schema_validate_parser.add_argument("input", type=Path, help="Path to JSON file")
+    schema_validate_parser.set_defaults(func=_run_schema_validate_command)
+
     # inspect
     inspect_parser = sub.add_parser("inspect", help="Inspect a Knowledge Structure")
     inspect_parser.add_argument("input", type=Path)
@@ -109,6 +116,24 @@ def _run_plugin_list_command(_args):
     for c in constraints:
         print(f"  {c.identity} — {c.description or '(no description)'}")
 
+def _run_schema_validate_command(args):
+    """Run schema validation on a JSON file."""
+    try:
+        raw = args.input.read_text(encoding="utf-8")
+        data = json.loads(raw)
+    except FileNotFoundError:
+        raise SystemExit(f"File not found: {args.input}")
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"Invalid JSON: {exc}")
+
+    from ..schema import validate_json, SchemaValidationError
+    try:
+        validate_json(data)
+        print("✅ Schema valid")
+    except SchemaValidationError as exc:
+        print(f"❌ Schema invalid: {exc}")
+        sys.exit(1)
+
 
 def main(argv: Optional[Sequence[str]] = None) -> None:
     parser = _create_parser()
@@ -159,6 +184,9 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         new_structure = compose(structure, operators)
         result = cks_serialize(new_structure)
         _write_output(result, args.output)
+    
+    elif args.command == "schema":
+            args.func(args)
 
     else:
         parser.print_help()

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://deus-corp.github.io/CKS/schema/cks-v1.json",
+  "title": "Canonical Knowledge Structure",
+  "description": "JSON Schema for CKS canonical serialization (CKS‑003).",
+  "type": "object",
+  "required": ["objects"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Canonical serialization version (CKS‑003)."
+    },
+    "objects": {
+      "type": "array",
+      "description": "Canonical Knowledge Objects.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["identity", "structure"],
+        "properties": {
+          "identity": {
+            "type": "object",
+            "required": ["id", "type", "name"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Globally unique canonical identifier."
+              },
+              "type": {
+                "type": "string",
+                "description": "Canonical object type."
+              },
+              "name": {
+                "type": "string",
+                "description": "Human-readable designation."
+              }
+            },
+            "additionalProperties": false
+          },
+          "structure": {
+            "type": "object",
+            "description": "Canonical semantic structure."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
