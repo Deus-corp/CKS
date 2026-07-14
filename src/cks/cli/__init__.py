@@ -16,7 +16,7 @@ from ..validator import validate as cks_validate
 from ..diagnostics import DiagnosticSeverity
 from ..evolution import compose, StructuralOperator, AddObject, AddRelation, RemoveObject, RemoveRelation
 from ..core import KnowledgeObject, CanonicalRelation, ObjectIdentity
-from .formatters import format_json, format_text
+from .formatters import format_json, format_text, format_html, format_markdown
 
 
 def _create_parser() -> argparse.ArgumentParser:
@@ -28,9 +28,15 @@ def _create_parser() -> argparse.ArgumentParser:
 
     # validate
     validate_parser = sub.add_parser("validate", help="Validate a Knowledge Structure")
-    validate_parser.add_argument("input", type=Path, help="Path to canonical JSON file")
-    validate_parser.add_argument("--format", "-f", choices=("text", "json"), default="text")
+    validate_parser.add_argument("input", type=Path, nargs="+", help="Path(s) to canonical JSON file(s)")
+    validate_parser.add_argument("--format", "-f", choices=("text", "json", "html", "markdown"), default="text")
     validate_parser.add_argument("--output", "-o", type=Path, default=None)
+    validate_parser.add_argument(
+        "--min-severity",
+        choices=("error", "warning", "information"),
+        default="error",
+        help="Minimum severity to consider a structure invalid",
+    )
 
     # parse
     parse_parser = sub.add_parser("parse", help="Parse a canonical JSON file")
@@ -140,11 +146,50 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     args = parser.parse_args(argv)
 
     if args.command == "validate":
-        structure = _read_structure(args.input)
-        result = cks_validate(structure)
-        formatted = format_json(result) if args.format == "json" else format_text(result)
-        _write_output(formatted, args.output)
-        sys.exit(0 if result.is_valid else 1)
+        # Determine minimum severity from CLI
+        severity_map = {
+            "error": DiagnosticSeverity.ERROR,
+            "warning": DiagnosticSeverity.WARNING,
+            "information": DiagnosticSeverity.INFORMATION,
+        }
+        min_severity = severity_map.get(args.min_severity, DiagnosticSeverity.ERROR)
+
+        # Map format to formatter
+        formatter_map = {
+            "json": format_json,
+            "text": format_text,
+            "html": format_html,
+            "markdown": format_markdown,
+        }
+        formatter = formatter_map.get(args.format, format_text)
+
+        structures = []
+        for path in args.input:
+            try:
+                structures.append(_read_structure(path))
+            except SystemExit:
+                raise
+
+        if len(structures) == 1:
+            # Single file
+            result = cks_validate(structures[0], min_severity=min_severity)
+            formatted = formatter(result)
+            _write_output(formatted, args.output)
+            sys.exit(0 if result.is_valid else 1)
+        else:
+            # Batch mode – aggregate
+            from cks.validator import validate_all
+            results_list = validate_all(structures, min_severity=min_severity)
+            total = len(results_list)
+            valid_count = sum(1 for r in results_list if r.is_valid)
+            print(f"Files validated: {total}")
+            print(f"Valid: {valid_count}")
+            print(f"Invalid: {total - valid_count}")
+            print()
+            for path, result in zip(args.input, results_list):
+                status = "✅ Valid" if result.is_valid else "❌ Invalid"
+                print(f"{path}: {status}")
+            sys.exit(0 if valid_count == total else 1)
 
     elif args.command == "parse":
         structure = _read_structure(args.input)
@@ -184,9 +229,9 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         new_structure = compose(structure, operators)
         result = cks_serialize(new_structure)
         _write_output(result, args.output)
-    
+
     elif args.command == "schema":
-            args.func(args)
+        args.func(args)
 
     else:
         parser.print_help()

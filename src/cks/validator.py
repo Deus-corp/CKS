@@ -95,11 +95,20 @@ class ReferenceValidator:
     # Execute Validation
     # ------------------------------------------------------------------
 
-    def validate(self, structure: KnowledgeStructure) -> ValidationResult:
+    def validate(
+        self,
+        structure: KnowledgeStructure,
+        *,
+        min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
+    ) -> ValidationResult:
         diagnostics = self._pipeline.execute(structure)
         diagnostics = tuple(sorted(diagnostics, key=Diagnostic.sort_key))
         collection = DiagnosticCollection(diagnostics=diagnostics)
-        valid = all(d.severity != DiagnosticSeverity.ERROR for d in diagnostics)
+        valid = all(
+            d.severity.value < min_severity.value
+            for d in diagnostics
+            if d.severity != DiagnosticSeverity.INFORMATION
+        )
         return ValidationResult(
             is_valid=valid,
             diagnostics=collection,
@@ -107,6 +116,7 @@ class ReferenceValidator:
             metadata={
                 "validator": "ReferenceValidator",
                 "pipeline": tuple(s.stage.value for s in self._pipeline.stages),
+                "min_severity": min_severity.value,
             },
         )
 
@@ -145,3 +155,24 @@ def evaluate_constraints(structure: KnowledgeStructure) -> list[Diagnostic]:
 def validate(structure: KnowledgeStructure) -> ValidationResult:
     """Execute the complete canonical validation pipeline."""
     return _validator.validate(structure)
+
+def validate_all(structures: Iterable[KnowledgeStructure]) -> list[ValidationResult]:
+    """Validate multiple KnowledgeStructures and return individual results."""
+    return [_validator.validate(s) for s in structures]
+
+def validate(
+    structure: KnowledgeStructure,
+    *,
+    min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
+) -> ValidationResult:
+    """Execute the complete canonical validation pipeline."""
+    return _validator.validate(structure, min_severity=min_severity)
+
+
+def validate_all(
+    structures: Iterable[KnowledgeStructure],
+    *,
+    min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
+) -> list[ValidationResult]:
+    """Validate multiple KnowledgeStructures and return individual results."""
+    return [_validator.validate(s, min_severity=min_severity) for s in structures]

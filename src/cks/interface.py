@@ -22,10 +22,12 @@ from typing import Mapping
 from .core import KnowledgeObject
 from .core import KnowledgeStructure
 
-from .diagnostics import DiagnosticCollection
 from .engine import ReferenceEngine
 from .result import ValidationResult
 from .serialization import SerializationError
+from .diagnostics import DiagnosticCollection, DiagnosticSeverity
+
+from .validator import validate as _validate, validate_all as _validate_all
 
 __all__ = [
     # Construction
@@ -193,3 +195,23 @@ def evolve(
         (Genesis/Decay).  Each operator must satisfy its contract.
     """
     return _ENGINE.evolve(structure, operators=operators)
+
+
+def validate_all(structures: Iterable[KnowledgeStructure]) -> list[ValidationResult]:
+    """Validate multiple KnowledgeStructures."""
+    return _validate_all(structures)
+
+def validate(
+    structure: KnowledgeStructure,
+    *,
+    min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
+) -> ValidationResult:
+    return _validate(structure, min_severity=min_severity)
+
+
+def validate_all(
+    structures: Iterable[KnowledgeStructure],
+    *,
+    min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
+) -> list[ValidationResult]:
+    return _validate_all(structures, min_severity=min_severity)
