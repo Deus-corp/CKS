@@ -6,7 +6,7 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
-## [1.0.0] - 2026-07-14
+## [1.0.1] - 2026-07-14
 
 ### Added
 

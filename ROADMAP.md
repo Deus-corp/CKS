@@ -117,18 +117,104 @@ The reference implementation evolves together with the formal CKS specifications
 
 ---
 
-# Beyond 1.0
+# Version 1.1 — Production Readiness (current)
 
-Possible future directions include:
+Planned work:
 
-* Additional language implementations (Rust, TypeScript, Java)
-* Distributed knowledge exchange
-* Streaming knowledge representations
-* Formal verification support
-* Semantic query interfaces
-* Advanced evolution strategies (branching, merging, conflict resolution)
-* Large-scale knowledge repositories
-* Integration with AI/LLM systems (MCP server, semantic tools)
+* Fix `CanonicalRelation` to explicitly validate `participants` and `relation_type`.
+* Change development status to `Production/Stable` in `pyproject.toml`.
+* Formalize that canonical identity is determined by `id` only (`type` and `name` are required attributes but do not affect uniqueness).
+* Remove Python <3.9 fallback from `plugin.py`.
+* Replace stderr print with structured logging in `plugin.py`.
+
+---
+
+# Version 1.2 — CLI Modularization
+
+Planned work:
+
+* Split `cli/__init__.py` into separate handlers (`cli/commands/`).
+* Add schema validation layer for operation files.
+* Improve user-facing error messages in CLI.
+* Add `--strict` flag for plugin failures.
+
+---
+
+# Version 1.3 — Contract Strengthening
+
+Planned work:
+
+* Extract `_normalize_structure()` for explicit structural comparison.
+* Document the contract “specification → validator → tests → CLI → plugins”.
+* Add `mypy` type-checking to CI.
+* Write contract tests for the plugin system.
+* Create reference plugin examples.
+
+---
+
+# Version 1.4 — AI/LLM Integration (MCP Server)
+
+Planned work:
+
+* Implement CKS MCP Server.
+* Provide standard MCP tools: `construct_knowledge`, `validate_knowledge`, `query_relations`, `compare_structures`, `evolve_knowledge`.
+* Publish the server as a separate package (`cks-mcp`).
+
+---
+
+# Version 1.5 — Semantic Tools
+
+Planned work:
+
+* Build reasoning tools on top of CKS (pathfinding across relations, concept similarity).
+* Expose semantic tools via MCP and CLI.
+
+---
+
+# Version 1.6 — Advanced SDK & Developer Experience
+
+Planned work:
+
+* Develop CKS Studio (lightweight web UI for constructing and validating Knowledge Structures).
+* Add more adapters (OWL, CSV, Markdown tables).
+* Begin client libraries for TypeScript and Rust.
+
+---
+
+# Version 1.7 — IDE Integration
+
+Planned work:
+
+* VS Code extension with syntax highlighting, autocompletion, and inline validation.
+
+---
+
+# Version 1.8 — Distributed Knowledge Spaces
+
+Planned work:
+
+* Enable linking and synchronizing multiple Knowledge Structures across different sources.
+
+---
+
+# Version 1.9 — Versioning and Merging
+
+Planned work:
+
+* Implement Git-like versioning, branching, and merging for Knowledge Structures.
+
+---
+
+# Version 2.0 — The Semantic Foundation
+
+Planned goals:
+
+* Fully distributed CKS ecosystem.
+* Stable MCP and semantic tools.
+* Multi-language SDKs.
+* IDE support.
+* Large-scale knowledge repositories.
+* Integration with major AI platforms.
 
 ---
 

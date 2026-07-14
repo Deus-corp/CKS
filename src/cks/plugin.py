@@ -15,26 +15,22 @@ Loaded constraints are automatically registered in the canonical global
 
 from __future__ import annotations
 
-import sys
+import logging
 from typing import Iterable, List
 
 from .constraints.base import Constraint
 from .constraints.registry import ConstraintRegistry
 from .constraints import registry as _global_registry
 
+logger = logging.getLogger(__name__)
+
 
 def discover_entry_points() -> Iterable:
     """Yield every entry-point registered under the ``cks.constraints`` group."""
-    try:
-        from importlib.metadata import entry_points
-    except ImportError:  # Python < 3.9 fallback
-        from importlib_metadata import entry_points
+    from importlib.metadata import entry_points
 
-    # Select the group; in Python ≥3.12 we can use entry_points(group=...)
-    eps = entry_points()
-    for ep in eps:
-        if ep.group == "cks.constraints":
-            yield ep
+    eps = entry_points(group="cks.constraints")
+    yield from eps
 
 
 def load_constraints_from_entry_point(ep) -> List[Constraint]:
@@ -71,6 +67,8 @@ def load_constraints_from_entry_point(ep) -> List[Constraint]:
 
 def load_external_constraints(
     registry: ConstraintRegistry | None = None,
+    *,
+    strict: bool = False,
 ) -> int:
     """Discover and register all external constraints.
 
@@ -79,6 +77,9 @@ def load_external_constraints(
     registry : ConstraintRegistry or None
         The target registry.  If *None*, the canonical global registry
         is used.
+    strict : bool
+        If True, raise RuntimeError on the first plugin failure
+        instead of logging a warning and continuing.
 
     Returns
     -------
@@ -91,11 +92,13 @@ def load_external_constraints(
         try:
             constraints = load_constraints_from_entry_point(ep)
         except RuntimeError:
-            # Log the error but continue with other plugins.
-            print(
-                f"[cks] WARNING: could not load plugin {ep.name!r} "
-                f"({ep.value!r})",
-                file=sys.stderr,
+            if strict:
+                raise
+            logger.warning(
+                "Could not load plugin %r (%r)",
+                ep.name,
+                ep.value,
+                exc_info=True,
             )
             continue
         for constraint in constraints:

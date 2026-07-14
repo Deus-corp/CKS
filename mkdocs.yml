@@ -82,6 +82,8 @@ nav:
 
   - Examples: examples.md
 
+  - Contracts: contracts.md
+
   - Specifications:
 
       - Overview: specifications/index.md

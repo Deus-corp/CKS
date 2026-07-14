@@ -92,6 +92,11 @@ class ObjectIdentity:
     """
     Immutable canonical identity of a Knowledge Object.
 
+    Canonical identity is determined by the ``id`` field alone.
+    The ``type`` and ``name`` fields are required attributes of the
+    identity but do **not** affect uniqueness: two objects with the
+    same ``id`` are identical regardless of their type or name.
+
     Defined in CKS-001, Section 2.2.
     """
 
@@ -156,20 +161,29 @@ class CanonicalRelation(KnowledgeObject):
     ) -> None:
         struct = dict(structure or {})
 
-        struct.setdefault("participants", tuple(participants))
-        struct.setdefault("relation_type", relation_type)
+        frozen_participants = tuple(participants)
 
-        object.__setattr__(
-            self,
-            "identity",
-            identity,
-        )
+        # Validate conflicting keys — compare *contents*, not types
+        for key, expected in (
+            ("participants", frozen_participants),
+            ("relation_type", relation_type),
+        ):
+            if key in struct:
+                existing = struct[key]
+                # Normalize to tuple for comparison
+                if key == "participants" and isinstance(existing, list):
+                    existing = tuple(existing)
+                if existing != expected:
+                    raise ValueError(
+                        f"Conflicting value for '{key}' in structure: "
+                        f"expected {expected!r}, got {struct[key]!r}"
+                    )
 
-        object.__setattr__(
-            self,
-            "structure",
-            _freeze_mapping(struct),
-        )
+        struct["participants"] = frozen_participants
+        struct["relation_type"] = relation_type
+
+        object.__setattr__(self, "identity", identity)
+        object.__setattr__(self, "structure", _freeze_mapping(struct))
 
     @property
     def participants(self) -> tuple[str, ...]:
@@ -185,6 +199,19 @@ class CanonicalRelation(KnowledgeObject):
     def relation_type(self) -> str:
         """Semantic relation type."""
         return str(self.structure["relation_type"])
+
+
+def _normalize_structure(structure: Mapping[str, Any]) -> tuple[tuple[str, object], ...]:
+    """
+    Normalize a semantic structure for comparison.
+
+    The structure is converted to a sorted tuple of (key, value) pairs,
+    where nested collections are recursively frozen.
+    This ensures that two semantically equivalent structures produce
+    identical normalized representations regardless of insertion order.
+    """
+    frozen = _freeze_mapping(structure)
+    return tuple(sorted(frozen.items()))
 
 
 # ============================================================================
@@ -294,9 +321,7 @@ class KnowledgeStructure:
 
         for obj in self._objects:
 
-            structure = tuple(
-                sorted(obj.structure.items())
-            )
+            structure = _normalize_structure(obj.structure)
 
             signature.append(
                 (
