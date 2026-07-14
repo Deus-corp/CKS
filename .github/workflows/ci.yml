@@ -52,6 +52,7 @@ jobs:
       - name: Type check with mypy
         run: |
           pip install -e .[dev]
+          pip install types-jsonschema
           mypy src/
 
   pre-commit:
