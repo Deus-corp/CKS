@@ -72,38 +72,35 @@ The reference implementation evolves together with the formal CKS specifications
 
 ---
 
-# Version 0.7 — SDK and Public API (in progress)
+# Version 0.7 — SDK and Public API ✅ (completed)
 
-Planned work:
-
-* Stabilize public API (`cks.interface`)
+* Stabilized public API (`cks.interface`)
 * Complete Python SDK documentation
-* Additional serialization format support (YAML)
-* Schema validation for canonical JSON
+* Evolution operators promoted to public API
 * Plugin architecture for custom constraints
+* JSON Schema validation (`cks schema validate`)
+* Full `__all__` declarations across public modules
 
 ---
 
-# Version 0.8 — Advanced Validation and Diagnostics
+# Version 0.8 — Advanced Validation ✅ (completed)
 
-Planned work:
-
-* Additional canonical constraints (metadata consistency, version compatibility)
-* Constraint severity configuration
-* Validation report export (HTML, Markdown)
-* Batch validation of multiple structures
+* Configurable severity thresholds (`--min-severity`)
+* HTML and Markdown report formatters
+* Batch validation of multiple structures (`validate_all`)
+* Automated CI/CD pipeline (GitHub Actions)
+* PyPI publication (`canonical-ks`)
 
 ---
 
-# Version 0.9 — Ecosystem and Integrations
+# Version 0.9 — Ecosystem and Integrations (current)
 
 Planned work:
 
-* PyPI publication
-* CI/CD pipeline (GitHub Actions)
 * Pre-commit hooks for CKS validation
-* IDE integrations (VS Code extension)
+* Additional constraint libraries
 * Knowledge graph import/export adapters
+* Developer tooling improvements
 
 ---
 
@@ -119,7 +116,7 @@ Planned goals:
 * Reference corpus
 * Conformance suite
 * Production-ready reference implementation
-* PyPI release
+* Long-term API stability guarantees
 
 ---
 

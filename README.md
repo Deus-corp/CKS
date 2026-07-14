@@ -4,8 +4,8 @@
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Tests](https://img.shields.io/badge/tests-116%20passing-brightgreen)
-![Status](https://img.shields.io/badge/status-reference%20implementation-blue)
+![Tests](https://img.shields.io/badge/tests-110%20passing-brightgreen)
+[![PyPI](https://img.shields.io/pypi/v/canonical-ks)](https://pypi.org/project/canonical-ks/)
 
 CKS is an open specification that defines how knowledge can be represented,
 validated, exchanged, and evolved independently of programming languages,
@@ -136,8 +136,11 @@ The current Python reference implementation provides:
 - Extraction
 - Inspection
 - Conformance Test Suite
-- Command-Line Interface (validate, parse, inspect, evolve)
+- Command-Line Interface (validate, parse, inspect, evolve, schema, plugin)
 - Structural Evolution (Genesis/Decay operators)
+- Configurable Severity Thresholds
+- HTML and Markdown Report Formatters
+- Batch Validation (multiple files)
 
 ---
 
@@ -173,29 +176,29 @@ Currently implemented:
 - ✅ Command-Line Interface
 - ✅ Structural Evolution (CKS‑004)
 - ✅ Reference Knowledge Corpus
-- ✅ Conformance Test Suite (116 tests)
+- ✅ Conformance Test Suite (110 tests)
+- ✅ PyPI Publication
 
 Planned:
 
-- Structure Evolution (CKS-004)
-- Constraint Libraries
-- Reference Knowledge Corpus
-- Additional language implementations
+- Constraint Libraries (additional built‑in constraints)
+- Additional language implementations (Rust, TypeScript)
 
 ---
 
 # Installation
 
-Clone the repository:
+From PyPI:
 
 ```bash
-git clone https://github.com/<your-username>/CKS.git
-cd CKS
+pip install canonical-ks
 ```
 
-Install in editable mode:
+Or from source:
 
 ```bash
+git clone https://github.com/Deus-corp/CKS.git
+cd CKS
 pip install -e .
 ```
 
@@ -254,7 +257,7 @@ python -m pytest -v
 
 Current status:
 
-- 116 tests
+- 110 tests
 - all passing
 
 The test suite verifies:
@@ -305,6 +308,7 @@ Current implementation status:
 | Test Suite | ✅ Passing |
 | CLI | ✅ Complete |
 | Structural Evolution | ✅ Complete |
+| Advanced Validation | ✅ Complete |
 
 The current implementation serves as the reference implementation of the
 existing CKS specifications.

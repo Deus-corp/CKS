@@ -31,16 +31,17 @@ The same knowledge can therefore be represented in multiple ways while preservin
 
 # Installation
 
-Clone the repository:
+From PyPI (recommended):
 
 ```bash
-git clone https://github.com/<your-account>/CKS.git
-cd CKS
+pip install canonical-ks
 ```
 
-Install the reference implementation in editable mode:
+Or from source:
 
 ```bash
+git clone https://github.com/Deus-corp/CKS.git
+cd CKS
 pip install -e .
 ```
 
@@ -109,6 +110,12 @@ Diagnostics are available even for valid structures.
 ```python
 for diagnostic in result.diagnostics:
     print(diagnostic)
+```
+
+Or use the command line:
+
+```bash
+cks validate examples/corpus/valid_theory_example.json
 ```
 
 ---
@@ -200,8 +207,7 @@ Execute the complete reference test suite.
 python -m pytest -v
 ```
 
-Current status: 116 tests, all passing.
-
+Current status: 110 tests, all passing.
 
 All tests should pass before contributing changes.
 
@@ -220,6 +226,8 @@ src/
         diagnostics.py
         result.py
         evolution.py
+        schema.py
+        plugin.py
         cli/
             __init__.py
             formatters.py
@@ -238,6 +246,8 @@ examples/
         invalid_duplicate_id.json
         invalid_dangling_reference.json
         invalid_derivation_cycle.json
+    json/
+        cks-schema.json
 tests/
 ```
 

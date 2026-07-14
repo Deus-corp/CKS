@@ -18,6 +18,7 @@ from cks import (
     parse,
     serialize,
     validate,
+    validate_all,
     diagnose,
     inspect,
     compare,
@@ -132,6 +133,8 @@ Execute the complete canonical validation pipeline.
 ```python
 validate(
     structure: KnowledgeStructure,
+    *,
+    min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
 ) -> ValidationResult
 ```
 
@@ -147,6 +150,34 @@ validate(
 result = validate(structure)
 
 print(result.is_valid)
+```
+
+---
+
+## validate_all()
+
+Validate multiple Knowledge Structures and return individual results.
+
+### Signature
+
+```python
+validate_all(
+    structures: Iterable[KnowledgeStructure],
+    *,
+    min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
+) -> list[ValidationResult]
+```
+
+### Example
+
+```python
+results = validate_all(
+    [
+        structure1,
+        structure2,
+    ],
+    min_severity=DiagnosticSeverity.WARNING,
+)
 ```
 
 ---
