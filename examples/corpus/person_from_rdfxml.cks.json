@@ -1,0 +1,71 @@
+{
+  "objects": [
+    {
+      "identity": {
+        "id": "urn:person:1",
+        "name": "urn:person:1",
+        "type": "http://schema.org/Person"
+      },
+      "structure": {}
+    },
+    {
+      "identity": {
+        "id": "urn:person:2",
+        "name": "urn:person:2",
+        "type": "http://schema.org/Person"
+      },
+      "structure": {}
+    },
+    {
+      "identity": {
+        "id": "http://schema.org/Person",
+        "name": "http://schema.org/Person",
+        "type": "Entity"
+      },
+      "structure": {}
+    },
+    {
+      "identity": {
+        "id": "urn:person:1-http://www.w3.org/1999/02/22-rdf-syntax-ns#type-http://schema.org/Person",
+        "name": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "type": "Relation"
+      },
+      "structure": {
+        "participants": [
+          "urn:person:1",
+          "http://schema.org/Person"
+        ],
+        "relation_type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      }
+    },
+    {
+      "identity": {
+        "id": "urn:person:1-http://schema.org/knows-urn:person:2",
+        "name": "http://schema.org/knows",
+        "type": "Relation"
+      },
+      "structure": {
+        "participants": [
+          "urn:person:1",
+          "urn:person:2"
+        ],
+        "relation_type": "http://schema.org/knows"
+      }
+    },
+    {
+      "identity": {
+        "id": "urn:person:2-http://www.w3.org/1999/02/22-rdf-syntax-ns#type-http://schema.org/Person",
+        "name": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "type": "Relation"
+      },
+      "structure": {
+        "participants": [
+          "urn:person:2",
+          "http://schema.org/Person"
+        ],
+        "relation_type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      }
+    }
+  ],
+  "version": "1.0"
+}

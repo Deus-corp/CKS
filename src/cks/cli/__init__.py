@@ -67,6 +67,26 @@ def _create_parser() -> argparse.ArgumentParser:
     plugin_list = plugin_sub.add_parser("list", help="List loaded constraints")
     plugin_list.set_defaults(func=_run_plugin_list_command)
 
+    # convert
+    convert_parser = sub.add_parser("convert", help="Convert JSON‑LD to CKS")
+    convert_parser.add_argument("input", type=Path, help="Path to JSON‑LD file")
+    convert_parser.add_argument("--output", "-o", type=Path, default=None, help="Write CKS JSON to file")
+    convert_parser.add_argument("--format", "-f", choices=("json-ld", "rdf-xml", "turtle"), default="json-ld", help="Input format (default: json-ld)")
+
+    # export
+    export_parser = sub.add_parser("export", help="Export CKS to another format")
+    export_parser.add_argument("input", type=Path, help="Path to CKS JSON file")
+    export_parser.add_argument(
+        "--format", "-f",
+        choices=("json-ld", "turtle", "rdf-xml"),
+        default="json-ld",
+        help="Output format (default: json-ld)",
+    )
+    export_parser.add_argument(
+        "--output", "-o", type=Path, default=None,
+        help="Write output to file instead of stdout",
+    )
+
     return parser
 
 
@@ -229,6 +249,44 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         new_structure = compose(structure, operators)
         result = cks_serialize(new_structure)
         _write_output(result, args.output)
+    
+    elif args.command == "convert":
+        raw = args.input.read_text(encoding="utf-8")
+        data = json.loads(raw) if args.format == "json-ld" else raw
+
+        if args.format == "json-ld":
+            from cks.adapters.jsonld_to_cks import JsonLdToCksConverter
+            converter = JsonLdToCksConverter(data)
+            structure = converter.convert()
+        elif args.format in ("rdf-xml", "turtle"):
+            from cks.adapters.rdf_to_cks import RdfToCksConverter
+            rdf_format = "xml" if args.format == "rdf-xml" else args.format
+            converter = RdfToCksConverter(data, format=rdf_format)
+            structure = converter.convert()
+        else:
+            raise SystemExit(f"Unknown format: {args.format}")
+
+        result = cks_serialize(structure)
+        _write_output(result, args.output)
+    
+    elif args.command == "export":
+        structure = _read_structure(args.input)
+        if args.format == "json-ld":
+            from cks.adapters.cks_to_jsonld import CksToJsonLdConverter
+            converter = CksToJsonLdConverter(structure)
+            output_data = converter.convert()
+            formatted = json.dumps(output_data, indent=2)
+        elif args.format == "turtle":
+            from cks.adapters.cks_to_rdf import CksToRdfConverter
+            converter = CksToRdfConverter(structure)
+            formatted = converter.to_turtle()
+        elif args.format == "rdf-xml":
+            from cks.adapters.cks_to_rdf import CksToRdfConverter
+            converter = CksToRdfConverter(structure)
+            formatted = converter.to_rdfxml()
+        else:
+            raise SystemExit(f"Unknown export format: {args.format}")
+        _write_output(formatted, args.output)
 
     elif args.command == "schema":
         args.func(args)

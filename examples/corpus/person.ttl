@@ -1,0 +1,9 @@
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:person:1> a schema:Person ;
+    schema:name "Alice" ;
+    schema:knows <urn:person:2> .
+
+<urn:person:2> a schema:Person ;
+    schema:name "Bob" .

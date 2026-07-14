@@ -1,0 +1,7 @@
+{
+  "@graph": [
+    {"@id": "urn:person:1", "@type": "Person", "name": "Alice"},
+    {"@id": "urn:person:2", "@type": "Person", "name": "Bob"},
+    {"@id": "urn:person:1", "knows": [{"@id": "urn:person:2"}]}
+  ]
+}

@@ -1,0 +1,2 @@
+cks export examples/corpus/valid_theory_example.json --format turtle --output examples/corpus/valid_theory_export.ttl
+cks export examples/corpus/valid_theory_example.json --format json-ld --output examples/corpus/valid_theory_export.jsonld

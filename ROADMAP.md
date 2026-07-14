@@ -93,20 +93,17 @@ The reference implementation evolves together with the formal CKS specifications
 
 ---
 
-# Version 0.9 — Ecosystem and Integrations (current)
-
-Planned work:
+# Version 0.9 — Ecosystem and Integrations ✅ (completed)
 
 * Pre-commit hooks for CKS validation
-* Additional constraint libraries
-* Knowledge graph import/export adapters
-* Developer tooling improvements
+* JSON‑LD, Turtle, RDF/XML import (`cks convert`)
+* JSON‑LD, Turtle, RDF/XML export (`cks export`)
+* CI/CD pipeline (GitHub Actions)
+* Linting (ruff) and pre-commit checks in CI
 
 ---
 
-# Version 1.0 — First Stable Release
-
-Planned goals:
+# Version 1.0 — First Stable Release ✅ (completed)
 
 * Stable public API
 * Complete reference implementation
@@ -114,9 +111,9 @@ Planned goals:
 * Canonical constraint library
 * Mature validation engine
 * Reference corpus
-* Conformance suite
-* Production-ready reference implementation
+* Conformance suite (114 tests)
 * Long-term API stability guarantees
+* PyPI publication (`canonical-ks`)
 
 ---
 

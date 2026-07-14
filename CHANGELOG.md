@@ -6,6 +6,37 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.0.0] - 2026-07-14
+
+### Added
+
+#### Import/Export Adapters
+
+- JSON‑LD → CKS converter (`cks convert`).
+- CKS → JSON‑LD converter (`cks export`).
+- Turtle → CKS converter (`cks convert`).
+- CKS → Turtle converter (`cks export`).
+- RDF/XML → CKS converter (`cks convert`).
+- CKS → RDF/XML converter (`cks export`).
+
+#### CI/CD and Developer Tooling
+
+- Pre-commit hooks for automatic CKS validation.
+- CI pipeline with test matrix (Python 3.12, 3.13, 3.14).
+- Linting with ruff.
+- Pre-commit checks in CI.
+
+### Changed
+
+- Public API stabilised for 1.0.0 release.
+- Package renamed to `canonical-ks` on PyPI (import remains `cks`).
+
+### Testing
+
+- All 114 tests passing.
+
+---
+
 ## [0.9.0] - 2026-07-14
 
 ### Added

@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Tests](https://img.shields.io/badge/tests-110%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-114%20passing-brightgreen)
 [![PyPI](https://img.shields.io/pypi/v/canonical-ks)](https://pypi.org/project/canonical-ks/)
 
 CKS is an open specification that defines how knowledge can be represented,
@@ -141,6 +141,8 @@ The current Python reference implementation provides:
 - Configurable Severity Thresholds
 - HTML and Markdown Report Formatters
 - Batch Validation (multiple files)
+- JSON‑LD, Turtle, RDF/XML Import (via `cks convert`)
+- JSON‑LD, Turtle, RDF/XML Export (via `cks export`)
 
 ---
 
@@ -176,8 +178,9 @@ Currently implemented:
 - ✅ Command-Line Interface
 - ✅ Structural Evolution (CKS‑004)
 - ✅ Reference Knowledge Corpus
-- ✅ Conformance Test Suite (110 tests)
+- ✅ Conformance Test Suite (114 tests)
 - ✅ PyPI Publication
+- ✅ Import/Export Adapters (JSON‑LD, Turtle, RDF/XML)
 
 Planned:
 
@@ -245,6 +248,16 @@ cks validate examples/corpus/valid_theory_example.json
 cks evolve examples/corpus/valid_theory_example.json examples/corpus/evolve_add.json
 ```
 
+Or convert between formats:
+
+```bash
+# Convert JSON‑LD to CKS
+cks convert examples/corpus/person.jsonld --format json-ld --output person.cks.json
+
+# Export CKS to Turtle
+cks export examples/corpus/valid_theory_example.json --format turtle --output theory.ttl
+```
+
 ---
 
 # Testing
@@ -257,7 +270,7 @@ python -m pytest -v
 
 Current status:
 
-- 110 tests
+- 114 tests
 - all passing
 
 The test suite verifies:
@@ -309,6 +322,7 @@ Current implementation status:
 | CLI | ✅ Complete |
 | Structural Evolution | ✅ Complete |
 | Advanced Validation | ✅ Complete |
+| Import/Export Adapters | ✅ Complete |
 
 The current implementation serves as the reference implementation of the
 existing CKS specifications.
