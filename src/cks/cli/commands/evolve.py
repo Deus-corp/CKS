@@ -6,7 +6,6 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
-from typing import Optional
 
 from ...serialization import parse as cks_parse, serialize as cks_serialize, SerializationError
 from ...evolution import compose, AddObject, AddRelation, RemoveObject, RemoveRelation
