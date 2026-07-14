@@ -6,6 +6,39 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [0.9.0] - 2026-07-14
+
+### Added
+
+#### Advanced Validation
+
+- `validate_all()` — batch validation of multiple Knowledge Structures.
+- `--min-severity` option (error/warning/information) for configurable severity thresholds.
+- HTML output formatter (`--format html`).
+- Markdown output formatter (`--format markdown`).
+
+#### CLI Improvements
+
+- `validate` command now accepts multiple input files (`nargs="+"`).
+- Severity map and formatter map integrated into CLI pipeline.
+- Batch mode aggregates results across all input files.
+
+### Changed
+
+- `validate()` signature extended with optional `min_severity` parameter.
+- `validate_all()` accepts `min_severity` parameter.
+- `interface.py` exposes new `validate_all` function.
+
+### Fixed
+
+- Various import and name resolution issues in `interface.py`.
+
+### Testing
+
+- All 110 tests passing.
+
+---
+
 ## [0.8.6] - 2026-07-14
 
 ### Changed
