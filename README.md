@@ -5,7 +5,7 @@
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Tests](https://img.shields.io/badge/tests-119%20passing-brightgreen)
-[![PyPI](https://img.shields.io/pypi/v/canonical-ks)](https://pypi.org/project/canonical-ks/)
+[![PyPI](https://img.shields.io/pypi/v/cks-core)](https://pypi.org/project/cks-core/)
 
 CKS is an open specification that defines how knowledge can be represented,
 validated, exchanged, and evolved independently of programming languages,
@@ -199,7 +199,7 @@ Planned:
 From PyPI:
 
 ```bash
-pip install canonical-ks
+pip install cks-core
 ```
 
 Or from source:

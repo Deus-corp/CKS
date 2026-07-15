@@ -6,6 +6,16 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.1.1] - 2026-07-14
+
+### Changed
+
+- Renamed PyPI distribution package from `canonical-ks` to `cks-core`
+  to align with the `cks-*` ecosystem naming convention.
+  Python import remains `import cks`.
+
+---
+
 ## [1.1.0] - 2026-07-14
 
 ### Added
