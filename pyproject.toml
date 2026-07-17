@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cks-core"
-version = "1.1.1"
+version = "1.1.2"
 description = "Canonical Knowledge Structure — Reference Implementation"
 readme = "README.md"
 authors = [{name = "Vladyslav Hruznov"}]
@@ -29,8 +29,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Deus-corp/CKS"
-Documentation = "https://github.com/Deus-corp/CKS"
+Homepage = "https://github.com/Deus-corp/cks-core"
+Documentation = "https://github.com/Deus-corp/cks-core"
 
 [tool.setuptools.packages.find]
 where = ["src"]

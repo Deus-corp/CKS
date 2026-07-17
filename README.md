@@ -17,6 +17,20 @@ software, and artificial intelligence.
 
 ---
 
+# Ecosystem
+
+CKS Core is the semantic foundation of the CKS ecosystem.
+Other projects build upon it:
+
+| Project | Description | Repository |
+|---------|-------------|------------|
+| **cks-core** | Canonical semantic engine (this repository) | [Deus-corp/cks-core](https://github.com/Deus-corp/cks-core) |
+| **cks-runtime** | Operational environment – sessions, transactions, persistence | [Deus-corp/cks-runtime](https://github.com/Deus-corp/cks-runtime) |
+| **cks-mcp** | MCP server – exposes CKS to LLMs | [Deus-corp/cks-mcp](https://github.com/Deus-corp/cks-mcp) |
+
+
+---
+
 # Why CKS?
 
 Today the same knowledge exists simultaneously in many incompatible forms:
@@ -205,7 +219,7 @@ pip install cks-core
 Or from source:
 
 ```bash
-git clone https://github.com/Deus-corp/CKS.git
+git clone https://github.com/Deus-corp/cks-core.git
 cd CKS
 pip install -e .
 ```

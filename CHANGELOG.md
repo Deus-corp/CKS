@@ -6,6 +6,15 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.1.2] - 2026-07-17
+
+### Changed
+- Repository renamed from `CKS` to `cks-core`.
+- Updated all internal and ecosystem links to new repository URL.
+- Added "Ecosystem" table to README.
+
+---
+
 ## [1.1.1] - 2026-07-14
 
 ### Changed
