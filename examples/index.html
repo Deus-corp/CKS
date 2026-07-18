@@ -1166,6 +1166,19 @@ Errors: 0  Warnings: 0  Info: 0
 <span class="p">]</span>
 </code></pre></div>
 <hr />
+<h3 id="extension-constraints">Extension Constraints</h3>
+<p>CKS ships with optional constraints that are not active by default.
+For example, the <code>EmbeddingProjectionIntegrityConstraint</code> validates
+vector‑space projections of Knowledge Objects.</p>
+<p>To enable it in your code:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks.constraints.builtin</span><span class="w"> </span><span class="kn">import</span> <span class="n">OPTIONAL_CONSTRAINTS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cks.constraints.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">registry</span>
+
+<span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="n">OPTIONAL_CONSTRAINTS</span><span class="p">:</span>
+    <span class="n">registry</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">constraint</span><span class="p">)</span>
+</code></pre></div>
+<p>See the Plugin Development Guide for more details.</p>
+<hr />
 <h1 id="canonical-workflow">Canonical Workflow</h1>
 <p>Most applications follow the same sequence of operations.</p>
 <div class="highlight"><pre><span></span><code>Construct / Parse
@@ -1191,7 +1204,7 @@ Exchange
 <p>All corpus examples are verified by the automated test suite:</p>
 <div class="highlight"><pre><span></span><code>python3<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>-v
 </code></pre></div>
-<p>Current status: 116 tests passing.</p>
+<p>Current status: 134+ tests passing.</p>
 <hr />
 <h1 id="related-documentation">Related Documentation</h1>
 <ul>

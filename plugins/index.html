@@ -669,6 +669,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#using-builtin-optional-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using built‑in optional constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1198,6 +1209,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#using-builtin-optional-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using built‑in optional constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1309,6 +1331,26 @@ when <code>cks</code> is imported.</p>
 <p>Once the plugin package is installed (<code>pip install .</code>), the constraint
 appears automatically in the global registry:</p>
 <div class="highlight"><pre><span></span><code>cks<span class="w"> </span>plugin<span class="w"> </span>list
+</code></pre></div>
+<hr />
+<h3 id="using-builtin-optional-constraints">Using built‑in optional constraints</h3>
+<p>CKS ships with <code>OPTIONAL_CONSTRAINTS</code> (e.g. <code>EmbeddingProjectionIntegrityConstraint</code>).
+They are not registered by default. To enable them process‑wide:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks.constraints.builtin</span><span class="w"> </span><span class="kn">import</span> <span class="n">OPTIONAL_CONSTRAINTS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cks.constraints.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">registry</span>
+
+<span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="n">OPTIONAL_CONSTRAINTS</span><span class="p">:</span>
+    <span class="n">registry</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">constraint</span><span class="p">)</span>
+</code></pre></div>
+<p>Or scoped to one ReferenceValidator:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks.constraints.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstraintRegistry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cks.validator</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReferenceValidator</span>
+
+<span class="n">reg</span> <span class="o">=</span> <span class="n">ConstraintRegistry</span><span class="p">()</span>
+<span class="n">reg</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">MyConstraint</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="n">OPTIONAL_CONSTRAINTS</span><span class="p">:</span>
+    <span class="n">reg</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">constraint</span><span class="p">)</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">ReferenceValidator</span><span class="p">(</span><span class="n">registry</span><span class="o">=</span><span class="n">reg</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="entry-point-group">Entry-Point Group</h2>

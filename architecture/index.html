@@ -1196,6 +1196,10 @@ Constraint Evaluation
 <li><code>builtin.py</code> — manifest that instantiates and exports all built‑in constraints.</li>
 </ul>
 <p>Constraints execute after structural and semantic validation.</p>
+<p>Built‑in constraints are auto‑registered. Optional constraints,
+such as <code>EmbeddingProjectionIntegrityConstraint</code>, are not registered
+by default and must be opted‑in explicitly per validator instance
+or process‑wide (see the Plugin Development Guide).</p>
 <hr />
 <h1 id="evolution-engine">Evolution Engine</h1>
 <div class="highlight"><pre><span></span><code>evolution.py

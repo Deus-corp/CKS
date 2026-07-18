@@ -1295,6 +1295,24 @@
 </code></pre></div>
 <p>Projection never modifies the original structure.</p>
 <hr />
+<h1 id="extension-constraints">Extension Constraints</h1>
+<p>CKS provides optional constraints that are not active by default.
+They can be registered explicitly to extend the validation pipeline
+with domain‑specific rules.</p>
+<p>For example, the <code>EmbeddingProjectionIntegrityConstraint</code> (available
+in <code>cks.constraints.projection</code>) enforces that an <code>EmbeddingProjection</code>
+object points to a valid source object and references its vector
+payload externally.</p>
+<p>To activate an optional constraint, register it in the global registry
+or in a scoped <code>ConstraintRegistry</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks.constraints.builtin</span><span class="w"> </span><span class="kn">import</span> <span class="n">OPTIONAL_CONSTRAINTS</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cks.constraints.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">registry</span>
+
+<span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="n">OPTIONAL_CONSTRAINTS</span><span class="p">:</span>
+    <span class="n">registry</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">constraint</span><span class="p">)</span>
+</code></pre></div>
+<p>See the Plugin Development Guide for more details.</p>
+<hr />
 <h1 id="evolution">Evolution</h1>
 <h2 id="evolve">evolve()</h2>
 <p>Apply a sequence of admissible structural operators (Genesis/Decay) to a Knowledge Structure.</p>
@@ -1478,6 +1496,17 @@
 </tr>
 </tbody>
 </table>
+<hr />
+<h3 id="copy-and-deepcopy-behaviour">Copy and deepcopy behaviour</h3>
+<p><code>KnowledgeObject</code>, <code>CanonicalRelation</code> and <code>KnowledgeStructure</code> are
+deeply immutable by contract.  When used with <code>copy.copy</code> or
+<code>copy.deepcopy</code> they return the same object (<code>self</code>) rather than
+creating a new copy.  This is safe and intentional – no observable
+state can be changed, so sharing the reference is indistinguishable
+from cloning the object.</p>
+<p>You can safely pass these objects to any library or store them in
+containers that rely on <code>deepcopy</code> (for example <code>cks-runtime</code>'s
+in‑memory storage).</p>
 <hr />
 <h1 id="api-stability">API Stability</h1>
 <p>The public API follows semantic versioning.</p>
