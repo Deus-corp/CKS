@@ -17,6 +17,7 @@ from .serialization import parse as _parse
 from .serialization import serialize as _serialize
 from .validator import validate as _validate
 from .evolution import StructuralOperator, compose
+from .constraints.base import Constraint
 
 
 # =============================================================================
