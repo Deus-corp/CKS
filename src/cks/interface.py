@@ -27,6 +27,7 @@ from .serialization import SerializationError
 from .diagnostics import DiagnosticCollection, DiagnosticSeverity
 
 from .validator import validate as _validate, validate_all as _validate_all
+from .constraints.base import Constraint
 
 __all__ = [
     # Construction
@@ -188,13 +189,23 @@ def validate(
     structure: KnowledgeStructure,
     *,
     min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
+    extra_constraints: Iterable[Constraint] | None = None,
 ) -> ValidationResult:
-    return _validate(structure, min_severity=min_severity)
+    return _validate(
+        structure,
+        min_severity=min_severity,
+        extra_constraints=extra_constraints,
+    )
 
 
 def validate_all(
     structures: Iterable[KnowledgeStructure],
     *,
     min_severity: DiagnosticSeverity = DiagnosticSeverity.ERROR,
+    extra_constraints: Iterable[Constraint] | None = None,
 ) -> list[ValidationResult]:
-    return _validate_all(structures, min_severity=min_severity)
+    return _validate_all(
+        structures,
+        min_severity=min_severity,
+        extra_constraints=extra_constraints,
+    )

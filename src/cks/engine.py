@@ -44,7 +44,7 @@ class ReferenceEngine:
         • implementation-independent
     """
 
-    VERSION: str = "1.4.0"
+    VERSION: str = "1.5.0"
 
     # ------------------------------------------------------------------
     # Construction & Serialization
@@ -90,12 +90,10 @@ class ReferenceEngine:
     def validate(
         self,
         structure: KnowledgeStructure,
+        *,
+        extra_constraints: "Iterable[Constraint] | None" = None,
     ) -> ValidationResult:
-        """
-        Execute the complete canonical validation pipeline.
-        """
-
-        return _validate(structure)
+        return _validate(structure, extra_constraints=extra_constraints)
 
     def diagnose(
         self,

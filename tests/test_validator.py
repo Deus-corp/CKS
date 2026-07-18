@@ -220,3 +220,72 @@ def test_diagnostics_info_warning_error():
     assert d_info.severity == DiagnosticSeverity.INFORMATION
     assert d_warn.severity == DiagnosticSeverity.WARNING
     assert d_err.severity == DiagnosticSeverity.ERROR
+
+
+# ============================================================================
+# extra_constraints — scoped, per-call constraint opt-in
+# ============================================================================
+#
+# extra_constraints lets a caller opt an OPTIONAL_CONSTRAINTS entry (or
+# any other Constraint) in for a single validate() call without
+# mutating the process-wide global registry.
+
+
+def test_extra_constraints_applies_only_for_this_call():
+    from cks.constraints.builtin import OPTIONAL_CONSTRAINTS
+
+    structure = KnowledgeStructure([
+        make_object("proj-1", otype="EmbeddingProjection"),
+    ])
+
+    with_extension = validate(structure, extra_constraints=OPTIONAL_CONSTRAINTS)
+    assert not with_extension.is_valid
+    assert "CKS-EXT-EMBEDDING-PROJECTION" in with_extension.evaluated_constraints
+
+    without_extension = validate(structure)
+    assert without_extension.is_valid
+    assert "CKS-EXT-EMBEDDING-PROJECTION" not in without_extension.evaluated_constraints
+
+
+def test_extra_constraints_does_not_mutate_global_registry():
+    from cks.constraints import registry
+    from cks.constraints.builtin import OPTIONAL_CONSTRAINTS
+
+    structure = KnowledgeStructure([make_object("a")])
+    validate(structure, extra_constraints=OPTIONAL_CONSTRAINTS)
+
+    assert "CKS-EXT-EMBEDDING-PROJECTION" not in registry.names()
+
+
+def test_extra_constraints_duplicate_identity_does_not_raise():
+    """Re-passing a constraint identity already present must be a no-op,
+    not a ValueError (unlike registry.register() on the same object)."""
+    from cks.constraints.builtin import BUILTIN_CONSTRAINTS
+
+    structure = KnowledgeStructure([make_object("a"), make_object("a2")])
+    # BUILTIN_CONSTRAINTS are already in the default registry; passing
+    # them again as extra_constraints must not crash.
+    result = validate(structure, extra_constraints=BUILTIN_CONSTRAINTS)
+    assert result.is_valid
+
+
+def test_structural_semantic_constraint_validate_accept_extra_constraints():
+    from cks.validator import structural_validate, semantic_validate, evaluate_constraints
+    from cks.constraints.builtin import OPTIONAL_CONSTRAINTS
+
+    structure = KnowledgeStructure([
+        make_object("proj-1", otype="EmbeddingProjection"),
+    ])
+
+    # The extension constraint runs at SEMANTIC stage.
+    assert structural_validate(structure, extra_constraints=OPTIONAL_CONSTRAINTS) == []
+    semantic_diagnostics = semantic_validate(structure, extra_constraints=OPTIONAL_CONSTRAINTS)
+    assert any(d.identity == "CKS-EXT-EMBEDDING-PROJECTION" for d in semantic_diagnostics)
+
+    constraint_diagnostics = evaluate_constraints(structure, extra_constraints=OPTIONAL_CONSTRAINTS)
+    # EmbeddingProjectionIntegrityConstraint.stage is SEMANTIC, not
+    # CONSTRAINTS, so the dedicated CONSTRAINTS-stage evaluator
+    # correctly does not see it here (same stage-filtering fix that
+    # previously stopped constraint_validate() from double-counting
+    # structural/semantic diagnostics).
+    assert not any(d.identity == "CKS-EXT-EMBEDDING-PROJECTION" for d in constraint_diagnostics)

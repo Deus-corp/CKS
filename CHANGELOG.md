@@ -6,6 +6,15 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.5.0] - 2026-07-18
+
+### Added
+- `extra_constraints` parameter to `validate()`, `validate_all()`, `structural_validate()`, `semantic_validate()`, `evaluate_constraints()`, `ReferenceEngine.validate()`, and `ReferenceValidator.validate()`. Allows opting in additional constraints for a single call without mutating the global registry.
+- `ReferenceValidator._STAGE_ORDER` and `_scoped_registry()` to support scoped constraint execution.
+- Five new tests validating scoped constraint behaviour and non-interference with the global registry (total 138 tests).
+
+---
+
 ## [1.4.0] - 2026-07-18
 
 ### Added
