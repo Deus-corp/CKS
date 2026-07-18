@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Tests](https://img.shields.io/badge/tests-119%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-134%20passing-brightgreen)
 [![PyPI](https://img.shields.io/pypi/v/cks-core)](https://pypi.org/project/cks-core/)
 
 CKS is an open specification that defines how knowledge can be represented,
@@ -159,6 +159,7 @@ The current Python reference implementation provides:
 - JSON‑LD, Turtle, RDF/XML Export (via `cks export`)
 - Strict Plugin Validation (`--strict`)
 - Static Type Checking (mypy)
+- Optional Extension Constraints (opt‑in validators for specialised knowledge types)
 
 ---
 
@@ -345,6 +346,7 @@ Current implementation status:
 | Modular CLI | ✅ Complete |
 | Contract Documentation | ✅ Complete |
 | Static Type Checking | ✅ Complete |
+| Optional Constraints | ✅ Complete |
 
 The current implementation serves as the reference implementation of the
 existing CKS specifications.

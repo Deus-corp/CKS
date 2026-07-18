@@ -71,7 +71,7 @@ from .interface import (
 
 _EXTERNAL_COUNT = load_external_constraints()
 
-__version__ = "1.3.1"
+__version__ = "1.4.0"
 
 VERSION = tuple(
     int(part)

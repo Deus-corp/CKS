@@ -6,6 +6,18 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.4.0] - 2026-07-18
+
+### Added
+- `EmbeddingProjectionIntegrityConstraint` — optional constraint for validating vector-space projections of Knowledge Objects (requires exactly one `represents` relation to an existing source and an external `store_ref`).
+- `OPTIONAL_CONSTRAINTS` set in `builtin.py` – not auto‑registered, opt‑in per validator.
+- Comprehensive tests for the new constraint (11 new tests).
+
+### Changed
+- Bumped test suite to 134 tests.
+
+---
+
 ## [1.3.1] - 2026-07-18
 
 ### Fixed
