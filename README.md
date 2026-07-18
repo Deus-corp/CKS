@@ -290,7 +290,7 @@ python -m pytest -v
 
 Current status:
 
-- 114 tests
+- 134+ tests
 - all passing
 
 The test suite verifies:
