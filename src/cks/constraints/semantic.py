@@ -109,10 +109,6 @@ class DerivationCycleConstraint(Constraint):
         colour = {obj.identity.id: WHITE for obj in structure.objects}
 
         def dfs(node: str) -> None:
-            for neighbour in adjacency.get(node, ()):
-                state = colour.get(neighbour)
-                if state is None:
-                    continue
             colour[node] = GRAY
             for neighbour in adjacency.get(node, ()):
                 state = colour[neighbour]

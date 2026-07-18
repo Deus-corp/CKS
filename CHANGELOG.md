@@ -6,6 +6,13 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.3.1] - 2026-07-18
+
+### Fixed
+- Removed dead code in `DerivationCycleConstraint.dfs()` – an unused loop left over from the previous fix.
+
+---
+
 ## [1.3.0] - 2026-07-18
 
 ### Fixed
