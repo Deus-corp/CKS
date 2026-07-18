@@ -176,6 +176,11 @@ Constraints are organized into **Validation Domains** (CKS‑005):
 
 Constraints execute after structural and semantic validation.
 
+Built‑in constraints are auto‑registered. Optional constraints,
+such as `EmbeddingProjectionIntegrityConstraint`, are not registered
+by default and must be opted‑in explicitly per validator instance
+or process‑wide (see the Plugin Development Guide).
+
 ---
 
 # Evolution Engine

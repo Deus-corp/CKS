@@ -59,6 +59,34 @@ cks plugin list
 
 ---
 
+### Using built‑in optional constraints
+
+CKS ships with `OPTIONAL_CONSTRAINTS` (e.g. `EmbeddingProjectionIntegrityConstraint`).
+They are not registered by default. To enable them process‑wide:
+
+```python
+from cks.constraints.builtin import OPTIONAL_CONSTRAINTS
+from cks.constraints.registry import registry
+
+for constraint in OPTIONAL_CONSTRAINTS:
+    registry.register(constraint)
+```
+
+Or scoped to one ReferenceValidator:
+
+```python
+from cks.constraints.registry import ConstraintRegistry
+from cks.validator import ReferenceValidator
+
+reg = ConstraintRegistry()
+reg.register(MyConstraint())
+for constraint in OPTIONAL_CONSTRAINTS:
+    reg.register(constraint)
+validator = ReferenceValidator(registry=reg)
+```
+
+---
+
 ## Entry-Point Group
 
 - **Group:** `cks.constraints`

@@ -317,6 +317,32 @@ Projection never modifies the original structure.
 
 ---
 
+# Extension Constraints
+
+CKS provides optional constraints that are not active by default.
+They can be registered explicitly to extend the validation pipeline
+with domain‑specific rules.
+
+For example, the `EmbeddingProjectionIntegrityConstraint` (available
+in `cks.constraints.projection`) enforces that an `EmbeddingProjection`
+object points to a valid source object and references its vector
+payload externally.
+
+To activate an optional constraint, register it in the global registry
+or in a scoped `ConstraintRegistry`:
+
+```python
+from cks.constraints.builtin import OPTIONAL_CONSTRAINTS
+from cks.constraints.registry import registry
+
+for constraint in OPTIONAL_CONSTRAINTS:
+    registry.register(constraint)
+```
+
+See the Plugin Development Guide for more details.
+
+---
+
 # Evolution
 
 ## evolve()

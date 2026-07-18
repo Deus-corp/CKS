@@ -100,6 +100,26 @@ Multiple operators can be chained in a single operations file:
 
 ---
 
+### Extension Constraints
+
+CKS ships with optional constraints that are not active by default.
+For example, the `EmbeddingProjectionIntegrityConstraint` validates
+vector‑space projections of Knowledge Objects.
+
+To enable it in your code:
+
+```python
+from cks.constraints.builtin import OPTIONAL_CONSTRAINTS
+from cks.constraints.registry import registry
+
+for constraint in OPTIONAL_CONSTRAINTS:
+    registry.register(constraint)
+```
+
+See the Plugin Development Guide for more details.
+
+---
+
 # Canonical Workflow
 
 Most applications follow the same sequence of operations.
@@ -135,7 +155,7 @@ All corpus examples are verified by the automated test suite:
 python3 -m pytest -v
 ```
 
-Current status: 116 tests passing.
+Current status: 134+ tests passing.
 
 ---
 
