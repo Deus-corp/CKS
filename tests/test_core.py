@@ -300,3 +300,49 @@ def test_sets_are_converted_to_frozensets():
         obj.structure["tags"],
         frozenset,
     )
+
+
+# ============================================================================
+# Copy / Deepcopy Semantics (regression for MappingProxyType)
+# ============================================================================
+
+def test_knowledge_object_deepcopy_does_not_raise():
+    from copy import deepcopy
+    obj = KnowledgeObject(
+        identity=ObjectIdentity("obj", "Thing", "Thing"),
+        structure={"nested": {"a": [1, 2, {"b": 3}]}},
+    )
+    copied = deepcopy(obj)
+    assert copied is obj
+
+
+def test_knowledge_object_copy_returns_self():
+    from copy import copy
+    obj = KnowledgeObject(
+        identity=ObjectIdentity("obj", "Thing", "Thing"),
+        structure={"a": 1},
+    )
+    assert copy(obj) is obj
+
+
+def test_knowledge_structure_deepcopy_does_not_raise():
+    from copy import deepcopy
+    obj = KnowledgeObject(
+        identity=ObjectIdentity("obj-1", "Thing", "Thing"),
+        structure={"content": "hello"},
+    )
+    structure = KnowledgeStructure([obj])
+    copied = deepcopy(structure)
+    assert copied is structure
+    assert copied == structure
+
+
+def test_knowledge_object_deepcopy_inside_container_does_not_raise():
+    from copy import deepcopy
+    obj = KnowledgeObject(
+        identity=ObjectIdentity("obj", "Thing", "Thing"),
+        structure={"content": "hello"},
+    )
+    container = {"session_like": {"knowledge_structure": obj}}
+    copied = deepcopy(container)
+    assert copied["session_like"]["knowledge_structure"] is obj

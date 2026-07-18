@@ -6,6 +6,14 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.2.0] - 2026-07-18
+
+### Fixed
+- `copy.deepcopy` no longer raises `TypeError` for `KnowledgeObject` and `KnowledgeStructure` (resolved `cannot pickle 'mappingproxy' object`). These immutable types now return `self` on copy, which is safe and fixes integration with `cks-runtime`'s `InMemoryStorage`.
+- Added 4 regression tests for copy/deepcopy behaviour.
+
+---
+
 ## [1.1.2] - 2026-07-17
 
 ### Changed

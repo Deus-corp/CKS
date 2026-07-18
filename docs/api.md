@@ -442,6 +442,21 @@ The following classes are part of the supported public API.
 
 ---
 
+### Copy and deepcopy behaviour
+
+`KnowledgeObject`, `CanonicalRelation` and `KnowledgeStructure` are
+deeply immutable by contract.  When used with `copy.copy` or
+`copy.deepcopy` they return the same object (`self`) rather than
+creating a new copy.  This is safe and intentional – no observable
+state can be changed, so sharing the reference is indistinguishable
+from cloning the object.
+
+You can safely pass these objects to any library or store them in
+containers that rely on `deepcopy` (for example `cks-runtime`'s
+in‑memory storage).
+
+---
+
 # API Stability
 
 The public API follows semantic versioning.
