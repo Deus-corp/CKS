@@ -6,6 +6,18 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.3.0] - 2026-07-18
+
+### Fixed
+- **Severity comparison** now uses numeric priority instead of lexicographic string comparison, so warnings no longer incorrectly invalidate structures (bug #4).
+- **DerivationCycleConstraint** no longer crashes with `KeyError` when a `derives` relation references a non-existent participant — dangling references are now safely ignored by the cycle detector (bug #3).
+- **Schema CLI** (`cks schema validate`) now works after `pip install cks-core` — the canonical JSON schema is bundled as package data and loaded via `importlib.resources` (bug #5).
+
+### Changed
+- Schema file moved from `examples/json/` to `src/cks/schemas/` and declared as package data in `pyproject.toml`.
+
+---
+
 ## [1.2.2] - 2026-07-18
 
 ### Added

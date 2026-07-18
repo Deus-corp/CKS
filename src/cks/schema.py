@@ -9,17 +9,22 @@ structural errors early, before semantic validation.
 from __future__ import annotations
 
 import json
-from pathlib import Path
+from importlib import resources
 from typing import Any, Dict, Optional
 
 import jsonschema
 from jsonschema import validate as jsonschema_validate
 
-# Path to the canonical schema file, relative to the package root.
-_SCHEMA_PATH = Path(__file__).resolve().parent.parent.parent / "examples" / "json" / "cks-schema.json"
+# The canonical schema ships as package data (see [tool.setuptools.package-data]
+# in pyproject.toml) so it is available both when running from source and
+# when installed from a built wheel/sdist.
+_SCHEMA_PACKAGE = "cks.schemas"
+_SCHEMA_FILENAME = "cks-schema.json"
 
 # Load schema once at import time.
-with _SCHEMA_PATH.open("r", encoding="utf-8") as _fh:
+with resources.files(_SCHEMA_PACKAGE).joinpath(_SCHEMA_FILENAME).open(
+    "r", encoding="utf-8"
+) as _fh:
     _CANONICAL_SCHEMA: Dict[str, Any] = json.load(_fh)
 
 

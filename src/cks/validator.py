@@ -105,7 +105,7 @@ class ReferenceValidator:
         diagnostics = tuple(sorted(diagnostics_raw, key=Diagnostic.sort_key))
         collection = DiagnosticCollection(diagnostics=diagnostics)
         valid = all(
-            d.severity.value < min_severity.value
+            d.severity.priority < min_severity.priority
             for d in diagnostics
             if d.severity != DiagnosticSeverity.INFORMATION
         )

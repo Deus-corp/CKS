@@ -88,18 +88,31 @@ class DerivationCycleConstraint(Constraint):
         diagnostics: list[Diagnostic] = []
         adjacency: dict[str, list[str]] = {}
 
+        existing = {obj.identity.id for obj in structure.objects}
+
         for relation in structure.relations():
             if relation.relation_type != "derives":
                 continue
             if len(relation.participants) != 2:
                 continue
             source, target = relation.participants
+            # Dangling participants are reported by
+            # NoDanglingRelationConstraint (STRUCTURAL stage). This
+            # constraint only reasons about edges between objects that
+            # actually exist, so it must not crash on references it
+            # cannot resolve.
+            if source not in existing or target not in existing:
+                continue
             adjacency.setdefault(source, []).append(target)
 
         WHITE, GRAY, BLACK = 0, 1, 2
         colour = {obj.identity.id: WHITE for obj in structure.objects}
 
         def dfs(node: str) -> None:
+            for neighbour in adjacency.get(node, ()):
+                state = colour.get(neighbour)
+                if state is None:
+                    continue
             colour[node] = GRAY
             for neighbour in adjacency.get(node, ()):
                 state = colour[neighbour]
