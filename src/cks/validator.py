@@ -24,9 +24,7 @@ from .result import ValidationResult
 from .validation import ValidationStage
 from .constraints.base import Constraint
 from .constraints.registry import ConstraintRegistry, registry as _registry
-from .constraints.builtin import BUILTIN_CONSTRAINTS
-for constraint in BUILTIN_CONSTRAINTS:
-    _registry.register(constraint)
+import cks.constraints  # noqa: F401
 
 
 ConstraintEvaluator = Callable[[KnowledgeStructure], list[Diagnostic]] | Constraint
