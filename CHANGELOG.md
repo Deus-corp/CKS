@@ -6,6 +6,13 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.2.1] - 2026-07-18
+
+### Fixed
+- Validation pipeline no longer double‑counts diagnostics. The `CONSTRAINTS` stage now evaluates only constraints tagged with that stage, instead of re‑evaluating all registered constraints.
+
+---
+
 ## [1.2.0] - 2026-07-18
 
 ### Fixed

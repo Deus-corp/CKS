@@ -82,7 +82,7 @@ class ReferenceValidator:
     # ------------------------------------------------------------------
 
     def constraint_validate(self, structure: KnowledgeStructure) -> list[Diagnostic]:
-        return self._registry.evaluate(structure)
+        return self._registry.evaluate(structure, stage=ValidationStage.CONSTRAINTS)
 
     # ------------------------------------------------------------------
     # Pipeline
