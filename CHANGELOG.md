@@ -6,6 +6,13 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.2.2] - 2026-07-18
+
+### Added
+- Public function `parse_operations` in `cks.evolution` for deserializing JSON operation descriptors into `StructuralOperator` objects. Used by CLI, `cks-mcp`, and any other adapter that receives evolution requests over the wire.
+
+---
+
 ## [1.2.1] - 2026-07-18
 
 ### Fixed
