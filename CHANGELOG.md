@@ -6,6 +6,15 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.6.0] - 2026-07-19
+
+### Added
+- `VerificationRecordIntegrityConstraint` (OPTIONAL) – validates the shape of `VerificationRecord` objects, ensuring exactly one `verified_by` relation, a well-formed `checked_at` timestamp, a valid `checked_via` method, a correct `http_status` when present, and no qualitative judgment fields.
+- `OPTIONAL_CONSTRAINTS_BY_NAME` dictionary for stable name-based lookup of optional constraints (e.g., `"embedding_projection"`, `"verification_record"`).
+- 12 new tests for the verification constraint (total 150 tests).
+
+---
+
 ## [1.5.0] - 2026-07-18
 
 ### Added

@@ -1,8 +1,20 @@
+"""
+CKS Constraints — Built-in Canonical Constraints.
+
+Reference implementations of the canonical constraints defined by the
+CKS specifications.
+
+This module serves as a manifest. All constraint implementations reside
+in the corresponding domain modules (structural, semantic, derivation,
+etc.).
+"""
+
 from __future__ import annotations
 
 from .structural import UniqueIdentityConstraint, NoDanglingRelationConstraint
 from .semantic import DerivationArityConstraint, DerivationCycleConstraint
 from .projection import EmbeddingProjectionIntegrityConstraint
+from .verification import VerificationRecordIntegrityConstraint
 
 
 # =============================================================================
@@ -17,6 +29,7 @@ BUILTIN_CONSTRAINTS = (
     # --- Structural Domain ---
     UniqueIdentityConstraint(),
     NoDanglingRelationConstraint(),
+
     # --- Semantic Domain ---
     DerivationArityConstraint(),
     DerivationCycleConstraint(),
@@ -44,4 +57,14 @@ BUILTIN_CONSTRAINTS = (
 OPTIONAL_CONSTRAINTS = (
     # --- Projection Domain (CKS-001 "Documents as Structural Projections") ---
     EmbeddingProjectionIntegrityConstraint(),
+    VerificationRecordIntegrityConstraint(),
 )
+
+# Stable name -> constraint lookup for callers that select extensions by
+# name at the API boundary (e.g. an MCP tool parameter such as
+# `extensions=["embedding_projection"]`). Keeps that name->constraint
+# mapping defined once, in core, instead of re-implemented per caller.
+OPTIONAL_CONSTRAINTS_BY_NAME = {
+    "embedding_projection": EmbeddingProjectionIntegrityConstraint(),
+    "verification_record": VerificationRecordIntegrityConstraint(),
+}
