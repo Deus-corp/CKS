@@ -1,36 +1,28 @@
-site_name: Canonical Knowledge Structure (CKS)
-site_description: Universal representation-independent semantic foundation for knowledge.
-site_author: Vladyslav
-repo_url: https://github.com/<YOUR_GITHUB>/CKS
+site_name: CKS Documentation
+site_description: Canonical Knowledge Structure ecosystem documentation
+repo_url: https://github.com/Deus-corp/cks-core
 repo_name: GitHub
 
 theme:
   name: material
-
   language: en
-
   features:
     - navigation.instant
     - navigation.tabs
     - navigation.sections
     - navigation.expand
     - navigation.top
-
     - search.highlight
     - search.share
     - search.suggest
-
     - content.code.copy
-
   palette:
-
     - scheme: default
       primary: indigo
       accent: indigo
       toggle:
         icon: material/weather-night
         name: Dark mode
-
     - scheme: slate
       primary: indigo
       accent: indigo
@@ -39,27 +31,17 @@ theme:
         name: Light mode
 
 markdown_extensions:
-
   - admonition
-
   - tables
-
   - attr_list
-
   - footnotes
-
   - pymdownx.highlight
-
   - pymdownx.superfences
-
   - pymdownx.tabbed
-
   - pymdownx.details
 
 plugins:
-
   - search
-
   - mkdocstrings:
       handlers:
         python:
@@ -67,43 +49,54 @@ plugins:
             show_source: true
 
 nav:
-
   - Home: index.md
+  - Quick Start: quickstart.md
 
-  - Getting Started: getting-started.md
+  - cks-core:
+      - Overview: cks-core/index.md
+      - Getting Started: cks-core/getting-started.md
+      - Concepts: cks-core/concepts.md
+      - Architecture: cks-core/architecture.md
+      - API Reference: cks-core/api.md
+      - Plugin Development: cks-core/plugins.md
+      - Examples: cks-core/examples.md
+      - Contracts: cks-core/contracts.md
+      - Specifications:
+          - Overview: cks-core/specifications/index.md
+          - CKS-000: cks-core/specifications/CKS-000_Canonical_Foundations_and_Terminology.md
+          - CKS-001: cks-core/specifications/CKS-001_Core_Specification.md
+          - CKS-002: cks-core/specifications/CKS-002_Canonical_Construction_Specification.md
+          - CKS-003: cks-core/specifications/CKS-003_Canonical_Serialization.md
+          - CKS-004: cks-core/specifications/CKS-004_Canonical_Structure_Evolution.md
+          - CKS-005: cks-core/specifications/CKS-005_Validator_Specification.md
+          - CKS-006: cks-core/specifications/CKS-006_Reference_Engine_Specification.md
+          - CKS-007: cks-core/specifications/CKS-007_Canonical_Knowledge_Interface.md
+          - CKS-008: cks-core/specifications/CKS-008_Reference_Conformance_Specification.md
+          - CKS-B001-PY: cks-core/specifications/CKS-B001-PY_Python_Reference.md
 
-  - Concepts: concepts.md
+  - cks-runtime:
+      - Overview: cks-runtime/index.md
+      - Charter: cks-runtime/charter/CHARTER.md
+      - Architecture: cks-runtime/architecture/ARCH-001_Runtime_Architecture.md
+      - Analysis:
+          - Dependencies on CKS Core: cks-runtime/analysis/ANALYSIS-001_Runtime_Dependencies_on_CKS_Core.md
+      - ADR:
+          - ADR-001 Runtime Layering: cks-runtime/adr/ADR-001 Runtime Layering.md
+          - ADR-002 Session Ownership: cks-runtime/adr/ADR-002 Session Ownership.md
+          - ADR-003 Transaction Model: cks-runtime/adr/ADR-003 Transaction Model.md
+          - ADR-004 Storage Abstraction: cks-runtime/adr/ADR-004 Storage Abstraction.md
+          - ADR-005 Version History: cks-runtime/adr/ADR-005 Version History.md
+          - ADR-006 Adapter Architecture: cks-runtime/adr/ADR-006 Adapter Architecture.md
+      - Specifications:
+          - SPEC-001 Runtime Overview: cks-runtime/standards/runtime/SPEC-001_Runtime_Overview.md
+          - SPEC-002 Session Model: cks-runtime/standards/runtime/SPEC-002_Session_Model.md
+          - SPEC-003 Runtime API: cks-runtime/standards/runtime/SPEC-003_Runtime_API.md
+          - SPEC-004 Diagnostics: cks-runtime/standards/runtime/SPEC-004_Diagnostics.md
+          - SPEC-005 Transactions: cks-runtime/standards/runtime/SPEC-005_Transactions.md
+          - SPEC-006 Storage: cks-runtime/standards/runtime/SPEC-006_Storage.md
+          - SPEC-007 Version History: cks-runtime/standards/runtime/SPEC-007_Version_History.md
+          - SPEC-008 Conformance: cks-runtime/standards/runtime/SPEC-008_Conformance.md
 
-  - Architecture: architecture.md
-
-  - API Reference: api.md
-
-  - Plugin Development: plugins.md
-
-  - Examples: examples.md
-
-  - Contracts: contracts.md
-
-  - Specifications:
-
-      - Overview: specifications/index.md
-
-      - CKS-000: specifications/CKS-000_Canonical_Foundations_and_Terminology.md
-
-      - CKS-001: specifications/CKS-001_Core_Specification.md
-
-      - CKS-002: specifications/CKS-002_Canonical_Construction_Specification.md
-
-      - CKS-003: specifications/CKS-003_Canonical_Serialization.md
-
-      - CKS-004: specifications/CKS-004_Canonical_Structure_Evolution.md
-
-      - CKS-005: specifications/CKS-005_Validator_Specification.md
-
-      - CKS-006: specifications/CKS-006_Reference_Engine_Specification.md
-
-      - CKS-007: specifications/CKS-007_Canonical_Knowledge_Interface.md
-
-      - CKS-008: specifications/CKS-008_Reference_Conformance_Specification.md
-
-      - CKS-B001-PY: specifications/CKS-B001-PY_Python_Reference.md
+  - cks-mcp:
+      - Overview: cks-mcp/index.md
+      - Architecture: cks-mcp/ARCHITECTURE.md
