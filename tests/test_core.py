@@ -346,3 +346,115 @@ def test_knowledge_object_deepcopy_inside_container_does_not_raise():
     container = {"session_like": {"knowledge_structure": obj}}
     copied = deepcopy(container)
     assert copied["session_like"]["knowledge_structure"] is obj
+
+
+# ============================================================================
+# Merkle Hashing & Structural Diff (v1.7.0)
+# ============================================================================
+
+def test_knowledge_object_has_stable_hash():
+    """KnowledgeObject._hash must be a 32-byte value computed once."""
+    obj = KnowledgeObject(
+        identity=ObjectIdentity("obj", "Thing", "Thing"),
+        structure={"a": 1},
+    )
+    assert isinstance(obj._hash, bytes)
+    assert len(obj._hash) == 32
+
+def test_knowledge_object_hash_deterministic():
+    """Same identity + structure must yield the same hash."""
+    obj1 = KnowledgeObject(
+        identity=ObjectIdentity("obj", "Thing", "Thing"),
+        structure={"a": 1, "b": 2},
+    )
+    obj2 = KnowledgeObject(
+        identity=ObjectIdentity("obj", "Thing", "Thing"),
+        structure={"b": 2, "a": 1},  # другой порядок ключей
+    )
+    assert obj1._hash == obj2._hash
+
+def test_knowledge_object_hash_differs_for_different_structure():
+    obj1 = KnowledgeObject(
+        identity=ObjectIdentity("obj", "Thing", "Thing"),
+        structure={"a": 1},
+    )
+    obj2 = KnowledgeObject(
+        identity=ObjectIdentity("obj", "Thing", "Thing"),
+        structure={"a": 2},
+    )
+    assert obj1._hash != obj2._hash
+
+def test_knowledge_structure_root_hash_deterministic():
+    """Merkle root must be independent of insertion order."""
+    a = KnowledgeObject(ObjectIdentity("a", "T", "A"), structure={})
+    b = KnowledgeObject(ObjectIdentity("b", "T", "B"), structure={})
+    s1 = KnowledgeStructure([a, b])
+    s2 = KnowledgeStructure([b, a])
+    assert s1.root_hash == s2.root_hash
+    assert s1.structurally_equivalent(s2)
+
+def test_knowledge_structure_root_hash_different_content():
+    a = KnowledgeObject(ObjectIdentity("a", "T", "A"), structure={})
+    b = KnowledgeObject(ObjectIdentity("b", "T", "B"), structure={})
+    s1 = KnowledgeStructure([a, b])
+    s2 = KnowledgeStructure([a])
+    assert s1.root_hash != s2.root_hash
+    assert not s1.structurally_equivalent(s2)
+
+def test_knowledge_structure_is_hashable():
+    """KnowledgeStructure now implements __hash__ based on root hash."""
+    a = KnowledgeObject(ObjectIdentity("a", "T", "A"), structure={})
+    b = KnowledgeObject(ObjectIdentity("b", "T", "B"), structure={})
+    s1 = KnowledgeStructure([a, b])
+    s2 = KnowledgeStructure([b, a])
+    s3 = KnowledgeStructure([a])
+    assert hash(s1) == hash(s2)
+    assert hash(s1) != hash(s3)
+    # Must be usable as dictionary key
+    d = {s1: "test"}
+    assert d[s2] == "test"
+
+def test_diff_identity():
+    """diff of identical structures must return empty list."""
+    left = make_structure()
+    right = make_structure()
+    ops = left.diff(right)
+    assert ops == []
+
+def test_diff_add_object():
+    """Adding an object must produce exactly one AddObject operator."""
+    left = make_structure()
+    new_obj = make_object("obj-3")
+    right = KnowledgeStructure(list(left.objects) + [new_obj])
+    ops = left.diff(right)
+    assert len(ops) == 1
+    from cks.evolution import AddObject
+    assert isinstance(ops[0], AddObject)
+
+def test_diff_remove_object():
+    """Removing an object must produce RemoveObject (and cascade relations)."""
+    left = make_structure()
+    # Remove obj-1, which will cascade-delete rel-1 (participants: obj-1, obj-2)
+    right = KnowledgeStructure([obj for obj in left.objects if obj.identity.id != "obj-1"])
+    ops = left.diff(right)
+    from cks.evolution import RemoveObject
+    assert any(isinstance(op, RemoveObject) for op in ops)
+
+def test_diff_modified_object_preserves_relations():
+    """Modifying an object must cascade-remove and re-add its dependent relations."""
+    left = make_structure()
+    # Modify obj-1: change structure
+    modified_obj = KnowledgeObject(
+        identity=ObjectIdentity("obj-1", "Definition", "obj-1"),
+        structure={"key": "new_value"},
+    )
+    right_objects = [modified_obj] + [obj for obj in left.objects if obj.identity.id != "obj-1"]
+    right = KnowledgeStructure(right_objects)
+
+    ops = left.diff(right)
+    from cks.evolution import compose
+    result = compose(left, ops)
+
+    assert result.structurally_equivalent(right)
+    # rel-1 must survive the modification
+    assert "rel-1" in result

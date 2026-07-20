@@ -6,6 +6,16 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.7.0] - 2026-07-20
+
+### Added
+- Merkle‑tree based canonical hashing for `KnowledgeObject` and `KnowledgeStructure`, enabling O(1) structural equivalence comparison.
+- `KnowledgeStructure.diff(target)` method that computes a correct, ordered list of structural operators to evolve the structure into `target`, handling cascading relation deletions.
+- `KnowledgeStructure.__hash__` is now implemented, allowing structures to be used as dictionary keys or set members.
+- `KnowledgeStructure.root_hash` property for external comparison and logging.
+
+---
+
 ## [1.6.0] - 2026-07-19
 
 ### Added

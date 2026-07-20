@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Tests](https://img.shields.io/badge/tests-150%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-160%20passing-brightgreen)
 [![PyPI](https://img.shields.io/pypi/v/cks-core)](https://pypi.org/project/cks-core/)
 
 CKS is an open specification that defines how knowledge can be represented,
@@ -160,6 +160,7 @@ The current Python reference implementation provides:
 - Strict Plugin Validation (`--strict`)
 - Static Type Checking (mypy)
 - Optional Extension Constraints (opt‑in validators for specialised knowledge types)
+- Merkle‑tree based structural hashing for O(1) comparison and diff computation
 
 ---
 
@@ -290,7 +291,7 @@ python -m pytest -v
 
 Current status:
 
-- 150+ tests
+- 160+ tests
 - all passing
 
 The test suite verifies:
@@ -347,6 +348,7 @@ Current implementation status:
 | Contract Documentation | ✅ Complete |
 | Static Type Checking | ✅ Complete |
 | Optional Constraints | ✅ Complete |
+| Merkle Hashing & Diff | ✅ Complete |
 
 The current implementation serves as the reference implementation of the
 existing CKS specifications.
