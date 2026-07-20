@@ -1,0 +1,3599 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Canonical Knowledge Structure ecosystem documentation">
+      
+      
+      
+      
+        <link rel="prev" href="../CKS-004_Canonical_Structure_Evolution/">
+      
+      
+        <link rel="next" href="../CKS-006_Reference_Engine_Specification/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>CKS-005 - CKS Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#part-i-normative-validator-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CKS Documentation" class="md-header__button md-logo" aria-label="CKS Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CKS Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CKS-005
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Deus-corp/cks-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../quickstart/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Quick Start
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  cks-core
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../cks-runtime/" class="md-tabs__link">
+          
+  
+  
+  cks-runtime
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../cks-mcp/" class="md-tabs__link">
+          
+  
+  
+  cks-mcp
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CKS Documentation" class="md-nav__button md-logo" aria-label="CKS Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CKS Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Deus-corp/cks-core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    cks-core
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    cks-core
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plugins/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contracts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contracts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-000_Canonical_Foundations_and_Terminology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-000
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-001_Core_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-001
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-002_Canonical_Construction_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-002
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-003_Canonical_Serialization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-003
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-004_Canonical_Structure_Evolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-004
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-005
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-006_Reference_Engine_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-006
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-007_Canonical_Knowledge_Interface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-007
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-008_Reference_Conformance_Specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-008
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CKS-B001-PY_Python_Reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CKS-B001-PY
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    cks-runtime
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    cks-runtime
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/charter/CHARTER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Charter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/architecture/ARCH-001_Runtime_Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Analysis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/analysis/ANALYSIS-001_Runtime_Dependencies_on_CKS_Core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependencies on CKS Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/adr/ADR-001%20Runtime%20Layering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-001 Runtime Layering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/adr/ADR-002%20Session%20Ownership/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-002 Session Ownership
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/adr/ADR-003%20Transaction%20Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-003 Transaction Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/adr/ADR-004%20Storage%20Abstraction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-004 Storage Abstraction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/adr/ADR-005%20Version%20History/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-005 Version History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/adr/ADR-006%20Adapter%20Architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-006 Adapter Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specifications
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Specifications
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/standards/runtime/SPEC-001_Runtime_Overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC-001 Runtime Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/standards/runtime/SPEC-002_Session_Model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC-002 Session Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/standards/runtime/SPEC-003_Runtime_API/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC-003 Runtime API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/standards/runtime/SPEC-004_Diagnostics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC-004 Diagnostics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/standards/runtime/SPEC-005_Transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC-005 Transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/standards/runtime/SPEC-006_Storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC-006 Storage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/standards/runtime/SPEC-007_Version_History/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC-007 Version History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-runtime/standards/runtime/SPEC-008_Conformance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPEC-008 Conformance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    cks-mcp
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    cks-mcp
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cks-mcp/ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="part-i-normative-validator-model">Part I — Normative Validator Model</h1>
+<h1 id="introduction">Introduction</h1>
+<h2 id="purpose">Purpose</h2>
+<p>The purpose of this specification is to define the canonical model governing validation within the Canonical Knowledge Structure ecosystem.</p>
+<p>Where previous Core CKS specifications define:</p>
+<ul>
+<li>canonical semantic entities;</li>
+<li>canonical construction;</li>
+<li>canonical serialization;</li>
+<li>canonical structure evolution,</li>
+</ul>
+<p>this specification defines the canonical validation model through which the correctness of Canonical Knowledge Structures is determined.</p>
+<p>Accordingly, this specification establishes the implementation-independent mathematical foundation of canonical validation independently of any programming language, execution engine, software architecture, or implementation strategy.</p>
+<hr />
+<h2 id="scope">Scope</h2>
+<p>This specification defines:</p>
+<ul>
+<li>the Canonical Validator;</li>
+<li>the Canonical Validation Model;</li>
+<li>Canonical Validation Constraints;</li>
+<li>Constraint Evaluation;</li>
+<li>Canonical Validation Reports;</li>
+<li>Validator Conformance;</li>
+<li>validation semantics;</li>
+<li>validation determinism;</li>
+<li>validation compatibility.</li>
+</ul>
+<p>Algorithms, optimization techniques, execution engines, software architectures, concurrency models, storage mechanisms, diagnostic systems, and implementation strategies are intentionally outside the scope of this specification.</p>
+<hr />
+<h2 id="position-within-cks">Position within CKS</h2>
+<p>The Core CKS specifications are organized as follows:</p>
+<ul>
+<li><strong>CKS-000</strong> establishes the foundational principles governing the Canonical Knowledge Structure ecosystem.</li>
+<li><strong>CKS-001</strong> defines the canonical semantic model.</li>
+<li><strong>CKS-002</strong> defines canonical construction.</li>
+<li><strong>CKS-003</strong> defines canonical serialization.</li>
+<li><strong>CKS-004</strong> defines canonical structure evolution.</li>
+<li><strong>CKS-005</strong> defines the canonical validation model governing the verification of Canonical Knowledge Structures.</li>
+</ul>
+<p>Together, these specifications establish the implementation-independent mathematical foundation of Canonical Knowledge Structures and their canonical validation.</p>
+<p>Unlike the previous Core Specifications, this document establishes the canonical bridge between the mathematical model of Canonical Knowledge Structures and their future software implementations.</p>
+<hr />
+<h2 id="validator-position">Validator Position</h2>
+<p>Canonical validation occupies a unique position within the CKS ecosystem.</p>
+<p>The Core Specifications define canonical semantics.</p>
+<p>The Canonical Validator determines whether a given Canonical Knowledge Structure satisfies those semantics.</p>
+<p>Validation therefore introduces no new canonical semantics.</p>
+<p>Instead, it evaluates conformance to semantics already established by the Core CKS specifications.</p>
+<hr />
+<h2 id="validation-principle">Validation Principle</h2>
+<p>Canonical validation is observational.</p>
+<p>A Canonical Validator observes a Canonical Knowledge Structure and determines whether it satisfies the Canonical Validation Constraints established by the Core CKS specifications.</p>
+<p>Validation shall never modify:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical structure;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical semantics.</li>
+</ul>
+<p>Accordingly, canonical validation constitutes semantic observation rather than canonical evolution.</p>
+<hr />
+<h2 id="implementation-independence">Implementation Independence</h2>
+<p>The Canonical Validation Model is independent of:</p>
+<ul>
+<li>programming languages;</li>
+<li>execution environments;</li>
+<li>serialization formats;</li>
+<li>storage technologies;</li>
+<li>software architectures;</li>
+<li>implementation strategies.</li>
+</ul>
+<p>Equivalent implementations shall produce canonically equivalent validation results.</p>
+<hr />
+<h2 id="document-organization">Document Organization</h2>
+<p>This specification consists of two complementary parts.</p>
+<p><strong>Part I — Normative Validator Model</strong></p>
+<p>defines the canonical validation model, Canonical Validation Constraints, Constraint Evaluation, Canonical Validation Reports, and Validator Conformance.</p>
+<p><strong>Part II — Mathematical Theory of Canonical Validation</strong></p>
+<p>establishes the mathematical properties of canonical validation, including determinism, soundness, completeness, equivalence, and the formal foundations of validator correctness.</p>
+<p>Together, these two parts establish the complete implementation-independent foundation of canonical validation within the Canonical Knowledge Structure ecosystem.</p>
+<hr />
+<h1 id="canonical-validation-model">Canonical Validation Model</h1>
+<h2 id="purpose_1">Purpose</h2>
+<p>The Canonical Validation Model defines the implementation‑independent
+mathematical model governing canonical validation within the Canonical
+Knowledge Structure ecosystem.  The model specifies how validity is
+determined exclusively from canonical semantics.</p>
+<h2 id="canonical-validation">Canonical Validation</h2>
+<p>Canonical Validation is the canonical process of determining whether a
+Canonical Knowledge Structure satisfies every applicable Canonical
+Validation Constraint.</p>
+<h2 id="validation-function">Validation Function</h2>
+<p>Canonical Validation is formally represented as the total function</p>
+<p>$$
+Validation : KS \to {True,\;False},
+$$</p>
+<p>where</p>
+<ul>
+<li>(KS) denotes the Canonical Knowledge Space;</li>
+<li>(True) means that every applicable Canonical Validation Constraint
+  is satisfied;</li>
+<li>(False) means that at least one such constraint is violated.</li>
+</ul>
+<p>The Validation Function constitutes the canonical realization of the
+Validity criterion defined in CKS‑001 (Section 13.2).  It maps each
+Canonical Knowledge Structure to its formal admissibility status
+according to the complete set of canonical constraints established by
+the Core CKS specifications and the Validator Specification.</p>
+<h2 id="validation-domain">Validation Domain</h2>
+<p>Canonical Validation is defined exclusively for Canonical Knowledge
+Structures.  Representations such as serialization formats,
+implementation objects, or storage encodings shall be interpreted as
+Canonical Knowledge Structures before validation is performed.</p>
+<hr />
+<h1 id="validation-principles">Validation Principles</h1>
+<h2 id="purpose_2">Purpose</h2>
+<p>Validation Principles define the fundamental canonical properties
+governing every Canonical Validator.  These principles establish the
+semantic requirements that every conformant implementation shall satisfy
+independently of its implementation strategy.</p>
+<h2 id="semantic-principle">Semantic Principle</h2>
+<p>Canonical Validation shall evaluate canonical semantics exclusively.
+Validation shall never depend upon implementation‑specific properties
+including serialization syntax, storage organisation, execution
+environment, implementation language, or software architecture.</p>
+<h2 id="observational-principle">Observational Principle</h2>
+<p>Canonical Validation is purely observational.  Validation shall never
+modify canonical identity, canonical structure, canonical relations,
+canonical derivations, or canonical semantics.  It constitutes semantic
+observation rather than Canonical Structure Evolution.</p>
+<h2 id="determinism-principle">Determinism Principle</h2>
+<p>Canonical Validation shall be deterministic.  Identical Canonical
+Knowledge Structures shall always produce equivalent Validation Results.
+Validation is a total function on the Canonical Knowledge Space: every
+Canonical Knowledge Structure possesses exactly one Validation Result
+with respect to a fixed version of the Core CKS specifications.</p>
+<h2 id="completeness-principle">Completeness Principle</h2>
+<p>Canonical Validation shall evaluate every Canonical Validation
+Constraint applicable to the validated Canonical Knowledge Structure.
+Omission of an applicable constraint invalidates the validation process.</p>
+<h2 id="consistency-principle">Consistency Principle</h2>
+<p>Canonical Validation shall produce internally consistent results.  A
+Validation Result shall never simultaneously declare a Canonical
+Knowledge Structure both valid and invalid.  Equivalent structures shall
+never produce contradictory outcomes.</p>
+<h2 id="traceability-principle">Traceability Principle</h2>
+<p>Every validation outcome shall be traceable to the Canonical Validation
+Constraints from which it was derived.  Traceability is independent of
+diagnostic presentation.</p>
+<h2 id="representation-independence-principle">Representation Independence Principle</h2>
+<p>Canonical Validation shall preserve identical semantics across all
+serialization formats and implementation technologies.  Equivalent
+Canonical Knowledge Structures shall produce equivalent results
+regardless of their concrete representation.</p>
+<h2 id="compatibility-principle">Compatibility Principle</h2>
+<p>Canonical Validation shall remain compatible with all Core CKS
+specifications.  Implementations shall evaluate only the canonical
+semantics established by the corresponding version of the Core CKS
+model.  Validation shall never introduce additional canonical semantics.</p>
+<h2 id="consequences">Consequences</h2>
+<p>The Validation Principles guarantee deterministic, semantically correct,
+observationally pure, implementation‑independent, interoperable, and
+reproducible validation.  These principles constitute mandatory
+requirements for every conformant Canonical Validator.</p>
+<hr />
+<h1 id="validation-domains">Validation Domains</h1>
+<h2 id="purpose_3">Purpose</h2>
+<p>Validation Domains define the canonical semantic domains within which Canonical Validation is performed.</p>
+<p>Each Validation Domain corresponds to a distinct aspect of the Canonical Knowledge Structure whose correctness is determined independently while contributing to the overall Canonical Validation Result.</p>
+<p>Validation Domains partition canonical validation without partitioning canonical semantics.</p>
+<hr />
+<h2 id="validation-domain_1">Validation Domain</h2>
+<p>A <strong>Validation Domain</strong> is a canonical semantic domain containing a coherent class of Canonical Validation Constraints.</p>
+<p>Each Canonical Validation Constraint belongs to exactly one Validation Domain.</p>
+<p>Validation Domains organize validation.</p>
+<p>They do not introduce additional canonical semantics.</p>
+<hr />
+<h2 id="domain-principle">Domain Principle</h2>
+<p>Canonical Validation shall evaluate every applicable Validation Domain.</p>
+<p>The validity of a Canonical Knowledge Structure is determined collectively by all applicable Validation Domains.</p>
+<p>No Validation Domain shall be omitted.</p>
+<hr />
+<h2 id="canonical-validation-domains">Canonical Validation Domains</h2>
+<p>The Core CKS model recognizes the following Validation Domains:</p>
+<ul>
+<li>Identity Validation;</li>
+<li>Structural Validation;</li>
+<li>Relation Validation;</li>
+<li>Derivation Validation;</li>
+<li>Metadata Validation;</li>
+<li>Serialization Validation;</li>
+<li>Evolution Validation.</li>
+</ul>
+<p>Future Core Specifications may introduce additional Validation Domains without modifying the semantics of existing domains.</p>
+<p>Validation Domains represent an architectural grouping of Canonical
+Validation Constraints for the purpose of organising the validation
+process.  They do not extend the canonical semantic model defined by
+CKS‑001, nor do they introduce new primitive semantic entities.  The
+partitioning of constraints into domains is a structural convenience
+for implementors and carries no additional canonical semantics.</p>
+<hr />
+<h2 id="domain-independence">Domain Independence</h2>
+<p>Validation Domains are semantically independent.</p>
+<p>The evaluation performed within one Validation Domain shall not modify the evaluation performed within another.</p>
+<p>Dependencies between canonical constraints may exist, but Validation Domains themselves remain conceptually independent.</p>
+<hr />
+<h2 id="domain-composition">Domain Composition</h2>
+<p>The Canonical Validation Result is obtained by combining the results of every applicable Validation Domain.</p>
+<p>Each Validation Domain contributes only its own canonical validation information.</p>
+<p>No Validation Domain determines the overall validation result independently of the remaining applicable domains.</p>
+<hr />
+<h2 id="extensibility">Extensibility</h2>
+<p>Validation Domains are extensible.</p>
+<p>Future Core Specifications may define additional Validation Domains provided that:</p>
+<ul>
+<li>previously defined Validation Domains remain unchanged;</li>
+<li>canonical semantics remain preserved;</li>
+<li>interoperability is maintained.</li>
+</ul>
+<hr />
+<h2 id="representation-independence">Representation Independence</h2>
+<p>Validation Domains are independent of:</p>
+<ul>
+<li>implementation language;</li>
+<li>serialization format;</li>
+<li>execution environment;</li>
+<li>software architecture;</li>
+<li>storage technology.</li>
+</ul>
+<p>Only canonical semantics determine membership within a Validation Domain.</p>
+<hr />
+<h1 id="canonical-validation-constraints">Canonical Validation Constraints</h1>
+<h2 id="purpose_4">Purpose</h2>
+<p>Canonical Validation Constraints define the canonical semantic conditions whose satisfaction determines the validity of a Canonical Knowledge Structure.</p>
+<p>Validation Constraints constitute the normative basis of Canonical Validation.</p>
+<p>They describe canonical correctness rather than validation procedures.</p>
+<hr />
+<h2 id="canonical-validation-constraint">Canonical Validation Constraint</h2>
+<p>A <strong>Canonical Validation Constraint (CVC)</strong> is a canonical semantic condition established by the Core CKS specifications.</p>
+<p>Each Canonical Validation Constraint specifies one necessary condition for canonical validity.</p>
+<p>Violation of a Canonical Validation Constraint constitutes a validation failure.</p>
+<hr />
+<h2 id="constraint-principle">Constraint Principle</h2>
+<p>Canonical Validation shall evaluate every Canonical Validation Constraint applicable to the validated Canonical Knowledge Structure.</p>
+<p>No applicable Canonical Validation Constraint may be omitted.</p>
+<p>Validation completeness therefore depends upon complete constraint evaluation.</p>
+<hr />
+<h2 id="constraint-independence">Constraint Independence</h2>
+<p>Each Canonical Validation Constraint shall possess independent canonical semantics.</p>
+<p>The semantic interpretation of one Canonical Validation Constraint shall not redefine the semantics of another.</p>
+<p>Dependencies between constraints may exist, but each constraint remains individually well-defined.</p>
+<hr />
+<h2 id="constraint-classification">Constraint Classification</h2>
+<p>Canonical Validation Constraints may be classified according to their Validation Domains.</p>
+<p>Examples include constraints concerning:</p>
+<ul>
+<li>canonical identity;</li>
+<li>structural organization;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>metadata consistency;</li>
+<li>serialization correctness;</li>
+<li>structure evolution.</li>
+</ul>
+<p>Future specifications may define additional Canonical Validation Constraints without modifying existing canonical semantics.</p>
+<hr />
+<h2 id="constraint-satisfaction">Constraint Satisfaction</h2>
+<p>A Canonical Validation Constraint is satisfied if the validated Canonical Knowledge Structure fulfills the semantic condition defined by that constraint.</p>
+<p>Otherwise, the constraint is violated.</p>
+<p>Constraint satisfaction depends exclusively upon canonical semantics.</p>
+<hr />
+<h2 id="constraint-preservation">Constraint Preservation</h2>
+<p>Canonical Validation Constraints are normative.</p>
+<p>Validator implementations evaluate Canonical Validation Constraints but shall never modify them.</p>
+<p>Canonical Validation Constraints are established exclusively by the Core CKS specifications.</p>
+<hr />
+<h2 id="representation-independence_1">Representation Independence</h2>
+<p>Canonical Validation Constraints are independent of:</p>
+<ul>
+<li>serialization format;</li>
+<li>implementation language;</li>
+<li>execution platform;</li>
+<li>software architecture;</li>
+<li>storage technology.</li>
+</ul>
+<p>Only canonical semantics determine constraint satisfaction.</p>
+<hr />
+<h1 id="constraint-evaluation">Constraint Evaluation</h1>
+<h2 id="purpose_5">Purpose</h2>
+<p>Constraint Evaluation defines the canonical process through which Canonical Validation Constraints are evaluated.</p>
+<p>Its purpose is to determine whether each applicable Canonical Validation Constraint is satisfied by a given Canonical Knowledge Structure.</p>
+<p>Constraint Evaluation is independent of implementation, execution strategy, and software architecture.</p>
+<hr />
+<h2 id="evaluation-principle">Evaluation Principle</h2>
+<p>Every applicable Canonical Validation Constraint shall be evaluated independently with respect to the Canonical Knowledge Structure under validation.</p>
+<p>Constraint Evaluation determines only whether a constraint is satisfied.</p>
+<p>It shall never modify canonical semantics.</p>
+<hr />
+<h2 id="applicability">Applicability</h2>
+<p>A Canonical Validation Constraint shall be evaluated only when it is applicable to the validated Canonical Knowledge Structure.</p>
+<p>Applicability is determined exclusively by canonical semantics.</p>
+<p>Constraints outside their canonical scope shall not be evaluated.</p>
+<hr />
+<h2 id="evaluation-result">Evaluation Result</h2>
+<p>The evaluation of every applicable Canonical Validation Constraint shall produce exactly one of the following canonical outcomes:</p>
+<ul>
+<li>Satisfied;</li>
+<li>Violated.</li>
+</ul>
+<p>No additional canonical evaluation outcomes are defined by the Core Validator Model.</p>
+<hr />
+<h2 id="evaluation-independence">Evaluation Independence</h2>
+<p>Constraint Evaluation is independent.</p>
+<p>The evaluation of one Canonical Validation Constraint shall not modify:</p>
+<ul>
+<li>the Canonical Knowledge Structure;</li>
+<li>the semantics of other Canonical Validation Constraints;</li>
+<li>the evaluation outcome of independent constraints.</li>
+</ul>
+<p>Dependencies defined by canonical semantics remain unaffected.</p>
+<hr />
+<h2 id="determinism">Determinism</h2>
+<p>Constraint Evaluation shall be deterministic.</p>
+<p>Given identical:</p>
+<ul>
+<li>Canonical Knowledge Structures;</li>
+<li>Canonical Validation Constraints;</li>
+</ul>
+<p>evaluation shall always produce identical canonical outcomes.</p>
+<p>Formally,</p>
+<p>Evaluate(S, C)</p>
+<p>=
+Evaluate(S, C)</p>
+<p>for every admissible Canonical Knowledge Structure S and applicable Canonical Validation Constraint C.</p>
+<hr />
+<h2 id="semantic-preservation">Semantic Preservation</h2>
+<p>Constraint Evaluation is observational.</p>
+<p>It shall preserve:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical structure;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical metadata.</li>
+</ul>
+<p>Constraint Evaluation performs semantic observation rather than structural evolution.</p>
+<hr />
+<h2 id="representation-independence_2">Representation Independence</h2>
+<p>Constraint Evaluation is independent of:</p>
+<ul>
+<li>serialization format;</li>
+<li>implementation language;</li>
+<li>execution platform;</li>
+<li>software architecture;</li>
+<li>storage technology.</li>
+</ul>
+<p>Equivalent implementations shall produce identical evaluation outcomes.</p>
+<hr />
+<h1 id="validation-results">Validation Results</h1>
+<h2 id="purpose_6">Purpose</h2>
+<p>Validation Results define the canonical outcome produced by Canonical Validation.</p>
+<p>A Validation Result summarizes the semantic status of the validated Canonical Knowledge Structure without modifying its canonical semantics.</p>
+<p>Validation Results provide the formal basis for determining canonical validity.</p>
+<hr />
+<h2 id="validation-result">Validation Result</h2>
+<p>A <strong>Validation Result (VR)</strong> is the canonical outcome produced after evaluating all applicable Canonical Validation Constraints.</p>
+<p>A Validation Result represents the semantic state of validation rather than the Canonical Knowledge Structure itself.</p>
+<hr />
+<h2 id="result-principle">Result Principle</h2>
+<p>A Validation Result shall be determined exclusively by the outcomes of Canonical Constraint Evaluation.</p>
+<p>No implementation-specific information shall influence the canonical Validation Result.</p>
+<hr />
+<h2 id="canonical-outcomes">Canonical Outcomes</h2>
+<p>The Core Validator Model recognizes two canonical validation outcomes:</p>
+<ul>
+<li><strong>Valid</strong></li>
+<li><strong>Invalid</strong></li>
+</ul>
+<p>A Canonical Knowledge Structure is <strong>Valid</strong> if every applicable Canonical Validation Constraint is satisfied.</p>
+<p>Otherwise, the Validation Result is <strong>Invalid</strong>.</p>
+<hr />
+<h2 id="validation-completeness">Validation Completeness</h2>
+<p>A Validation Result is complete if every applicable Canonical Validation Constraint has been evaluated.</p>
+<p>Incomplete constraint evaluation shall not produce a canonical Validation Result.</p>
+<hr />
+<h2 id="validation-consistency">Validation Consistency</h2>
+<p>Equivalent Canonical Knowledge Structures shall always produce equivalent Validation Results.</p>
+<p>Formally,</p>
+<p>if</p>
+<p>S₁ ≡ S₂,</p>
+<p>then</p>
+<p>Validate(S₁)</p>
+<p>=
+Validate(S₂).</p>
+<p>Validation consistency follows from canonical semantic equivalence.</p>
+<hr />
+<h2 id="semantic-interpretation">Semantic Interpretation</h2>
+<p>The Validation Result reflects only canonical semantic correctness.</p>
+<p>It shall not measure:</p>
+<ul>
+<li>quality;</li>
+<li>usefulness;</li>
+<li>completeness;</li>
+<li>importance;</li>
+<li>implementation efficiency.</li>
+</ul>
+<p>Validation determines canonical validity exclusively.</p>
+<hr />
+<h2 id="representation-independence_3">Representation Independence</h2>
+<p>Validation Results are independent of:</p>
+<ul>
+<li>serialization format;</li>
+<li>implementation language;</li>
+<li>execution platform;</li>
+<li>software architecture;</li>
+<li>storage technology.</li>
+</ul>
+<p>Equivalent validator implementations shall produce identical Validation Results.</p>
+<hr />
+<h1 id="validation-procedure">Validation Procedure</h1>
+<h2 id="purpose_7">Purpose</h2>
+<p>The Validation Procedure defines the canonical sequence through which Canonical Validation is performed.</p>
+<p>Its purpose is to ensure that every conformant Validator evaluates Canonical Knowledge Structures according to the same implementation-independent validation process.</p>
+<p>The Validation Procedure specifies semantic stages rather than implementation algorithms.</p>
+<hr />
+<h2 id="procedure-principle">Procedure Principle</h2>
+<p>Canonical Validation shall proceed through a deterministic sequence of validation stages.</p>
+<p>Each stage operates upon the Canonical Knowledge Structure without modifying its canonical semantics.</p>
+<p>The Validation Procedure is observational rather than transformational.</p>
+<hr />
+<h2 id="canonical-validation-stages">Canonical Validation Stages</h2>
+<p>Canonical Validation consists of the following conceptual stages:</p>
+<ol>
+<li>Identification of the Canonical Knowledge Structure.</li>
+<li>Determination of the applicable Validation Domains.</li>
+<li>Selection of applicable Canonical Validation Constraints.</li>
+<li>Independent evaluation of every applicable constraint.</li>
+<li>Aggregation of individual evaluation outcomes.</li>
+<li>Construction of the Validation Result.</li>
+</ol>
+<p>Every conformant Validator shall preserve the semantic order of these stages.</p>
+<hr />
+<h2 id="stage-independence">Stage Independence</h2>
+<p>Each validation stage possesses a distinct canonical responsibility.</p>
+<p>The semantic role of one stage shall not be merged with or substituted by another.</p>
+<p>Implementations may optimize execution provided that the canonical semantics of every stage are preserved.</p>
+<hr />
+<h2 id="deterministic-execution">Deterministic Execution</h2>
+<p>The Validation Procedure shall be deterministic.</p>
+<p>Given identical Canonical Knowledge Structures, every conformant Validator shall perform equivalent validation stages and produce identical Validation Results.</p>
+<hr />
+<h2 id="observational-nature">Observational Nature</h2>
+<p>The Validation Procedure shall not modify:</p>
+<ul>
+<li>canonical identity;</li>
+<li>canonical structure;</li>
+<li>canonical relations;</li>
+<li>canonical derivations;</li>
+<li>canonical metadata.</li>
+</ul>
+<p>Validation observes canonical semantics but never changes them.</p>
+<hr />
+<h2 id="failure-principle">Failure Principle</h2>
+<p>Whenever one or more Canonical Validation Constraints are violated, the Validation Procedure shall continue sufficiently to determine the complete Validation Result.</p>
+<p>Termination after the first detected violation is an implementation optimization rather than a canonical property.</p>
+<p>The canonical Validation Result depends upon the complete evaluation defined by this specification.</p>
+<hr />
+<h2 id="representation-independence_4">Representation Independence</h2>
+<p>The Validation Procedure is independent of:</p>
+<ul>
+<li>serialization format;</li>
+<li>programming language;</li>
+<li>execution platform;</li>
+<li>storage technology;</li>
+<li>software architecture.</li>
+</ul>
+<p>Equivalent implementations shall preserve the same canonical validation semantics.</p>
+<hr />
+<h1 id="constraint-evaluation_1">Constraint Evaluation</h1>
+<h2 id="purpose_8">Purpose</h2>
+<p>The purpose of Constraint Evaluation is to define the canonical semantics by which individual Canonical Validation Constraints are evaluated.</p>
+<p>Constraint Evaluation establishes the implementation-independent interpretation of validation constraints independently of any execution strategy, programming language, or software architecture.</p>
+<p>Every conformant validator shall evaluate Canonical Validation Constraints according to the semantics defined by this specification.</p>
+<hr />
+<h2 id="constraint-evaluation-principle">Constraint Evaluation Principle</h2>
+<p>Constraint Evaluation determines whether a Canonical Validation Constraint is satisfied by a Canonical Knowledge Structure.</p>
+<p>Constraint Evaluation shall depend exclusively upon canonical semantics.</p>
+<p>It shall not depend upon:</p>
+<ul>
+<li>serialization;</li>
+<li>implementation language;</li>
+<li>execution order;</li>
+<li>storage technology;</li>
+<li>software architecture.</li>
+</ul>
+<hr />
+<h2 id="evaluation-domain">Evaluation Domain</h2>
+<p>Let</p>
+<p>$$
+S
+$$</p>
+<p>denote a Canonical Knowledge Structure and</p>
+<p>$$
+C
+$$</p>
+<p>a Canonical Validation Constraint.</p>
+<p>Constraint Evaluation determines whether</p>
+<p>$$
+S
+$$</p>
+<p>satisfies</p>
+<p>$$
+C.
+$$</p>
+<p>Formally,</p>
+<p>$$
+Evaluate(S,C)
+\in
+{
+Satisfied,
+Violated
+}.
+$$</p>
+<hr />
+<h2 id="satisfaction">Satisfaction</h2>
+<p>A Canonical Validation Constraint is satisfied if the Canonical Knowledge Structure fulfills every semantic requirement represented by that constraint.</p>
+<p>Formally,</p>
+<p>$$
+Evaluate(S,C)=Satisfied.
+$$</p>
+<p>Satisfied constraints contribute positively to the overall validation result.</p>
+<hr />
+<h2 id="violation">Violation</h2>
+<p>A Canonical Validation Constraint is violated if the Canonical Knowledge Structure fails to satisfy one or more semantic requirements represented by that constraint.</p>
+<p>Formally,</p>
+<p>$$
+Evaluate(S,C)=Violated.
+$$</p>
+<p>Constraint violations shall not modify the Canonical Knowledge Structure.</p>
+<p>They represent validation outcomes only.</p>
+<hr />
+<h2 id="evaluation-independence_1">Evaluation Independence</h2>
+<p>Constraint Evaluation is independent of:</p>
+<ul>
+<li>serialization format;</li>
+<li>execution platform;</li>
+<li>implementation language;</li>
+<li>software architecture;</li>
+<li>optimization strategy.</li>
+</ul>
+<p>Equivalent Canonical Knowledge Structures shall produce identical evaluation results.</p>
+<hr />
+<h2 id="deterministic-evaluation">Deterministic Evaluation</h2>
+<p>Constraint Evaluation shall be deterministic.</p>
+<p>Given identical Canonical Knowledge Structures and identical Canonical Validation Constraints,</p>
+<p>$$
+Evaluate(S,C)
+$$</p>
+<p>shall always produce the same result.</p>
+<p>Formally,</p>
+<p>$$
+Evaluate(S,C)
+=
+Evaluate(S,C).
+$$</p>
+<p>Determinism is a mandatory property of every conformant validator.</p>
+<hr />
+<h2 id="consequences_1">Consequences</h2>
+<p>Constraint Evaluation guarantees:</p>
+<ul>
+<li>implementation-independent constraint interpretation;</li>
+<li>deterministic semantic evaluation;</li>
+<li>reproducible validation results;</li>
+<li>interoperability between independent validator implementations.</li>
+</ul>
+<p>Constraint Evaluation therefore constitutes the canonical semantic foundation upon which complete validation is constructed.</p>
+<hr />
+<h1 id="validation-composition">Validation Composition</h1>
+<h2 id="purpose_9">Purpose</h2>
+<p>The purpose of Validation Composition is to define how individual Canonical Validation Constraint evaluations are combined into a single canonical validation result.</p>
+<p>Validation Composition establishes the implementation-independent semantics governing complete validation of Canonical Knowledge Structures.</p>
+<hr />
+<h2 id="composition-principle">Composition Principle</h2>
+<p>Canonical Validation consists of the evaluation of a finite collection of Canonical Validation Constraints.</p>
+<p>The overall validation result shall be determined exclusively by the collective evaluation of these constraints.</p>
+<p>No implementation-specific interpretation may influence the canonical validation result.</p>
+<hr />
+<h2 id="validation-set">Validation Set</h2>
+<p>Let</p>
+<p>$$
+\mathcal C
+=
+{
+C_1,
+C_2,
+\ldots,
+C_n
+}
+$$</p>
+<p>denote the complete set of Canonical Validation Constraints applicable to a Canonical Knowledge Structure</p>
+<p>$$
+S.
+$$</p>
+<p>Canonical Validation evaluates every constraint contained in</p>
+<p>$$
+\mathcal C.
+$$</p>
+<hr />
+<h2 id="complete-validation">Complete Validation</h2>
+<p>The Canonical Validation Result is obtained by evaluating every Canonical Validation Constraint.</p>
+<p>Formally,</p>
+<p>$$
+Validation(S)
+=
+{
+Evaluate(S,C)
+\mid
+C
+\in
+\mathcal C
+}.
+$$</p>
+<p>The validation process therefore consists of the complete evaluation of the canonical constraint set.</p>
+<hr />
+<h2 id="validation-success">Validation Success</h2>
+<p>Canonical Validation succeeds if and only if every Canonical Validation Constraint is satisfied.</p>
+<p>Formally,</p>
+<p>$$
+Validation(S)=Valid
+$$</p>
+<p>if</p>
+<p>$$
+\forall
+C
+\in
+\mathcal C,
+\quad
+Evaluate(S,C)
+=
+Satisfied.
+$$</p>
+<hr />
+<h2 id="validation-failure">Validation Failure</h2>
+<p>Canonical Validation fails whenever at least one Canonical Validation Constraint is violated.</p>
+<p>Formally,</p>
+<p>$$
+Validation(S)=Invalid
+$$</p>
+<p>if</p>
+<p>$$
+\exists
+C
+\in
+\mathcal C
+\quad
+such\ that
+\quad
+Evaluate(S,C)
+=
+Violated.
+$$</p>
+<hr />
+<h2 id="order-independence">Order Independence</h2>
+<p>The canonical validation result shall not depend upon the order in which Canonical Validation Constraints are evaluated.</p>
+<p>Equivalent validators may evaluate constraints in different sequences while producing identical canonical validation results.</p>
+<hr />
+<h2 id="composition-determinism">Composition Determinism</h2>
+<p>Validation Composition shall be deterministic.</p>
+<p>Given identical Canonical Knowledge Structures and identical Canonical Validation Constraints,</p>
+<p>$$
+Validation(S)
+$$</p>
+<p>shall always produce the same canonical validation result.</p>
+<hr />
+<h2 id="consequences_2">Consequences</h2>
+<p>Validation Composition guarantees:</p>
+<ul>
+<li>deterministic complete validation;</li>
+<li>implementation-independent validation semantics;</li>
+<li>reproducible validation results;</li>
+<li>interoperability between independent validator implementations.</li>
+</ul>
+<p>Validation Composition therefore defines the canonical semantics of complete validation within the Canonical Validator Model.</p>
+<hr />
+<h1 id="validator-correctness">Validator Correctness</h1>
+<h2 id="purpose_10">Purpose</h2>
+<p>The purpose of this chapter is to establish the formal correctness properties required of every conformant Canonical Validator.</p>
+<p>These properties define the implementation-independent criteria that distinguish a correct validator from an arbitrary software implementation.</p>
+<p>Validator Correctness guarantees that validation faithfully reflects the canonical semantics established by the Core CKS specifications.</p>
+<hr />
+<h2 id="correctness-principle">Correctness Principle</h2>
+<p>A Canonical Validator is correct if and only if its validation results are completely determined by the canonical semantics of the Canonical Knowledge Structure.</p>
+<p>Correctness shall not depend upon:</p>
+<ul>
+<li>implementation strategy;</li>
+<li>programming language;</li>
+<li>execution environment;</li>
+<li>storage technology;</li>
+<li>serialization format.</li>
+</ul>
+<hr />
+<h2 id="soundness">Soundness</h2>
+<p>A Canonical Validator shall be sound.</p>
+<p>A validator shall never classify an invalid Canonical Knowledge Structure as valid.</p>
+<p>Formally,</p>
+<p>$$
+Validation(S)=Valid
+\Longrightarrow
+S
+\models
+\mathcal C.
+$$</p>
+<p>where</p>
+<p>$$
+\mathcal C
+$$</p>
+<p>denotes the complete Canonical Validation Constraint set.</p>
+<hr />
+<h2 id="completeness">Completeness</h2>
+<p>A Canonical Validator shall be complete.</p>
+<p>Every Canonical Knowledge Structure satisfying all Canonical Validation Constraints shall be classified as valid.</p>
+<p>Formally,</p>
+<p>$$
+S
+\models
+\mathcal C
+\Longrightarrow
+Validation(S)=Valid.
+$$</p>
+<hr />
+<h2 id="determinism_1">Determinism</h2>
+<p>Canonical validation shall be deterministic.</p>
+<p>Given identical Canonical Knowledge Structures,</p>
+<p>$$
+S_1
+\equiv
+S_2,
+$$</p>
+<p>the validator shall always produce identical validation results.</p>
+<p>Formally,</p>
+<p>$$
+Validation(S_1)
+=
+Validation(S_2).
+$$</p>
+<p>Determinism is independent of implementation.</p>
+<hr />
+<h2 id="consistency">Consistency</h2>
+<p>A Canonical Validator shall produce internally consistent validation results.</p>
+<p>Individual Constraint Evaluations shall never contradict the overall Validation Result.</p>
+<p>Every Validation Report shall faithfully represent the corresponding Validation Outcome.</p>
+<hr />
+<h2 id="semantic-fidelity">Semantic Fidelity</h2>
+<p>Canonical validation shall preserve canonical semantics.</p>
+<p>Validation shall evaluate canonical meaning rather than implementation-specific representation.</p>
+<p>Equivalent serialized representations shall always produce identical validation results after canonical reconstruction.</p>
+<hr />
+<h2 id="representation-independence_5">Representation Independence</h2>
+<p>Validator Correctness is independent of:</p>
+<ul>
+<li>serialization syntax;</li>
+<li>programming language;</li>
+<li>execution architecture;</li>
+<li>storage mechanism;</li>
+<li>software framework.</li>
+</ul>
+<p>Only canonical semantics determine validator correctness.</p>
+<hr />
+<h2 id="consequences_3">Consequences</h2>
+<p>Validator Correctness guarantees:</p>
+<ul>
+<li>reliable validation;</li>
+<li>deterministic behavior;</li>
+<li>semantic consistency;</li>
+<li>implementation interoperability;</li>
+<li>reproducible validation.</li>
+</ul>
+<p>These properties constitute mandatory requirements for every conformant Canonical Validator.</p>
+<hr />
+<h1 id="validator-conformance">Validator Conformance</h1>
+<h2 id="purpose_11">Purpose</h2>
+<p>This chapter defines the requirements that an implementation shall satisfy in order to be regarded as a conformant Canonical Knowledge Structure Validator.</p>
+<p>Conformance guarantees that independent validator implementations produce identical canonical validation results for identical Canonical Knowledge Structures.</p>
+<hr />
+<h2 id="conformance-principle">Conformance Principle</h2>
+<p>A Validator implementation is conformant if and only if it faithfully implements the Canonical Validation Model defined by this specification.</p>
+<p>Implementation-specific optimizations, execution strategies, internal representations, and software architectures shall not affect validation semantics.</p>
+<hr />
+<h2 id="mandatory-requirements">Mandatory Requirements</h2>
+<p>Every conformant Validator shall correctly implement:</p>
+<ul>
+<li>Canonical Validation Model;</li>
+<li>Validation Principles;</li>
+<li>Validation Domains;</li>
+<li>Canonical Validation Constraints;</li>
+<li>Validation Contracts;</li>
+<li>Validation Results;</li>
+<li>Validation Determinism;</li>
+<li>Validation Traceability;</li>
+<li>Validation Composition;</li>
+<li>Validation Independence.</li>
+</ul>
+<hr />
+<h2 id="semantic-equivalence">Semantic Equivalence</h2>
+<p>Two Validator implementations are semantically equivalent if they produce identical Validation Results for every admissible Canonical Knowledge Structure.</p>
+<p>Formally,</p>
+<p>$$
+Validate_A(S)
+=
+Validate_B(S)
+$$</p>
+<p>for every admissible Canonical Knowledge Structure</p>
+<p>$$
+S.
+$$</p>
+<p>Semantic equivalence is determined exclusively by canonical validation semantics.</p>
+<hr />
+<h2 id="deterministic-behavior">Deterministic Behavior</h2>
+<p>Every conformant Validator shall be deterministic.</p>
+<p>Repeated validation of an unchanged Canonical Knowledge Structure shall always produce identical Validation Results.</p>
+<p>Validator behavior shall not depend upon:</p>
+<ul>
+<li>execution order;</li>
+<li>implementation language;</li>
+<li>storage architecture;</li>
+<li>operating system;</li>
+<li>hardware platform.</li>
+</ul>
+<hr />
+<h2 id="independence-of-representation">Independence of Representation</h2>
+<p>Validator conformance is independent of:</p>
+<ul>
+<li>serialization format;</li>
+<li>storage technology;</li>
+<li>communication protocol;</li>
+<li>implementation language;</li>
+<li>software architecture.</li>
+</ul>
+<p>Only canonical semantics determine conformance.</p>
+<hr />
+<h2 id="extensibility_1">Extensibility</h2>
+<p>Future Validator implementations may introduce:</p>
+<ul>
+<li>performance optimizations;</li>
+<li>additional diagnostics;</li>
+<li>implementation-specific tooling;</li>
+<li>developer utilities.</li>
+</ul>
+<p>Such extensions shall never modify:</p>
+<ul>
+<li>canonical validation semantics;</li>
+<li>validation results;</li>
+<li>admissibility criteria;</li>
+<li>canonical constraints.</li>
+</ul>
+<hr />
+<h2 id="consequences_4">Consequences</h2>
+<p>Validator Conformance guarantees:</p>
+<ul>
+<li>implementation interoperability;</li>
+<li>reproducible validation;</li>
+<li>deterministic behavior;</li>
+<li>semantic consistency;</li>
+<li>portability across implementations.</li>
+</ul>
+<p>Every conformant Validator therefore constitutes a faithful implementation of the Canonical Validation Model.</p>
+<hr />
+<h1 id="part-ii-mathematical-theory-of-canonical-validation">Part II — Mathematical Theory of Canonical Validation</h1>
+<p>The second part of this specification establishes the mathematical foundation of canonical validation.</p>
+<p>Where Part I defines the normative Validator Model, the following chapters establish the formal mathematical properties that justify canonical validation as a complete, deterministic, and implementation-independent process.</p>
+<p>The results presented in this part are derived from the Core CKS specifications together with the normative Validator Model defined in Part I.</p>
+<p>Accordingly, Part II demonstrates that canonical validation is mathematically well-defined, semantically sound, and sufficient for determining the admissibility of Canonical Knowledge Structures.</p>
+<p>Unlike Part I, which specifies normative validator behavior, Part II establishes formal theorems concerning the correctness, completeness, consistency, and compositional properties of canonical validation.</p>
+<p>Together, Parts I and II provide both the operational definition and the mathematical justification of the Canonical Validator.</p>
+<hr />
+<h1 id="canonical-validation_1">Canonical Validation</h1>
+<h2 id="purpose_12">Purpose</h2>
+<p>The purpose of Canonical Validation is to provide the formal mathematical model governing validation within the Canonical Knowledge Structure framework.</p>
+<p>Where Part I specifies the normative behavior of the Canonical Validator, this chapter establishes validation as a mathematical function over the space of Canonical Knowledge Structures.</p>
+<p>Canonical Validation determines whether a Canonical Knowledge Structure satisfies every canonical constraint established by the Core CKS specifications and the Validator Specification.</p>
+<hr />
+<h2 id="validation-principle_1">Validation Principle</h2>
+<p>Canonical Validation is a semantic decision procedure.</p>
+<p>Its result depends exclusively upon canonical semantics and shall remain independent of:</p>
+<ul>
+<li>serialization;</li>
+<li>implementation;</li>
+<li>execution environment;</li>
+<li>programming language;</li>
+<li>software architecture.</li>
+</ul>
+<p>Equivalent Canonical Knowledge Structures shall therefore always produce identical validation results.</p>
+<hr />
+<h2 id="validation-function_1">Validation Function</h2>
+<p>Canonical Validation is formally represented as the function</p>
+<p>$$
+Validation :
+KS
+\rightarrow
+{True,\ False},
+$$</p>
+<p>where</p>
+<ul>
+<li>$KS$ denotes the Canonical Knowledge Space;</li>
+<li>$True$ denotes that every canonical constraint is satisfied;</li>
+<li>$False$ denotes that one or more canonical constraints are violated.</li>
+</ul>
+<p>Accordingly, Canonical Validation partitions the Canonical Knowledge Space into valid and invalid Canonical Knowledge Structures.</p>
+<p>The Validation Function constitutes the canonical realization of the
+Validity criterion defined in CKS‑001 (Section 13.2).  It maps each
+Canonical Knowledge Structure to its formal admissibility status
+according to the complete set of canonical constraints established by
+the Core CKS specifications and the Validator Specification.</p>
+<hr />
+<h2 id="valid-canonical-knowledge-structures">Valid Canonical Knowledge Structures</h2>
+<p>A Canonical Knowledge Structure $\mathcal S$ is valid if and only if</p>
+<p>$$
+Validation(\mathcal S)=True.
+$$</p>
+<p>Equivalently,</p>
+<p>$$
+Validation(\mathcal S)=True
+\iff
+\mathcal S\models C,
+$$</p>
+<p>where</p>
+<ul>
+<li>$C$ denotes the complete canonical constraint set defined by the Core CKS specifications and the Validator Specification.</li>
+</ul>
+<hr />
+<h2 id="invalid-canonical-knowledge-structures">Invalid Canonical Knowledge Structures</h2>
+<p>A Canonical Knowledge Structure is invalid whenever one or more canonical constraints are violated.</p>
+<p>Formally,</p>
+<p>$$
+Validation(\mathcal S)=False
+\iff
+\mathcal S\not\models C.
+$$</p>
+<p>An invalid Canonical Knowledge Structure shall not be regarded as canonically admissible.</p>
+<hr />
+<h2 id="validation-domain_2">Validation Domain</h2>
+<p>Canonical Validation is defined exclusively for Canonical Knowledge Structures.</p>
+<p>Validation does not operate directly upon:</p>
+<ul>
+<li>serialization formats;</li>
+<li>implementation objects;</li>
+<li>programming-language data structures;</li>
+<li>storage representations.</li>
+</ul>
+<p>Such representations shall first be interpreted as Canonical Knowledge Structures before canonical validation may be performed.</p>
+<hr />
+<h2 id="validation-independence">Validation Independence</h2>
+<p>The mathematical definition of Canonical Validation is independent of:</p>
+<ul>
+<li>implementation strategy;</li>
+<li>validator architecture;</li>
+<li>optimization techniques;</li>
+<li>execution order;</li>
+<li>hardware platform.</li>
+</ul>
+<p>Only canonical semantics determine the validation result.</p>
+<hr />
+<h2 id="consequences_5">Consequences</h2>
+<p>The formal Validation Function establishes Canonical Validation as the unique mathematical criterion for admissibility within the Canonical Knowledge Structure framework.</p>
+<p>All subsequent mathematical properties of the Canonical Validator are derived from this formal model.</p>
+<hr />
+<h1 id="canonical-validation-outcomes">Canonical Validation Outcomes</h1>
+<h2 id="purpose_13">Purpose</h2>
+<p>The purpose of Canonical Validation Outcomes is to define the canonical results that may be produced by a conformant Canonical Validator.</p>
+<p>Validation Outcomes provide the normative interpretation of the validation process independently of implementation, execution strategy, reporting mechanism, or software architecture.</p>
+<p>Every completed Canonical Validation shall produce exactly one Canonical Validation Outcome.</p>
+<hr />
+<h2 id="outcome-principle">Outcome Principle</h2>
+<p>A Canonical Validation Outcome represents the canonical status of the validated Canonical Knowledge Structure with respect to the validation constraints defined by this specification.</p>
+<p>Validation Outcomes describe canonical validity rather than implementation-specific execution details.</p>
+<hr />
+<h2 id="canonical-outcomes_1">Canonical Outcomes</h2>
+<p>The Core Validator Specification recognizes the following canonical validation outcomes.</p>
+<h3 id="valid">Valid</h3>
+<p>The Canonical Knowledge Structure satisfies every applicable validation constraint.</p>
+<p>No canonical violations are detected.</p>
+<p>The structure is canonically valid.</p>
+<hr />
+<h3 id="invalid">Invalid</h3>
+<p>One or more mandatory validation constraints are violated.</p>
+<p>The Canonical Knowledge Structure is not canonically valid.</p>
+<p>Every detected violation shall be reported through a Canonical Validation Report.</p>
+<hr />
+<h3 id="validation-failure_1">Validation Failure</h3>
+<p>Validation cannot be completed because the validator itself cannot establish a canonical result.</p>
+<p>Examples include:</p>
+<ul>
+<li>unavailable required inputs;</li>
+<li>corrupted validator state;</li>
+<li>unrecoverable implementation failure.</li>
+</ul>
+<p>A Validation Failure shall not be interpreted as either Valid or Invalid.</p>
+<hr />
+<h2 id="deterministic-outcomes">Deterministic Outcomes</h2>
+<p>Given identical canonical inputs, every conformant validator shall produce identical Canonical Validation Outcomes.</p>
+<p>Validation Outcomes shall therefore be deterministic and implementation-independent.</p>
+<hr />
+<h2 id="outcome-independence">Outcome Independence</h2>
+<p>Canonical Validation Outcomes are independent of:</p>
+<ul>
+<li>programming language;</li>
+<li>execution platform;</li>
+<li>storage technology;</li>
+<li>serialization format;</li>
+<li>implementation architecture.</li>
+</ul>
+<p>Only canonical semantics determine the validation result.</p>
+<hr />
+<h2 id="outcome-completeness">Outcome Completeness</h2>
+<p>Every completed Canonical Validation shall terminate with exactly one Canonical Validation Outcome.</p>
+<p>No additional canonical outcome categories are recognized by this specification.</p>
+<hr />
+<h2 id="consequences_6">Consequences</h2>
+<p>Canonical Validation Outcomes provide:</p>
+<ul>
+<li>deterministic validation results;</li>
+<li>implementation interoperability;</li>
+<li>reproducible validation;</li>
+<li>canonical reporting;</li>
+<li>stable integration with subsequent validator specifications.</li>
+</ul>
+<p>These outcomes constitute the canonical completion states of every validation process defined by the Core Validator Specification.</p>
+<hr />
+<h1 id="validator-soundness">Validator Soundness</h1>
+<h2 id="purpose_14">Purpose</h2>
+<p>The purpose of this chapter is to establish that Canonical Validation is sound with respect to the canonical semantics defined by the Core CKS specifications.</p>
+<p>Soundness guarantees that every Canonical Knowledge Structure accepted by a conformant Canonical Validator satisfies all canonical validity requirements.</p>
+<p>Accordingly, Canonical Validation never classifies an invalid Canonical Knowledge Structure as valid.</p>
+<hr />
+<h2 id="soundness-theorem">Soundness Theorem</h2>
+<h3 id="purpose_15">Purpose</h3>
+<p>The purpose of this theorem is to establish that Canonical Validation correctly recognizes only canonically valid Canonical Knowledge Structures.</p>
+<hr />
+<h3 id="statement">Statement</h3>
+<p>Canonical Validation is sound.</p>
+<p>For every Canonical Knowledge Structure</p>
+<p>$$
+\mathcal S,
+$$</p>
+<p>if</p>
+<p>$$
+Validation(\mathcal S)=True,
+$$</p>
+<p>then</p>
+<p>$$
+Validity(\mathcal S)=True.
+$$</p>
+<p>Equivalently,</p>
+<p>$$
+Validation(\mathcal S)=True
+\Longrightarrow
+Validity(\mathcal S)=True.
+$$</p>
+<hr />
+<h3 id="dependencies">Dependencies</h3>
+<p>This theorem depends upon:</p>
+<ul>
+<li>CKS-001 — Canonical Validity;</li>
+<li>Canonical Validation Model;</li>
+<li>Canonical Validation Constraints;</li>
+<li>Constraint Evaluation;</li>
+<li>Validation Composition.</li>
+</ul>
+<hr />
+<h3 id="proof">Proof</h3>
+<p>By the Canonical Validation Model,</p>
+<p>Canonical Validation evaluates every applicable Canonical Validation Constraint.</p>
+<p>By Validation Composition,</p>
+<p>the overall validation result is <strong>True</strong> if and only if every applicable Canonical Validation Constraint is satisfied.</p>
+<p>Each Canonical Validation Constraint represents a canonical validity requirement established by the Core CKS specifications.</p>
+<p>Therefore,</p>
+<p>if</p>
+<p>$$
+Validation(\mathcal S)=True,
+$$</p>
+<p>every canonical validity requirement is satisfied.</p>
+<p>Consequently,</p>
+<p>$$
+Validity(\mathcal S)=True.
+$$</p>
+<p>Hence Canonical Validation is sound.</p>
+<p>∎</p>
+<hr />
+<h3 id="corollaries">Corollaries</h3>
+<p>A conformant Canonical Validator shall never accept an invalid Canonical Knowledge Structure.</p>
+<p>False-positive validation is impossible within the Canonical Validator Model.</p>
+<p>Canonical Validation therefore preserves canonical correctness.</p>
+<hr />
+<h1 id="validator-completeness">Validator Completeness</h1>
+<h2 id="purpose_16">Purpose</h2>
+<p>The purpose of this chapter is to establish that Canonical Validation is complete with respect to the canonical semantics defined by the Core CKS specifications.</p>
+<p>Completeness guarantees that every canonically valid Canonical Knowledge Structure is recognized as valid by every conformant Canonical Validator.</p>
+<p>Accordingly, Canonical Validation never rejects a valid Canonical Knowledge Structure.</p>
+<hr />
+<h2 id="completeness-theorem">Completeness Theorem</h2>
+<h3 id="purpose_17">Purpose</h3>
+<p>The purpose of this theorem is to establish that Canonical Validation recognizes every Canonical Knowledge Structure satisfying the complete set of canonical validity requirements.</p>
+<hr />
+<h3 id="statement_1">Statement</h3>
+<p>Canonical Validation is complete.</p>
+<p>For every Canonical Knowledge Structure</p>
+<p>$$
+\mathcal S,
+$$</p>
+<p>if</p>
+<p>$$
+Validity(\mathcal S)=True,
+$$</p>
+<p>then</p>
+<p>$$
+Validation(\mathcal S)=True.
+$$</p>
+<p>Equivalently,</p>
+<p>$$
+Validity(\mathcal S)=True
+\Longrightarrow
+Validation(\mathcal S)=True.
+$$</p>
+<hr />
+<h3 id="dependencies_1">Dependencies</h3>
+<p>This theorem depends upon:</p>
+<ul>
+<li>CKS-001 — Canonical Validity;</li>
+<li>Canonical Validation Model;</li>
+<li>Canonical Validation Constraints;</li>
+<li>Constraint Evaluation;</li>
+<li>Validation Composition.</li>
+</ul>
+<hr />
+<h3 id="proof_1">Proof</h3>
+<p>Assume</p>
+<p>$$
+Validity(\mathcal S)=True.
+$$</p>
+<p>By the definition of Canonical Validity established in CKS-001,</p>
+<p>every canonical validity requirement is satisfied.</p>
+<p>Every such requirement is represented by a corresponding Canonical Validation Constraint.</p>
+<p>Therefore,</p>
+<p>every applicable Canonical Validation Constraint is satisfied.</p>
+<p>By Validation Composition,</p>
+<p>the evaluation of all applicable Canonical Validation Constraints produces the validation result</p>
+<p>$$
+Validation(\mathcal S)=True.
+$$</p>
+<p>Hence Canonical Validation is complete.</p>
+<p>∎</p>
+<hr />
+<h3 id="corollaries_1">Corollaries</h3>
+<p>A conformant Canonical Validator shall never reject a canonically valid Canonical Knowledge Structure.</p>
+<p>False-negative validation is impossible within the Canonical Validator Model.</p>
+<p>Canonical Validation therefore recognizes every admissible Canonical Knowledge Structure.</p>
+<hr />
+<h1 id="validator-correctness_1">Validator Correctness</h1>
+<h2 id="purpose_18">Purpose</h2>
+<p>The purpose of this chapter is to establish that Canonical Validation exactly characterizes Canonical Validity.</p>
+<p>The Validator Correctness Theorem unifies the Soundness and Completeness Theorems established in the preceding chapters.</p>
+<p>Accordingly, Canonical Validation is proven to be a mathematically exact realization of Canonical Validity rather than an approximation or heuristic.</p>
+<hr />
+<h2 id="validator-correctness-theorem">Validator Correctness Theorem</h2>
+<h3 id="purpose_19">Purpose</h3>
+<p>The purpose of this theorem is to establish that Canonical Validation and Canonical Validity are mathematically equivalent.</p>
+<hr />
+<h3 id="statement_2">Statement</h3>
+<p>For every Canonical Knowledge Structure</p>
+<p>$$
+\mathcal S,
+$$</p>
+<p>Canonical Validation and Canonical Validity are equivalent.</p>
+<p>Formally,</p>
+<p>$$
+Validation(\mathcal S)=True
+\iff
+Validity(\mathcal S)=True.
+$$</p>
+<hr />
+<h3 id="dependencies_2">Dependencies</h3>
+<p>This theorem depends upon:</p>
+<ul>
+<li>Validator Soundness Theorem;</li>
+<li>Validator Completeness Theorem.</li>
+</ul>
+<hr />
+<h3 id="proof_2">Proof</h3>
+<p>By the Validator Soundness Theorem,</p>
+<p>$$
+Validation(\mathcal S)=True
+\Longrightarrow
+Validity(\mathcal S)=True.
+$$</p>
+<p>By the Validator Completeness Theorem,</p>
+<p>$$
+Validity(\mathcal S)=True
+\Longrightarrow
+Validation(\mathcal S)=True.
+$$</p>
+<p>Combining both implications yields</p>
+<p>$$
+Validation(\mathcal S)=True
+\iff
+Validity(\mathcal S)=True.
+$$</p>
+<p>Hence Canonical Validation exactly characterizes Canonical Validity.</p>
+<p>∎</p>
+<hr />
+<h3 id="corollaries_2">Corollaries</h3>
+<p>Canonical Validation computes Canonical Validity exactly.</p>
+<p>Validator correctness is independent of:</p>
+<ul>
+<li>implementation;</li>
+<li>serialization;</li>
+<li>execution strategy;</li>
+<li>programming language;</li>
+<li>storage technology.</li>
+</ul>
+<p>Every conformant Canonical Validator therefore produces validation results that are mathematically equivalent to Canonical Validity as defined by the Core CKS specifications.</p>
+<hr />
+<h2 id="consequences_7">Consequences</h2>
+<p>The Validator Correctness Theorem establishes Canonical Validation as the unique canonical decision procedure for determining the admissibility of Canonical Knowledge Structures.</p>
+<p>Accordingly,</p>
+<ul>
+<li>Canonical Validation is sound;</li>
+<li>Canonical Validation is complete;</li>
+<li>Canonical Validation is mathematically exact;</li>
+<li>Canonical Validation is implementation-independent.</li>
+</ul>
+<p>This theorem constitutes the central correctness result of the Canonical Validator Specification.</p>
+<hr />
+<h1 id="validator-determinism">Validator Determinism</h1>
+<h2 id="purpose_20">Purpose</h2>
+<p>The purpose of this chapter is to establish that Canonical Validation is deterministic.</p>
+<p>Determinism guarantees that Canonical Validation produces identical results for identical Canonical Knowledge Structures independently of implementation, execution order, or computational environment.</p>
+<p>Accordingly, Canonical Validation constitutes a reproducible decision procedure.</p>
+<hr />
+<h2 id="validator-determinism-theorem">Validator Determinism Theorem</h2>
+<h3 id="purpose_21">Purpose</h3>
+<p>The purpose of this theorem is to establish that Canonical Validation is deterministic.</p>
+<hr />
+<h3 id="statement_3">Statement</h3>
+<p>For every Canonical Knowledge Structure</p>
+<p>$$
+\mathcal S,
+$$</p>
+<p>repeated validation always produces the same Validation Result.</p>
+<p>Formally,</p>
+<p>$$
+Validation(\mathcal S)
+=
+Validation(\mathcal S).
+$$</p>
+<p>More generally,</p>
+<p>$$
+\mathcal S_1
+\equiv
+\mathcal S_2
+\Longrightarrow
+Validation(\mathcal S_1)
+=
+Validation(\mathcal S_2),
+$$</p>
+<p>where</p>
+<p>$$
+\equiv
+$$</p>
+<p>denotes Structural Equivalence as defined in CKS-001.</p>
+<hr />
+<h3 id="dependencies_3">Dependencies</h3>
+<p>This theorem depends upon:</p>
+<ul>
+<li>CKS-001 — Structural Equivalence;</li>
+<li>Validator Correctness Theorem;</li>
+<li>Canonical Validation Model.</li>
+</ul>
+<hr />
+<h3 id="proof_3">Proof</h3>
+<p>By the Validator Correctness Theorem,</p>
+<p>Canonical Validation depends exclusively upon Canonical Validity.</p>
+<p>Canonical Validity is determined entirely by canonical semantics and is independent of implementation.</p>
+<p>Structurally equivalent Canonical Knowledge Structures possess identical canonical semantics.</p>
+<p>Therefore,</p>
+<p>Canonical Validation evaluates identical canonical constraints for both structures.</p>
+<p>Consequently,</p>
+<p>$$
+Validation(\mathcal S_1)
+=
+Validation(\mathcal S_2).
+$$</p>
+<p>Hence Canonical Validation is deterministic.</p>
+<p>∎</p>
+<hr />
+<h3 id="corollaries_3">Corollaries</h3>
+<p>Canonical Validation is reproducible.</p>
+<p>Repeated validation of an unchanged Canonical Knowledge Structure always produces identical Validation Results.</p>
+<p>Validator implementations therefore cannot disagree on validation results provided they conform to this specification.</p>
+<hr />
+<h2 id="consequences_8">Consequences</h2>
+<p>Validator Determinism guarantees:</p>
+<ul>
+<li>reproducible validation;</li>
+<li>deterministic interoperability;</li>
+<li>implementation independence;</li>
+<li>stable validation reports;</li>
+<li>canonical repeatability.</li>
+</ul>
+<p>Determinism is therefore an intrinsic mathematical property of Canonical Validation rather than an implementation characteristic.</p>
+<hr />
+<h1 id="validator-consistency">Validator Consistency</h1>
+<h2 id="purpose_22">Purpose</h2>
+<p>The purpose of this chapter is to establish that all conformant Canonical Validators are mutually consistent.</p>
+<p>Consistency guarantees that Canonical Validation constitutes a unique semantic decision procedure independently of the particular Validator implementation.</p>
+<p>Accordingly, independent Validator implementations cannot produce contradictory validation results for the same Canonical Knowledge Structure.</p>
+<hr />
+<h2 id="validator-consistency-theorem">Validator Consistency Theorem</h2>
+<h3 id="purpose_23">Purpose</h3>
+<p>The purpose of this theorem is to establish that every conformant Canonical Validator produces identical validation results for identical Canonical Knowledge Structures.</p>
+<hr />
+<h3 id="statement_4">Statement</h3>
+<p>Let</p>
+<p>$$
+V_A
+$$</p>
+<p>and</p>
+<p>$$
+V_B
+$$</p>
+<p>be two conformant Canonical Validators.</p>
+<p>Then for every Canonical Knowledge Structure</p>
+<p>$$
+\mathcal S,
+$$</p>
+<p>$$
+V_A(\mathcal S)
+=
+V_B(\mathcal S).
+$$</p>
+<hr />
+<h3 id="dependencies_4">Dependencies</h3>
+<p>This theorem depends upon:</p>
+<ul>
+<li>Validator Correctness Theorem;</li>
+<li>Validator Determinism Theorem;</li>
+<li>Canonical Validation Model.</li>
+</ul>
+<hr />
+<h3 id="proof_4">Proof</h3>
+<p>By the Validator Correctness Theorem,</p>
+<p>every conformant Validator computes Canonical Validity exactly.</p>
+<p>Therefore,</p>
+<p>both</p>
+<p>$$
+V_A
+$$</p>
+<p>and</p>
+<p>$$
+V_B
+$$</p>
+<p>compute the same mathematical function,</p>
+<p>$$
+Validation(\mathcal S).
+$$</p>
+<p>By the Validator Determinism Theorem,</p>
+<p>Canonical Validation is deterministic.</p>
+<p>Consequently,</p>
+<p>both Validators necessarily produce identical Validation Results for every Canonical Knowledge Structure.</p>
+<p>Hence all conformant Canonical Validators are mutually consistent.</p>
+<p>∎</p>
+<hr />
+<h3 id="corollaries_4">Corollaries</h3>
+<p>Validator implementations cannot disagree while remaining conformant.</p>
+<p>Any disagreement between Validator implementations necessarily indicates that at least one implementation violates this specification.</p>
+<p>Accordingly, validator consistency provides a canonical criterion for implementation conformance.</p>
+<hr />
+<h2 id="consequences_9">Consequences</h2>
+<p>Validator Consistency guarantees:</p>
+<ul>
+<li>implementation interoperability;</li>
+<li>reproducible validation;</li>
+<li>independent software ecosystems;</li>
+<li>portable validation behavior;</li>
+<li>stable canonical semantics.</li>
+</ul>
+<p>Consistency therefore establishes Canonical Validation as a unique semantic decision procedure across all conformant implementations.</p>
+<hr />
+<h1 id="validation-composition_1">Validation Composition</h1>
+<h2 id="purpose_24">Purpose</h2>
+<p>The purpose of this chapter is to establish that Canonical Validation is compositional.</p>
+<p>Compositionality guarantees that complete Canonical Validation is mathematically equivalent to the composition of independent Validation Domains.</p>
+<p>Accordingly, Canonical Validation may be implemented modularly without altering canonical semantics.</p>
+<hr />
+<h2 id="validation-composition-theorem">Validation Composition Theorem</h2>
+<h3 id="purpose_25">Purpose</h3>
+<p>The purpose of this theorem is to establish that Canonical Validation is the composition of independent Validation Domains.</p>
+<hr />
+<h3 id="statement_5">Statement</h3>
+<p>Let</p>
+<p>$$
+D_1,
+D_2,
+\ldots,
+D_n
+$$</p>
+<p>denote the complete set of Validation Domains defined by this specification.</p>
+<p>Then</p>
+<p>$$
+Validation(\mathcal S)
+=
+D_1(\mathcal S)
+\land
+D_2(\mathcal S)
+\land
+\cdots
+\land
+D_n(\mathcal S),
+$$</p>
+<p>where</p>
+<p>each Validation Domain evaluates one independent class of canonical constraints.</p>
+<hr />
+<h3 id="dependencies_5">Dependencies</h3>
+<p>This theorem depends upon:</p>
+<ul>
+<li>Validation Domains;</li>
+<li>Constraint Evaluation;</li>
+<li>Validation Composition;</li>
+<li>Validator Correctness Theorem.</li>
+</ul>
+<hr />
+<h3 id="proof_5">Proof</h3>
+<p>By definition,</p>
+<p>every Canonical Validation Constraint belongs to exactly one Validation Domain.</p>
+<p>Each Validation Domain evaluates its own independent subset of canonical constraints.</p>
+<p>The complete canonical constraint set is the union of the constraint sets of all Validation Domains.</p>
+<p>By Validation Composition,</p>
+<p>Canonical Validation succeeds if and only if every Validation Domain succeeds.</p>
+<p>Therefore,</p>
+<p>Canonical Validation is mathematically equivalent to the logical conjunction of all Validation Domains.</p>
+<p>Hence Canonical Validation is compositional.</p>
+<p>∎</p>
+<hr />
+<h3 id="corollaries_5">Corollaries</h3>
+<p>Validation Domains may be implemented independently.</p>
+<p>Validation Domains may be executed in any order.</p>
+<p>Validation Domains may be evaluated in parallel provided that canonical semantics are preserved.</p>
+<p>Adding new Validation Domains extends Canonical Validation without modifying existing Validation Domains.</p>
+<hr />
+<h2 id="consequences_10">Consequences</h2>
+<p>Validation Compositionality guarantees:</p>
+<ul>
+<li>modular validator architecture;</li>
+<li>independent validator components;</li>
+<li>scalable validator implementations;</li>
+<li>parallel validation;</li>
+<li>long-term extensibility.</li>
+</ul>
+<p>Compositionality therefore establishes the mathematical foundation for every future Reference Validator implementation.</p>
+<hr />
+<h1 id="specification-boundary">Specification Boundary</h1>
+<h2 id="purpose_26">Purpose</h2>
+<p>This chapter defines the logical boundary of the Canonical Validator Specification.</p>
+<p>It identifies the canonical questions resolved by this specification and distinguishes them from those addressed by subsequent Reference Implementation specifications.</p>
+<hr />
+<h2 id="scope_1">Scope</h2>
+<p>This specification establishes:</p>
+<ul>
+<li>the Canonical Validation Model;</li>
+<li>Validation Principles;</li>
+<li>Validation Domains;</li>
+<li>Canonical Validation Constraints;</li>
+<li>Validation Reports;</li>
+<li>Validation Composition;</li>
+<li>Validator Soundness;</li>
+<li>Validator Completeness;</li>
+<li>Validator Correctness;</li>
+<li>Validator Determinism;</li>
+<li>Validator Consistency;</li>
+<li>Validation Compositionality.</li>
+</ul>
+<p>Together, these definitions and theorems establish the complete mathematical foundation of Canonical Validation.</p>
+<hr />
+<h2 id="exclusions">Exclusions</h2>
+<p>This specification does not define:</p>
+<ul>
+<li>validator algorithms;</li>
+<li>execution strategies;</li>
+<li>software architecture;</li>
+<li>programming interfaces;</li>
+<li>storage mechanisms;</li>
+<li>optimization techniques;</li>
+<li>computational complexity;</li>
+<li>parallel execution models;</li>
+<li>implementation languages.</li>
+</ul>
+<p>These topics are addressed by subsequent Reference Implementation specifications.</p>
+<hr />
+<h2 id="transition-to-the-reference-engine">Transition to the Reference Engine</h2>
+<p>The Validator Specification establishes the canonical semantics of validation.</p>
+<p>The subsequent Reference Engine Specification defines the canonical operational model through which Canonical Knowledge Structures are created, modified, validated, and manipulated while preserving the canonical semantics established by the Core CKS specifications and the present Validator Specification.</p>
+<p>Accordingly,</p>
+<p>CKS-005 answers the question:</p>
+<blockquote>
+<p><strong>"What does it mean for Canonical Validation to be correct?"</strong></p>
+</blockquote>
+<p>CKS-006 answers the question:</p>
+<blockquote>
+<p><strong>"How are canonical operations performed by a conformant Reference Engine?"</strong></p>
+</blockquote>
+<hr />
+<h2 id="completion">Completion</h2>
+<p>Together with the Core CKS specifications,</p>
+<ul>
+<li>CKS-000 — Foundational Manifesto;</li>
+<li>CKS-001 — Core Specification;</li>
+<li>CKS-002 — Canonical Construction Specification;</li>
+<li>CKS-003 — Canonical Serialization;</li>
+<li>CKS-004 — Canonical Structure Evolution;</li>
+</ul>
+<p>the present specification completes the formal mathematical foundation of Canonical Validation.</p>
+<p>Subsequent specifications build upon this foundation without modifying the canonical semantics established herein.</p>
+<hr />
+<h1 id="normative-references">Normative References</h1>
+<p>[CKS-000] Canonical Knowledge Structure — Canonical Foundations and Terminology.</p>
+<p>[CKS-001] Canonical Knowledge Structure — Core Specification.</p>
+<p>[CKS-002] Canonical Knowledge Structure — Canonical Construction Specification.</p>
+<p>[CKS-003] Canonical Knowledge Structure — Canonical Serialization.</p>
+<p>[CKS-004] Canonical Knowledge Structure — Canonical Structure Evolution.</p>
+<p>[CKS-005] Canonical Knowledge Structure — Validator Specification.</p>
+<p>[CKS-006] Canonical Knowledge Structure — Reference Engine Specification.</p>
+<p>[CKS-007] Canonical Knowledge Structure — Canonical Knowledge Interface (CKI).</p>
+<p>[CKS-008] Canonical Knowledge Structure — Reference Conformance Specification.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

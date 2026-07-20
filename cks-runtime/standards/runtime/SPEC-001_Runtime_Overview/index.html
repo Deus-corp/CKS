@@ -11,24 +11,28 @@
       
       
       
+        <link rel="prev" href="../../../adr/ADR-006%20Adapter%20Architecture/">
+      
+      
+        <link rel="next" href="../SPEC-002_Session_Model/">
       
       
         
       
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>CKS Documentation</title>
+        <title>SPEC-001 Runtime Overview - CKS Documentation</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="/assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#spec-001" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -83,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="CKS Documentation" class="md-header__button md-logo" aria-label="CKS Documentation" data-md-component="logo">
+    <a href="../../../.." title="CKS Documentation" class="md-header__button md-logo" aria-label="CKS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -103,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              SPEC-001 Runtime Overview
             
           </span>
         </div>
@@ -221,7 +230,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/." class="md-tabs__link">
+      <a href="../../../.." class="md-tabs__link">
         
   
   
@@ -240,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/quickstart/" class="md-tabs__link">
+      <a href="../../../../quickstart/" class="md-tabs__link">
         
   
   
@@ -261,7 +270,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/cks-core/" class="md-tabs__link">
+        <a href="../../../../cks-core/" class="md-tabs__link">
           
   
   
@@ -277,11 +286,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/cks-runtime/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../" class="md-tabs__link">
           
   
   
@@ -301,7 +312,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/cks-mcp/" class="md-tabs__link">
+        <a href="../../../../cks-mcp/" class="md-tabs__link">
           
   
   
@@ -335,7 +346,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="CKS Documentation" class="md-nav__button md-logo" aria-label="CKS Documentation" data-md-component="logo">
+    <a href="../../../.." title="CKS Documentation" class="md-nav__button md-logo" aria-label="CKS Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -365,7 +376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   
@@ -392,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/quickstart/" class="md-nav__link">
+      <a href="../../../../quickstart/" class="md-nav__link">
         
   
   
@@ -473,7 +484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/" class="md-nav__link">
+      <a href="../../../../cks-core/" class="md-nav__link">
         
   
   
@@ -501,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/getting-started/" class="md-nav__link">
+      <a href="../../../../cks-core/getting-started/" class="md-nav__link">
         
   
   
@@ -529,7 +540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/concepts/" class="md-nav__link">
+      <a href="../../../../cks-core/concepts/" class="md-nav__link">
         
   
   
@@ -557,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/architecture/" class="md-nav__link">
+      <a href="../../../../cks-core/architecture/" class="md-nav__link">
         
   
   
@@ -585,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/api/" class="md-nav__link">
+      <a href="../../../../cks-core/api/" class="md-nav__link">
         
   
   
@@ -613,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/plugins/" class="md-nav__link">
+      <a href="../../../../cks-core/plugins/" class="md-nav__link">
         
   
   
@@ -641,7 +652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/examples/" class="md-nav__link">
+      <a href="../../../../cks-core/examples/" class="md-nav__link">
         
   
   
@@ -669,7 +680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/contracts/" class="md-nav__link">
+      <a href="../../../../cks-core/contracts/" class="md-nav__link">
         
   
   
@@ -751,7 +762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/" class="md-nav__link">
         
   
   
@@ -779,7 +790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-000_Canonical_Foundations_and_Terminology/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-000_Canonical_Foundations_and_Terminology/" class="md-nav__link">
         
   
   
@@ -807,7 +818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-001_Core_Specification/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-001_Core_Specification/" class="md-nav__link">
         
   
   
@@ -835,7 +846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-002_Canonical_Construction_Specification/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-002_Canonical_Construction_Specification/" class="md-nav__link">
         
   
   
@@ -863,7 +874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-003_Canonical_Serialization/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-003_Canonical_Serialization/" class="md-nav__link">
         
   
   
@@ -891,7 +902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-004_Canonical_Structure_Evolution/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-004_Canonical_Structure_Evolution/" class="md-nav__link">
         
   
   
@@ -919,7 +930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-005_Validator_Specification/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-005_Validator_Specification/" class="md-nav__link">
         
   
   
@@ -947,7 +958,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-006_Reference_Engine_Specification/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-006_Reference_Engine_Specification/" class="md-nav__link">
         
   
   
@@ -975,7 +986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-007_Canonical_Knowledge_Interface/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-007_Canonical_Knowledge_Interface/" class="md-nav__link">
         
   
   
@@ -1003,7 +1014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-008_Reference_Conformance_Specification/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-008_Reference_Conformance_Specification/" class="md-nav__link">
         
   
   
@@ -1031,7 +1042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-core/specifications/CKS-B001-PY_Python_Reference/" class="md-nav__link">
+      <a href="../../../../cks-core/specifications/CKS-B001-PY_Python_Reference/" class="md-nav__link">
         
   
   
@@ -1071,28 +1082,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -1110,7 +1124,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1128,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/" class="md-nav__link">
+      <a href="../../../" class="md-nav__link">
         
   
   
@@ -1156,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/charter/CHARTER/" class="md-nav__link">
+      <a href="../../../charter/CHARTER/" class="md-nav__link">
         
   
   
@@ -1184,7 +1198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/architecture/ARCH-001_Runtime_Architecture/" class="md-nav__link">
+      <a href="../../../architecture/ARCH-001_Runtime_Architecture/" class="md-nav__link">
         
   
   
@@ -1218,10 +1232,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -1230,7 +1247,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
             
   
   
@@ -1266,7 +1283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/analysis/ANALYSIS-001_Runtime_Dependencies_on_CKS_Core/" class="md-nav__link">
+      <a href="../../../analysis/ANALYSIS-001_Runtime_Dependencies_on_CKS_Core/" class="md-nav__link">
         
   
   
@@ -1308,10 +1325,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -1320,7 +1340,7 @@
         <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
         
           
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
             
   
   
@@ -1356,7 +1376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/adr/ADR-001%20Runtime%20Layering/" class="md-nav__link">
+      <a href="../../../adr/ADR-001%20Runtime%20Layering/" class="md-nav__link">
         
   
   
@@ -1384,7 +1404,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/adr/ADR-002%20Session%20Ownership/" class="md-nav__link">
+      <a href="../../../adr/ADR-002%20Session%20Ownership/" class="md-nav__link">
         
   
   
@@ -1412,7 +1432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/adr/ADR-003%20Transaction%20Model/" class="md-nav__link">
+      <a href="../../../adr/ADR-003%20Transaction%20Model/" class="md-nav__link">
         
   
   
@@ -1440,7 +1460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/adr/ADR-004%20Storage%20Abstraction/" class="md-nav__link">
+      <a href="../../../adr/ADR-004%20Storage%20Abstraction/" class="md-nav__link">
         
   
   
@@ -1468,7 +1488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/adr/ADR-005%20Version%20History/" class="md-nav__link">
+      <a href="../../../adr/ADR-005%20Version%20History/" class="md-nav__link">
         
   
   
@@ -1496,7 +1516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/adr/ADR-006%20Adapter%20Architecture/" class="md-nav__link">
+      <a href="../../../adr/ADR-006%20Adapter%20Architecture/" class="md-nav__link">
         
   
   
@@ -1529,28 +1549,31 @@
                 
   
   
+    
   
   
+  
     
     
     
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
         
           
+          
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" checked>
         
           
-          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
             
   
   
@@ -1568,7 +1591,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1583,10 +1606,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/cks-runtime/standards/runtime/SPEC-001_Runtime_Overview/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1602,6 +1634,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1614,7 +1647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/standards/runtime/SPEC-002_Session_Model/" class="md-nav__link">
+      <a href="../SPEC-002_Session_Model/" class="md-nav__link">
         
   
   
@@ -1642,7 +1675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/standards/runtime/SPEC-003_Runtime_API/" class="md-nav__link">
+      <a href="../SPEC-003_Runtime_API/" class="md-nav__link">
         
   
   
@@ -1670,7 +1703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/standards/runtime/SPEC-004_Diagnostics/" class="md-nav__link">
+      <a href="../SPEC-004_Diagnostics/" class="md-nav__link">
         
   
   
@@ -1698,7 +1731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/standards/runtime/SPEC-005_Transactions/" class="md-nav__link">
+      <a href="../SPEC-005_Transactions/" class="md-nav__link">
         
   
   
@@ -1726,7 +1759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/standards/runtime/SPEC-006_Storage/" class="md-nav__link">
+      <a href="../SPEC-006_Storage/" class="md-nav__link">
         
   
   
@@ -1754,7 +1787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/standards/runtime/SPEC-007_Version_History/" class="md-nav__link">
+      <a href="../SPEC-007_Version_History/" class="md-nav__link">
         
   
   
@@ -1782,7 +1815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-runtime/standards/runtime/SPEC-008_Conformance/" class="md-nav__link">
+      <a href="../SPEC-008_Conformance/" class="md-nav__link">
         
   
   
@@ -1879,7 +1912,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-mcp/" class="md-nav__link">
+      <a href="../../../../cks-mcp/" class="md-nav__link">
         
   
   
@@ -1907,7 +1940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/cks-mcp/ARCHITECTURE/" class="md-nav__link">
+      <a href="../../../../cks-mcp/ARCHITECTURE/" class="md-nav__link">
         
   
   
@@ -1952,6 +1985,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -1964,8 +1999,253 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="spec-001">SPEC-001</h1>
+<h1 id="runtime-overview">Runtime Overview</h1>
+<p><strong>Status:</strong> Draft</p>
+<p><strong>Standard:</strong> CKS Runtime</p>
+<p><strong>Category:</strong> Foundational Specification</p>
+<hr />
+<h1 id="1-purpose">1. Purpose</h1>
+<p>This specification defines the architectural role of CKS Runtime within the CKS ecosystem.</p>
+<p>It establishes:</p>
+<ul>
+<li>the purpose of Runtime;</li>
+<li>the Runtime lifecycle model;</li>
+<li>architectural responsibilities;</li>
+<li>component boundaries;</li>
+<li>interactions with CKS Core;</li>
+<li>interactions with external adapters.</li>
+</ul>
+<p>This specification serves as the architectural foundation for every subsequent Runtime specification.</p>
+<p>All subsequent Runtime specifications shall be interpreted in accordance with the architectural principles established by this specification.</p>
+<hr />
+<h1 id="2-scope">2. Scope</h1>
+<p>This specification defines the Runtime architecture.</p>
+<p>It does not specify:</p>
+<ul>
+<li>session semantics;</li>
+<li>transaction semantics;</li>
+<li>storage implementations;</li>
+<li>runtime APIs;</li>
+<li>persistence formats.</li>
+</ul>
+<p>Those topics are specified separately.</p>
+<hr />
+<h1 id="3-runtime-definition">3. Runtime Definition</h1>
+<p>A Runtime is the canonical operational environment responsible for managing Canonical Knowledge Structures throughout their lifecycle.</p>
+<p>Runtime owns operational lifecycle management.</p>
+<p>CKS Core owns semantic authority.</p>
+<p>The Runtime Standard defines operational behaviour.</p>
+<p>Semantic behaviour remains exclusively defined by the CKS Core Standard.</p>
+<p>Runtime shall never redefine or reinterpret canonical semantics.</p>
+<hr />
+<h1 id="4-runtime-responsibilities">4. Runtime Responsibilities</h1>
+<p>The Runtime Standard defines the following operational responsibilities:</p>
+<ul>
+<li>creating sessions;</li>
+<li>maintaining runtime state;</li>
+<li>executing transactions;</li>
+<li>coordinating validation;</li>
+<li>orchestrating persistence;</li>
+<li>managing version history;</li>
+<li>aggregating diagnostics;</li>
+<li>coordinating explainability;</li>
+<li>exposing runtime services to adapters.</li>
+</ul>
+<p>Every responsibility performed by Runtime is operational rather than semantic.</p>
+<p>The Runtime Standard defines these responsibilities conceptually.</p>
+<p>Individual specifications define their externally observable behaviour.</p>
+<hr />
+<h1 id="5-runtime-execution-model">5. Runtime Execution Model</h1>
+<p>Runtime manages one or more independent knowledge sessions.</p>
+<p>Each session owns:</p>
+<ul>
+<li>runtime state;</li>
+<li>a reference to the current Canonical Knowledge Structure;</li>
+<li>version history;</li>
+<li>diagnostics;</li>
+<li>transactional context.</li>
+</ul>
+<p>Sessions are isolated from one another.</p>
+<p>Operations performed within one session shall not affect the state of another session unless explicitly specified by a future Runtime specification.</p>
+<p>The Runtime coordinates these sessions but never modifies the semantic definition of knowledge itself.</p>
+<hr />
+<h1 id="6-relationship-to-cks-core">6. Relationship to CKS Core</h1>
+<p>Runtime depends upon CKS Core.</p>
+<p>Core provides:</p>
+<ul>
+<li>canonical models;</li>
+<li>canonical validation;</li>
+<li>canonical serialization;</li>
+<li>canonical evolution;</li>
+<li>canonical semantic diagnostics.</li>
+</ul>
+<p>Runtime invokes these services without modifying their behaviour.</p>
+<p>The reference implementation provides this integration through the
+<code>cks-runtime-core</code> package, which contains <code>CksCoreAdapter</code> — a
+concrete implementation of <code>CoreInterface</code>.</p>
+<p>The dependency direction defined by ANALYSIS-001 is normative and shall remain unchanged throughout the evolution of the Runtime Standard.</p>
+<hr />
+<h1 id="7-runtime-architecture">7. Runtime Architecture</h1>
+<p>The Runtime architecture consists of several cooperating conceptual subsystems.</p>
+<div class="highlight"><pre><span></span><code>                    Adapters
+                        │
+        ┌───────────────┼───────────────┐
+        │               │               │
+      MCP             CLI            HTTP
+        │               │               │
+        └───────────────┼───────────────┘
+                        │
+                CKS Runtime
+                        │
+     ┌──────────────────┼──────────────────┐
+     │                  │                  │
+ Session Manager   Transaction Engine   Storage
+     │                  │                  │
+ Diagnostics      Version History   Explainability
+                        │
+                   CKS Core
+</code></pre></div>
+<p>Communication between CKS Runtime and CKS Core passes exclusively
+through the Core API Boundary, as defined in ANALYSIS‑001 and
+ARCH‑001. The reference implementation realises this boundary via
+the <code>CksCoreAdapter</code> class.</p>
+<p>Each conceptual subsystem owns a single operational responsibility.</p>
+<p>Concrete implementations may combine or separate subsystems provided externally observable behaviour remains conformant.</p>
+<hr />
+<h1 id="8-runtime-components">8. Runtime Components</h1>
+<p>The Runtime Standard defines the following conceptual components.</p>
+<p>These components represent architectural responsibilities rather than mandatory implementation units.</p>
+<p>Components may be implemented as separate modules, services or internal structures.</p>
+<h2 id="session-manager">Session Manager</h2>
+<p>Owns runtime sessions.</p>
+<hr />
+<h2 id="transaction-engine">Transaction Engine</h2>
+<p>Coordinates atomic Runtime state transitions.</p>
+<hr />
+<h2 id="validation-coordinator">Validation Coordinator</h2>
+<p>Invokes canonical validation provided by CKS Core.</p>
+<p><strong>Validation Coordinator</strong></p>
+<p>Invokes canonical validation provided by CKS Core. In the reference
+implementation this responsibility is carried by <code>CksCoreAdapter</code>
+(part of the <code>cks-runtime-core</code> package), which wraps the public
+Python API of <code>cks-core</code>.</p>
+<hr />
+<h2 id="diagnostics-aggregator">Diagnostics Aggregator</h2>
+<p>Collects diagnostics produced throughout runtime operations.</p>
+<hr />
+<h2 id="version-manager">Version Manager</h2>
+<p>Maintains runtime history.</p>
+<hr />
+<h2 id="storage-layer">Storage Layer</h2>
+<p>Persists runtime state through an implementation-independent abstraction.</p>
+<hr />
+<h2 id="explainability-coordinator">Explainability Coordinator</h2>
+<p>Coordinates explanation services without redefining semantic meaning.</p>
+<hr />
+<h1 id="9-architectural-rules">9. Architectural Rules</h1>
+<p>The following rules are mandatory.</p>
+<p>Runtime shall never:</p>
+<ul>
+<li>redefine canonical semantics;</li>
+<li>reinterpret canonical validation;</li>
+<li>alter canonical serialization;</li>
+<li>replace canonical evolution.</li>
+</ul>
+<p>Runtime shall treat every service provided by CKS Core as authoritative.</p>
+<p>Runtime shall not introduce an alternative semantic authority.</p>
+<p>Runtime may:</p>
+<ul>
+<li>orchestrate;</li>
+<li>schedule;</li>
+<li>coordinate;</li>
+<li>aggregate;</li>
+<li>persist;</li>
+<li>expose operational services.</li>
+</ul>
+<hr />
+<h1 id="10-adapter-model">10. Adapter Model</h1>
+<p>Adapters expose Runtime capabilities to external systems.</p>
+<p>Examples include:</p>
+<ul>
+<li>MCP</li>
+<li>CLI</li>
+<li>Python API</li>
+<li>HTTP API</li>
+</ul>
+<p>Adapters contain no semantic knowledge.</p>
+<p>Adapters are transport-specific integrations rather than extensions of Runtime.</p>
+<p>Adapters shall communicate exclusively through the Runtime API.</p>
+<hr />
+<h1 id="11-lifecycle">11. Lifecycle</h1>
+<p>The canonical Runtime lifecycle is:</p>
+<div class="highlight"><pre><span></span><code>Create Session
+        ↓
+Attach Knowledge Structure
+        ↓
+Validate
+        ↓
+Execute Operations
+        ↓
+Commit Transaction
+        ↓
+Persist
+        ↓
+Expose Results
+        ↓
+Close Session
+</code></pre></div>
+<p>Individual Runtime implementations may introduce additional internal stages provided the externally observable lifecycle remains equivalent.</p>
+<p>Future specifications may refine individual lifecycle stages while preserving this overall structure.</p>
+<hr />
+<h1 id="12-design-goals">12. Design Goals</h1>
+<p>The Runtime Standard is designed to achieve:</p>
+<ul>
+<li>deterministic behaviour;</li>
+<li>behavioural predictability;</li>
+<li>implementation independence;</li>
+<li>ecosystem interoperability;</li>
+<li>adapter neutrality;</li>
+<li>operational extensibility;</li>
+<li>semantic stability;</li>
+<li>transport independence.</li>
+</ul>
+<hr />
+<h1 id="13-conformance">13. Conformance</h1>
+<p>A Runtime implementation conforms to this specification when it:</p>
+<ul>
+<li>operates exclusively on Canonical Knowledge Structures;</li>
+<li>preserves Core semantics;</li>
+<li>exposes operational services without redefining semantic behaviour;</li>
+<li>satisfies all mandatory Runtime specifications.</li>
+</ul>
+<p>Conformance to this specification does not imply conformance to the complete Runtime Standard.</p>
+<p>Additional Runtime specifications define further normative requirements.</p>
+<hr />
+<h1 id="14-summary">14. Summary</h1>
+<p>CKS Runtime is the canonical operational environment of the CKS ecosystem.</p>
+<p>It manages the operational lifecycle of canonical knowledge while preserving the semantic guarantees established by CKS Core.</p>
+<p>This specification establishes the architectural foundation upon which every subsequent Runtime specification is built.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -2008,10 +2288,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "search.suggest", "content.code.copy"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
