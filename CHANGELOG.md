@@ -6,6 +6,21 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.8.1] - 2026-07-21
+
+### Added
+- `KnowledgeStructure.merge()` – three-way merge of independently evolved structures with conflict detection via object hashes, referential integrity enforcement, and structured `MergeConflictError`.
+- `MergeConflict` and `MergeConflictError` types, exported from the top-level `cks` package.
+- `merge()` function in `cks.interface`, wired through `ReferenceEngine`.
+- `KnowledgeObject._id_hash` – cached canonical hash of `identity.id`, making `KnowledgeStructure` construction ~10× faster.
+- New tests for `identity_equivalent`, `_id_hash` caching, and merge (7 new tests, total 167 passed).
+
+### Changed
+- `KnowledgeStructure.__init__` now uses each object's cached `_id_hash` instead of recomputing `_canonical_hash(id)` for every object on every construction.
+- `CanonicalRelation.__init__` sets `_id_hash` explicitly, matching the cache behaviour of `KnowledgeObject.__post_init__`.
+
+---
+
 ## [1.8.0] - 2026-07-21
 
 ### Added

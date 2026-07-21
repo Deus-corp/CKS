@@ -27,6 +27,8 @@ from .core import (
     CanonicalRelation,
     KnowledgeObject,
     KnowledgeStructure,
+    MergeConflict,
+    MergeConflictError,
     ObjectIdentity,
 )
 
@@ -59,6 +61,7 @@ from .interface import (
     evolve,
     extract,
     inspect,
+    merge,
     parse,
     project,
     serialize,
@@ -71,7 +74,7 @@ from .interface import (
 
 _EXTERNAL_COUNT = load_external_constraints()
 
-__version__ = "1.8.0"
+__version__ = "1.8.1"
 
 VERSION = tuple(
     int(part)
@@ -90,12 +93,15 @@ __all__ = [
     "extract",
     "project",
     "evolve",
+    "merge",
 
     # Core model
     "ObjectIdentity",
     "KnowledgeObject",
     "CanonicalRelation",
     "KnowledgeStructure",
+    "MergeConflict",
+    "MergeConflictError",
 
     # Evolution operators
     "AddObject",
