@@ -161,6 +161,7 @@ The current Python reference implementation provides:
 - Static Type Checking (mypy)
 - Optional Extension Constraints (opt‑in validators for specialised knowledge types)
 - Merkle‑tree based structural hashing for O(1) comparison and diff computation
+- Three‑way merge (base‑branch‑branch) with conflict detection and structured error reporting
 
 ---
 
@@ -269,6 +270,21 @@ cks validate examples/corpus/valid_theory_example.json
 cks evolve examples/corpus/valid_theory_example.json examples/corpus/evolve_add.json
 ```
 
+```bash
+# Three-way merge of diverged structures
+from cks import merge, MergeConflictError
+
+base = construct([obj1, obj2])
+branch_a = construct([obj1, obj3])
+branch_b = construct([obj2, obj4])
+
+try:
+    merged = merge(base, branch_a, branch_b)
+except MergeConflictError as e:
+    for conflict in e.conflicts:
+        print(f"Conflict on {conflict.object_id}")
+```
+
 Or convert between formats:
 
 ```bash
@@ -349,6 +365,7 @@ Current implementation status:
 | Static Type Checking | ✅ Complete |
 | Optional Constraints | ✅ Complete |
 | Merkle Hashing & Diff | ✅ Complete |
+| Three‑Way Merge | ✅ Complete |
 
 The current implementation serves as the reference implementation of the
 existing CKS specifications.

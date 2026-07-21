@@ -21,6 +21,20 @@ The reference implementation evolves together with the formal CKS specifications
 
 ---
 
+# Current Status (July 2026)
+
+The project has progressed significantly beyond the original roadmap.
+Key achievements since v1.3:
+
+- v1.4–v1.6: MCP server (`cks-mcp`), event system, time-travel operations, delta version storage — **all completed**
+- v1.7: Merkle-tree hashing and structural diff — **completed**
+- v1.8: Three-way merge with conflict detection — **completed**
+
+The sections below reflect the original roadmap and will be updated
+in a future documentation refresh.
+
+---
+
 # Version 0.2 — Constraints ✅ (completed)
 
 * Canonical constraint framework

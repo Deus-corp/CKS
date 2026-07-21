@@ -25,6 +25,8 @@ from cks import (
     extract,
     project,
     evolve,
+    merge,
+    MergeConflictError,
 )
 
 from cks.evolution import (
@@ -384,6 +386,51 @@ All operators are observationally pure — the original structure is never modif
 
 ---
 
+# Merging
+
+## merge()
+
+Three-way merge of independently evolved Knowledge Structures.
+
+### Signature
+
+```python
+merge(
+    base: KnowledgeStructure,
+    branch_a: KnowledgeStructure,
+    branch_b: KnowledgeStructure,
+) -> KnowledgeStructure
+```
+
+### Example
+
+```python
+from cks import merge, MergeConflictError
+
+base = KnowledgeStructure([obj1, obj2])
+branch_a = KnowledgeStructure([obj1, obj3])   # evolved independently
+branch_b = KnowledgeStructure([obj2, obj4])   # evolved independently
+
+try:
+    merged = merge(base, branch_a, branch_b)
+except MergeConflictError as e:
+    for conflict in e.conflicts:
+        print(f"Conflict on {conflict.object_id}")
+```
+
+### MergeConflictError
+
+Raised when `branch_a` and `branch_b` changed the same identity to different results. The `conflicts` attribute is a list of `MergeConflict` objects, each containing:
+
+| Field      | Description                                      |
+|------------|--------------------------------------------------|
+| object_id  | The identity that both branches changed          |
+| base       | The object in the common ancestor (or None)      |
+| branch_a   | The object in branch A (or None if removed)      |
+| branch_b   | The object in branch B (or None if removed)      |
+
+---
+
 # Reference Engine
 
 The public interface internally delegates every operation to the Reference Engine.
@@ -465,6 +512,8 @@ The following classes are part of the supported public API.
 | AddRelation          | Genesis – add a CanonicalRelation          |
 | RemoveObject         | Decay – remove a KnowledgeObject           |
 | RemoveRelation       | Decay – remove a CanonicalRelation         |
+| MergeConflict       | Describes a single merge conflict           |
+| MergeConflictError  | Exception raised when merge conflicts occur |
 
 ---
 
@@ -506,5 +555,3 @@ For additional information, see:
 * **Architecture** — implementation design.
 * **Examples** — practical usage patterns.
 * **Core Specifications** — formal normative definitions.
-
----
