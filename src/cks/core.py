@@ -122,10 +122,20 @@ class KnowledgeObject:
     #: -- it is a cached derivation, not independent state.
     _hash: bytes = field(init=False, repr=False, compare=False)
 
+    #: Canonical hash of just ``identity.id``, cached once here so
+    #: KnowledgeStructure.__init__ can build ``_identity_hash`` by
+    #: sorting/concatenating already-computed digests instead of
+    #: recomputing a SHA-256 leaf hash per id on every single
+    #: structure construction (every StructuralOperator.apply()
+    #: builds a brand new KnowledgeStructure, so this constructor
+    #: runs far more often than any individual object changes).
+    _id_hash: bytes = field(init=False, repr=False, compare=False)
+
     def __post_init__(self) -> None:
         frozen_structure = _freeze_mapping(self.structure)
         object.__setattr__(self, "structure", frozen_structure)
         object.__setattr__(self, "_hash", _compute_leaf_hash(self.identity, frozen_structure))
+        object.__setattr__(self, "_id_hash", _canonical_hash(self.identity.id))
 
     # ------------------------------------------------------------------
     # Copy semantics
@@ -172,6 +182,7 @@ class CanonicalRelation(KnowledgeObject):
         object.__setattr__(self, "identity", identity)
         object.__setattr__(self, "structure", frozen_struct)
         object.__setattr__(self, "_hash", _compute_leaf_hash(identity, frozen_struct))
+        object.__setattr__(self, "_id_hash", _canonical_hash(identity.id))
 
     @property
     def participants(self) -> tuple[str, ...]:
@@ -217,10 +228,15 @@ class KnowledgeStructure:
 
         # A second, narrower hash over identities only (ids present),
         # backing identity_equivalent -- unaffected by content changes.
-        sorted_ids = sorted(self._index.keys())
+        # Uses each object's cached _id_hash (set once when that
+        # KnowledgeObject was constructed) rather than recomputing
+        # _canonical_hash(id) here, since this constructor runs on
+        # every structural edit regardless of how many ids actually
+        # changed.
+        sorted_id_hashes = sorted(obj._id_hash for obj in object_list)
         self._identity_hash = hashlib.sha256(
-            _HASH_TAG_SET + _uint32(len(sorted_ids))
-            + b"".join(_canonical_hash(i) for i in sorted_ids)
+            _HASH_TAG_SET + _uint32(len(sorted_id_hashes))
+            + b"".join(sorted_id_hashes)
         ).digest()
 
     def __len__(self) -> int:
@@ -386,3 +402,172 @@ class KnowledgeStructure:
             operators.append(AddRelation(target._index[rid]))
 
         return operators
+
+    # ------------------------------------------------------------------
+    # Three-Way Merge
+    # ------------------------------------------------------------------
+
+    def merge(
+        self,
+        branch_a: "KnowledgeStructure",
+        branch_b: "KnowledgeStructure",
+    ) -> "KnowledgeStructure":
+        """
+        Three-way merge. ``self`` is the common ancestor (base);
+        ``branch_a`` and ``branch_b`` are two structures independently
+        evolved from it.
+
+        An identity is a conflict only when BOTH branches changed it
+        (added, removed, or modified relative to base) AND ended up
+        with different results:
+
+        - both branches introducing the identical object/relation
+          (same id, same content) is NOT a conflict -- it converges;
+        - both branches removing the same identity is NOT a conflict
+          -- they agree it's gone;
+        - one branch removing an identity while the other modifies
+          it (or leaves a different value under the same id) IS a
+          conflict -- there is no way to reconcile "gone" with
+          "changed to X" without the caller deciding;
+        - both branches modifying the same identity to different
+          content IS a conflict.
+
+        This mirrors :meth:`diff`'s own id-and-hash comparison rather
+        than introspecting evolution operators: comparing final
+        object hashes at each touched id is both simpler and more
+        precise than trying to tell "these two operators represent
+        the same change" apart from bare id overlap.
+
+        Referential integrity: if an object is removed by either
+        branch, any relation that still references it -- even one
+        neither branch's own ``touched`` set flags, e.g. inherited
+        unchanged from ``self`` -- is dropped from the result rather
+        than emitting a structure with a dangling reference. This is
+        the same contract :class:`~cks.evolution.RemoveObject` itself
+        enforces via cascade deletion, applied here defensively so
+        ``merge()`` never depends on both inputs having been built
+        through operators that already cascade correctly.
+
+        Parameters
+        ----------
+        branch_a, branch_b
+            Structures assumed to have evolved from ``self`` (though
+            this is not verified -- callers are responsible for
+            supplying structures that actually share ``self`` as an
+            ancestor; merging unrelated structures will simply treat
+            every identity present in one but not ``self`` as an
+            addition).
+
+        Returns
+        -------
+        KnowledgeStructure
+            The merged result: every identity either branch added,
+            removed, or modified is reflected; identities neither
+            branch touched are carried over from ``self`` unchanged.
+
+        Raises
+        ------
+        MergeConflictError
+            Both branches changed the same identity to different,
+            irreconcilable results. ``error.conflicts`` lists every
+            such identity together with its value in ``self``,
+            ``branch_a``, and ``branch_b`` (``None`` meaning "absent
+            in that structure") so the caller can present or resolve
+            each one.
+        """
+        base_ids = set(self._index)
+        a_ids = set(branch_a._index)
+        b_ids = set(branch_b._index)
+
+        def touched_ids(ids: set, index: Mapping[str, KnowledgeObject]) -> set:
+            added = ids - base_ids
+            removed = base_ids - ids
+            modified = {
+                oid for oid in (base_ids & ids)
+                if self._index[oid]._hash != index[oid]._hash
+            }
+            return added | removed | modified
+
+        a_touched = touched_ids(a_ids, branch_a._index)
+        b_touched = touched_ids(b_ids, branch_b._index)
+
+        conflicts: list[MergeConflict] = []
+        for oid in sorted(a_touched & b_touched):
+            a_obj = branch_a._index.get(oid)
+            b_obj = branch_b._index.get(oid)
+            a_hash = a_obj._hash if a_obj is not None else None
+            b_hash = b_obj._hash if b_obj is not None else None
+            if a_hash != b_hash:
+                conflicts.append(
+                    MergeConflict(
+                        object_id=oid,
+                        base=self._index.get(oid),
+                        branch_a=a_obj,
+                        branch_b=b_obj,
+                    )
+                )
+
+        if conflicts:
+            raise MergeConflictError(conflicts)
+
+        merged: dict[str, KnowledgeObject] = dict(self._index)
+        for oid in a_touched:
+            if oid in a_ids:
+                merged[oid] = branch_a._index[oid]
+            else:
+                merged.pop(oid, None)
+        for oid in b_touched:
+            if oid in b_ids:
+                merged[oid] = branch_b._index[oid]
+            else:
+                merged.pop(oid, None)
+
+        surviving_ids = set(merged)
+        final_objects = [
+            obj for obj in merged.values()
+            if not (
+                isinstance(obj, CanonicalRelation)
+                and not set(obj.participants) <= surviving_ids
+            )
+        ]
+
+        return KnowledgeStructure(final_objects)
+
+
+# ============================================================================
+# Three-Way Merge support types
+# ============================================================================
+
+
+@dataclass(frozen=True, slots=True)
+class MergeConflict:
+    """
+    One identity that ``branch_a`` and ``branch_b`` both changed,
+    relative to a common ``base``, to different results.
+
+    ``base``, ``branch_a``, and ``branch_b`` hold the object as it
+    existed in each structure -- ``None`` means the identity was
+    absent there (e.g. ``base=None`` for an id both branches
+    introduced independently with different content).
+    """
+
+    object_id: str
+    base: "KnowledgeObject | None"
+    branch_a: "KnowledgeObject | None"
+    branch_b: "KnowledgeObject | None"
+
+    def __repr__(self) -> str:
+        return f"MergeConflict(object_id={self.object_id!r})"
+
+
+class MergeConflictError(ValueError):
+    """
+    Raised by :meth:`KnowledgeStructure.merge` when ``branch_a`` and
+    ``branch_b`` changed one or more of the same identities to
+    different, irreconcilable results.
+    """
+
+    def __init__(self, conflicts: list["MergeConflict"]) -> None:
+        self.conflicts = conflicts
+        ids = ", ".join(c.object_id for c in conflicts)
+        super().__init__(f"Merge conflict on identities: {ids}")

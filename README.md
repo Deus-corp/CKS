@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Tests](https://img.shields.io/badge/tests-160%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-167%20passing-brightgreen)
 [![PyPI](https://img.shields.io/pypi/v/cks-core)](https://pypi.org/project/cks-core/)
 
 CKS is an open specification that defines how knowledge can be represented,
@@ -291,7 +291,7 @@ python -m pytest -v
 
 Current status:
 
-- 160+ tests
+- 167+ tests
 - all passing
 
 The test suite verifies:

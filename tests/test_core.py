@@ -210,6 +210,58 @@ def test_not_structurally_equivalent():
 
 
 # =============================================================================
+# Identity equivalence
+# =============================================================================
+#
+# identity_equivalent() had no direct test coverage anywhere in the
+# suite before this. That gap is exactly how a change to
+# KnowledgeStructure._identity_hash's internal construction (caching
+# each KnowledgeObject's id hash instead of recomputing it from
+# scratch on every KnowledgeStructure.__init__ call) could have
+# silently changed its observable behaviour without any test noticing.
+
+
+def test_identity_equivalent_same_ids_different_content():
+    """Same ids, different (non-id) content -> identity-equivalent but not structurally equivalent."""
+    left = KnowledgeStructure(
+        [make_object("obj-1", name="Alpha")],
+    )
+    right = KnowledgeStructure(
+        [make_object("obj-1", name="Beta")],
+    )
+
+    assert left.identity_equivalent(right)
+    assert not left.structurally_equivalent(right)
+
+
+def test_identity_equivalent_different_ids():
+    left = KnowledgeStructure([make_object("obj-1")])
+    right = KnowledgeStructure([make_object("obj-2")])
+
+    assert not left.identity_equivalent(right)
+
+
+def test_identity_equivalent_is_order_independent():
+    """Same id set, inserted in a different order -> still identity-equivalent."""
+    left = KnowledgeStructure(
+        [make_object("obj-1"), make_object("obj-2"), make_object("obj-3")],
+    )
+    right = KnowledgeStructure(
+        [make_object("obj-3"), make_object("obj-1"), make_object("obj-2")],
+    )
+
+    assert left.identity_equivalent(right)
+
+
+def test_identity_equivalent_reflexive_for_relations():
+    """Relations (which bypass KnowledgeObject.__post_init__ via their own __init__) must also be covered."""
+    left = make_structure()
+    right = make_structure()
+
+    assert left.identity_equivalent(right)
+
+
+# =============================================================================
 # Representation
 # =============================================================================
 
@@ -383,6 +435,40 @@ def test_knowledge_object_hash_differs_for_different_structure():
         structure={"a": 2},
     )
     assert obj1._hash != obj2._hash
+
+def test_knowledge_object_has_stable_id_hash():
+    """
+    KnowledgeObject._id_hash caches the canonical hash of just
+    identity.id, computed once in __post_init__, so
+    KnowledgeStructure.__init__ can build _identity_hash without
+    recomputing a SHA-256 leaf hash per id on every construction.
+    """
+    obj = KnowledgeObject(
+        identity=ObjectIdentity("obj", "Thing", "Thing"),
+        structure={"a": 1},
+    )
+    assert isinstance(obj._id_hash, bytes)
+    assert len(obj._id_hash) == 32
+
+def test_knowledge_object_id_hash_depends_only_on_id():
+    """_id_hash must be the same for two objects sharing an id, even
+    when their type/name/structure differ -- and different for
+    different ids, even with everything else identical."""
+    same_id_a = KnowledgeObject(identity=ObjectIdentity("obj", "TypeA", "Alpha"), structure={"x": 1})
+    same_id_b = KnowledgeObject(identity=ObjectIdentity("obj", "TypeB", "Beta"), structure={"y": 2})
+    assert same_id_a._id_hash == same_id_b._id_hash
+
+    different_id = KnowledgeObject(identity=ObjectIdentity("other", "TypeA", "Alpha"), structure={"x": 1})
+    assert same_id_a._id_hash != different_id._id_hash
+
+def test_canonical_relation_has_id_hash():
+    """CanonicalRelation.__init__ bypasses KnowledgeObject.__post_init__
+    entirely (it sets fields via object.__setattr__ directly), so it
+    must set _id_hash itself -- otherwise every KnowledgeStructure
+    containing a relation would raise AttributeError on construction."""
+    relation = make_relation("rel-1", ["obj-1", "obj-2"])
+    assert isinstance(relation._id_hash, bytes)
+    assert len(relation._id_hash) == 32
 
 def test_knowledge_structure_root_hash_deterministic():
     """Merkle root must be independent of insertion order."""
