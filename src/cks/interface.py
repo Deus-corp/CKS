@@ -21,9 +21,6 @@ from typing import Iterable, Mapping, Any
 from .core import (
     KnowledgeObject,
     KnowledgeStructure,
-    CanonicalRelation,
-    MergeConflict,
-    MergeConflictError,
 )
 
 from .engine import ReferenceEngine
