@@ -2019,6 +2019,8 @@
     <span class="n">extract</span><span class="p">,</span>
     <span class="n">project</span><span class="p">,</span>
     <span class="n">evolve</span><span class="p">,</span>
+    <span class="n">merge</span><span class="p">,</span>
+    <span class="n">MergeConflictError</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">cks.evolution</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -2283,6 +2285,58 @@ or in a scoped <code>ConstraintRegistry</code>:</p>
 </code></pre></div>
 <p>All operators are observationally pure — the original structure is never modified.</p>
 <hr />
+<h1 id="merging">Merging</h1>
+<h2 id="merge">merge()</h2>
+<p>Three-way merge of independently evolved Knowledge Structures.</p>
+<h3 id="signature_11">Signature</h3>
+<div class="highlight"><pre><span></span><code><span class="n">merge</span><span class="p">(</span>
+    <span class="n">base</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+    <span class="n">branch_a</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+    <span class="n">branch_b</span><span class="p">:</span> <span class="n">KnowledgeStructure</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KnowledgeStructure</span>
+</code></pre></div>
+<h3 id="example_11">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cks</span><span class="w"> </span><span class="kn">import</span> <span class="n">merge</span><span class="p">,</span> <span class="n">MergeConflictError</span>
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">KnowledgeStructure</span><span class="p">([</span><span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">])</span>
+<span class="n">branch_a</span> <span class="o">=</span> <span class="n">KnowledgeStructure</span><span class="p">([</span><span class="n">obj1</span><span class="p">,</span> <span class="n">obj3</span><span class="p">])</span>   <span class="c1"># evolved independently</span>
+<span class="n">branch_b</span> <span class="o">=</span> <span class="n">KnowledgeStructure</span><span class="p">([</span><span class="n">obj2</span><span class="p">,</span> <span class="n">obj4</span><span class="p">])</span>   <span class="c1"># evolved independently</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">merged</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">branch_a</span><span class="p">,</span> <span class="n">branch_b</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">MergeConflictError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">conflict</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">conflicts</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conflict on </span><span class="si">{</span><span class="n">conflict</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="mergeconflicterror">MergeConflictError</h3>
+<p>Raised when <code>branch_a</code> and <code>branch_b</code> changed the same identity to different results. The <code>conflicts</code> attribute is a list of <code>MergeConflict</code> objects, each containing:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>object_id</td>
+<td>The identity that both branches changed</td>
+</tr>
+<tr>
+<td>base</td>
+<td>The object in the common ancestor (or None)</td>
+</tr>
+<tr>
+<td>branch_a</td>
+<td>The object in branch A (or None if removed)</td>
+</tr>
+<tr>
+<td>branch_b</td>
+<td>The object in branch B (or None if removed)</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h1 id="reference-engine">Reference Engine</h1>
 <p>The public interface internally delegates every operation to the Reference Engine.</p>
 <p>Applications normally do not need to instantiate the engine directly.</p>
@@ -2416,6 +2470,14 @@ or in a scoped <code>ConstraintRegistry</code>:</p>
 <td>RemoveRelation</td>
 <td>Decay – remove a CanonicalRelation</td>
 </tr>
+<tr>
+<td>MergeConflict</td>
+<td>Describes a single merge conflict</td>
+</tr>
+<tr>
+<td>MergeConflictError</td>
+<td>Exception raised when merge conflicts occur</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -2449,7 +2511,6 @@ in‑memory storage).</p>
 <li><strong>Examples</strong> — practical usage patterns.</li>
 <li><strong>Core Specifications</strong> — formal normative definitions.</li>
 </ul>
-<hr />
 
 
 
