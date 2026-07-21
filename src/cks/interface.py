@@ -18,8 +18,13 @@ from __future__ import annotations
 
 from typing import Iterable, Mapping, Any
 
-from .core import KnowledgeObject
-from .core import KnowledgeStructure
+from .core import (
+    KnowledgeObject,
+    KnowledgeStructure,
+    CanonicalRelation,
+    MergeConflict,
+    MergeConflictError,
+)
 
 from .engine import ReferenceEngine
 from .result import ValidationResult
@@ -51,6 +56,8 @@ __all__ = [
     # Public classes
     "ReferenceEngine",
     "SerializationError",
+
+    "merge",
 ]
 
 # Canonical shared ReferenceEngine.
@@ -209,3 +216,20 @@ def validate_all(
         min_severity=min_severity,
         extra_constraints=extra_constraints,
     )
+
+def merge(
+    base: KnowledgeStructure,
+    branch_a: KnowledgeStructure,
+    branch_b: KnowledgeStructure,
+) -> KnowledgeStructure:
+    """
+    Three-way merge of independently evolved Knowledge Structures.
+
+    ``base`` is the common ancestor; ``branch_a`` and ``branch_b``
+    are two structures independently evolved from it.  Returns the
+    merged result.
+
+    Raises :class:`MergeConflictError` when the two branches changed
+    the same identity to different, irreconcilable results.
+    """
+    return base.merge(branch_a, branch_b)

@@ -6,6 +6,14 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.8.2] - 2026-07-21
+
+### Added
+- `merge()` function in the public `cks.interface` module, delegating to `KnowledgeStructure.merge()`.
+- `MergeConflict` and `MergeConflictError` now exported from the top-level `cks` package.
+
+---
+
 ## [1.8.1] - 2026-07-21
 
 ### Added
