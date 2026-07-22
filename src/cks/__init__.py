@@ -30,6 +30,7 @@ from .core import (
     MergeConflict,
     MergeConflictError,
     ObjectIdentity,
+    SubgraphResult,
 )
 
 from .diagnostics import (
@@ -64,6 +65,7 @@ from .interface import (
     merge,
     parse,
     project,
+    query_subgraph,
     serialize,
     validate,
 )
@@ -74,7 +76,7 @@ from .interface import (
 
 _EXTERNAL_COUNT = load_external_constraints()
 
-__version__ = "1.8.3"
+__version__ = "1.9.0"
 
 VERSION = tuple(
     int(part)
@@ -94,6 +96,7 @@ __all__ = [
     "project",
     "evolve",
     "merge",
+    "query_subgraph",
 
     # Core model
     "ObjectIdentity",
@@ -102,6 +105,7 @@ __all__ = [
     "KnowledgeStructure",
     "MergeConflict",
     "MergeConflictError",
+    "SubgraphResult",
 
     # Evolution operators
     "AddObject",

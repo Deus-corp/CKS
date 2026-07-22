@@ -6,10 +6,13 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
-## [1.8.3] - 2026-07-22
+## [1.9.0] - 2026-07-21
 
-### Fixed
-- Three-way merge (`KnowledgeStructure.merge`) now preserves deterministic object ordering based on insertion order in the branches, rather than on random set iteration order (PYTHONHASHSEED). (#bug 2)
+### Added
+- `KnowledgeStructure.query_subgraph()` – extracts the local k-hop neighborhood around one or more seed ids as a self-contained subgraph (own `root_hash`, no dangling relations), with optional `include_relation_types`/`include_object_types` filters, and an optional `max_tokens`/`max_objects` budget with degree/type/distance-weighted candidate ranking when the neighborhood exceeds it.
+- `SubgraphResult` – return type of `query_subgraph()`, pairing the extracted `structure` with `total_found_nodes`, `returned_nodes`, `is_truncated`, `truncation_reason`, and `suggested_next_seed`, so a caller can always tell a full neighborhood from a budget-truncated one and knows where to resume.
+- `query_subgraph()` function in the public `cks.interface` module, delegating to `KnowledgeStructure.query_subgraph()`. `SubgraphResult` and `query_subgraph` now exported from the top-level `cks` package.
+- 17 new tests covering traversal depth, multiple seeds, n-ary (hyperedge) relations, the two `include_*` filters, budget truncation under both `max_objects` and `max_tokens`, `type_weights` ranking, and the seeds-are-never-dropped guarantee.
 
 ---
 

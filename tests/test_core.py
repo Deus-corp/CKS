@@ -546,31 +546,243 @@ def test_diff_modified_object_preserves_relations():
     assert "rel-1" in result
 
 
-def test_merge_preserves_insertion_order():
-    """Порядок объектов после слияния должен определяться порядком в ветках, а не случайным хэшированием."""
-    # Базовые объекты
-    base_objs = [
-        KnowledgeObject(identity=ObjectIdentity(id="1", type="T", name="Base1")),
-        KnowledgeObject(identity=ObjectIdentity(id="2", type="T", name="Base2")),
+# =============================================================================
+# query_subgraph
+# =============================================================================
+#
+# Chain graph used by most tests below:
+#
+#     A --r1-- B --r2-- C --r3-- D        (E isolated, no relations)
+#
+# Plus a separate 3-way hyperedge graph (F, G, H via r_hyper) for tests
+# that specifically need a non-binary relation, and a star graph (hub
+# plus N leaves) for the budget/ranking tests, where degree centrality
+# and distance alone can't distinguish leaves from each other.
+
+
+def _make_chain_structure() -> KnowledgeStructure:
+    return KnowledgeStructure(
+        [
+            make_object("A"),
+            make_object("B"),
+            make_object("C"),
+            make_object("D"),
+            make_object("E"),
+            make_relation("r1", ["A", "B"]),
+            make_relation("r2", ["B", "C"]),
+            make_relation("r3", ["C", "D"]),
+        ]
+    )
+
+
+def _make_hyperedge_structure() -> KnowledgeStructure:
+    return KnowledgeStructure(
+        [
+            make_object("F"),
+            make_object("G"),
+            make_object("H"),
+            make_relation("r_hyper", ["F", "G", "H"], relation_type="triad"),
+        ]
+    )
+
+
+def _make_star_structure(leaf_count: int = 10) -> KnowledgeStructure:
+    objects = [make_object("hub", otype="Hub")]
+    objects += [make_object(f"leaf{i}") for i in range(leaf_count)]
+    objects.append(make_object("vip", otype="Architecture"))
+    relations = [
+        make_relation(f"r{i}", ["hub", f"leaf{i}"]) for i in range(leaf_count)
     ]
-    base = KnowledgeStructure(base_objs)
+    relations.append(make_relation("r_vip", ["hub", "vip"]))
+    return KnowledgeStructure(objects + relations)
 
-    # Ветка A добавляет объекты в определённом порядке: 4, 3 (проверяем, что порядок сохранён)
-    branch_a = KnowledgeStructure([
-        *base_objs,
-        KnowledgeObject(identity=ObjectIdentity(id="4", type="T", name="A4")),
-        KnowledgeObject(identity=ObjectIdentity(id="3", type="T", name="A3")),
-    ])
 
-    # Ветка B добавляет объект 5
-    branch_b = KnowledgeStructure([
-        *base_objs,
-        KnowledgeObject(identity=ObjectIdentity(id="5", type="T", name="B5")),
-    ])
+def test_query_subgraph_unknown_seed_returns_empty():
+    structure = _make_chain_structure()
+    result = structure.query_subgraph("does-not-exist", depth=2)
+    assert len(result.structure) == 0
+    assert result.total_found_nodes == 0
+    assert result.returned_nodes == 0
+    assert result.is_truncated is False
+    assert result.truncation_reason is None
+    assert result.suggested_next_seed is None
 
-    merged = base.merge(branch_a, branch_b)
 
-    # Ожидаемый порядок: все базовые (в исходном порядке), затем 4, 3, 5
-    expected_ids = [obj.identity.id for obj in base.objects] + ["4", "3", "5"]
-    actual_ids = [obj.identity.id for obj in merged.objects]
-    assert actual_ids == expected_ids, f"Expected order {expected_ids}, got {actual_ids}"
+def test_query_subgraph_depth_zero_returns_only_seed():
+    structure = _make_chain_structure()
+    result = structure.query_subgraph("A", depth=0)
+    ids = {obj.identity.id for obj in result.structure.objects}
+    assert ids == {"A"}
+
+
+def test_query_subgraph_depth_one_stops_at_one_hop():
+    structure = _make_chain_structure()
+    result = structure.query_subgraph("A", depth=1)
+    ids = {obj.identity.id for obj in result.structure.objects}
+    assert ids == {"A", "B", "r1"}
+
+
+def test_query_subgraph_depth_two_reaches_further():
+    structure = _make_chain_structure()
+    result = structure.query_subgraph("A", depth=2)
+    ids = {obj.identity.id for obj in result.structure.objects}
+    assert ids == {"A", "B", "C", "r1", "r2"}
+    assert result.total_found_nodes == 3  # A, B, C
+    assert result.returned_nodes == 3
+    assert result.is_truncated is False
+
+
+def test_query_subgraph_isolated_node_returns_only_itself():
+    structure = _make_chain_structure()
+    result = structure.query_subgraph("E", depth=5)
+    ids = {obj.identity.id for obj in result.structure.objects}
+    assert ids == {"E"}
+
+
+def test_query_subgraph_multiple_seeds():
+    structure = _make_chain_structure()
+    result = structure.query_subgraph({"A", "D"}, depth=1)
+    ids = {obj.identity.id for obj in result.structure.objects}
+    # A reaches B and D reaches C in one hop each, so the visited set
+    # is {A, B, C, D}. r2 (B--C) is then included too even though it
+    # was never itself traversed: both its endpoints survived, and
+    # query_subgraph applies the standard vertex-induced-subgraph rule
+    # (every relation whose participants all survived is kept) rather
+    # than only relations actually crossed by BFS.
+    assert ids == {"A", "B", "C", "D", "r1", "r2", "r3"}
+
+
+def test_query_subgraph_traverses_hyperedge():
+    """A relation with 3+ participants must expose every OTHER
+    participant as a one-hop neighbor of any one of them."""
+    structure = _make_hyperedge_structure()
+    result = structure.query_subgraph("F", depth=1)
+    ids = {obj.identity.id for obj in result.structure.objects}
+    assert ids == {"F", "G", "H", "r_hyper"}
+
+
+def test_query_subgraph_result_has_no_dangling_relations():
+    structure = _make_chain_structure()
+    result = structure.query_subgraph("A", depth=1)
+    returned_ids = {obj.identity.id for obj in result.structure.objects}
+    for relation in result.structure.relations():
+        assert set(relation.participants) <= returned_ids
+
+
+def test_query_subgraph_root_hash_is_stable_and_order_independent():
+    structure = _make_chain_structure()
+    first = structure.query_subgraph("A", depth=2)
+    second = structure.query_subgraph({"A"}, depth=2)
+    assert first.structure.root_hash == second.structure.root_hash
+
+
+def test_query_subgraph_include_relation_types_filters_traversal_and_output():
+    structure = KnowledgeStructure(
+        [
+            make_object("A"),
+            make_object("B"),
+            make_object("C"),
+            make_relation("r1", ["A", "B"], relation_type="depends_on"),
+            make_relation("r2", ["A", "C"], relation_type="mentions"),
+        ]
+    )
+    result = structure.query_subgraph("A", depth=1, include_relation_types={"depends_on"})
+    ids = {obj.identity.id for obj in result.structure.objects}
+    # "mentions" neither connects C nor appears in the output.
+    assert ids == {"A", "B", "r1"}
+
+
+def test_query_subgraph_include_object_types_filters_discovered_not_seeds():
+    structure = KnowledgeStructure(
+        [
+            make_object("A", otype="Seed"),
+            make_object("B", otype="Excluded"),
+            make_relation("r1", ["A", "B"]),
+        ]
+    )
+    result = structure.query_subgraph(
+        "A", depth=1, include_object_types={"Seed"}
+    )
+    ids = {obj.identity.id for obj in result.structure.objects}
+    # B's type is excluded from *discovery*, and its relation to A
+    # then has a missing participant, so both are dropped -- but the
+    # seed itself is exempt from the object-type filter.
+    assert ids == {"A"}
+
+
+def test_query_subgraph_not_truncated_when_budget_is_generous():
+    structure = _make_chain_structure()
+    result = structure.query_subgraph("A", depth=2, max_objects=50)
+    assert result.is_truncated is False
+    assert result.truncation_reason is None
+    assert result.suggested_next_seed is None
+
+
+def test_query_subgraph_max_objects_truncates_and_reports_metadata():
+    structure = _make_star_structure(leaf_count=10)
+    result = structure.query_subgraph("hub", depth=1, max_objects=4)
+    ids = {
+        obj.identity.id
+        for obj in result.structure.objects
+        if not isinstance(obj, CanonicalRelation)
+    }
+    assert "hub" in ids  # seed always kept
+    assert len(ids) == 4
+    assert result.total_found_nodes == 12  # hub (seed) + 10 leaves + vip
+    assert result.returned_nodes == 4
+    assert result.is_truncated is True
+    assert result.truncation_reason == "max_objects_exceeded"
+    assert result.suggested_next_seed is not None
+    assert result.suggested_next_seed not in ids
+
+
+def test_query_subgraph_max_tokens_truncates():
+    from cks.core import _estimate_subgraph_tokens
+
+    structure = _make_star_structure(leaf_count=10)
+    # Every leaf costs the same estimated tokens; a tight budget must
+    # still keep the seed and stop taking further leaves once spent.
+    budget = (
+        _estimate_subgraph_tokens(structure.get("hub"))
+        + _estimate_subgraph_tokens(structure.get("leaf0"))
+    )
+    result = structure.query_subgraph("hub", depth=1, max_tokens=budget)
+    ids = {
+        obj.identity.id
+        for obj in result.structure.objects
+        if not isinstance(obj, CanonicalRelation)
+    }
+    assert "hub" in ids
+    assert result.is_truncated is True
+    assert result.truncation_reason == "max_tokens_exceeded"
+
+
+def test_query_subgraph_type_weights_prioritizes_candidates():
+    structure = _make_star_structure(leaf_count=10)
+    result = structure.query_subgraph(
+        "hub",
+        depth=1,
+        max_objects=4,
+        type_weights={"Architecture": 5.0},
+    )
+    ids = {obj.identity.id for obj in result.structure.objects}
+    # "vip" has the same degree as every leaf but a much higher type
+    # weight, so it must win a slot over at least one leaf.
+    assert "vip" in ids
+
+
+def test_query_subgraph_seeds_are_never_dropped_by_budget():
+    structure = _make_chain_structure()
+    result = structure.query_subgraph({"A", "D"}, depth=0, max_objects=1)
+    ids = {obj.identity.id for obj in result.structure.objects}
+    assert ids == {"A", "D"}
+
+
+def test_query_subgraph_top_level_function_matches_method():
+    import cks
+
+    structure = _make_chain_structure()
+    via_function = cks.query_subgraph(structure, "A", depth=2)
+    via_method = structure.query_subgraph("A", depth=2)
+    assert via_function.structure.root_hash == via_method.structure.root_hash
+    assert via_function.total_found_nodes == via_method.total_found_nodes

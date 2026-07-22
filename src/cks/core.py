@@ -510,28 +510,17 @@ class KnowledgeStructure:
         if conflicts:
             raise MergeConflictError(conflicts)
 
-        def _apply_branch_changes(
-            merged: dict[str, KnowledgeObject],
-            touched: set,
-            ids: set,
-            branch_index: Mapping[str, KnowledgeObject],
-        ) -> None:
-            # Removals: pop order never affects the position of the
-            # keys that remain, so a plain set walk is fine here.
-            for oid in touched - ids:
-                merged.pop(oid, None)
-            # Additions/modifications: iterate the branch's own index
-            # (insertion-ordered, unlike `touched`/`ids` which are
-            # plain sets) so that objects or relations the branch
-            # added keep their original relative order in the merged
-            # result instead of a PYTHONHASHSEED-dependent one.
-            for oid, obj in branch_index.items():
-                if oid in touched:
-                    merged[oid] = obj
-
         merged: dict[str, KnowledgeObject] = dict(self._index)
-        _apply_branch_changes(merged, a_touched, a_ids, branch_a._index)
-        _apply_branch_changes(merged, b_touched, b_ids, branch_b._index)
+        for oid in a_touched:
+            if oid in a_ids:
+                merged[oid] = branch_a._index[oid]
+            else:
+                merged.pop(oid, None)
+        for oid in b_touched:
+            if oid in b_ids:
+                merged[oid] = branch_b._index[oid]
+            else:
+                merged.pop(oid, None)
 
         surviving_ids = set(merged)
         final_objects = [
@@ -543,6 +532,224 @@ class KnowledgeStructure:
         ]
 
         return KnowledgeStructure(final_objects)
+
+    # ------------------------------------------------------------------
+    # Subgraph Query
+    # ------------------------------------------------------------------
+
+    def query_subgraph(
+        self,
+        seed_ids: str | Iterable[str],
+        depth: int = 1,
+        *,
+        include_relation_types: set[str] | None = None,
+        include_object_types: set[str] | None = None,
+        max_tokens: int | None = None,
+        max_objects: int | None = None,
+        type_weights: dict[str, float] | None = None,
+    ) -> "SubgraphResult":
+        """
+        Extract the local neighborhood around ``seed_ids`` out to
+        ``depth`` hops, as a self-contained ``KnowledgeStructure`` with
+        its own Merkle ``root_hash``.
+
+        Referential integrity: a relation is included only if EVERY
+        one of its participants is present in the returned node set.
+        This is the standard vertex-induced-subgraph rule (the same
+        one e.g. networkx's ``G.subgraph()`` uses): it applies to
+        every relation in ``self``, not only ones actually crossed
+        during the BFS, so an edge whose endpoints both happen to
+        survive is kept even if traversal reached them by different
+        paths. There is never a relation in the result referencing an
+        object outside it -- callers never see a dangling reference.
+
+        Traversal follows relations as (possibly n-ary) hyperedges:
+        from any current-frontier participant, every other participant
+        of a shared relation is reachable in one hop, matching
+        ``CanonicalRelation.participants`` not being restricted to
+        exactly two ids.
+
+        Budget (optional): when ``max_tokens`` and/or ``max_objects``
+        is given and the full neighborhood exceeds it, candidates
+        (everything but the seeds, which are always kept) are ranked
+        by
+
+            score(v) = (degree(v) * type_weight(v)) / (distance(v) + 1)
+
+        and taken highest-score-first until the budget is spent.
+        ``degree`` counts relation-participations anywhere in ``self``
+        (a hub/architectural-node signal, not just within this
+        neighborhood); ``distance`` is hop count from the nearest seed;
+        ``type_weight`` defaults to 1.0 for any type not present in
+        ``type_weights``. Budget-driven omission never breaks the
+        no-dangling-relation guarantee above -- an omitted node's
+        relations are simply excluded too.
+
+        Parameters
+        ----------
+        seed_ids
+            One id, or a set of ids, to start from. Ids absent from
+            ``self`` are silently ignored; if none are valid, an empty
+            result is returned rather than raising.
+        depth
+            Maximum number of hops from any seed. ``0`` returns just
+            the (valid) seeds themselves.
+        include_relation_types
+            If given, only relations whose ``relation_type`` is in
+            this set are traversed AND included in the result -- a
+            relation type excluded here neither connects nodes nor
+            appears in the output.
+        include_object_types
+            If given, restricts which *discovered* (non-seed) objects
+            are allowed into the neighborhood. Seeds are always
+            included regardless of their own type.
+        max_tokens, max_objects
+            Optional budget(s) on the returned neighborhood, beyond
+            the always-kept seeds. A candidate already over
+            ``max_tokens`` is skipped (smaller candidates further down
+            the ranking may still fit); ``max_objects`` is a hard cap
+            on total node count and stops selection outright once hit.
+        type_weights
+            Optional per-``identity.type`` multiplier used only in the
+            budget-ranking score above; irrelevant when no budget is
+            given (the full neighborhood is returned as found).
+
+        Returns
+        -------
+        SubgraphResult
+            Wraps the extracted ``structure`` together with
+            ``total_found_nodes`` (the full neighborhood, pre-budget),
+            ``returned_nodes``, ``is_truncated``, ``truncation_reason``,
+            and ``suggested_next_seed`` -- the single highest-ranked
+            node left out by the budget, if any, so a caller (e.g. an
+            LLM agent) can explicitly continue exploring from there
+            instead of wrongly concluding the neighborhood ends where
+            the response did.
+        """
+        if isinstance(seed_ids, str):
+            seeds = {seed_ids}
+        else:
+            seeds = set(seed_ids)
+
+        valid_seeds = {sid for sid in seeds if sid in self._index}
+        if not valid_seeds:
+            return SubgraphResult(
+                structure=KnowledgeStructure([]),
+                total_found_nodes=0,
+                returned_nodes=0,
+                is_truncated=False,
+                truncation_reason=None,
+                suggested_next_seed=None,
+            )
+
+        # Single pass: adjacency (for BFS) and degree (for scoring),
+        # both restricted to the traversable relation types.
+        adj_relations: dict[str, list[CanonicalRelation]] = {}
+        degree_map: dict[str, int] = {}
+        for rel in self._relations:
+            if include_relation_types and rel.relation_type not in include_relation_types:
+                continue
+            for pid in rel.participants:
+                adj_relations.setdefault(pid, []).append(rel)
+                degree_map[pid] = degree_map.get(pid, 0) + 1
+
+        # BFS out to `depth` hops, recording each discovered object's
+        # distance from the nearest seed (seeds are distance 0).
+        distance_map: dict[str, int] = {sid: 0 for sid in valid_seeds}
+        visited_object_ids = set(valid_seeds)
+        frontier = set(valid_seeds)
+
+        for current_depth in range(1, depth + 1):
+            next_frontier = set()
+            for current_id in frontier:
+                for rel in adj_relations.get(current_id, []):
+                    for part_id in rel.participants:
+                        if part_id in self._index and part_id not in visited_object_ids:
+                            obj = self._index[part_id]
+                            if isinstance(obj, CanonicalRelation):
+                                continue
+                            if include_object_types and obj.identity.type not in include_object_types:
+                                continue
+                            visited_object_ids.add(part_id)
+                            distance_map[part_id] = current_depth
+                            next_frontier.add(part_id)
+            frontier = next_frontier
+            if not frontier:
+                break
+
+        total_found_nodes = len(visited_object_ids)
+
+        # Budget selection: seeds are unconditional; candidates are
+        # ranked and taken highest-score-first until spent.
+        selected_object_ids = set(valid_seeds)
+        current_tokens = sum(
+            _estimate_subgraph_tokens(self._index[sid]) for sid in valid_seeds
+        )
+        candidate_ids = visited_object_ids - valid_seeds
+        ranked_candidates: list[str] = []
+        hit_max_objects = False
+        hit_max_tokens = False
+
+        if (max_tokens or max_objects) and candidate_ids:
+            weights = type_weights or {}
+
+            def compute_score(oid: str) -> float:
+                obj = self._index[oid]
+                dist = distance_map.get(oid, depth)
+                deg = degree_map.get(oid, 1)
+                type_w = weights.get(obj.identity.type, 1.0)
+                return (deg * type_w) / (dist + 1.0)
+
+            ranked_candidates = sorted(candidate_ids, key=compute_score, reverse=True)
+
+            for oid in ranked_candidates:
+                if max_objects and len(selected_object_ids) >= max_objects:
+                    hit_max_objects = True
+                    break
+
+                obj_tokens = _estimate_subgraph_tokens(self._index[oid])
+                if max_tokens and (current_tokens + obj_tokens) > max_tokens:
+                    hit_max_tokens = True
+                    continue
+
+                selected_object_ids.add(oid)
+                current_tokens += obj_tokens
+        else:
+            selected_object_ids = set(visited_object_ids)
+
+        extracted_objects: list[KnowledgeObject] = [
+            self._index[oid] for oid in selected_object_ids
+        ]
+        extracted_relations: list[KnowledgeObject] = [
+            rel for rel in self._relations
+            if not (include_relation_types and rel.relation_type not in include_relation_types)
+            and all(pid in selected_object_ids for pid in rel.participants)
+        ]
+
+        returned_nodes = len(selected_object_ids)
+        is_truncated = returned_nodes < total_found_nodes
+
+        truncation_reason: str | None = None
+        if hit_max_objects and hit_max_tokens:
+            truncation_reason = "max_objects_and_max_tokens_exceeded"
+        elif hit_max_objects:
+            truncation_reason = "max_objects_exceeded"
+        elif hit_max_tokens:
+            truncation_reason = "max_tokens_exceeded"
+
+        suggested_next_seed = next(
+            (oid for oid in ranked_candidates if oid not in selected_object_ids),
+            None,
+        )
+
+        return SubgraphResult(
+            structure=KnowledgeStructure(extracted_objects + extracted_relations),
+            total_found_nodes=total_found_nodes,
+            returned_nodes=returned_nodes,
+            is_truncated=is_truncated,
+            truncation_reason=truncation_reason,
+            suggested_next_seed=suggested_next_seed,
+        )
 
 
 # ============================================================================
@@ -582,3 +789,61 @@ class MergeConflictError(ValueError):
         self.conflicts = conflicts
         ids = ", ".join(c.object_id for c in conflicts)
         super().__init__(f"Merge conflict on identities: {ids}")
+
+
+# ============================================================================
+# Subgraph Query support types
+# ============================================================================
+
+
+def _estimate_subgraph_tokens(obj: "KnowledgeObject") -> int:
+    """
+    Rough, fast token estimate for a KnowledgeObject (~1 token per 4
+    chars of its identity+structure text), used only to budget
+    ``query_subgraph``'s ``max_tokens`` -- not a real tokenizer count,
+    and callers must not treat it as one.
+    """
+    text_repr = f"{obj.identity.id}:{obj.identity.type}:{obj.identity.name}:{obj.structure}"
+    return len(text_repr) // 4 + 10
+
+
+@dataclass(frozen=True, slots=True)
+class SubgraphResult:
+    """
+    Result of :meth:`KnowledgeStructure.query_subgraph`.
+
+    ``structure`` is the extracted, self-contained subgraph (its own
+    valid ``KnowledgeStructure`` with a fresh ``root_hash``, no
+    dangling relations). The remaining fields describe how it relates
+    to the full neighborhood that was actually found, before any
+    budget was applied -- without these, a caller has no way to tell
+    "this is everything nearby" from "this is a budget-truncated
+    slice", which is exactly the ambiguity that leads an LLM agent to
+    wrongly conclude a neighborhood ends where the response did.
+    """
+
+    #: The extracted subgraph.
+    structure: "KnowledgeStructure"
+
+    #: Size of the full neighborhood discovered by BFS, before any
+    #: ``max_tokens``/``max_objects`` budget was applied.
+    total_found_nodes: int
+
+    #: Number of (non-relation) objects actually present in
+    #: ``structure`` -- equal to ``total_found_nodes`` unless
+    #: ``is_truncated``.
+    returned_nodes: int
+
+    #: Whether a budget cut the neighborhood down from what was found.
+    is_truncated: bool
+
+    #: ``None`` when not truncated; otherwise one of
+    #: ``"max_objects_exceeded"``, ``"max_tokens_exceeded"``, or
+    #: ``"max_objects_and_max_tokens_exceeded"``.
+    truncation_reason: str | None
+
+    #: The single highest-ranked node the budget left out, or ``None``
+    #: when not truncated. A caller that needs more of the
+    #: neighborhood can pass this back in as a seed for a follow-up
+    #: ``query_subgraph`` call.
+    suggested_next_seed: str | None

@@ -21,6 +21,7 @@ from typing import Iterable, Mapping, Any
 from .core import (
     KnowledgeObject,
     KnowledgeStructure,
+    SubgraphResult,
 )
 
 from .engine import ReferenceEngine
@@ -230,3 +231,35 @@ def merge(
     the same identity to different, irreconcilable results.
     """
     return base.merge(branch_a, branch_b)
+
+
+def query_subgraph(
+    structure: KnowledgeStructure,
+    seed_ids: str | Iterable[str],
+    depth: int = 1,
+    *,
+    include_relation_types: set[str] | None = None,
+    include_object_types: set[str] | None = None,
+    max_tokens: int | None = None,
+    max_objects: int | None = None,
+    type_weights: dict[str, float] | None = None,
+) -> SubgraphResult:
+    """
+    Extract the local neighborhood around ``seed_ids`` out to
+    ``depth`` hops, as a self-contained, dangling-reference-free
+    subgraph.
+
+    See :meth:`KnowledgeStructure.query_subgraph` for the full
+    contract: traversal semantics (including n-ary relations),
+    budget/ranking behavior, and what each ``SubgraphResult`` field
+    means.
+    """
+    return structure.query_subgraph(
+        seed_ids,
+        depth,
+        include_relation_types=include_relation_types,
+        include_object_types=include_object_types,
+        max_tokens=max_tokens,
+        max_objects=max_objects,
+        type_weights=type_weights,
+    )
