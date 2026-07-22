@@ -6,6 +6,13 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.8.3] - 2026-07-22
+
+### Fixed
+- Three-way merge (`KnowledgeStructure.merge`) now preserves deterministic object ordering based on insertion order in the branches, rather than on random set iteration order (PYTHONHASHSEED). (#bug 2)
+
+---
+
 ## [1.8.2] - 2026-07-21
 
 ### Added

@@ -544,3 +544,33 @@ def test_diff_modified_object_preserves_relations():
     assert result.structurally_equivalent(right)
     # rel-1 must survive the modification
     assert "rel-1" in result
+
+
+def test_merge_preserves_insertion_order():
+    """Порядок объектов после слияния должен определяться порядком в ветках, а не случайным хэшированием."""
+    # Базовые объекты
+    base_objs = [
+        KnowledgeObject(identity=ObjectIdentity(id="1", type="T", name="Base1")),
+        KnowledgeObject(identity=ObjectIdentity(id="2", type="T", name="Base2")),
+    ]
+    base = KnowledgeStructure(base_objs)
+
+    # Ветка A добавляет объекты в определённом порядке: 4, 3 (проверяем, что порядок сохранён)
+    branch_a = KnowledgeStructure([
+        *base_objs,
+        KnowledgeObject(identity=ObjectIdentity(id="4", type="T", name="A4")),
+        KnowledgeObject(identity=ObjectIdentity(id="3", type="T", name="A3")),
+    ])
+
+    # Ветка B добавляет объект 5
+    branch_b = KnowledgeStructure([
+        *base_objs,
+        KnowledgeObject(identity=ObjectIdentity(id="5", type="T", name="B5")),
+    ])
+
+    merged = base.merge(branch_a, branch_b)
+
+    # Ожидаемый порядок: все базовые (в исходном порядке), затем 4, 3, 5
+    expected_ids = [obj.identity.id for obj in base.objects] + ["4", "3", "5"]
+    actual_ids = [obj.identity.id for obj in merged.objects]
+    assert actual_ids == expected_ids, f"Expected order {expected_ids}, got {actual_ids}"

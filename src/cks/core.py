@@ -510,17 +510,28 @@ class KnowledgeStructure:
         if conflicts:
             raise MergeConflictError(conflicts)
 
+        def _apply_branch_changes(
+            merged: dict[str, KnowledgeObject],
+            touched: set,
+            ids: set,
+            branch_index: Mapping[str, KnowledgeObject],
+        ) -> None:
+            # Removals: pop order never affects the position of the
+            # keys that remain, so a plain set walk is fine here.
+            for oid in touched - ids:
+                merged.pop(oid, None)
+            # Additions/modifications: iterate the branch's own index
+            # (insertion-ordered, unlike `touched`/`ids` which are
+            # plain sets) so that objects or relations the branch
+            # added keep their original relative order in the merged
+            # result instead of a PYTHONHASHSEED-dependent one.
+            for oid, obj in branch_index.items():
+                if oid in touched:
+                    merged[oid] = obj
+
         merged: dict[str, KnowledgeObject] = dict(self._index)
-        for oid in a_touched:
-            if oid in a_ids:
-                merged[oid] = branch_a._index[oid]
-            else:
-                merged.pop(oid, None)
-        for oid in b_touched:
-            if oid in b_ids:
-                merged[oid] = branch_b._index[oid]
-            else:
-                merged.pop(oid, None)
+        _apply_branch_changes(merged, a_touched, a_ids, branch_a._index)
+        _apply_branch_changes(merged, b_touched, b_ids, branch_b._index)
 
         surviving_ids = set(merged)
         final_objects = [
