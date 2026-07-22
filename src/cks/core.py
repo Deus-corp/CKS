@@ -608,7 +608,8 @@ class KnowledgeStructure:
             the always-kept seeds. A candidate already over
             ``max_tokens`` is skipped (smaller candidates further down
             the ranking may still fit); ``max_objects`` is a hard cap
-            on total node count and stops selection outright once hit.
+            on returned node count (seeds do not count towards this budget)
+            and stops selection outright once hit.
         type_weights
             Optional per-``identity.type`` multiplier used only in the
             budget-ranking score above; irrelevant when no budget is
@@ -631,7 +632,16 @@ class KnowledgeStructure:
         else:
             seeds = set(seed_ids)
 
-        valid_seeds = {sid for sid in seeds if sid in self._index}
+        # A Relation's own id is never a valid seed -- seeding on one
+        # would let a bare CanonicalRelation into the result with none
+        # of its participants present, violating the no-dangling-
+        # reference guarantee documented above. Discovered relations
+        # are already excluded the same way further down; mirror that
+        # here for seeds.
+        valid_seeds = {
+            sid for sid in seeds
+            if sid in self._index and not isinstance(self._index[sid], CanonicalRelation)
+        }
         if not valid_seeds:
             return SubgraphResult(
                 structure=KnowledgeStructure([]),
@@ -717,8 +727,12 @@ class KnowledgeStructure:
         else:
             selected_object_ids = set(visited_object_ids)
 
+        # Iterate self._index (insertion-ordered) rather than the plain
+        # `selected_object_ids` set directly -- the same
+        # PYTHONHASHSEED-dependent ordering issue previously fixed in
+        # merge() would otherwise resurface here.
         extracted_objects: list[KnowledgeObject] = [
-            self._index[oid] for oid in selected_object_ids
+            obj for oid, obj in self._index.items() if oid in selected_object_ids
         ]
         extracted_relations: list[KnowledgeObject] = [
             rel for rel in self._relations

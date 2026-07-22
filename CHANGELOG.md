@@ -6,6 +6,14 @@ The project follows a semantic versioning strategy where practical.
 
 ---
 
+## [1.9.1] - 2026-07-22
+
+### Fixed
+- `query_subgraph` no longer produces dangling relations when a CanonicalRelation ID is passed as a seed – it now correctly returns an empty result.
+- `query_subgraph` now preserves deterministic insertion order, eliminating PYTHONHASHSEED-dependent ordering.
+
+---
+
 ## [1.9.0] - 2026-07-21
 
 ### Added
