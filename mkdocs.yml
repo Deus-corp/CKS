@@ -52,6 +52,10 @@ nav:
   - Home: index.md
   - Quick Start: quickstart.md
 
+  - Case Studies:
+    - Overview: case-studies/index.md
+    - Catching Fake Citations: case-studies/catching-fake-citations.md
+
   - cks-core:
       - Overview: cks-core/index.md
       - Getting Started: cks-core/getting-started.md
